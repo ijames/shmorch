@@ -43,9 +43,9 @@ Run `git status --short 2>/dev/null | head -5`. Any output?
 Any files matching `shmorch/state/vacuum-report-*.md`?
 - Yes → "Unreviewed vacuum report(s) in shmorch/state/. Run `/shmorch vacuum` to act on them."
 
-**Check F — Version**
-Read `shmorch/VERSION` and `~/.claude/skills/shmorch/VERSION`.
-- Skill newer → "Shmorch update available ([project version] → [skill version]). Run `/shmorch update`."
+**Check F — Shmorch version**
+Read `shmorch/VERSION` (installed shmorch version) and `~/.claude/skills/shmorch/VERSION` (latest skill version).
+- Skill newer → "Shmorch update available ([installed version] → [skill version]). Run `/shmorch update`."
 - Same → no mention.
 
 **Output format:**

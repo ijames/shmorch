@@ -14,9 +14,9 @@ Use the remainder of `$ARGUMENTS` after "go" as the detail. If empty, use "new s
 
 ## Step 1b — Version check
 
-Read `shmorch/VERSION` (project) and `~/.claude/skills/shmorch/VERSION` (skill).
+Read `shmorch/VERSION` (installed shmorch version) and `~/.claude/skills/shmorch/VERSION` (latest skill version).
 
-- If skill version is newer: print one line — `Note: Shmorch update available (PROJECT_VERSION → SKILL_VERSION). Run /shmorch update when ready.`
+- If skill version is newer: print one line — `Note: Shmorch update available (INSTALLED_VERSION → SKILL_VERSION). Run /shmorch update when ready.`
 - If same or skill file missing: skip silently.
 
 ## Step 2 — Read context and stack
@@ -51,9 +51,18 @@ Run `git status` quickly. If there are uncommitted changes, mention it upfront:
 
 If the working tree is clean, skip this without comment.
 
-## Step 6 — Ask what to do
+## Step 6 — Surface gaps and propose next move
 
-Ask the user: "What do you want to work on?"
+Before asking what to work on, scan for obvious gaps and surface them:
+- Are there unfilled placeholders in `context.md` (code style, test framework, commit style)?
+- Is `stack.md` missing key dependency versions?
+- Does `session.md` note specific things to pick up immediately?
+
+If the session.md has a "Pick up immediately" note, lead with that — do it or propose it before asking the open-ended question.
+
+Then propose 2-3 concrete options for what to do next, based on the plan and any gaps found. Don't just ask "what do you want to work on?" cold — give the user something to react to.
+
+If the user declines all options or says "not yet", ask what's holding them back, or offer something smaller (a quick scan, filling in state, answering a codebase question). Never just go quiet.
 
 ---
 

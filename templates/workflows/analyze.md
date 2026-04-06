@@ -13,4 +13,7 @@
 5. Synthesize → `state/analysis-summary.md`
 6. Present: healthy / broken / dead / **version-mismatched**
 7. Update `shmorch/state/stack.md` if the analysis revealed new constraints or better package info
-8. Confirm before Spec or Design
+8. **State updates now** — don't wait for wrap:
+   - Any architectural insight or constraint worth remembering → append to `shmorch/state/decisions.md`
+   - Any blocker or risk that affects open tracks → update `shmorch/state/plan.md` immediately
+9. Confirm before Spec or Design

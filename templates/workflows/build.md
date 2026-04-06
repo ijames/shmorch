@@ -33,6 +33,8 @@ Run through this checklist before every commit. Do not split these into separate
 - Did a new service, model, or exception type get introduced?
   - If yes: is it documented in the relevant architecture doc?
 - Does `docs/tracks/` need a new entry, or an existing one updated?
+- Did this change countermand or supersede something previously documented?
+  - If yes: rewrite that section to reflect current reality — don't append a correction. Note the date and reason for the change if significant, then state the new truth cleanly. History lives in the timelog and git; the doc shows what's true now.
 
 ### 3. Track
 

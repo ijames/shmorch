@@ -20,10 +20,10 @@ echo "Project: $PROJECT_VERSION"
 echo "Skill:   $SKILL_VERSION"
 ```
 
-Version format is `YYYYMMDD.NN.NN` (e.g. `20260401.00`). The `.NN` sub-version allows multiple releases per day.
+Version format is `YYYYMMDD.NN` (e.g. `20260404.00`). The `.NN` sub-version allows multiple releases per day.
 
-- If they match: tell the user "Already up to date (version YYYYMMDD.NN.NN)." and stop.
-- If the project version is older: show "Project is at YYYYMMDD.NN.NN, skill is at YYYYMMDD.NN.NN."
+- If they match: tell the user "Already up to date (shmorch YYYYMMDD.NN)." and stop.
+- If the project version is older: show "Project is at YYYYMMDD.NN, skill is at YYYYMMDD.NN."
 
 ---
 
