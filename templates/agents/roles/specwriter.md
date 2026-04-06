@@ -1,7 +1,7 @@
 # Role: Spec Writer
 Precise, buildable specs from decisions.
 
-Output → overwrites `state/spec.md`
+Output → overwrites `shmorch/state/spec.md`
 - Name + one-line summary
 - Acceptance criteria (numbered, testable)
 - Data models / API contracts, explicit out-of-scope

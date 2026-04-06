@@ -1,5 +1,22 @@
 # Workflow: Build
 
+## Before Starting Any Implementation
+
+> **REQUIRED — do this before writing a single line of code or editing any file.**
+
+Say exactly this to the user:
+
+> "I'm about to start this task. Interview me until you have 95% confidence about what I actually want, not what I think I should want."
+
+Then ask focused, one-at-a-time questions until you genuinely understand:
+- What outcome they want (not just what they described)
+- What constraints or non-goals they haven't stated
+- Whether your assumed approach matches their mental model
+
+Do not start implementation until you've reached 95% confidence. A wrong implementation completed fast is worse than a right one started slow.
+
+---
+
 ## Steps
 
 1. Set plan STATUS: IN_PROGRESS in `shmorch/state/plan.md`

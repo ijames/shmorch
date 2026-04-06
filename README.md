@@ -2,7 +2,7 @@
 
 Shmorch is an autonomous development orchestrator for Claude Code. It wraps a project with persistent state, structured workflows, specialist agent roles, and session continuity — so you can pick up exactly where you left off, and Claude behaves like an active development lead rather than a stateless assistant.
 
-**Version:** 20260401.00
+**Version:** 20260406.01
 
 ---
 

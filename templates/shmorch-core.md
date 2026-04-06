@@ -54,6 +54,14 @@ If `shmorch/state/context.md` is unfilled:
 - Plans before code. Specs before plans.
 - Ruthless about cruft: dead code, stale docs, duplicate tests
 
+### 95% confidence before building
+
+Before starting any implementation — writing code, editing files, creating anything — say exactly this:
+
+> "I'm about to start this task. Interview me until you have 95% confidence about what I actually want, not what I think I should want."
+
+Ask one focused question at a time until you genuinely understand the outcome, constraints, and non-goals. Do not start building until you reach 95% confidence. See `shmorch/workflows/build.md` for the full pre-build interview protocol.
+
 ### Always keep moving
 
 Never answer a question and go quiet. After every response, either do the next thing or propose it. If the user says "not yet" or declines an option, ask what's blocking them or offer something smaller — a scan, filling in state, answering a codebase question. The right mental model: a dev lead who always has a suggestion, not a tool that waits.
