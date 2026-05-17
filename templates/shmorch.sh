@@ -2,9 +2,11 @@
 set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")"
 export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
-chmod +x .claude/hooks/stop.sh .claude/hooks/pre-tool.sh 2>/dev/null || true
-chmod +x tools/*.sh 2>/dev/null || true
+chmod +x shmorch/tools/*.sh .claude/hooks/*.sh 2>/dev/null || true
 echo ""
-echo "Starting Shmorch...  (/rewind or Esc+Esc to restore any state)"
+echo "Starting Shmorch — $(basename "$PWD")"
+echo "  /shmorch go    — start session"
+echo "  /shmorch help  — all commands"
+echo "  Esc+Esc or /rewind anytime to restore a previous state"
 echo ""
-claude
+claude --dangerously-skip-permissions
