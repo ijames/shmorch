@@ -130,10 +130,33 @@ Present each proposal one at a time:
 > Change: <specific>
 > Apply? (yes / no / modify)"
 
-When applying, use the correct target:
-- `commands/`, `shmorch-core.md`, `agents/` → SKILL at `~/.claude/skills/shmorch/<path>`
-- `.shmorch/workflows/` → project-local copy (creates a project override)
-- Bump `~/.claude/skills/shmorch/VERSION` after any skill-level change
+**Two targets — different workflows for each:**
+
+**Skill-level changes** (`commands/`, `shmorch-core.md`, `agents/`, `tools/`, `workflows/` in the skill):
+1. `cd ~/.claude/skills/shmorch`
+2. `git checkout -b <type>/YYYYMMDD-<concept>` — type is `feature`, `bug`, or `upgrade`
+3. Apply the changes to skill files
+4. Bump `VERSION` to `YYYYMMDD.NN`
+5. Use `/smart-commit` to stage and commit
+6. `git push -u origin <branch>`
+7. Create PR:
+   ```bash
+   gh pr create --title "<type>(shmorch): <concept>" --body "$(cat <<'EOF'
+   ## Summary
+   - <bullet per proposal applied>
+
+   ## Pattern observed
+   <what the evidence showed>
+
+   🤖 Generated with Shmorch self-improve
+   EOF
+   )"
+   ```
+8. `git checkout main` — return to main after PR is open; do NOT merge
+
+**Project-local changes** (`.shmorch/workflows/` overrides, `.shmorch/CLAUDE.md`):
+- Apply directly to the project file — no PR needed
+- Bump `.shmorch/VERSION`
 
 ---
 
