@@ -407,3 +407,13 @@ Current version: see `.shmorch/VERSION`.
 To update to the latest skill: `/shmorch update`
 
 **VERSION bump rule:** Any edit to shmorch skill files (`shmorch-core.md`, `workflows/*.md`, `agents/**`, `commands/*.md`, `~/.claude/skills/shmorch/tools/*.sh`) must immediately bump both `.shmorch/VERSION` and `~/.claude/skills/shmorch/VERSION` to `YYYYMMDD.NN` (today's date, increment `.NN` if already edited today). Never leave VERSION stale — this is what lets `update` detect drift.
+
+**Skill change workflow:** Never commit skill changes directly to `main` in `~/.claude/skills/shmorch/`. Always branch, PR, and let the developer merge:
+1. `cd ~/.claude/skills/shmorch && git checkout -b <type>/YYYYMMDD-<concept>`
+   — `type` is `feature` (new behaviour), `bug` (fix), or `upgrade` (refactor/tooling)
+2. Make changes, bump `VERSION`
+3. `/smart-commit` to stage and commit
+4. `git push -u origin <branch>`
+5. `gh pr create` — PR title: `<type>(shmorch): <concept>`
+6. `git checkout main` — do NOT self-merge; the developer reviews and merges
+   Others pull from `main`; PRs are the gate.
