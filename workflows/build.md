@@ -203,6 +203,7 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 - Run the full test suite — no regressions?
 - (See `.shmorch/CLAUDE.md` for project-specific test command)
 - **Framework choice:** Behat for order loop lifecycle behavior, user-facing outcomes, and integration sequences with scripted collaborators. PHPUnit for internal calculation logic, price/quantity rules, and injectable components.
+- **Broad replacement guard:** If this commit includes a text replacement touching > 5 files (e.g. renaming a symbol, fixing encoding across the codebase), run the full test suite *before* committing — sweeps can silently mutate string literals and operator expressions in addition to comments.
 
 ### Documentation
 - Public API, architectural pattern, or data model changed? Update `docs/architecture/` or `docs/development/`.
