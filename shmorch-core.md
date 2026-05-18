@@ -297,11 +297,9 @@ Projects contain only overrides and additions.
 1. `.shmorch/agents/roles/<name>.md` — project override (if present)
 2. `~/.claude/skills/shmorch/agents/roles/<name>.md` — skill default (fallback)
 
-**Two override patterns — workflows and roles both support both:**
+**Override pattern — Extend (preferred for all cases):**
 
-*Complete supersession* — rewrite the file entirely. Use when the project's approach is fundamentally different.
-
-*Extend* — include the skill default and declare only the delta. Use when adding steps, tightening constraints, or adding domain knowledge to one section:
+Project workflow files are thin subclasses of skill defaults. They declare only the delta — added steps, tightened constraints, domain-specific rules — and inherit everything else from the skill. This keeps project files short, readable, and automatically in sync with skill updates to sections they don't override.
 
 ```markdown
 # Extends: ~/.claude/skills/shmorch/workflows/build.md
@@ -309,15 +307,21 @@ Projects contain only overrides and additions.
 > Read the skill default first: `~/.claude/skills/shmorch/workflows/build.md`
 > Each section below replaces the matching section. Everything else follows the skill default.
 
-## Step 4 — Definition of Done (project additions)
+## Step 1 — Branch setup (project override)
 ...
 ```
 
-Claude reads the base first, applies declared overrides. Undeclared sections follow the skill default automatically — so project overrides stay in sync with skill updates to those sections.
+Claude reads the base first, then applies declared overrides. Undeclared sections follow the skill default automatically.
+
+**Complete supersession** (last resort only) — rewrite the file entirely. Only when the project's approach is so fundamentally different that inheriting skill defaults would actively mislead. If you find yourself rewriting more than half the file, reconsider: the generic parts probably belong in the skill.
 
 **To restore a skill default:** delete the project-local file.
 
-Project override directories (`.shmorch/workflows/`, `.shmorch/agents/roles/`) are created empty by `init` with README stubs explaining both patterns.
+**Graduation rule for project overrides:** When a project-specific addition proves useful across sessions and would benefit any project, it belongs in the skill — not the project override. Self-improve flags this; when confirmed, move the content to the skill and thin the project file back down. Project files should trend toward empty over time as their good ideas graduate.
+
+**Fat-copy anti-pattern:** A project workflow file that is a full copy of the skill default (not using Extends) is a maintenance liability — it will silently diverge as the skill evolves. Self-improve detects these and flags them for trimming.
+
+Project override directories (`.shmorch/workflows/`, `.shmorch/agents/roles/`) are created empty by `init` with README stubs explaining this pattern.
 
 ---
 

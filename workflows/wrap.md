@@ -177,14 +177,13 @@ Skip silently if output is "Nothing to commit."
 
 ## Step 8.6 — Developer prompts
 
-Ask the developer these two questions (one message, expect a brief reply or "nothing"):
+Read wrap prompts from two sources (both may exist):
+1. `~/.claude/skills/shmorch/wrap-prompts.md` — skill defaults (always read)
+2. `.shmorch/wrap-prompts.md` — project additions (read if present, appended after defaults)
 
-> - **Spillover** — anything touched this session that implicates other domains not yet tracked?
-> - **Emerging intent** — anything half-formed that deserves a brainstorm file before it's forgotten?
+Ask all prompts together in one message. Expect a brief reply or "nothing" per item.
 
 Integrate any answers immediately into the appropriate state file (`plan.md`, `decisions.md`, or a new brainstorm file). Re-commit state files if anything changed (reuse Step 8.5 procedure).
-
-*(To add or remove dimensions, edit Step 8.6 in `~/.claude/skills/shmorch/workflows/wrap.md` or override in `.shmorch/workflows/wrap.md`.)*
 
 ---
 
