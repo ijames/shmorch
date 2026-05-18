@@ -192,11 +192,11 @@ End of every session: run `/shmorch wrap` (self-improve runs automatically insid
 `docs/` is a structural skeleton that fills in as the project matures. It is not a dump of named files — it is a categorical, multidimensional outline of everything that will eventually be documented. As work completes, the skeleton fills in. As docs grow, state shrinks. A complete, mature project has almost no state and a full, navigable docs tree.
 
 **Skeleton structure rules:**
-- **Top-level `docs/` subdirectories use generic, cross-project category names** — the same names would make sense in any software project: `architecture/`, `development/`, `product/`, `reference/`, `guides/`. Project-specific names appear only *below* the category level, not at it. `docs/my-feature/` violates this. `docs/architecture/my-feature.md` does not.
+- **Top-level `docs/` subdirectories use generic, cross-project category names** — the same names would make sense in any software project: `architecture/`, `development/`, `product/`, `reference/`. Project-specific names appear only *below* the category level, not at it. `docs/my-feature/` violates this. `docs/architecture/my-feature.md` does not.
 - **`docs/<category>/` directories must not be flat file dumps.** Each category should have standard subdirectories for distinct concerns. Example standard layout for `docs/development/`: `guides/` (setup, deployment, runbooks), `testing/` (strategy, mock setup, patterns), plus cross-cutting root files (`decisions.md`, `anti-decisions.md`, `notes.md`). Apply the same principle to other categories as they grow.
 - No bespoke named files at the top level of `docs/` or most subdirectories
 - Files are categorically organized within their section (e.g. `docs/architecture/order-workflow.md`, not `docs/order-workflow-2026.md`)
-- Subdirectories that contain dated or versioned content use date/version prefixes inside a named category (e.g. `docs/changelog/2026-05-01.md`, `docs/guides/deploy.md`)
+- Subdirectories that contain dated or versioned content use date/version prefixes inside a named category (e.g. `docs/changelog/2026-05-01.md`, `docs/development/guides/deploy.md`)
 - **There is no `docs/tracks/`.** Tracks are project management artifacts — they live in `docs/state/tracks/YYYYMMDD-<name>/` and stay there permanently. The knowledge they produce distributes into the appropriate `docs/<category>/` sections when the track closes.
 - Every section has an `index.md` that links downward; every doc links `↑` to its parent
 

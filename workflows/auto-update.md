@@ -38,7 +38,8 @@ Check whether the project is missing any directories or seed files that the curr
 # Directories expected by current template
 for d in \
   docs/state docs/state/tracks docs/state/schedule \
-  docs/product docs/development docs/architecture docs/reference docs/guides \
+  docs/product docs/development docs/architecture docs/reference \
+  docs/development/guides docs/development/testing \
   .shmorch/tools .shmorch/workflows .shmorch/agents/roles .claude/hooks; do
   [ -d "$d" ] || echo "MISSING DIR: $d"
 done
