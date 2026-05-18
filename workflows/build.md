@@ -201,8 +201,7 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 ### Tests
 - New or changed public methods: tests written and passing?
 - Run the full test suite — no regressions?
-- (See `.shmorch/CLAUDE.md` for project-specific test command)
-- **Framework choice:** Behat for order loop lifecycle behavior, user-facing outcomes, and integration sequences with scripted collaborators. PHPUnit for internal calculation logic, price/quantity rules, and injectable components.
+- (See `.shmorch/CLAUDE.md` for project-specific test command and framework guidance)
 
 ### Documentation
 - Public API, architectural pattern, or data model changed? Update `docs/architecture/` or `docs/development/`.

@@ -47,8 +47,19 @@ Read in parallel:
 - `.shmorch/NOTES.md` — manually recorded issues (may not exist)
 - `docs/development/decisions.md` — decisions later revised or reversed
 
-Also run the scaffold reverse check and capture output as evidence:
+Also run these structural checks and capture output as evidence:
 
+**Fat project workflow files** (not using Extends pattern):
+```bash
+for f in .shmorch/workflows/*.md; do
+  [ -f "$f" ] || continue
+  [[ "$(basename $f)" == "README.md" ]] && continue
+  head -3 "$f" | grep -q "^# Extends:" || echo "FAT COPY CANDIDATE: $f"
+done
+```
+Any file flagged is a full copy that will silently diverge from skill updates. Include in researcher evidence as a graduation or trimming candidate — the project-specific parts may belong in the skill, or the file just needs to be rewritten as a thin Extends stub.
+
+**Scaffold reverse check** (docs/ dirs not in canonical template):
 ```bash
 EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing"
 find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/state/tracks/" | sort | while read d; do

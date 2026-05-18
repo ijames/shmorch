@@ -1,8 +1,10 @@
-# Wrap Developer Prompts
+# Wrap Prompts — Skill Defaults
 
-Brief dimensions to scan before closing. Shmorch handles cross-link analysis; the developer only needs to flag if something here is significant or in early pipeline.
+Asked at the end of every session. Keep answers brief — one sentence or "nothing."
+Project-specific additions go in `.shmorch/wrap-prompts.md`.
 
 ---
 
-- **Spillover** — anything touched this session that implicates other domains not yet tracked?
-- **Emerging intent** — anything half-formed that deserves a brainstorm file before it's forgotten?
+- **Unlogged decisions** — Was any approach chosen over an alternative today that isn't in `decisions.md`? (tradeoff, constraint discovered, option rejected)
+- **Unplanned scope** — Did we touch code or docs outside today's track? Name them — I'll open plan items if needed.
+- **Next-session risk** — Is there something we now know that, if forgotten before next session, would cause us to re-derive it? Where should it live?
