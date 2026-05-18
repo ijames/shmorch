@@ -47,6 +47,17 @@ Read in parallel:
 - `.shmorch/NOTES.md` — manually recorded issues (may not exist)
 - `docs/development/decisions.md` — decisions later revised or reversed
 
+Also run the scaffold reverse check and capture output as evidence:
+
+```bash
+EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing"
+find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/state/tracks/" | sort | while read d; do
+  echo "$EXPECTED_DOCS" | grep -qw "$d" || echo "UNLISTED DIR: $d"
+done
+```
+
+If any `UNLISTED DIR` entries appear, include them in the researcher's evidence as potential structural drift — the canonical scaffold may need updating to match actual usage.
+
 ---
 
 ## Step 4 — Call Task (researcher, introspective mode)
