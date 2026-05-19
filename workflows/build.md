@@ -87,7 +87,7 @@ git branch --show-current
 If on `main`: prompt the user to create an appropriate feature branch before proceeding:
 > "You're on main. This work belongs on a feature branch — create one now?"
 
-If the project has branch naming conventions documented (in `decisions.md` or a project `build.md` override), apply them. Otherwise suggest `feature/<short-description>`.
+Default branch naming: `<type>/YYYYMMDD-<short-description>` where type is one of `feat`, `fix`, `chore`, `refactor`, `docs`. Example: `feat/20260519-order-ticker`, `chore/20260519-vacuum`. If the project has a different convention in `decisions.md` or a project `build.md` override, apply that instead.
 
 State files (`docs/state/`, `docs/development/decisions.md`) are the only content that commits directly to main — via `/shmorch wrap`, never manually during a build.
 
