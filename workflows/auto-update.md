@@ -38,7 +38,8 @@ Check whether the project is missing any directories or seed files that the curr
 # Directories expected by current template
 for d in \
   docs/state docs/state/tracks docs/state/schedule \
-  docs/product docs/development docs/architecture docs/reference docs/guides \
+  docs/product docs/development docs/architecture docs/reference \
+  docs/development/guides docs/development/testing \
   .shmorch/tools .shmorch/workflows .shmorch/agents/roles .claude/hooks; do
   [ -d "$d" ] || echo "MISSING DIR: $d"
 done
@@ -53,6 +54,26 @@ done
 ```
 
 If anything is missing: list it, then ask "Create missing scaffold? (yes/no)". If yes, copy from skill templates — never overwrite existing files.
+
+---
+
+## Step 2.1 — Reverse scaffold check
+
+Check what exists in `docs/` that isn't in the canonical template. These may be legitimate project-specific dirs, or they may indicate the template has drifted from actual convention.
+
+```bash
+EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing"
+find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/state/tracks/" | sort | while read d; do
+  echo "$EXPECTED_DOCS" | grep -qw "$d" || echo "UNLISTED DIR: $d"
+done
+```
+
+If any `UNLISTED DIR` entries appear:
+1. List them to the developer
+2. For each, ask: is this project-specific (skip) or a convention that should be added to the canonical scaffold?
+3. If it should be canonical: note it — propose adding it to the scaffold list in this file as part of Step 6, along with a PR to the skill.
+
+Do **not** flag `docs/state/tracks/YYYYMMDD-*` subdirectories — those are per-project and expected to vary.
 
 ---
 
