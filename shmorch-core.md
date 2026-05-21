@@ -220,6 +220,7 @@ End of every session: run `/shmorch wrap` (self-improve runs automatically insid
 `docs/` is a structural skeleton that fills in as the project matures. It is not a dump of named files — it is a categorical, multidimensional outline of everything that will eventually be documented. As work completes, the skeleton fills in. As docs grow, state shrinks. A complete, mature project has almost no state and a full, navigable docs tree.
 
 **Skeleton structure rules:**
+
 - **Top-level `docs/` subdirectories use generic, cross-project category names** — the same names would make sense in any software project: `architecture/`, `development/`, `product/`, `reference/`. Project-specific names appear only *below* the category level, not at it. `docs/my-feature/` violates this. `docs/architecture/my-feature.md` does not.
 - **`docs/<category>/` directories must not be flat file dumps.** Each category should have standard subdirectories for distinct concerns. Example standard layout for `docs/development/`: `guides/` (setup, deployment, runbooks), `testing/` (strategy, mock setup, patterns), plus cross-cutting root files (`decisions.md`, `anti-decisions.md`, `notes.md`). Apply the same principle to other categories as they grow.
 - No bespoke named files at the top level of `docs/` or most subdirectories
@@ -440,6 +441,8 @@ To update to the latest skill: `/shmorch update`
 
 **VERSION bump rule:** Any edit to shmorch skill files (`shmorch-core.md`, `workflows/*.md`, `agents/**`, `commands/*.md`, `~/.claude/skills/shmorch/tools/*.sh`) must immediately bump both `.shmorch/VERSION` and `~/.claude/skills/shmorch/VERSION` to `YYYYMMDD.NN` (today's date, increment `.NN` if already edited today). Never leave VERSION stale — this is what lets `update` detect drift.
 
+**Shmorch docs do NOT bump VERSION.** Changes to `~/.claude/skills/shmorch/docs/` (the shmorch skill's own project documentation — roadmap, backlog, architecture) are not skill behaviour changes and do not affect downstream projects. Do not bump VERSION for doc-only commits in the shmorch repo.
+
 **Skill change workflow:** Never commit skill changes directly to `main` in `~/.claude/skills/shmorch/`. Always branch, PR, and let the developer merge:
 1. `cd ~/.claude/skills/shmorch`
 2. `git fetch --all` — get latest remote state before anything else
@@ -447,10 +450,15 @@ To update to the latest skill: `/shmorch update`
    - If already on a relevant feature branch for this work: stay on it
    - If on `main` or an unrelated branch: `git checkout -b <type>/YYYYMMDD-<concept>`
    — `type` is `feature` (new behaviour), `bug` (fix), or `upgrade` (refactor/tooling)
-4. `git rebase origin/main` — ensure the branch is current before adding commits
-5. Make changes, bump `VERSION`
+4. `git rebase js/main` — ensure the branch is current before adding commits
+5. Make changes, bump `VERSION` (skill files only — not for doc-only changes)
 6. Stage and commit
-7. `git push -u origin <branch>`
+7. `git push -u js <branch>`
 8. `gh pr create` — PR title: `<type>(shmorch): <concept>`
 9. `git checkout main` — do NOT self-merge; the developer reviews and merges
    Others pull from `main`; PRs are the gate.
+
+**The shmorch skill is itself a shmorch-managed project.** It has its own `docs/` folder at `~/.claude/skills/shmorch/docs/` that follows the same skeleton structure as any project using shmorch. This is the live documentation FOR shmorch — roadmap, backlog, architecture decisions about the tool itself. It is separate from `templates/docs/`, which contains the empty stubs copied to new projects on `init`. Key boundaries:
+- `~/.claude/skills/shmorch/docs/` — live shmorch project docs. Managed by working on shmorch as a project.
+- `~/.claude/skills/shmorch/templates/docs/` — blank scaffolds seeded to new repos by `/shmorch init`. Never mix these.
+- `init` must not be run on `~/.claude/skills/shmorch/` itself — the guard in `workflows/init.md` prevents this. See that file for details.
