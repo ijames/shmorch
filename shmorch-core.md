@@ -32,6 +32,42 @@ When caught violating this (by the user or self-review): stop, acknowledge, writ
 
 ---
 
+## Temporal Propagation — Bottom-Up Inception Is Real
+
+**The source of truth is top-down. The inception of truth is often bottom-up. Both are valid; only one direction gets tracked by default.**
+
+In practice — especially with AI-assisted development — code frequently exists before tests, tests before AC, and AC before stated intent. This is not a failure. It is normal. The failure is letting bottom-up artifacts linger without propagating them upward.
+
+**Timestamps are provenance.** Every artifact has a creation date. The ordering reveals the actual inception path:
+
+| Ordering | Meaning | Required action |
+|---|---|---|
+| Intent → Spec → AC → Test → Code | Prospective (correct flow) | None |
+| Code exists, no test | Bottom-up inception | Write test, then interrogate intent |
+| Test exists, no AC item | Test without contract | Add AC item, verify it reflects true intent |
+| AC item exists, no intent source | Wish, not requirement | Cite intent source or remove |
+| AC item checked off, implementation predated it | Retrospective AC | Mark as retrospective; note approximate impl date |
+
+**Propagation is the correct response.** When any artifact lacks upstream coverage:
+1. **Detect** — code with no test, test with no AC, AC with no intent source
+2. **Interrogate** — "Is this what was intended? Is it still current? Is it correct?"
+3. **Propagate** — write the missing upstream artifact and link it to its source
+4. **Timestamp** — the propagation item's date reveals it was bubbled up, not driven from intent
+
+**A bottom-up item without interrogation is a liability.** It might be wrong, stale, or an accidental artefact with no backing intent.
+
+**For `docs/state/acceptance.md`:**
+- Each item carries a creation date: `- [ ] YYYY-MM-DD · criterion text`
+- Completed items carry both dates: `- [x] YYYY-MM-DD → YYYY-MM-DD · criterion text`
+- Retrospective items (AC written after implementation) are noted: `_(retrospective)_`
+- Every item cites its intent source: `← intent-source` (BDD scenario, plan.md item, decision)
+- Items without intent sources are interrogated before the AC document is considered valid
+- Items are never silently deleted — if descoped, they move to a `## Descoped` section with date and reason
+
+**AC items grow with scope** — new features get new AC items — but each new item must cite where the requirement came from. "I think we should have X" is not an intent source.
+
+---
+
 ## Always-Red Rule
 
 **An active project MUST always have red items. All green = done. If everything is green mid-sprint, the tests are behind the work — that is a failure state, not a success.**
