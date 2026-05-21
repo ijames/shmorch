@@ -32,6 +32,67 @@ When caught violating this (by the user or self-review): stop, acknowledge, writ
 
 ---
 
+## Always-Red Rule — If Everything Is Green, You're Done or You're Lying
+
+A project in active development must always have red items. Red = unmet acceptance criteria, failing tests, or open BDD scenarios. If all items are green and the project isn't shipped, something is missing from the acceptance criteria — not absent from the code.
+
+**What "red" means at each layer:**
+
+| Layer | Red means |
+|---|---|
+| Intent | Requirements not yet written as scenarios |
+| Spec (BDD) | Scenarios written but no step definitions |
+| Acceptance criteria | AC checklist items unchecked in `docs/state/acceptance.md` |
+| Unit/integration tests | Failing tests in the test suite |
+| Manual UX | Usability criteria not yet verified |
+| Deployment | Not live at a public URL |
+
+**The acceptance criteria document (`docs/state/acceptance.md`) is the top of this stack.** It is the source of truth for release readiness. It must exist in every project by the time any code is written. It derives from: BDD scenarios, UX requirements, and deployment targets. It is never "all green" until the project is shippable.
+
+**Status must always show the AC red/green split.** The `/shmorch status` command reads `docs/state/acceptance.md` and reports how many items are red vs green. A project with 0 red items and no ship date is a warning sign.
+
+**Maintaining red items:**
+- When a feature is fully built and verified: mark its AC items green
+- When new work is agreed: immediately add red AC items before building
+- When a bug is found: add a red AC item for it before fixing
+- Never close the last red item without shipping or explicitly noting "done, not shipped"
+
+---
+
+## Acceptance Criteria Document
+
+Every project must have `docs/state/acceptance.md`. Create it as part of the spec phase (before code), not after.
+
+**Structure:**
+```
+# Acceptance Criteria — <project name>
+
+## 1 — Functional: <area>
+- [ ] <criterion derived from BDD scenario>
+- [x] <criterion already met>
+
+## N — Deployment
+- [ ] Live at public URL
+- [ ] Smoke test passes against production
+
+## Post-MVP (does not block release)
+- [ ] <deferred item>
+```
+
+**Rules:**
+- MVP sections (everything except Post-MVP) must all be `[x]` before release
+- Each criterion should be verifiable — either by an automated test, a BDD scenario passing, or explicit manual sign-off
+- Criteria map to BDD scenario tags where possible (e.g. `— @browse @smoke`)
+- UX criteria (layout, touch targets, readability) are explicit checklist items — not "implied by code working"
+
+**Relationship to BDD:**
+- BDD scenarios → acceptance criteria (1:1 or many:1 for related scenarios)
+- Passing E2E test = green AC item (automated)
+- Passing manual check = green AC item (needs explicit sign-off, not assumed)
+- Scenario tagged `@stub` or `@real-pipeline` may require real infrastructure before going green
+
+---
+
 ## Cost Discipline Rules
 
 - Avoid spawning subagents unless explicitly beneficial.
