@@ -113,3 +113,37 @@ The always-red rule and a passing CI gate are not in conflict — they refer to 
 **Feature branch lifecycle:** write failing test → implement → green → PR → merge → delete branch. Never merge red. Never commit aspirational failing tests to `main` — if future work needs signalling, add an AC item to `acceptance.md`.
 
 **AC ↔ test sync:** Every checked AC item must have a passing test on `main`. Every passing test on `main` covering user-facing behaviour must trace to an AC item. Gaps in either direction are caught by `/shmorch vacuum`.
+
+---
+
+## Acceptance Criteria Document
+
+Every project must have `docs/state/acceptance.md`. Create it as part of the spec phase (before code), not after.
+
+**Structure:**
+```
+# Acceptance Criteria — <project name>
+
+## 1 — Functional: <area>
+- [ ] <criterion derived from BDD scenario>
+- [x] <criterion already met>
+
+## N — Deployment
+- [ ] Live at public URL
+- [ ] Smoke test passes against production
+
+## Post-MVP (does not block release)
+- [ ] <deferred item>
+```
+
+**Rules:**
+- MVP sections (everything except Post-MVP) must all be `[x]` before release
+- Each criterion should be verifiable — either by an automated test, a BDD scenario passing, or explicit manual sign-off
+- Criteria map to BDD scenario tags where possible (e.g. `— @browse @smoke`)
+- UX criteria (layout, touch targets, readability) are explicit checklist items — not "implied by code working"
+
+**Relationship to BDD:**
+- BDD scenarios → acceptance criteria (1:1 or many:1 for related scenarios)
+- Passing E2E test = green AC item (automated)
+- Passing manual check = green AC item (needs explicit sign-off, not assumed)
+- Scenario tagged `@stub` or `@real-pipeline` may require real infrastructure before going green
