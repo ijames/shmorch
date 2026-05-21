@@ -43,6 +43,8 @@ END-OF-SESSION SEQUENCE (suggested)
   3. /shmorch wrap          Persist state. Self-improve runs automatically.
 
 PLANNING
+  /shmorch status            Quick project health snapshot — sprint day, open/done tasks, test
+                             counts, recent commits, and one risk or next-step call.
   /shmorch sprinter          Show current sprint status and flag risks.
   /shmorch sprinter new      Start a new sprint — goal, dates, scope, definition of done.
   /shmorch sprinter close    Close sprint, update track outcomes, archive to docs/state/schedule/.
