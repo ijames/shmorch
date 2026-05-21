@@ -32,6 +32,34 @@ When caught violating this (by the user or self-review): stop, acknowledge, writ
 
 ---
 
+## Always-Red Rule
+
+**An active project MUST always have red items. All green = done. If everything is green mid-sprint, the tests are behind the work — that is a failure state, not a success.**
+
+"Tests" in this context means the full stack:
+
+| Layer | Red means |
+|---|---|
+| Intent | Next feature has no spec or scenario yet |
+| Spec / BDD | At least one unimplemented scenario exists |
+| `docs/state/acceptance.md` | At least one unchecked `- [ ]` item in the MVP sections |
+| Unit / integration tests | At least one failing test for the next planned behaviour |
+| Manual UX | At least one open UX acceptance criterion |
+| Deployment | Not yet live at a public URL |
+
+**`docs/state/acceptance.md` is a first-class test artefact.** Every unchecked `- [ ]` item in the MVP sections counts as a failing test. The project is not done until every MVP box is checked. The `/shmorch status` command must show the AC red/green split alongside unit test counts.
+
+**How to count AC red items** (stops at the `## Post-MVP` boundary):
+```bash
+awk '/^## Post-MVP/{exit} /^\- \[ \]/{count++} END{print count+0}' docs/state/acceptance.md
+```
+
+**When the user reports "all tests green":** Ask immediately — are there AC items still unchecked? If yes, the project is not done; the green unit suite means only that the implemented code is correct, not that all required behaviour exists.
+
+**Never interpret a fully-green test run as project completion during an active sprint.** It means one of: (a) tests are ahead of code (good), (b) tests are behind — there is unwritten work with no test yet (bad), or (c) the project is genuinely complete. Distinguish these explicitly.
+
+---
+
 ## Cost Discipline Rules
 
 - Avoid spawning subagents unless explicitly beneficial.
