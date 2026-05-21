@@ -15,6 +15,29 @@ Initialize a Shmorch workspace at the given path (or current directory if no arg
 
 ---
 
+## Step 0 — Self-init guard
+
+Before anything else, resolve what the target directory will be (applying the same argument-expansion logic as Step 1), then check:
+
+```bash
+SKILL_DIR="$(cd ~/.claude/skills/shmorch && pwd)"
+TARGET_ABS="$(cd "${1:-$(pwd)}" && pwd)"
+[ "$TARGET_ABS" = "$SKILL_DIR" ] && echo "SELF" || echo "OK"
+```
+
+If the result is `SELF`: stop immediately and tell the user:
+
+> `init` cannot be run on the shmorch skill directory itself (`~/.claude/skills/shmorch/`).
+> That directory is already a shmorch-managed project with its own live `docs/` — running init
+> would overwrite live docs with blank templates.
+>
+> To work on shmorch's own docs and roadmap, open a session in `~/.claude/skills/shmorch/`
+> directly and use the existing `docs/state/plan.md`.
+
+Do not proceed past this point if `SELF`.
+
+---
+
 ## Step 1 — Resolve target directory
 
 - If an argument follows "init", expand `~` to the home directory and use that as `TARGET`
