@@ -2,17 +2,12 @@
 
 Sprint plans, timelines, and completed sprint records.
 
-- Active sprint: see `docs/state/plan.md` for sequenced tasks
-- Sprint calendar and daily objectives: `docs/state/sprint.md` (if active)
-- Completed sprints graduate here as `sprint-YYYY-MM-DD.md`
-
-
-Closed sprint records. Each file is a completed sprint — goal, scope, what shipped, what didn't.
-
-Active sprint lives in `docs/state/sprint.md`.
+- Active sprint sequenced tasks: `docs/state/plan.md`
+- Active sprint detail: `docs/state/schedule/sprint.md` (rename to `YYYYMMDD-<title>.md` when sprint closes)
+- Closed sprints: files named `YYYYMMDD-<semantic-title>.md` in this directory
 
 ## Sprints
 
-| Sprint | Dates | Outcome |
+| Sprint | Sessions | Outcome |
 |---|---|---|
 | _(none yet)_ | | |
