@@ -332,7 +332,7 @@ Track closing process:
 
 | State file | Graduates to |
 |---|---|
-| `docs/state/schedule/sprint.md` (closed) | `docs/state/schedule/YYYYMMDD-<semantic-title>.md` |
+| `docs/state/schedule/sprint.md` (closed) | `docs/state/schedule/sprints/YYYYMMDD-<semantic-title>.md` |
 | `docs/state/tracks/YYYYMMDD-<name>/` (done) | Knowledge extracted into `docs/<section>/` — track stays in state/ as history |
 | `docs/state/spec.md` (implemented) | Cleared to stub; knowledge went to `→ destination` docs |
 | `docs/development/decisions.md` entries | Permanent — stays in `decisions.md` |
