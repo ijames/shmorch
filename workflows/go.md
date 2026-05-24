@@ -101,7 +101,27 @@ Run `git status` and `git log --oneline -5` in parallel. Then:
 
 ---
 
-## Step 5b — Memory staleness check
+## Step 5b — Untracked test failures check
+
+Scan `docs/state/session.md` for lines containing `failing`, `outstanding`, `pre-existing`, or `test failure` (case-insensitive):
+
+```bash
+grep -i "failing\|outstanding\|pre-existing\|test failure" docs/state/session.md | head -10
+```
+
+For each failure cluster found:
+1. Check `docs/state/plan.md` — is there already a backlog item tracking it?
+2. If **no plan item exists**: add one immediately to the Backlog section of `plan.md`:
+   ```
+   - [ ] Fix pre-existing test failures: <component/area> (<N> failures) — tracked <YYYY-MM-DD>
+   ```
+3. Surface to the user briefly: "Found <N> pre-existing test failures in <area> with no plan item. Added to backlog."
+
+Do not surface this step unless failures are found. A failure with no plan item is invisible to sprint planning and violates the always-red rule.
+
+---
+
+## Step 5c — Memory staleness check
 
 Scan the project memory directory (`~/.claude/projects/.../memory/`) for any files containing the strings `UNFIXED`, `OPEN QUESTION`, `TWO BUGS`, or `BUG` (case-insensitive). For each match found:
 

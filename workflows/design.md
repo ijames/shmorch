@@ -29,6 +29,31 @@ bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "design: starting — <fe
 
 ---
 
+## Step 1b — Stack compatibility gate (run before spawning the architect)
+
+If the tech stack is still being settled **or** this feature adds a new integration point between systems, run this gate before calling the architect. Skip silently if the stack is fully locked and no new integration points are introduced.
+
+For each requirement in the spec, answer:
+
+1. **Dev-to-prod parity** — does this requirement behave identically in dev and production?
+   - Flag anything that works in dev but has a known production constraint (e.g. streaming responses buffered by an API gateway, long-running jobs killed by a hosting timeout, file system writes unavailable in a serverless environment).
+   - For each flag: state the gap and the effort required to bridge it. If the effort is high or the workaround changes the approach significantly, surface it as a decision before proceeding.
+
+2. **Integration effort** — enumerate every glue point between disparate systems this feature requires (e.g. Vercel ↔ Lambda auth/CORS, SSE passthrough, SQS trigger wiring, Neon connection pooling on Lambda cold starts). For each:
+   - Estimate the wiring effort: low (< 1 hr), medium (1–4 hrs), high (4+ hrs)
+   - Note any "works in dev only" risk
+
+3. **Cost dimensions** — for each approach being considered, explicitly compare:
+   - **Time cost**: wiring effort, debugging prod-only issues, integration testing
+   - **Monetary cost**: per-request pricing, egress fees, cold-start overhead
+   - **Risk**: anything that is "green in dev, broken in prod" is high-risk and must be resolved before the build starts — not discovered during it
+
+4. **Record findings** — if any flag, gap, or trade-off is non-trivial, record it now in `docs/development/decisions.md` under a dated entry titled "Stack compatibility: <feature>". This creates the paper trail if the approach needs to be reconsidered later.
+
+If Step 1b finds a blocking incompatibility (a requirement that cannot be met by the chosen stack without significant rework): surface it to the developer now, before the architect is spawned. Do not proceed to Step 2 until resolved.
+
+---
+
 ## Step 2 — Call Task (architect)
 
 ```
@@ -51,6 +76,7 @@ Task(
     - Key interfaces or contracts between components
     - What must NOT change (constraints from stack or architecture)
     - Two or three implementation approaches with tradeoffs — recommend one
+    - For each approach: integration effort (low/medium/high), dev-to-prod parity risk, and cost dimensions (time, money, risk)
 
     ## Output
     Write the design to: docs/state/design-<feature-slug>.md
@@ -65,8 +91,8 @@ Task(
     ### Interfaces
     ### Constraints
     ### Approaches considered
-    | Approach | Pros | Cons |
-    |---|---|---|
+    | Approach | Pros | Cons | Integration effort | Dev-to-prod risk |
+    |---|---|---|---|---|
     ### Recommendation
     ### Open decisions
     - [ ] <decision needed — default: <default if developer doesn't respond>>

@@ -90,11 +90,13 @@ This gives the project empty override directories ready to receive project-speci
 Copy hooks and settings. Skip if files already exist — never overwrite an existing hook.
 
 **`templates/docs/` → `TARGET/docs/`**
-Merge carefully:
-- `docs/state/` files: copy only if the destination file does not exist. Never overwrite an existing `plan.md`, `context.md`, `decisions.md`, etc.
-- `docs/product/`, `docs/development/`, `docs/architecture/`, `docs/reference/`, `docs/guides/`: create the directory and copy `.gitkeep` only if the directory doesn't exist at all.
-- `docs/state/schedule/`: copy `README.md` only if the directory doesn't exist at all.
-- `docs/tracks/README.md`: copy only if no `docs/tracks/` exists yet.
+Merge carefully — the rule is **skip-if-exists**: copy a file only if no file already exists at that destination path. Never overwrite.
+
+Walk the full `templates/docs/` tree recursively. For each file:
+- If the destination path does not exist: copy it.
+- If the destination path already exists: skip it silently.
+
+This includes all `index.md` stubs, state file templates, and `.gitkeep` placeholders. The skip-if-exists rule protects existing project content while ensuring new projects get the full skeleton including `index.md` stubs in every docs subdirectory.
 
 **`templates/shmorch.sh` → `TARGET/shmorch.sh`**
 Copy only if `TARGET/shmorch.sh` does not exist. Make executable.
