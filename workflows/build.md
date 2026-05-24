@@ -123,6 +123,10 @@ Before writing code, enumerate:
 
 Write this list to `docs/state/plan.md` under the active task.
 
+4. **Seed scripts (stage-gated):** If this implementation writes or modifies any migration files (`db/migrations/`, `migrations/`, `alembic/versions/`, or similar), apply the following check based on the project `stage` from `docs/state/context.md`:
+   - **R&D / proof-sprint:** List every seed/fixture script that populates the affected tables. Flag each as "potentially stale — verify schema alignment before running `make db-seed` or equivalent." Updating stale seeds is part of the Definition of Done for this task, not a follow-up.
+   - **productionization / maintenance:** Seed scripts are not the authoritative data source in production. Instead: flag that this migration must be validated against a production branch restore (e.g. Neon copy-on-write branch from the production branch) before applying. Seeds are a dev scaffold only — live data comes from backups, not seeds.
+
 **Gate condition:** Do not start Step 3 until this list exists. When implementation completes (Step 4), use this list as the doc/test update checklist — not just the DoD checklist.
 
 ---

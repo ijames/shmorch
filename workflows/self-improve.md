@@ -182,9 +182,28 @@ Present each proposal one at a time:
 
 ---
 
-## Step 7 — Clear and stamp
+## Step 7 — Clear addressed NOTES items and stamp
 
-- Scan `.shmorch/NOTES.md` for every item. For each one, check whether it has been fully addressed (promoted to a skill file, workflow, or decisions.md). Remove addressed items immediately — do not leave them as archive. The file should only contain unactioned notes.
+Scan `.shmorch/NOTES.md` (or `~/.claude/skills/shmorch/NOTES.md` if no project NOTES.md exists). For each item, classify it mechanically:
+
+```bash
+# For each item, grep for the core concern in skill files
+grep -r "<keyword from NOTES item>" ~/.claude/skills/shmorch/shmorch-core.md \
+  ~/.claude/skills/shmorch/workflows/*.md 2>/dev/null | head -3
+```
+
+Classification:
+- **ADDRESSED** — the concern is reflected verbatim or substantively in a skill file → remove the item now; do not leave it as archive (git history carries it)
+- **PARTIAL** — the concept exists but the specific proposal isn't implemented → append `_(partial — <what's missing>)_` and keep
+- **UNADDRESSED** — not found in any skill file → keep as-is; include in no-action observations in the proposals output
+
+Rewrite NOTES.md with only surviving (non-ADDRESSED) items. Record the cleanup in the proposals file:
+
+```
+### NOTES.md cleanup — <date>
+Removed: <N items> (addressed). Kept: <M items> (partial/unaddressed).
+```
+
 - Append to `docs/state/session.md`: `Self-improve <date>: N proposals, M applied.`
 
 ```bash
