@@ -38,6 +38,7 @@ For each requirement in the spec, answer:
 1. **Dev-to-prod parity** — does this requirement behave identically in dev and production?
    - Flag anything that works in dev but has a known production constraint (e.g. streaming responses buffered by an API gateway, long-running jobs killed by a hosting timeout, file system writes unavailable in a serverless environment).
    - For each flag: state the gap and the effort required to bridge it. If the effort is high or the workaround changes the approach significantly, surface it as a decision before proceeding.
+   - **For any transport or protocol choice (SSE, WebSockets, streaming, chunked responses):** trace the full request path layer by layer and verify each layer supports it. Name every layer explicitly — e.g. `Lambda function → ASGI adapter → invoke mode → Function URL → CDN/proxy → client`. One layer that can't pass the protocol through invalidates the whole choice. Do not assume support; look it up for each layer. This check is mandatory before committing to any non-standard transport.
 
 2. **Integration effort** — enumerate every glue point between disparate systems this feature requires (e.g. Vercel ↔ Lambda auth/CORS, SSE passthrough, SQS trigger wiring, Neon connection pooling on Lambda cold starts). For each:
    - Estimate the wiring effort: low (< 1 hr), medium (1–4 hrs), high (4+ hrs)

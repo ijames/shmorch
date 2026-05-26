@@ -107,6 +107,11 @@ Task(
     One file per project per date — multiple projects may write notes on the same date
     without conflict because filenames include the project slug.
 
+    **IMPORTANT: NEVER write self-improve output to the project's `docs/state/` directory.**
+    The `~/.claude/` location is deliberate — self-improve output is a shmorch tool artifact,
+    not a project document. Writing to the project mixes tool output with project state and
+    creates cruft that must be manually cleaned up.
+
     Structure:
     ### Self-Improve Proposals — <date> | Project: <project-slug>
 

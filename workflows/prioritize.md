@@ -58,7 +58,10 @@ Task(
     Flag any items that should be DROPPED (no longer relevant) or DEFERRED (valid but not now).
 
     ## Output
-    Write your ranked backlog to: docs/state/priority-proposal.md
+    Ensure the run artifacts directory exists: `mkdir -p docs/state/prioritizer`
+
+    Write your ranked backlog to: docs/state/prioritizer/YYYYMMDD_priority-proposal.md (use today's date)
+    **Never write to docs/state/priority-proposal.md at the root level.**
 
     Use this structure:
     ### Proposed Backlog Order
@@ -82,7 +85,7 @@ Task(
 
 ### Step 4 — Gate
 
-Verify `docs/state/priority-proposal.md` exists.
+Verify `docs/state/prioritizer/YYYYMMDD_priority-proposal.md` exists.
 If BLOCKER in return: surface the conflict to the developer before showing the proposal.
 
 ### Step 5 — Present and confirm
@@ -91,11 +94,29 @@ Show the proposed ranking to the developer. Ask:
 
 > "Want to apply this order to plan.md, adjust anything first, or keep the current order?"
 
-- If apply: rewrite the backlog table in `docs/state/plan.md` to match the proposal. Delete `docs/state/priority-proposal.md`.
+- If apply: rewrite the backlog table in `docs/state/plan.md` to match the proposal. Update the index row in `docs/state/prioritizer/index.md` to mark status "Applied YYYY-MM-DD". Keep the proposal file as a historical record.
 - If adjust: make the requested changes, re-confirm, then apply.
-- If keep: delete the proposal file, no changes to plan.md.
+- If keep: mark the index row "Superseded". No changes to plan.md.
 
-### Step 6 — Stamp
+### Step 6 — Update index and stamp
+
+If `docs/state/prioritizer/index.md` does not exist, create it:
+```markdown
+# Prioritizer Runs
+
+↑ [docs/state/](../index.md)
+
+Backlog ranking proposals from `/shmorch prioritize` runs.
+Files are named `YYYYMMDD_priority-proposal.md`. Applied proposals are kept as historical record.
+
+---
+
+| Date | File | Top priority | Status |
+|---|---|---|---|
+```
+
+Add a row for this run.
+
 ```bash
 bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "prioritize: complete"
 ```
