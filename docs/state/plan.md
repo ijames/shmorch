@@ -32,6 +32,14 @@ None active.
   - Condition to re-evaluate: After a project using Shmorch heavily enough to feel the pain of flat markdown task files — or when Beads has more documented usage examples.
   - Moved from: MoBoS plan.md 2026-05-19
 
+- [ ] **wrap.md: BLOCKER tier in pick-up items** — From self-improve-20260501 Proposal 3 (unapplied). At wrap, split "pick up immediately" items into two explicit tiers: `**BLOCKER** (do first):` (max 2 items) and `**Next up:**` (everything else). go.md fast-path on re-entry reads the BLOCKER tier only. Prevents lower-priority carry-forward items from obscuring actual blockers across sessions. File: `workflows/wrap.md`.
+
+- [ ] **documentarian + prioritizer run artifacts: subfolders + date naming** — From DarkBadge 2026-05-25. Documentarian parity reports go to `docs/state/documentarian/YYYYMMDD_parity-report.md`; prioritizer proposals go to `docs/state/prioritizer/YYYYMMDD_priority-proposal.md`. Each subfolder has an `index.md` listing runs chronologically. Prevents single-run artifacts from floating in `docs/state/` root alongside permanent files. init.md should scaffold these directories with index stubs. Files: `workflows/documentarian.md`, `workflows/prioritize.md`, `workflows/init.md`, `templates/docs/state/documentarian/index.md`, `templates/docs/state/prioritizer/index.md`.
+
+- [ ] **self-improve output location enforcement** — Early project sessions wrote self-improve output to project `docs/state/` instead of `~/.claude/`. The workflow already specifies `~/.claude/self-improve-YYYYMMDD-<slug>.md` as the correct path, but the agent wrote to the project. Add an explicit "never write to project docs/state/" warning to self-improve Step 4 (Task prompt) so the researcher agent can't place files in the wrong location. File: `workflows/self-improve.md`.
+
+- [ ] **Graph-first documentation: surface-map indexes and size discipline** — Design concept from DarkBadge 2026-05-25. Docs are nodes; references are edges. `index.md` files are surface maps (which features appear where, for which consumers), not flat listings. Feature files are single-responsibility, small (~200–400 lines max), and are referenced (transcluded) — never copied. Consumer-aware traversal means different readers follow different subgraphs. Shmorch should: (1) enforce single-responsibility via documentarian size-limit checks; (2) scaffold `index.md` as a surface map, not a flat listing; (3) document a "context bundle" concept — named traversal paths for common task types. Connects to JIT context loading (Anthropic guide). See also: DarkBadge `docs/development/notes.md` §Graph-First Documentation Architecture.
+
 ---
 
 ## Completed
