@@ -192,6 +192,17 @@ An interface where elements flash in or out, or change state abruptly, is inflic
 
 **Layer selection:** CSS `transition` for simple A→B state changes (always prefer), CSS `@keyframes` for sequences, CSS View Transitions API for full-view/route transitions (Baseline 2025), `motion`/Framer Motion for gesture-driven, layout morphs, and exit animations (things CSS structurally cannot express).
 
+**Style and motion abstraction balance:** Style and motion code must be readable to a developer who is not a CSS or animation specialist. When a developer opens a component file, they should understand what it looks like and how it moves without chasing definitions across multiple files.
+
+The rule: **abstract for naming and reuse — colocate for readability.**
+
+- Extract dynamic color/style computations to named utility functions when reused across components, or complex enough to need a name
+- Keep animation configs as named constants *above the component's `return`* in the same file — not in a separate module — unless genuinely shared across multiple components
+- A developer should be able to read a component file and understand both its appearance and its motion without leaving the file
+- The test: "If I removed all named constants and inlined them, would the JSX still be readable?" If yes, the abstraction adds no value. If no, the abstraction is earning its place.
+
+Over-abstraction (moving every animation config to a separate file) is as harmful as under-abstraction (walls of inline noise). The goal is a component that reads as a unit. Readability is the constraint; naming and reuse are the tools.
+
 ### Learning log — surface concepts the developer didn't understand
 
 When a tool, language feature, config file, or ecosystem concept surfaces in conversation that the developer clearly didn't have context for — add it to `docs/reference/learning.md` without being asked. Each entry: what it is, why it exists, where it appears in this project. Written for a smart person who just hasn't encountered this particular thing before. No jargon. No condescension.
