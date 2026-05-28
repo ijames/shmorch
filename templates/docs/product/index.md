@@ -12,3 +12,4 @@ Intent — what MoBoS does and why. Functional specs, business rules, trader-fac
 | [product-guidelines.md](product-guidelines.md) | Brand, UX principles, communication style |
 | [order-types.md](order-types.md) | Order command language: instructions, quantity types, formulas, buying-power tiers |
 | [roadmap.md](roadmap.md) | Strategic direction — scheduled execution, hosting evolution, multi-account, async |
+| [seo-geo.md](seo-geo.md) | SEO/GEO strategy — target queries, content model, structured data, GEO citation requirements |
