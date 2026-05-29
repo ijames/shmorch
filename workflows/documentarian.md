@@ -98,7 +98,28 @@ Then classify:
 
 ## Step 6 — Write parity report
 
-Write `docs/state/parity-report-YYYYMMDD.md`:
+Ensure the run artifacts directory exists:
+```bash
+mkdir -p docs/state/documentarian
+```
+
+If `docs/state/documentarian/index.md` does not exist, create it:
+```markdown
+# Documentarian Runs
+
+↑ [docs/state/](../index.md)
+
+Parity reports from `/shmorch documentarian` runs. Each file is a point-in-time audit.
+Files are named `YYYYMMDD_parity-report.md`. The most recent run is the authoritative current state.
+
+---
+
+| Date | File | Findings | Resolved |
+|---|---|---|---|
+```
+
+Write `docs/state/documentarian/YYYYMMDD_parity-report.md` (replace YYYYMMDD with today's date):
+**Never write to `docs/state/parity-report-*.md` at the root level.**
 
 ```markdown
 # Parity Report — YYYY-MM-DD
@@ -144,7 +165,12 @@ After each batch of changes, verify the docs still form a consistent skeleton (n
 
 ---
 
-## Step 9 — Stamp completion
+## Step 9 — Update index and stamp
+
+Add a row to `docs/state/documentarian/index.md` for this run:
+```
+| YYYY-MM-DD | [YYYYMMDD_parity-report.md](YYYYMMDD_parity-report.md) | N findings (summary) | Applied / Pending |
+```
 
 ```bash
 bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "documentarian: complete — N gaps closed, M items escalated"
