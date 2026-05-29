@@ -142,6 +142,30 @@ SEO gets you ranked. GEO gets you *cited*. Both are functional requirements for 
 
 **Template:** `docs/product/seo-geo.md` — scaffolded by `init` for web-facing projects.
 
+### Analytics — User-Facing Products
+
+Analytics answers: *What are users doing, and is the product delivering value?* It is distinct from observability (infrastructure health) — analytics is the product intelligence layer.
+
+**The three questions analytics must answer at productionization:**
+1. **Discovery** — how are users finding the product? (search, referral, direct)
+2. **Engagement** — which content and interactions deliver value? (funnels, dwell, return rate)
+3. **Quality** — are experiments and changes moving metrics in the right direction?
+
+**The privacy trap.** Products that critique dark patterns in engagement-driven design — or any product that values user trust — must not replicate the tracking patterns they critique. Default posture: no PII, no persistent cross-session identifiers, aggregated by default. Collect what is needed to make product decisions. Not everything technically available.
+
+Stage expectations:
+
+| Stage | Minimum |
+|---|---|
+| R&D | None |
+| proof-sprint | Zero-config pageviews only (Vercel Analytics, Plausible, or equivalent). Core Web Vitals. No custom events. |
+| productionization | Event model defined in `docs/product/analytics.md`. Custom events for key user funnel. Tool decision recorded in `decisions.md`. |
+| maintenance | Dashboard per audience (product/strategy). A/B harness live. Analytics reviewed before each sprint planning. |
+
+**Init questionnaire trigger:** "Is this a user-facing product?" → yes → scaffold `docs/product/analytics.md` with core questions, event model stub, privacy posture, and stack decision.
+
+**Template:** `docs/product/analytics.md` — scaffolded by `init` for user-facing projects.
+
 ---
 
 ## Persistent State
