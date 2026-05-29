@@ -192,6 +192,17 @@ An interface where elements flash in or out, or change state abruptly, is inflic
 
 **Layer selection:** CSS `transition` for simple A→B state changes (always prefer), CSS `@keyframes` for sequences, CSS View Transitions API for full-view/route transitions (Baseline 2025), `motion`/Framer Motion for gesture-driven, layout morphs, and exit animations (things CSS structurally cannot express).
 
+**Style and motion abstraction balance:** Style and motion code must be readable to a developer who is not a CSS or animation specialist. When a developer opens a component file, they should understand what it looks like and how it moves without chasing definitions across multiple files.
+
+The rule: **abstract for naming and reuse — colocate for readability.**
+
+- Extract dynamic color/style computations to named utility functions when reused across components, or complex enough to need a name
+- Keep animation configs as named constants *above the component's `return`* in the same file — not in a separate module — unless genuinely shared across multiple components
+- A developer should be able to read a component file and understand both its appearance and its motion without leaving the file
+- The test: "If I removed all named constants and inlined them, would the JSX still be readable?" If yes, the abstraction adds no value. If no, the abstraction is earning its place.
+
+Over-abstraction (moving every animation config to a separate file) is as harmful as under-abstraction (walls of inline noise). The goal is a component that reads as a unit. Readability is the constraint; naming and reuse are the tools.
+
 ### Learning log — surface concepts the developer didn't understand
 
 When a tool, language feature, config file, or ecosystem concept surfaces in conversation that the developer clearly didn't have context for — add it to `docs/reference/learning.md` without being asked. Each entry: what it is, why it exists, where it appears in this project. Written for a smart person who just hasn't encountered this particular thing before. No jargon. No condescension.
@@ -269,6 +280,75 @@ When something is countermanded or redesigned, **rewrite the document to reflect
 If `stage` is missing from context.md, ask once: "What stage is this project in? (R&D / proof-sprint / productionization / maintenance)"
 
 **Sprint day = work session, not calendar day.** A sprint of 14 days means 14 work sessions of ~4 hrs each. Sessions may be separated by days or weeks. Always refer to progress as "Day N of N" (session count), never as a calendar date. Never assume sessions are consecutive.
+
+---
+
+## First-Class Dimensions — Plan These at Intent Stage
+
+Some concerns are routinely backlogged until "later" and then never properly addressed. These affect every stage of a project and are harder to add retroactively than to plan upfront. Raise them at intent stage for every project. Templates are scaffolded by `init`.
+
+### Observability
+
+Every project that runs code needs an observability strategy from day one. The three pillars:
+
+- **Logs** — what happened, and why. Structured (JSON), queryable, consistent fields: timestamp, event_type, severity, context. Write these explicitly at every meaningful system event.
+- **Metrics** — how much, how often, how fast. Counters, gauges, histograms. Drive alerting and SLOs.
+- **Traces** — where time was spent. Spans linking a user action through every system hop. Essential for distributed or multi-service systems.
+
+Stage expectations:
+
+| Stage | Minimum |
+|---|---|
+| R&D | Print/stdout logs with event names. Enough to replay what happened. |
+| proof-sprint | Structured JSON logs at every pipeline step: job start, each external call (scrape/API), job complete/failed. Stdout sink. |
+| productionization | Metrics + alerting on SLOs. P95 latency, error rate, job success rate. Dashboard per audience: ops/product/quality. |
+| maintenance | Distributed traces for cross-service flows. Alert coverage for all known failure modes. |
+
+**Build track rule:** Every track that introduces a new pipeline step must answer in its spec: *"What log events does this feature introduce?"* The answer is a required field before implementation begins.
+
+**Template:** `docs/architecture/observability.md` — scaffolded by `init` for all projects. Three sections: audiences + questions, log event catalog, tooling decision.
+
+### SEO / GEO — Web-Facing Projects
+
+For any project with a public URL, search discoverability is a first-class product requirement — not a post-launch bolt-on. Two layers:
+
+**SEO (Search Engine Optimization)** — traditional search (Google, Bing).  
+Requires: correct HTML structure (`<title>`, `<meta>`, `<h1>` hierarchy, canonical URLs), server-side rendering (not CSR-only — crawlers don't reliably execute JavaScript), structured data (JSON-LD schema.org), Core Web Vitals performance (LCP, CLS, INP), sitemap, robots.txt, mobile-first rendering.
+
+**GEO (Generative Engine Optimization)** — AI-powered search (ChatGPT, Perplexity, Google AI Overviews, Claude).  
+Requires: factual, specific, citable claims (numbers and named publishers, not hedged adjectives); prose an LLM can extract and attribute; being the named primary source for domain-specific facts; consistent page structure across similar pages (enables LLM pattern extraction); research citations that signal authority over aggregated content.
+
+SEO gets you ranked. GEO gets you *cited*. Both are functional requirements for public web products.
+
+**When to plan:** At intent stage. The product's URL structure, rendering strategy, and content shape are all downstream of SEO/GEO requirements. Retrofitting after launch costs 3× as much as planning upfront.
+
+**Init questionnaire trigger:** "Is this a public-facing web product?" → yes → scaffold `docs/product/seo-geo.md` with target queries, content model, technical requirements, and GEO content rules.
+
+**Template:** `docs/product/seo-geo.md` — scaffolded by `init` for web-facing projects.
+
+### Analytics — User-Facing Products
+
+Analytics answers: *What are users doing, and is the product delivering value?* It is distinct from observability (infrastructure health) — analytics is the product intelligence layer.
+
+**The three questions analytics must answer at productionization:**
+1. **Discovery** — how are users finding the product? (search, referral, direct)
+2. **Engagement** — which content and interactions deliver value? (funnels, dwell, return rate)
+3. **Quality** — are experiments and changes moving metrics in the right direction?
+
+**The privacy trap.** Products that critique dark patterns in engagement-driven design — or any product that values user trust — must not replicate the tracking patterns they critique. Default posture: no PII, no persistent cross-session identifiers, aggregated by default. Collect what is needed to make product decisions. Not everything technically available.
+
+Stage expectations:
+
+| Stage | Minimum |
+|---|---|
+| R&D | None |
+| proof-sprint | Zero-config pageviews only (Vercel Analytics, Plausible, or equivalent). Core Web Vitals. No custom events. |
+| productionization | Event model defined in `docs/product/analytics.md`. Custom events for key user funnel. Tool decision recorded in `decisions.md`. |
+| maintenance | Dashboard per audience (product/strategy). A/B harness live. Analytics reviewed before each sprint planning. |
+
+**Init questionnaire trigger:** "Is this a user-facing product?" → yes → scaffold `docs/product/analytics.md` with core questions, event model stub, privacy posture, and stack decision.
+
+**Template:** `docs/product/analytics.md` — scaffolded by `init` for user-facing projects.
 
 ---
 
