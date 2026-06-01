@@ -40,6 +40,8 @@ None active.
 
 - [ ] **Graph-first documentation: surface-map indexes and size discipline** — Design concept from DarkBadge 2026-05-25. Docs are nodes; references are edges. `index.md` files are surface maps (which features appear where, for which consumers), not flat listings. Feature files are single-responsibility, small (~200–400 lines max), and are referenced (transcluded) — never copied. Consumer-aware traversal means different readers follow different subgraphs. Shmorch should: (1) enforce single-responsibility via documentarian size-limit checks; (2) scaffold `index.md` as a surface map, not a flat listing; (3) document a "context bundle" concept — named traversal paths for common task types. Connects to JIT context loading (Anthropic guide). See also: DarkBadge `docs/development/notes.md` §Graph-First Documentation Architecture.
 
+- [ ] **Core / role / workflow / command boundary cleanup** — The four layers (core, role, workflow, command) have content that belongs to one layer but lives in another, causing collision and duplication. Current pain points: (1) dimension content (observability, progressive delivery, etc.) is high-level principle but currently lives in core — should be reachable from role and workflow docs when relevant, not just from core; (2) build-phase rules that belong in `workflows/build.md` drift into core; (3) commands that dispatch to workflows sometimes carry logic that belongs in the workflow. Design pass needed: define what each layer exclusively owns, identify current violations, move content to the right layer. Related to the graph-first / atomic-file direction — the layer boundary problem and the include/reference problem are the same problem at different scales.
+
 ---
 
 ## Completed
