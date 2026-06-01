@@ -376,7 +376,9 @@ Stage expectations:
 
 ### Progressive Delivery — All Projects with a Deploy Pipeline
 
-@progressive_delivery.md
+Deploy ≠ Release. Features ship dark; the flag flip is the release event, not the deploy. Every feature is built with a toggle from the first commit; toggles are codified (removed) once the feature is stable, except ops toggles (kill switches) which are permanent infrastructure. At spec time: answer toggle type, flag name, absence behaviour, owner, and codify condition before implementation begins.
+
+Full protocol (toggle taxonomy, scale ladder, who controls, codify phase): `progressive_delivery.md`.
 
 ---
 
