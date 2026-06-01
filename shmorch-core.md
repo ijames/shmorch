@@ -94,6 +94,30 @@ awk '/^## Post-MVP/{exit} /^\- \[ \]/{count++} END{print count+0}' docs/state/ac
 
 **Never interpret a fully-green test run as project completion during an active sprint.** It means one of: (a) tests are ahead of code (good), (b) tests are behind — there is unwritten work with no test yet (bad), or (c) the project is genuinely complete. Distinguish these explicitly.
 
+### Branching and the Two Reds
+
+The always-red rule and a passing CI gate are not in conflict — they refer to different things.
+
+| Red kind | Lives where | Blocks CI? |
+|---|---|---|
+| **Product red** — unchecked AC items, unimplemented scenarios | `acceptance.md`, open feature branches | No |
+| **Branch red** — failing tests for in-progress work | Feature branch only | Yes — blocks merge |
+
+`main` must always pass CI. The project must always have unfinished work. Both are true because product red lives in the backlog and on feature branches, never on `main`.
+
+**Branch roles:**
+
+| Branch | CI gate | Purpose |
+|---|---|---|
+| `main` | Always green — CI blocks merge | Deployable at all times |
+| `staging` | Mirrors main + smoke tests | Integration verification |
+| `feature/*` | Red during development — by design | Where new work happens |
+| `hotfix/*` | Must be green before merge | Off-cycle fixes |
+
+**Feature branch lifecycle:** write failing test → implement → green → PR → merge → delete branch. Never merge red. Never commit aspirational failing tests to `main` — if future work needs signalling, add an AC item to `acceptance.md`, not a `@skip` in the suite.
+
+**AC ↔ test sync:** Every checked AC item must have a passing test on `main`. Every passing test on `main` covering user-facing behaviour must trace to an AC item. Gaps in either direction are caught by `/shmorch vacuum`.
+
 ---
 
 ## Cost Discipline Rules
@@ -577,6 +601,23 @@ At appropriate reflection points, and on noticing stale TODOs, dead tests, orpha
 - Any proposed change to test logic or doc behavior descriptions **requires explicit developer review and sign-off before proceeding**
 - Flag all test/doc logic changes in the commit plan and wait for confirmation
 - This rule applies even when the change looks minor or "obviously correct" — the developer decides what behavior is intended, not the agent
+
+**Test layers and stage expectations:**
+
+| Layer | Tests what | Stage minimum |
+|---|---|---|
+| Unit | Single function/class in isolation | productionization |
+| Integration | Real components working together | proof-sprint |
+| Functional / BDD | Complete user-facing behaviour end-to-end | proof-sprint |
+| Smoke | "Is it alive?" on a live environment | all stages post-deploy |
+
+At `proof-sprint`: integration/functional tests RED before unit tests RED before code. The integration test is the AC item made executable — write it first.
+
+**BDD scenarios before test code.** For any user-facing behaviour: write the scenario in plain language before writing test code. The scenario is the intent; the test is its executable form. Never reverse this.
+
+**Regression rule.** Every bug gets a failing test before the fix. A fix without a regression test is unverifiable and silently reversible.
+
+**Never mock what you can test for real.** Mocks are for: external APIs with rate limits or cost, non-deterministic time/random, genuinely unavailable infrastructure. Not for: your own database, your own service layer, anything where mock/prod divergence has caused an incident.
 
 ### Bidirectional Sync Rule
 
