@@ -374,6 +374,10 @@ Stage expectations:
 
 **Template:** `docs/product/analytics.md` — scaffolded by `init` for user-facing projects.
 
+### Progressive Delivery — All Projects with a Deploy Pipeline
+
+@progressive_delivery.md
+
 ---
 
 ## Persistent State

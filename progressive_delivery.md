@@ -1,11 +1,5 @@
 # Progressive Delivery — First-Class Dimension
 
-> **Status: Draft concept** — not yet wired into `shmorch-core.md`.
-> When integrated: referenced via `@progressive_delivery.md` in the First-Class Dimensions section;
-> "At spec time" questions added to the spec checklist; build workflow note added to `workflows/build.md`.
-
----
-
 ## Principle
 
 **Deploy ≠ Release.** Code goes to production dark. Release is intentional. The flag is the release gate, not the deploy pipeline.
@@ -103,13 +97,3 @@ For ops toggles additionally: what does "off" mean operationally? (rate limit? r
 
 At implementation: the feature is always wrapped in a conditional from the first commit. Never ship a feature unwrapped and retrofit a flag later.
 
----
-
-## Shmorch Core Integration Notes
-
-When promoting this from draft to active:
-
-- Add to `shmorch-core.md` First-Class Dimensions section with an `@progressive_delivery.md` include
-- Add "At spec time" checklist to `workflows/spec.md`
-- Add build hook to `workflows/build.md` (pre-implementation checklist item)
-- Consider: does init scaffold a `docs/product/progressive-delivery.md` stub for web-facing or user-facing projects? Probably yes — alongside analytics and SEO/GEO.
