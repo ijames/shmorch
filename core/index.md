@@ -12,3 +12,4 @@ Doctrine files loaded on demand by `shmorch-core.md`, workflows, and roles. Thes
 | `seo_geo.md` | SEO (ranking) + GEO (LLM citation) — rendering strategy, structured data, content shape |
 | `analytics.md` | User behavior analytics — event model, privacy posture, funnel coverage |
 | `progressive_delivery.md` | Deploy ≠ Release — toggle taxonomy, flag lifecycle, codify phase |
+| `deployment.md` | Deployment manifest sync — dev env ≠ bundle, cross-platform wheel constraints |
