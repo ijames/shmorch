@@ -188,6 +188,7 @@ At reflection points, and on noticing stale TODOs, dead tests, or orphaned docs:
 - Write `docs/state/plan.md` before multi-file changes
 - One question at a time
 - **Tests and docs encode intended behavior — code does not.** Never change test logic to make tests pass. Flag all test/doc logic changes and wait for developer confirmation.
+- **Deployment manifest sync:** After any dependency change, sync all deployment manifests before committing — dev environment ≠ deployment bundle (e.g. `pyproject.toml` → `uv export` → `requirements.txt`). Verify cross-platform wheel availability for the target runtime. Full detail: `~/.claude/skills/shmorch/core/deployment.md`
 - **Bidirectional sync:** When code changes happen outside a planned build task, immediately check which docs may be stale, whether the change countermands a `decisions.md` entry, and whether a `plan.md` task should be opened to reconcile.
 
 ---
