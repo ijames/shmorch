@@ -25,20 +25,62 @@ bash ~/.claude/skills/shmorch/tools/check-session-state.sh
 ```
 
 - `CLEAN` (or script missing / no timelog yet): stamp SESSION_START normally.
-- `INTERRUPTED`: previous session has no SESSION_END (context compaction or crash). Stamp a close first, then open the new one:
+- `INTERRUPTED`: previous session has no SESSION_END — run the **Catch-Up Wrap** protocol below before opening the new session.
 
+Use the remainder of `$ARGUMENTS` after "go" as the detail. If empty, use "new session".
+
+---
+
+### Catch-Up Wrap (runs only on INTERRUPTED)
+
+Tell the user immediately, before doing anything else:
+
+> "Previous session wasn't wrapped — running catch-up wrap now before we start."
+
+Then execute these steps in order:
+
+**CW-1 — Close the previous session in the timelog:**
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_END" "session interrupted — resuming"
+bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_END" "auto-wrapped on reentry"
+```
+
+**CW-2 — Infer what happened:**
+```bash
+git log --oneline -10
+```
+Read `docs/state/session.md` to find the last session entry date. Commits since that date are what the previous session produced.
+
+**CW-3 — Update session.md:**
+Write a session entry (or update today's if one exists) using the standard session.md format from `workflows/wrap.md` Step 5. Use git log as the source for "What was done" and "Commits". Set the focus line to "Session ended without wrap — reconstructed from git log." Demote the previous "Latest Session" heading to a date heading.
+
+**CW-4 — Update plan.md:**
+Check if any tracks or tasks visible in git commits have a status that should now be updated. Apply changes if obvious; skip if unclear.
+
+**CW-5 — Graduate closed tracks:**
+```bash
+grep -rl "Status: Closed\|Status: Done" docs/state/tracks/ 2>/dev/null
+```
+For each match, prompt the user: "Track `<name>` is closed — graduate now or defer?" (one question, non-blocking).
+
+**CW-6 — Commit state files:**
+```bash
+bash ~/.claude/skills/shmorch/tools/commit-session-state.sh
+```
+Skip silently if nothing to commit.
+
+**CW-7 — Stamp new session start:**
+```bash
 bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_START" "DETAIL"
 ```
 
-  Then immediately extract and display the first **BLOCKER** pick-up item from `docs/state/session.md` before reading any other state:
-  ```bash
-  grep -A1 "BLOCKER\|Pick up immediately" docs/state/session.md | head -4
-  ```
-  Surface it to the user with: "Resuming interrupted session. First blocker: [item]". Then continue with the full orientation below.
+Tell the user: "Catch-up wrap done. Continuing with session start."
 
-Use the remainder of `$ARGUMENTS` after "go" as the detail. If empty, use "new session".
+Then extract and surface the first **BLOCKER** from session.md:
+```bash
+grep -A1 "BLOCKER\|Pick up immediately" docs/state/session.md | head -4
+```
+
+Then continue with Step 1b below.
 
 ---
 
