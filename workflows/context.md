@@ -63,6 +63,14 @@ Compact when any of the following is true:
 - Tool outputs accumulating without being referenced again
 - Visible symptoms: responses slowing, repeating prior context, losing track of decisions
 
+### Mid-session wrap reminder — ~55% utilization
+
+When context appears to be around 55% full, surface this reminder once (do not repeat it):
+
+> "We're about halfway through the context window. Good time for a mid-session wrap — self-improve and wrap prompts while there's still room. Want to do that now, or keep going?"
+
+This is a prompt, not an action. Do not run self-improve or wrap prompts automatically. If the user says yes, run them inline. If no, continue and let them decide when to compact or quit.
+
 Compression is needed when:
 
 - A single thread has been running for many exchanges with growing complexity
