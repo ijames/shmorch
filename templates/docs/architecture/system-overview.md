@@ -1,13 +1,21 @@
 ↑ [architecture/index.md](index.md)
 
-# MoBoS System Overview
+# System Overview
 
-## Hosts & Environments
+<!-- Describe how the system fits together at runtime: environments, entry points, data flows. Tech-agnostic where possible. -->
 
-:
+## Environments
 
-| Host | Stack | Config |
+| Environment | Purpose | URL / Notes |
 |---|---|---|
+| <!-- development --> | | |
+| <!-- staging --> | | |
+| <!-- production --> | | |
 
+## System Shape
 
-## Config Files 
+<!-- Describe the major components and how they connect. Diagrams welcome as ASCII or Mermaid. -->
+
+## Config Files
+
+<!-- List configuration files and what each controls. -->

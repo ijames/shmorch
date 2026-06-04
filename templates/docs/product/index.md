@@ -1,6 +1,6 @@
 # Product
 
-Intent — what MoBoS does and why. Functional specs, business rules, trader-facing behaviour. Language a non-engineer could read.
+Intent — what this project does and why. Functional specs, business rules, user-facing behaviour. Language a non-engineer could read.
 
 ↑ [docs/index.md](../index.md)
 
@@ -10,6 +10,5 @@ Intent — what MoBoS does and why. Functional specs, business rules, trader-fac
 |----------|---------|
 | [product.md](product.md) | Vision, goals, features, target audience, non-goals |
 | [product-guidelines.md](product-guidelines.md) | Brand, UX principles, communication style |
-| [order-types.md](order-types.md) | Order command language: instructions, quantity types, formulas, buying-power tiers |
-| [roadmap.md](roadmap.md) | Strategic direction — scheduled execution, hosting evolution, multi-account, async |
-| [seo-geo.md](seo-geo.md) | SEO/GEO strategy — target queries, content model, structured data, GEO citation requirements |
+| [roadmap.md](roadmap.md) | Strategic direction |
+| [design.md](design.md) | Visual design and interaction patterns |
