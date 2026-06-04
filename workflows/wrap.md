@@ -163,6 +163,18 @@ Three fields; do it inline without asking.
 
 ---
 
+## Step 8.45 — Patch doc sibling navigation
+
+Run docs-nav to keep sibling links current in every docs/ directory:
+
+```bash
+bash ~/.claude/skills/shmorch/tools/docs-nav.sh docs/
+```
+
+If `docs/` does not exist in the project, skip silently. If any files were patched, stage them as part of the state commit in Step 8.5 — do not create a separate commit.
+
+---
+
 ## Step 8.5 — Commit state files
 
 After updating session.md, plan.md, decisions.md, and timelog.md, commit them so the working tree is clean at next session start.
