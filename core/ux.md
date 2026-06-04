@@ -27,3 +27,17 @@ The rule: **abstract for naming and reuse — colocate for readability.**
 - The test: "If I removed all named constants and inlined them, would the JSX still be readable?" If yes, the abstraction adds no value. If no, the abstraction is earning its place.
 
 Over-abstraction (moving every animation config to a separate file) is as harmful as under-abstraction (walls of inline noise). The goal is a component that reads as a unit. Readability is the constraint; naming and reuse are the tools.
+
+---
+
+## Live Config Binding as Design Practice
+
+For any project with tunable visual or experiential output, build a live config binding tool **before or alongside** speccing the output itself. The tool is how you discover what the spec should be — not the other way around.
+
+**Why:** Good design optima in visual/experiential systems are often not reachable by analytical reasoning. You cannot think your way to the right spiral radius, the right colour temperature, the right timing curve. You can only feel your way there. Live binding — where moving a slider immediately updates the output — compresses the explore-evaluate loop to near-zero latency and lets you converge on results you could not have specified in advance.
+
+**Implication for spec work:** When a system has tunable parameters, the first spec question is not "what are the right values?" but "what parameters need to be live-bindable?" Spec the binding surface. Let the experimenter answer the value questions.
+
+**The designer is a theme creator.** When a user finds a configuration they like, saving that config state *is* the theme. Theme creation is not abstract design work done upfront — it is "reach a state you like in the experimenter, name it, save it." A theme system built on top of a serialisable config costs nothing to add and makes the tool immediately meaningful to users who want to personalise or share their setup.
+
+**Scope:** This applies anywhere output is experienced rather than just read: visualisations, audio, motion, 3D scenes, generative UI, game feel. If a human has to perceive it to evaluate it, live binding is not a nice-to-have — it is the primary design method.
