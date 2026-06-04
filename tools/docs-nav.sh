@@ -5,9 +5,14 @@
 # Default docs-root: docs/  (relative to current working directory)
 #
 # For each directory containing an index.md, reads the sibling .md files,
-# extracts their # Title headings, and writes an "In this section:" nav line
-# immediately after the ↑ up-link in each sibling. Safe to re-run — replaces
-# the nav line on subsequent runs.
+# extracts their # Title headings, and writes a "In this section:" nav line
+# into each sibling. Each file's own name is excluded from its nav line.
+#
+# Injection point:
+#   - Files with a ↑ up-link:   nav line inserted immediately after ↑ line
+#   - Files with no ↑ up-link:  nav line inserted before the first # heading
+#
+# Safe to re-run — strips any existing nav line before re-inserting.
 
 set -euo pipefail
 
@@ -19,7 +24,6 @@ if [[ ! -d "$DOCS" ]]; then
 fi
 
 patched=0
-skipped=0
 
 # join_with SEP elem [elem ...]
 join_with() {
@@ -31,10 +35,18 @@ join_with() {
   printf '%s' "$result"
 }
 
+# extract_title FILE — first # heading, trailing punctuation/whitespace stripped
+extract_title() {
+  local title
+  title="$(grep -m1 '^# ' "$1" 2>/dev/null | sed 's/^# //' | tr -d '\r' | sed 's/[[:space:]]*[–—:|-]*[[:space:]]*$//')"
+  [[ -z "$title" ]] && title="$(basename "$1" .md)"
+  printf '%s' "$title"
+}
+
 while IFS= read -r index_file; do
   dir="$(dirname "$index_file")"
 
-  # Collect sibling .md files (sorted, excluding index.md itself)
+  # Collect all sibling .md files (sorted, excluding index.md)
   sibling_files=()
   while IFS= read -r f; do
     sibling_files+=("$f")
@@ -42,35 +54,53 @@ while IFS= read -r index_file; do
 
   [[ ${#sibling_files[@]} -eq 0 ]] && continue
 
-  # Build nav parts: [Title](filename.md)
-  nav_parts=()
+  # Pre-extract titles into an associative array keyed by basename
+  declare -A titles=()
   for sib in "${sibling_files[@]}"; do
-    bname="$(basename "$sib")"
-    title="$(grep -m1 '^# ' "$sib" 2>/dev/null | sed 's/^# //' | tr -d '\r')"
-    [[ -z "$title" ]] && title="${bname%.md}"
-    nav_parts+=("[${title}](${bname})")
+    titles["$(basename "$sib")"]="$(extract_title "$sib")"
   done
-
-  nav_line="**In this section:** $(join_with ' · ' "${nav_parts[@]}")"
 
   # Patch each sibling
   for sib in "${sibling_files[@]}"; do
-    if ! grep -q '^↑' "$sib" 2>/dev/null; then
-      skipped=$((skipped + 1))
-      continue
-    fi
+    bname="$(basename "$sib")"
+
+    # Build nav parts — every sibling except this file itself
+    nav_parts=()
+    for other in "${sibling_files[@]}"; do
+      other_bname="$(basename "$other")"
+      [[ "$other_bname" == "$bname" ]] && continue
+      nav_parts+=("[${titles[$other_bname]}](${other_bname})")
+    done
+
+    [[ ${#nav_parts[@]} -eq 0 ]] && continue   # sole file — nothing to link
+
+    nav_line="**In this section:** $(join_with ' · ' "${nav_parts[@]}")"
 
     tmp="$(mktemp)"
-    # Remove any existing nav line, then insert fresh one after the ↑ line
-    awk -v nav="$nav_line" '
-      /^\*\*In this section:/ { next }
-      /^↑/                    { print; print nav; next }
-      { print }
-    ' "$sib" > "$tmp"
+
+    if grep -q '^↑' "$sib" 2>/dev/null; then
+      # Remove existing nav line, insert fresh one after the ↑ line
+      awk -v nav="$nav_line" '
+        /^\*\*In this section:/ { next }
+        /^↑/                    { print; print nav; next }
+        { print }
+      ' "$sib" > "$tmp"
+    else
+      # No ↑ line — remove existing nav if any, insert before first # heading
+      awk -v nav="$nav_line" '
+        BEGIN { done = 0 }
+        /^\*\*In this section:/ { next }
+        /^# / && !done          { print nav; print ""; done = 1 }
+        { print }
+      ' "$sib" > "$tmp"
+    fi
+
     mv "$tmp" "$sib"
     patched=$((patched + 1))
   done
 
+  unset titles
+
 done < <(find "$DOCS" -name "index.md" | sort)
 
-echo "docs-nav: patched ${patched} file(s)${skipped:+, skipped ${skipped} (no ↑ link)}"
+echo "docs-nav: patched ${patched} file(s)"
