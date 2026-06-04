@@ -209,11 +209,19 @@ Current version: see `.shmorch/VERSION`. To update: `/shmorch update`.
 
 **Skill change workflow:** Branch → PR → developer merges. Never commit directly to `main`.
 1. `git fetch --all`
-2. Check current branch — if on `main` or unrelated: `git checkout -b <type>/YYYYMMDD-<concept>`
-3. `git rebase js/main`
+2. `git checkout main && git pull js main` — always fork from a current main
+3. `git checkout -b <type>/YYYYMMDD-<concept>`
 4. Make changes + bump VERSION
 5. `git push -u js <branch>`
 6. `gh pr create` — title: `<type>(shmorch): <concept>`
 7. `git checkout main` — do NOT self-merge
+
+**After the developer merges any PR** — mandatory before any other action:
+```
+git fetch --all
+git checkout main
+git pull js main
+```
+Then rebase every remaining open branch onto the freshly-pulled main before resuming work or merging it. Never batch-merge without pulling between each merge. Full doctrine: `core/git-discipline.md`
 
 **The shmorch skill is itself a shmorch-managed project.** `docs/` at `~/.claude/skills/shmorch/docs/` is the live project documentation for shmorch. `templates/docs/` contains blank stubs seeded to new repos by `/shmorch init`. Never mix these. `init` must not be run on `~/.claude/skills/shmorch/` itself — the guard in `workflows/init.md` prevents this.

@@ -13,3 +13,4 @@ Doctrine files loaded on demand by `shmorch-core.md`, workflows, and roles. Thes
 | `analytics.md` | User behavior analytics — event model, privacy posture, funnel coverage |
 | `progressive_delivery.md` | Deploy ≠ Release — toggle taxonomy, flag lifecycle, codify phase |
 | `deployment.md` | Deployment manifest sync — dev env ≠ bundle, cross-platform wheel constraints |
+| `git-discipline.md` | Branch hygiene — pull after merge, rebase before work, never batch-merge |
