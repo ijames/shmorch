@@ -110,6 +110,75 @@ Raise these at intent stage for every applicable project. Templates scaffolded b
 
 ---
 
+## First-Class Dimensions — Plan These at Intent Stage
+
+Some concerns are routinely backlogged until "later" and then never properly addressed. These affect every stage of a project and are harder to add retroactively than to plan upfront. Raise them at intent stage for every project. Templates are scaffolded by `init`.
+
+### Observability
+
+Every project that runs code needs an observability strategy from day one. The three pillars:
+
+- **Logs** — what happened, and why. Structured (JSON), queryable, consistent fields: timestamp, event_type, severity, context. Write these explicitly at every meaningful system event.
+- **Metrics** — how much, how often, how fast. Counters, gauges, histograms. Drive alerting and SLOs.
+- **Traces** — where time was spent. Spans linking a user action through every system hop. Essential for distributed or multi-service systems.
+
+Stage expectations:
+
+| Stage | Minimum |
+|---|---|
+| R&D | Print/stdout logs with event names. Enough to replay what happened. |
+| proof-sprint | Structured JSON logs at every pipeline step: job start, each external call (scrape/API), job complete/failed. Stdout sink. |
+| productionization | Metrics + alerting on SLOs. P95 latency, error rate, job success rate. Dashboard per audience: ops/product/quality. |
+| maintenance | Distributed traces for cross-service flows. Alert coverage for all known failure modes. |
+
+**Build track rule:** Every track that introduces a new pipeline step must answer in its spec: *"What log events does this feature introduce?"* The answer is a required field before implementation begins.
+
+**Template:** `docs/architecture/observability.md` — scaffolded by `init` for all projects. Three sections: audiences + questions, log event catalog, tooling decision.
+
+### SEO / GEO — Web-Facing Projects
+
+For any project with a public URL, search discoverability is a first-class product requirement — not a post-launch bolt-on. Two layers:
+
+**SEO (Search Engine Optimization)** — traditional search (Google, Bing).  
+Requires: correct HTML structure (`<title>`, `<meta>`, `<h1>` hierarchy, canonical URLs), server-side rendering (not CSR-only — crawlers don't reliably execute JavaScript), structured data (JSON-LD schema.org), Core Web Vitals performance (LCP, CLS, INP), sitemap, robots.txt, mobile-first rendering.
+
+**GEO (Generative Engine Optimization)** — AI-powered search (ChatGPT, Perplexity, Google AI Overviews, Claude).  
+Requires: factual, specific, citable claims (numbers and named publishers, not hedged adjectives); prose an LLM can extract and attribute; being the named primary source for domain-specific facts; consistent page structure across similar pages (enables LLM pattern extraction); research citations that signal authority over aggregated content.
+
+SEO gets you ranked. GEO gets you *cited*. Both are functional requirements for public web products.
+
+**When to plan:** At intent stage. The product's URL structure, rendering strategy, and content shape are all downstream of SEO/GEO requirements. Retrofitting after launch costs 3× as much as planning upfront.
+
+**Init questionnaire trigger:** "Is this a public-facing web product?" → yes → scaffold `docs/product/seo-geo.md` with target queries, content model, technical requirements, and GEO content rules.
+
+**Template:** `docs/product/seo-geo.md` — scaffolded by `init` for web-facing projects.
+
+### Analytics — User-Facing Products
+
+Analytics answers: *What are users doing, and is the product delivering value?* It is distinct from observability (infrastructure health) — analytics is the product intelligence layer.
+
+**The three questions analytics must answer at productionization:**
+1. **Discovery** — how are users finding the product? (search, referral, direct)
+2. **Engagement** — which content and interactions deliver value? (funnels, dwell, return rate)
+3. **Quality** — are experiments and changes moving metrics in the right direction?
+
+**The privacy trap.** Products that critique dark patterns in engagement-driven design — or any product that values user trust — must not replicate the tracking patterns they critique. Default posture: no PII, no persistent cross-session identifiers, aggregated by default. Collect what is needed to make product decisions. Not everything technically available.
+
+Stage expectations:
+
+| Stage | Minimum |
+|---|---|
+| R&D | None |
+| proof-sprint | Zero-config pageviews only (Vercel Analytics, Plausible, or equivalent). Core Web Vitals. No custom events. |
+| productionization | Event model defined in `docs/product/analytics.md`. Custom events for key user funnel. Tool decision recorded in `decisions.md`. |
+| maintenance | Dashboard per audience (product/strategy). A/B harness live. Analytics reviewed before each sprint planning. |
+
+**Init questionnaire trigger:** "Is this a user-facing product?" → yes → scaffold `docs/product/analytics.md` with core questions, event model stub, privacy posture, and stack decision.
+
+**Template:** `docs/product/analytics.md` — scaffolded by `init` for user-facing projects.
+
+---
+
 ## Persistent State
 
 **`docs/state/`** — in-flight only. Nothing permanent lives here.
