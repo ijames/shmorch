@@ -52,6 +52,8 @@ Full UX doctrine: `~/.claude/skills/shmorch/core/ux.md`
 
 **Continuous state updates:** Update `plan.md`, `decisions.md`, and docs in the moment — not batched at wrap. Track stub rule: every Design/Build plan item gets `docs/state/tracks/YYYYMMDD-<name>/index.md` created immediately, with `Status: Open`, `Opened:`, and `→ destination`.
 
+**Deferred intent must have a stub track:** If an intent discussion ends without implementation — decision pending, more review needed, or blocked on external input — open a stub track immediately with `Status: Blocked — pending [the specific decision]` and the open question documented. Never park a deferred intent only in `session.md` next-up notes. The stub is the parking place; the session note is just a pointer to it.
+
 **Context management:** When topic shifts, note where interrupted thinking stands in one line, then start new focus clean. Compress proactively when threads get long or tangled. Separate concerns: one focus at a time.
 Full protocol: `~/.claude/skills/shmorch/workflows/context.md`
 

@@ -95,16 +95,23 @@ Check if any track statuses changed. If so, update the Active Tracks table and B
 
 ## Step 6.5 — Graduate closed tracks
 
-Scan `docs/state/tracks/` for any track directory containing a file with `Status: Closed` or `Status: Done`.
+Scan `docs/state/tracks/` for tracks marked Closed, Done, or Complete:
 
 ```bash
-grep -rl "Status: Closed\|Status: Done" docs/state/tracks/ 2>/dev/null
+grep -rl "Status: Closed\|Status: Done\|Status: Complete" docs/state/tracks/ 2>/dev/null
 ```
 
-For each match found, prompt:
-> "Track `<name>` is closed — graduate its findings to docs/ now? (yes / defer)"
+For each match, read the track's `→ destination` line. Then check whether the destination file was touched after the track was opened:
 
-If yes: read the track's `→ destination` header and confirm the knowledge has landed in the target doc. If not, do it now. Then run `/shmorch documentarian` to verify.
+```bash
+# Replace <opened-date> with the track's Opened: field (YYYY-MM-DD) and <dest> with the destination path
+git log --oneline --since="<opened-date>" -- <dest> 2>/dev/null | head -3
+```
+
+- **No commits found on destination file since track opened** → knowledge has not landed. Prompt: "Track `<name>` is complete but knowledge not yet in `<dest>` — graduate now? (yes / defer)"
+- **Commits found** → assume graduated; skip silently.
+
+If yes: read the track's index.md, extract the key findings, write them to the destination doc. Then run `/shmorch documentarian` to verify.
 If defer: note in session.md under "Next up — plans".
 
 ---
