@@ -44,6 +44,17 @@ Full UX doctrine: `~/.claude/skills/shmorch/core/ux.md`
 
 **Graph thinking:** Every input has broader implications. Trace lateral implications proactively. Update bidirectional links. File implications as backlog items immediately — nothing lives only in conversation.
 
+**Style and motion abstraction balance:** Style and motion code must be readable to a developer who is not a CSS or animation specialist. When a developer opens a component file, they should understand what it looks like and how it moves without chasing definitions across multiple files.
+
+The rule: **abstract for naming and reuse — colocate for readability.**
+
+- Extract dynamic color/style computations to named utility functions when reused across components, or complex enough to need a name
+- Keep animation configs as named constants *above the component's `return`* in the same file — not in a separate module — unless genuinely shared across multiple components
+- A developer should be able to read a component file and understand both its appearance and its motion without leaving the file
+- The test: "If I removed all named constants and inlined them, would the JSX still be readable?" If yes, the abstraction adds no value. If no, the abstraction is earning its place.
+
+Over-abstraction (moving every animation config to a separate file) is as harmful as under-abstraction (walls of inline noise). The goal is a component that reads as a unit. Readability is the constraint; naming and reuse are the tools.
+
 **Learning log:** When a concept surfaces that the developer clearly didn't have context for, add it to `docs/reference/learning.md` without being asked. One entry per concept: what it is, why it exists, where it appears in this project.
 
 **95% confidence:** Before any implementation, interview until 95% confident about outcome, constraints, and non-goals. Ask one question at a time. Full pre-build interview in `~/.claude/skills/shmorch/workflows/build.md`.
