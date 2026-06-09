@@ -194,6 +194,50 @@ Skip silently if output is "Nothing to commit."
 
 ---
 
+## Step 8.55 — Branch close-out prompt
+
+Check the current branch:
+
+```bash
+git branch --show-current
+```
+
+If on `main` or `dev`: skip silently.
+
+If on any other branch (feature, fix, docs, etc.):
+
+1. Check whether the branch has unpushed commits:
+   ```bash
+   git log --oneline @{u}..HEAD 2>/dev/null || git log --oneline HEAD
+   ```
+
+2. Ask in ONE message (not separately):
+   > "You're on `<branch>`. Want to (a) push + open a PR now, and (b) return to main after?"
+
+3. If yes to push + PR:
+   ```bash
+   git push -u origin <branch>
+   gh pr create --title "<conventional-commit title>" --body "$(cat <<'EOF'
+   ## Summary
+   <bullet points from session>
+
+   ## Test plan
+   - [ ] CI passes
+
+   🤖 Generated with [Claude Code](https://claude.com/claude-code)
+   EOF
+   )"
+   ```
+
+4. If yes to return to main:
+   ```bash
+   git checkout main && git pull origin main
+   ```
+
+5. If no to either: note in session.md under "Next up — plans": "Push `<branch>`, open PR, return to main."
+
+---
+
 ## Step 8.6 — Developer prompts
 
 Read wrap prompts from two sources (both may exist):
