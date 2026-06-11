@@ -6,7 +6,7 @@ TIMELOG="$ROOT/docs/state/timelog.md"
 
 # Stamp SESSION_END if session is still open (SESSION_START with no SESSION_END)
 if [ -f "$TIMELOG" ]; then
-  LAST=$(grep "SESSION_" "$TIMELOG" 2>/dev/null | tail -1)
+  LAST=$(grep "SESSION_" "$TIMELOG" 2>/dev/null | tail -1 || true)
   if [[ "$LAST" == *"SESSION_START"* ]]; then
     bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_END" "auto-closed by stop hook"
   fi

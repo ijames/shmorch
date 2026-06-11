@@ -10,7 +10,7 @@ if [ ! -f "$TIMELOG" ]; then
   exit 0
 fi
 
-LAST=$(grep "SESSION_" "$TIMELOG" 2>/dev/null | tail -1)
+LAST=$(grep "SESSION_" "$TIMELOG" 2>/dev/null | tail -1 || true)
 
 if [[ "$LAST" == *"SESSION_START"* ]]; then
   echo "INTERRUPTED"
