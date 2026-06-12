@@ -24,6 +24,9 @@ if [[ ! -d "$DOCS" ]]; then
 fi
 
 patched=0
+=======
+skipped=0
+>>>>>>> c886980 (feat(tools): docs-nav.sh — auto-patch sibling nav links in docs/)
 
 # join_with SEP elem [elem ...]
 join_with() {
@@ -35,6 +38,7 @@ join_with() {
   printf '%s' "$result"
 }
 
+<<<<<<< HEAD
 # extract_title FILE — first # heading, trailing punctuation/whitespace stripped
 extract_title() {
   local title
