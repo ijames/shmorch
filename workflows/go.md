@@ -86,6 +86,8 @@ Then continue with Step 1b below.
 
 ## Step 1b — Auto-update check
 
+If `SHMORCH_SELF=1` is set in the environment, skip this step entirely — the skill repo is its own source of truth.
+
 ```bash
 PROJECT_VERSION=$(cat .shmorch/VERSION 2>/dev/null | tr -d '[:space:]')
 SKILL_VERSION=$(cat ~/.claude/skills/shmorch/VERSION 2>/dev/null | tr -d '[:space:]')
