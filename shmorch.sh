@@ -5,8 +5,8 @@ export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
 export SHMORCH_SELF=1
 echo ""
 echo "Starting Shmorch — $(basename "$PWD")"
-echo "  /shmorch go    — start session"
+echo "  Running /shmorch go automatically."
+echo "  After go completes, Esc+Esc rewinds to this point — reclaim context anytime."
 echo "  /shmorch help  — all commands"
-echo "  Esc+Esc or /rewind anytime to restore a previous state"
 echo ""
-claude --dangerously-skip-permissions
+claude --dangerously-skip-permissions "/shmorch go"
