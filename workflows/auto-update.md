@@ -154,6 +154,45 @@ If no: skip without comment.
 
 ---
 
+## Step 2.9 — Hook sync
+
+Ensure the project's `.githooks/` files are in sync with the skill template and are executable. This mirrors what `init` does on first setup.
+
+```bash
+SKILL_HOOKS=~/.claude/skills/shmorch/templates/.githooks
+PROJECT_HOOKS=./.githooks
+
+# Check if .githooks/ exists in project
+[ -d "$PROJECT_HOOKS" ] || echo "MISSING: .githooks/ directory"
+
+# Diff skill hooks vs project hooks
+if [ -d "$PROJECT_HOOKS" ] && [ -d "$SKILL_HOOKS" ]; then
+  diff -rq "$SKILL_HOOKS" "$PROJECT_HOOKS" 2>/dev/null || true
+fi
+
+# Check executability
+find "$PROJECT_HOOKS" -type f 2>/dev/null | while read f; do
+  [ -x "$f" ] || echo "NOT EXECUTABLE: $f"
+done
+```
+
+For each file reported as `Only in $SKILL_HOOKS` (new hook in skill, missing from project):
+- Offer to copy it. Default yes.
+
+For each file reported as differing:
+- Show the diff. Classify as `generic-improvement` or `conflict` using the same rules as Step 4.
+- Offer to apply generic improvements automatically.
+
+For each `NOT EXECUTABLE` file:
+- Fix silently: `chmod +x <file>`
+
+After any hook file changes, re-register the hooks path (idempotent):
+```bash
+git config core.hooksPath .githooks
+```
+
+---
+
 ## Step 3 — File diff (bash first)
 
 Run a concrete diff between the skill template and the project's shmorch files. This is the ground truth — semantic analysis comes after, not instead of, this.
