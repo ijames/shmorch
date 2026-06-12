@@ -1,0 +1,37 @@
+#!/bin/sh
+# Prevent accidental commits directly to integration or release branches.
+# Code changes belong on a feature branch — use: git checkout -b <type>/YYYYMMDD-<description>
+# State-only commits (docs/state/, docs/development/decisions.md) are exempt.
+
+BRANCH=$(git branch --show-current)
+
+case "$BRANCH" in
+  main|dev)
+    # Allow if every staged file is under docs/state/ or docs/development/decisions.md
+    STAGED=$(git diff --cached --name-only)
+    CODE_FILES=$(echo "$STAGED" | grep -v \
+      -e '^docs/state/' \
+      -e '^docs/development/decisions\.md' \
+      -e '^\.gitattributes$')
+
+    if [ -n "$CODE_FILES" ]; then
+      echo ""
+      echo "  BLOCKED: direct commit to '$BRANCH'"
+      echo ""
+      echo "  Code changes must land via PR from a feature branch."
+      echo "  Create one now:"
+      echo "    git stash"
+      echo "    git checkout -b <type>/$(date +%Y%m%d)-<description>"
+      echo "    git stash pop"
+      echo ""
+      echo "  Staged files that triggered this block:"
+      echo "$CODE_FILES" | sed 's/^/    /'
+      echo ""
+      echo "  (State files — docs/state/, decisions.md — may commit directly.)"
+      echo ""
+      exit 1
+    fi
+    ;;
+esac
+
+exit 0
