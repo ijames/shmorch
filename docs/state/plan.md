@@ -16,6 +16,8 @@ None active.
 
 ### Fixes
 
+- [ ] **Squash-merge policy enforcement** — messy history from non-squash merges across branches left duplicate commits and half-landed state. Document in a CONTRIBUTING guide or `wrap.md` branch close-out step: feature branches must be squash-merged. Flag if a merge commit lands on `main`/`dev` without a squash. Surfaced 2026-06-11.
+
 - [ ] **Init self-guard** — `init` must detect when `TARGET` is `~/.claude/skills/shmorch/` and skip the template-copy step entirely.
 
 - [ ] **wrap.md: BLOCKER tier** — split pick-up items into `**BLOCKER** (do first):` (max 2) and `**Next up:**`; `go.md` fast-path reads BLOCKER tier only. (`workflows/wrap.md`)
@@ -53,6 +55,10 @@ None active.
 ---
 
 ### Features
+
+- [ ] **Structural focus enforcement — no nagging, mechanical** — Shmorch can't enforce focus if nothing invokes it. Two options: (1) `init` writes a CLAUDE.md rule: "Before any task, state today's single objective; flag divergence before proceeding." (2) A `SessionStart` hook that auto-cats `.shmorch/sprint-calendar.md` + current state into context — makes drift-checking zero-effort instead of discipline-dependent. Option 2 is stronger (hook fires automatically, no reliance on the developer remembering to invoke a command). Surfaced 2026-06-11.
+
+- [ ] **Cross-functional UX: participant awareness** — Shmorch should know who the participants are in the work (developer, reviewer, stakeholder) and surface relevant context per role. `go.md` could prompt for active participants and adjust what it shows at session start (e.g. reviewer-facing summary vs builder-facing task list). "U" in UX = the people doing the work, not just the end-user. Surfaced 2026-06-11.
 
 - [ ] **Scheduler integration** — three-tier model: in-session hygiene, cross-session rhythms, sprint boundary events. Design doc already written. Blocked on remote-agent vs CronCreate open question. → [track](tracks/20260602-scheduler-integration/index.md)
 
