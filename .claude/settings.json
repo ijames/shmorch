@@ -1,6 +1,7 @@
 {
   "env": { "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1" },
   "hooks": {
+    "SessionStart": [{"matcher": "", "hooks": [{"type": "command", "command": "bash .claude/hooks/session-start.sh 2>/dev/null || true"}]}],
     "Stop": [{"matcher": "", "hooks": [{"type": "command", "command": "bash ~/.claude/skills/shmorch/tools/stop.sh"}]}],
     "PreToolUse": [{"matcher": "Bash", "hooks": [{"type": "command", "command": "bash .claude/hooks/pre-tool.sh 2>/dev/null || true"}]}]
   },

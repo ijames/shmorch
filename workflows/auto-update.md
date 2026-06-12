@@ -156,7 +156,9 @@ If no: skip without comment.
 
 ## Step 2.9 — Hook sync
 
-Ensure the project's `.githooks/` files are in sync with the skill template and are executable. This mirrors what `init` does on first setup.
+Ensure the project's `.githooks/` and `.claude/hooks/` files are in sync with the skill template and are executable. This mirrors what `init` does on first setup.
+
+**Git hooks (`.githooks/`)**
 
 ```bash
 SKILL_HOOKS=~/.claude/skills/shmorch/templates/.githooks
@@ -190,6 +192,25 @@ After any hook file changes, re-register the hooks path (idempotent):
 ```bash
 git config core.hooksPath .githooks
 ```
+
+**Claude Code hooks (`.claude/hooks/`)**
+
+```bash
+SKILL_CLAUDE_HOOKS=~/.claude/skills/shmorch/templates/.claude/hooks
+PROJECT_CLAUDE_HOOKS=./.claude/hooks
+
+[ -d "$PROJECT_CLAUDE_HOOKS" ] || echo "MISSING: .claude/hooks/ directory"
+
+if [ -d "$PROJECT_CLAUDE_HOOKS" ] && [ -d "$SKILL_CLAUDE_HOOKS" ]; then
+  diff -rq "$SKILL_CLAUDE_HOOKS" "$PROJECT_CLAUDE_HOOKS" 2>/dev/null || true
+fi
+
+find "$PROJECT_CLAUDE_HOOKS" -type f 2>/dev/null | while read f; do
+  [ -x "$f" ] || echo "NOT EXECUTABLE: $f"
+done
+```
+
+Apply the same rules as git hooks above: offer to copy new files, show diffs for changed files, fix executability silently. After copying any new hook, also add the corresponding entry to `.claude/settings.json` under `hooks` — copy the entry from `templates/.claude/settings.json` if it isn't already present.
 
 ---
 
