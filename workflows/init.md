@@ -101,6 +101,15 @@ This includes all `index.md` stubs, state file templates, and `.gitkeep` placeho
 **`templates/shmorch.sh` → `TARGET/shmorch.sh`**
 Copy only if `TARGET/shmorch.sh` does not exist. Make executable.
 
+**`templates/.githooks/` → `TARGET/.githooks/`**
+Copy all files. Skip any that already exist. Make all files executable (`chmod +x`).
+
+After copying, register the hooks path with git — but only if `TARGET` is a git repository:
+```bash
+git -C "$TARGET" config core.hooksPath .githooks
+```
+This is idempotent and safe to re-run. It points git at the tracked `.githooks/` directory instead of the default `.git/hooks/`, so the hooks are version-controlled and survive clones. Any developer who runs `shmorch init` (or re-runs it) gets the hooks registered automatically.
+
 After copying, tell the user what was created vs. skipped.
 
 ---
