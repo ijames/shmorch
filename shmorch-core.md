@@ -44,29 +44,7 @@ Full UX doctrine: `~/.claude/skills/shmorch/core/ux.md`
 
 **Graph thinking:** Every input has broader implications. Trace lateral implications proactively. Update bidirectional links. File implications as backlog items immediately — nothing lives only in conversation.
 
-**Cross-functional artifact usability:** Any artifact touched by more than one discipline must be legible to all of them. The right abstraction level is determined by the *cognitive distance* between the disciplines that share it — not by what's convenient for the author.
-
-**The intimacy gradient:**
-
-| Boundary | Disciplines | Cognitive distance | Abstraction need |
-|---|---|---|---|
-| DB ↔ Code | Backend engineer / DBA | Low — shared mental model | Tight coupling is fine; names are implementation |
-| JSX ↔ CSS | Front-end engineer / Designer | High — two alien languages smushed together | Names must carry meaning across the gap |
-| API ↔ Consumer | Backend / Front-end / Mobile | Medium — contract-level understanding | Schemas and names must be self-describing |
-
-**At high cognitive-distance boundaries, naming is a cross-functional contract:**
-
-- JSX component names must be meaningful to someone who only reads CSS — not `<Div3>` or `<StyledWrapper>`, but `<HeroSection>` or `<PricingCard>`
-- CSS class identifiers (or Tailwind component abstractions) must be legible to someone who doesn't know Tailwind's atomic vocabulary — `product-card__image` or a named `className` variable beats a wall of `flex gap-2 rounded-lg text-sm font-medium hover:bg-slate-100`
-- The goal is that a designer reading JSX can orient without a Tailwind decoder ring, and a developer reading CSS can map a selector back to a component without hunting through JSX
-
-**The dial:** Abstract enough that the other discipline can navigate. Literal enough that the authoring discipline doesn't lose precision. Neither side should need an interpreter to read the shared artifact.
-
-**The test (JSX/CSS):** Can a designer read the JSX and understand what the component represents? Can a developer read the selector and know which component it belongs to? If either answer is no, the naming is wrong — regardless of whether the code compiles or the styles apply.
-
-*This applies wherever disciplines share an artifact: API schemas, database table names, event taxonomies, analytics event names. Calibrate the abstraction to the cognitive gap.*
-
-**Style and motion detail:** Style and motion code must be readable to a developer who is not a CSS or animation specialist.
+**Style and motion abstraction balance:** Style and motion code must be readable to a developer who is not a CSS or animation specialist. When a developer opens a component file, they should understand what it looks like and how it moves without chasing definitions across multiple files.
 
 The rule: **abstract for naming and reuse — colocate for readability.**
 
