@@ -84,6 +84,33 @@ Use SendMessage whenever the agent is still relevant and its context is still va
 
 ---
 
+## Cross-functional mediator — join and audit patterns
+
+**Join condition:** When spawning 2+ roles simultaneously, add the cross-functional mediator after the parallel agents complete — before synthesis. It reviews the seams between outputs, not the outputs themselves.
+
+```
+# After parallel agents complete:
+Agent(
+  name: "cross-functional-mediator",
+  model: "haiku",
+  description: "Cross-functional mediator: review artifact seams",
+  prompt: <mediator prompt — see cross-functional-mediator role>
+)
+```
+
+The mediator returns findings only (no rewrites). Gate on `[SEVERITY] high` before synthesis — surface to user. Pass `medium` and `low` findings to the synthesizer as context.
+
+**Audit recall:** During `/shmorch vacuum` or any explicit naming/legibility audit, recall or spawn the mediator explicitly:
+
+```
+SendMessage(to: "cross-functional-mediator", message: "<audit scope>")
+# or respawn if session is stale
+```
+
+Do not spawn the mediator for single-role work or single-discipline artifacts.
+
+---
+
 ## Critic pattern — phase boundary only
 
 At the end of a phase (spec complete, design complete, implementation complete), spawn a critic:
