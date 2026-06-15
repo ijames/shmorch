@@ -143,6 +143,19 @@ DETECTED_STACK_OR_PLACEHOLDER
 
 Where possible, encode prohibitions as lint rules with remediation instructions — markdown instructions alone are probabilistic.
 
+### Branching Discipline
+
+Every track gets its own branch. No direct-to-main commits except hotfixes confirmed by the user.
+
+**Branch naming:** `feat/YYYYMMDD-<slug>` · `fix/YYYYMMDD-<slug>` · `docs/YYYYMMDD-<slug>`
+
+**PR merge strategy:** <!-- merge | squash | rebase — see decisions.md for rationale -->
+- `merge` — preserves branch topology in DAG, parallel work visible in graph forever
+- `squash` — one commit per PR, granular history lost, topology lost
+- `rebase` — granular history preserved, topology lost
+
+**Use:** `gh pr merge --STRATEGY`
+
 ### Never Do Without Asking
 <!-- fill in -->
 ```

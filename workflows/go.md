@@ -114,8 +114,9 @@ If `context.md` is unfilled, run the Context Setup flow:
    - "What is this project? One or two sentences."
    - "What's your tech stack? ('not sure yet' is fine)"
    - "Existing codebase or starting fresh?"
+   - "PR merge strategy: merge, squash, or rebase? (merge preserves branch topology in git graph; squash = one commit per PR; rebase = linear history, no merge commits)"
    - "Anything I should never do without asking first?"
-3. Write answers to `docs/state/context.md`, confirm with user.
+3. Write answers to `docs/state/context.md` and the merge strategy to `.shmorch/CLAUDE.md` under Branching Discipline, confirm with user.
 
 If filled, summarize in 1-2 sentences.
 
