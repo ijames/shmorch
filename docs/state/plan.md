@@ -52,6 +52,8 @@ None active.
 
 - [ ] **State file discipline: tracks own their state, dev owns root state** — root-level state files must never be committed to feature branches; per-track state lives in the track directory for its full lifecycle; root files consolidated on `dev` at merge time only. → [track](tracks/20260609-state-file-discipline/index.md)
 
+- [ ] **Shared state branch: git-decoupled state layer** — state files conflict on every branch merge because git's divergence model and shared mutable state are structurally incompatible. Candidate: orphan `state` branch + permanent git worktree at `.shmorch-state/`; state lives outside the branch graph entirely. Supersedes state-file-discipline if adopted. → [track](tracks/20260614-shared-state-branch/index.md)
+
 ---
 
 ### Features
