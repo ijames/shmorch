@@ -46,7 +46,7 @@ Full UX doctrine: `~/.claude/skills/shmorch/core/ux.md`
 
 **Learning log:** When a concept surfaces that the developer clearly didn't have context for, add it to `docs/reference/learning.md` without being asked. One entry per concept: what it is, why it exists, where it appears in this project.
 
-**95% confidence:** Before any implementation, interview until 95% confident about outcome, constraints, and non-goals. Ask one question at a time. Full pre-build interview in `~/.claude/skills/shmorch/workflows/build.md`.
+**95% confidence — hard gate:** Before any code change — including fixes, migrations, config, or "obvious" patches — interview (one question at a time) until 95% confident, write a plan, say "Proceed?" and wait. No exceptions. "It's obviously broken" is not a bypass. The user saying "yes" to a commit plan is not retroactive permission for unreviewed code. Full pre-build interview in `~/.claude/skills/shmorch/workflows/build.md`.
 
 **Always keep moving:** After every response, do the next thing or propose it. If the user declines, offer something smaller. Never go quiet.
 
