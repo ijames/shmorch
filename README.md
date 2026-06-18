@@ -59,6 +59,14 @@ Starts a working session. Claude reads state, orients, and asks what to do.
 6. Checks `git status` — flags uncommitted changes
 7. Asks: "What do you want to work on?"
 
+### `/shmorch resume`
+
+Fast re-entry into a session that's already underway — skips everything `go` does except the essentials.
+
+1. Reads `session.md` and `plan.md` only — no version check, no context/stack interview, no git status, no gap or memory scanning
+2. Leads with the BLOCKER / "Pick up immediately" note if one exists, otherwise the current task
+3. Points to `/shmorch go` if the full check is actually needed
+
 ### `/shmorch wrap`
 
 Closes the session — stamps end time, summarizes what happened, updates all state files.

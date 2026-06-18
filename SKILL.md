@@ -1,6 +1,6 @@
 ---
 name: shmorch
-description: Shmorch is an autonomous development orchestrator that manages persistent project state across sessions. Use this skill whenever the user wants to start a dev session, plan features, track in-progress work, clean up code, manage a sprint, prioritize work, or improve the shmorch workflow itself. Trigger on /shmorch go, init, discover, wrap, commit, vacuum, checkpoint, sprinter, prioritize, self-improve, research, status, or auto-update — or when they say things like "let's start a session", "what were we working on", "clean up the code", "check the sprint", "reprioritize the backlog", "what's the status", or "look for better practices".
+description: Shmorch is an autonomous development orchestrator that manages persistent project state across sessions. Use this skill whenever the user wants to start a dev session, plan features, track in-progress work, clean up code, manage a sprint, prioritize work, or improve the shmorch workflow itself. Trigger on /shmorch go, resume, init, discover, wrap, commit, vacuum, checkpoint, sprinter, prioritize, self-improve, research, status, or auto-update — or when they say things like "let's start a session", "what were we working on", "clean up the code", "check the sprint", "reprioritize the backlog", "what's the status", or "look for better practices".
 user-invocable: true
 allowed-tools: Bash, Read, Edit, Write, Grep, Glob, Agent, WebSearch
 ---
@@ -12,6 +12,7 @@ Dispatch on the first word of `$ARGUMENTS`. Read **only** the matching command f
 | `init` | `commands/init.md` |
 | `discover` | `commands/discover.md` |
 | `go` | `commands/go.md` |
+| `resume` | `commands/resume.md` |
 | `wrap` | `commands/wrap.md` |
 | `commit` | `commands/commit.md` |
 | `vacuum` | `commands/vacuum.md` |
