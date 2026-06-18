@@ -16,14 +16,14 @@ if [ "$SESSION_COUNT" -lt 3 ]; then
   exit 0
 fi
 
-LAST_RUN_LINE=$(grep "self-improve: complete" "$TIMELOG" 2>/dev/null | tail -1)
+LAST_RUN_LINE=$(grep "self-improve: complete" "$TIMELOG" 2>/dev/null | tail -1 || true)
 
 if [ -z "$LAST_RUN_LINE" ]; then
   echo "PROCEED"
   exit 0
 fi
 
-LAST_SESSION_END_LINE=$(grep "SESSION_END" "$TIMELOG" 2>/dev/null | tail -1)
+LAST_SESSION_END_LINE=$(grep "SESSION_END" "$TIMELOG" 2>/dev/null | tail -1 || true)
 
 LAST_RUN_TS=$(echo "$LAST_RUN_LINE" | grep -o '\[[0-9-]* [0-9:]*\]' | tr -d '[]')
 LAST_END_TS=$(echo "$LAST_SESSION_END_LINE" | grep -o '\[[0-9-]* [0-9:]*\]' | tr -d '[]')
