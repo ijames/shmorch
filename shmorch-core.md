@@ -6,16 +6,28 @@ Doctrine files (principles, philosophy, full rule sets): `~/.claude/skills/shmor
 
 ---
 
-## Auto-Go — Conversation Start
+## Session Start — Ask, Don't Auto-Run
 
 > **CRITICAL — do this before responding to anything else, even "Hello".**
+>
+> This fires on Claude Code's actual `SessionStart` event only. `/clear` has no hook and is invisible to Shmorch — nothing runs automatically after it; the user must type `/shmorch go` or `/shmorch resume` directly.
 
 At the start of every new conversation, before any greeting or reply:
 1. Check if `docs/state/context.md` exists.
-2. If it does — immediately run `~/.claude/skills/shmorch/workflows/go.md`. Do **not** wait for the user to say `/shmorch go`.
-3. If it doesn't — tell the user: "This project has Shmorch but hasn't been initialized yet. Run `/shmorch init` to get started."
+2. If it doesn't — tell the user: "This project has Shmorch but hasn't been initialized yet. Run `/shmorch init` to get started." Stop here.
+3. If it does — ask, in one message, before anything else:
 
-The user's first message is a trigger, not a question to answer first.
+   > "Session started. Already loaded: Shmorch identity (`shmorch-core.md`) and project rules (`.shmorch/AGENTS.md`) via the `CLAUDE.md` import chain — no project state yet.
+   >
+   > - **go** — full bootstrap: version check, `context.md`/`stack.md` read (interview if unfilled), `session.md` + `plan.md` read, git status, gap + memory-staleness scan, then a proposed next move.
+   > - **resume** — fast path: reads only `session.md` + `plan.md`, surfaces the BLOCKER/current task, skips everything else.
+   > - **nothing** — stay idle, wait for direction.
+   >
+   > Go, resume, or nothing?"
+
+4. Act on the answer: `go` → run `~/.claude/skills/shmorch/workflows/go.md`. `resume` → run `~/.claude/skills/shmorch/workflows/resume.md`. `nothing` → wait silently; do not propose work unprompted.
+
+The user's first message is answered by this question, not by an unprompted bootstrap.
 
 ---
 

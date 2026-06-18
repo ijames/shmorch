@@ -3,7 +3,7 @@
 Orient, read state, and propose the next move at the start of a session.
 
 ## When to use
-- At the start of every session (auto-runs via `commands/go.md`)
+- Chosen at the SessionStart prompt (see `shmorch-core.md`)
 - After resuming an interrupted session
 - Any time you need to re-orient mid-session
 

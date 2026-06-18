@@ -1,9 +1,9 @@
 # Command: go
 
-Enter Shmorch orchestration mode. Read state, orient, and propose the next move. Auto-runs at the start of every conversation.
+Enter Shmorch orchestration mode. Read state, orient, and propose the next move.
 
 ## When to run
-- Automatically at the start of every new conversation (this is the session start trigger)
+- Chosen at the SessionStart prompt (see `shmorch-core.md` "Session Start — Ask, Don't Auto-Run")
 - After an interrupted session — detects orphaned SESSION_START and recovers
 - Any time you need to re-orient mid-session
 
