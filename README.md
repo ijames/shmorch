@@ -22,7 +22,7 @@ Shmorch installs a `.shmorch/` directory inside your project. That directory con
 - **Tool scripts** — bash utilities for timekeeping, checkpointing, and cleanup
 - **Safety hooks** — Claude Code hooks that block `rm -rf`, force-push, and other destructive commands
 
-At the start of every conversation, Claude auto-reads context and session state before asking what to do. No manual "go" required.
+At the start of every session, Claude asks one question — `go`, `resume`, or `nothing` — describing what's already loaded (Shmorch identity via `CLAUDE.md`'s import chain) and what each option does, so you stay in control of when the full bootstrap or state read happens. This only fires on a real Claude Code session start, not on `/clear` — `/clear` has no hook, so nothing runs automatically after it; type `/shmorch go` or `/shmorch resume` directly.
 
 ---
 
@@ -58,6 +58,14 @@ Starts a working session. Claude reads state, orients, and asks what to do.
 5. Reads `plan.md` — shows active tracks and current focus
 6. Checks `git status` — flags uncommitted changes
 7. Asks: "What do you want to work on?"
+
+### `/shmorch resume`
+
+Fast re-entry into a session that's already underway — skips everything `go` does except the essentials.
+
+1. Reads `session.md` and `plan.md` only — no version check, no context/stack interview, no git status, no gap or memory scanning
+2. Leads with the BLOCKER / "Pick up immediately" note if one exists, otherwise the current task
+3. Points to `/shmorch go` if the full check is actually needed
 
 ### `/shmorch wrap`
 
@@ -261,9 +269,9 @@ NOTES.md           — development notes and known gaps
 
 ```
 bash shmorch.sh              # open Claude in the project
-                             # Claude auto-reads state and orients
+                             # Claude asks: go, resume, or nothing?
 
-/shmorch go                  # explicit start (or happens automatically)
+/shmorch go                  # full bootstrap, if you didn't already answer "go" above
 
 ... work happens ...
 

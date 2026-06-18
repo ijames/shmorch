@@ -15,6 +15,8 @@ Shmorch — autonomous development orchestrator
 SESSION
   /shmorch go [topic]       Start or resume a session. Reads state, orients, proposes next move.
                              Runs auto-update check and environment check automatically.
+  /shmorch resume           Fast re-entry mid-session: latest session.md + plan.md only, no
+                             version check, no interview, no gap scanning. Use after `go` already ran.
   /shmorch wrap             Close session. Updates session.md, plan.md, decisions.md, closes
                              timelog. Self-improve runs automatically — no need to run it separately.
   /shmorch checkpoint       Save shmorch state to git (safe restore point).
