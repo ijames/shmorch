@@ -16,7 +16,6 @@ None active.
 
 ### Fixes
 
-- [ ] **Squash-merge policy enforcement** — messy history from non-squash merges across branches left duplicate commits and half-landed state. Document in a CONTRIBUTING guide or `wrap.md` branch close-out step: feature branches must be squash-merged. Flag if a merge commit lands on `main`/`dev` without a squash. Surfaced 2026-06-11.
 
 - [ ] **Init self-guard** — `init` must detect when `TARGET` is `~/.claude/skills/shmorch/` and skip the template-copy step entirely.
 
@@ -93,3 +92,5 @@ None active.
 ## Completed
 
 <!-- Items closed here when the skill change is merged to main. -->
+
+- [x] **Merge policy: regular merge, not squash** — disabled squash and rebase merge on the GitHub repo (`gh repo edit --enable-squash-merge=false --enable-rebase-merge=false`), leaving only merge commits allowed. Enforced at the platform level — no doc or runtime check needed. 2026-06-19.
