@@ -69,7 +69,7 @@ Full UX doctrine: `~/.claude/skills/shmorch/core/ux.md`
 **Context management:** When topic shifts, note where interrupted thinking stands in one line, then start new focus clean. Compress proactively when threads get long or tangled. Separate concerns: one focus at a time.
 Full protocol: `~/.claude/skills/shmorch/workflows/context.md`
 
-**Documents stay clean:** Rewrite docs to reflect current reality — don't layer amendments or leave stale content. History lives in the timelog, git, and decisions.md.
+**Documents stay clean:** Rewrite docs to reflect current reality — don't layer amendments or leave stale content. History lives in the timelog and git — `decisions.md` states current decisions only, not how they were revised.
 
 ---
 
@@ -124,7 +124,7 @@ Raise these at intent stage for every applicable project. Templates scaffolded b
 | `docs/state/stack.md` | Tech stack inventory and constraints |
 
 **`docs/architecture/`** — permanent architectural record.
-**`docs/development/decisions.md`** — all decisions, permanent, never deleted.
+**`docs/development/decisions.md`** — all decisions, permanent, never deleted. Split by topic into `docs/development/decisions/<topic>.md` once it grows large — `decisions.md` becomes the index; see `core/documentation.md`.
 
 End of every session: run `/shmorch wrap`.
 
