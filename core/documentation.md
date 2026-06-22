@@ -55,6 +55,8 @@ Track closing process:
 | `docs/state/spec.md` (implemented) | Cleared to stub; knowledge went to `→ destination` docs |
 | `docs/development/decisions.md` entries | Permanent — stays in `decisions.md` |
 
+**Decisions.md growth:** when `decisions.md` accumulates many entries (rule of thumb: high entry count, or multiple entries that supersede/correct earlier entries on the same topic), split it into `docs/development/decisions/<topic>.md` files by topic (e.g. `stack.md`, `process.md`, `data-architecture.md`, `ux-motion.md`, `infra-ops.md`, `product-monetization.md` — topics follow the project's actual decision clusters, not a fixed list). Rewrite `decisions.md` itself into a short index linking to each topic file — keep it at that same path so existing inbound links from tracks/architecture docs don't break. Each topic file states only the *current* form of each decision, never the history of how it was reached or revised — collapse correction chains into one clean statement. Git log / commit messages are the audit trail for how a decision evolved; `decisions.md` and its topic files are not. Reference implementation: DarkBadge's `docs/development/decisions/` split (2026-06-19).
+
 **External memory (e.g. `~/.claude/projects/...`):** User preferences and feedback belong there. Project state — plans, specs, architecture, decisions — belongs in `docs/state/` or `docs/`, version-controlled with the code.
 
 **Memory placement rule:** Universal Shmorch process guidance belongs in the skill — `shmorch-core.md` or the relevant workflow. Project memory is for project-specific signal only. If a feedback memory would apply equally to any Shmorch project, migrate it to the skill instead.
