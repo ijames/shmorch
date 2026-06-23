@@ -62,17 +62,21 @@ Any file flagged is a full copy that will silently diverge from skill updates. I
 **Scaffold reverse check** (docs/ dirs not in canonical template):
 ```bash
 EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing"
-# Load project-local allowlist if present
-ALLOWED=""
-[ -f ".shmorch/scaffold-additions.txt" ] && ALLOWED=$(cat .shmorch/scaffold-additions.txt)
+LOG=".shmorch/project_docs_log.md"
+LOGGED=""
+[ -f "$LOG" ] && LOGGED=$(grep -v '^#' "$LOG" 2>/dev/null)
 find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/state/tracks/" | sort | while read d; do
-  echo "$EXPECTED_DOCS $ALLOWED" | grep -qw "$d" || echo "UNLISTED DIR: $d"
+  echo "$EXPECTED_DOCS" | grep -qw "$d" && continue
+  # A dir is covered if it's logged directly, or nested under a logged top-level dir
+  echo "$LOGGED" | grep -qxF "$d" && continue
+  echo "$LOGGED" | while read logged; do [ -n "$logged" ] && [[ "$d" == "$logged"/* ]] && exit 0; done && continue
+  echo "UNLISTED DIR: $d"
 done
 ```
 
-If any `UNLISTED DIR` entries appear, include them in the researcher's evidence as potential structural drift — the canonical scaffold may need updating, or the dir belongs in `.shmorch/scaffold-additions.txt`.
+If any `UNLISTED DIR` entries appear, include them in the researcher's evidence as potential structural drift — the canonical scaffold may need updating, or the dir is project-specific and belongs in `.shmorch/project_docs_log.md`.
 
-**Note:** Projects can silence known-good dirs by listing them (one per line) in `.shmorch/scaffold-additions.txt`. This file is project-local and not checked in to the shmorch skill.
+**Note:** `.shmorch/project_docs_log.md` is a project-local, append-only log of project-specific doc/folder additions that aren't part of the canonical scaffold. It is not checked in to the shmorch skill. Keep it small: log only the top-level dir (e.g. `docs/reference/schwab`) — anything created underneath an already-logged dir does not need its own line. When creating a new docs/ dir that isn't in `EXPECTED_DOCS`, check this file and append a line if the dir isn't already covered.
 
 ---
 
