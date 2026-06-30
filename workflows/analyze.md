@@ -36,16 +36,16 @@ Analysis artifacts need a home with a lifecycle. Before scoping:
 
 1. Ask: does a track in `docs/state/tracks/` already cover this area? (`ls docs/state/tracks/` to check)
 2. If yes: use it. Set `TRACK_DIR=docs/state/tracks/<existing-slug>/`.
-3. If no: create one now.
+3. If no: create one now. Include `analysis` in the slug.
    ```bash
-   mkdir -p docs/state/tracks/<YYYYMMDD>-<slug>/
+   mkdir -p docs/state/tracks/<YYYYMMDD>-analysis-<slug>/
    ```
-   Write a minimal `docs/state/tracks/<YYYYMMDD>-<slug>/index.md`:
+   Write a minimal `docs/state/tracks/<YYYYMMDD>-analysis-<slug>/index.md`:
    ```markdown
    ↑ [Plan](../../plan.md)
    → <destination docs, e.g. decisions.md or plan.md — fill in after analysis>
 
-   # Track: <Title>
+   # Track: <Title> — Analysis
 
    **Status:** Investigation
    **Opened:** <YYYYMMDD>
@@ -54,12 +54,19 @@ Analysis artifacts need a home with a lifecycle. Before scoping:
    ## Why
    <one sentence: what prompted this analysis>
 
+   ## Files
+
+   <!-- updated as analysts complete -->
+   - [analysis-summary-<YYYYMMDD>.md](analysis-summary-<YYYYMMDD>.md)
+
    ## Work log
 
    ### <YYYYMMDD>
    Analysis initiated.
    ```
-   Set `TRACK_DIR=docs/state/tracks/<YYYYMMDD>-<slug>/`.
+   Set `TRACK_DIR=docs/state/tracks/<YYYYMMDD>-analysis-<slug>/`.
+
+Note: if attaching to an existing track that wasn't created by analyze, add an `## Analysis Files` section to its `index.md` rather than renaming the track.
 
 All subsequent output files go under `TRACK_DIR`.
 
@@ -148,7 +155,9 @@ Read all output files. Write `<TRACK_DIR>/analysis-summary-<YYYYMMDD>.md`:
 <recommended action: Spec / Design / Build / Defer — one sentence>
 ```
 
-Update the track's `index.md` work log with a one-line entry: `### <date>` + what was analyzed and what the answer was.
+Update the track's `index.md`:
+- Add each `analysis-<sub-area-slug>-<YYYYMMDD>.md` file to the `## Files` (or `## Analysis Files`) index, one line per file with a one-phrase description.
+- Add a work log entry: `### <date>` + what was analyzed and what the answer was.
 
 ---
 
