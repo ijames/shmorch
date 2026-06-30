@@ -30,13 +30,48 @@ bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "analyze: starting — <a
 
 ---
 
-## Step 2 — Scope the work
+## Step 2 — Identify or create the track
+
+Analysis artifacts need a home with a lifecycle. Before scoping:
+
+1. Ask: does a track in `docs/state/tracks/` already cover this area? (`ls docs/state/tracks/` to check)
+2. If yes: use it. Set `TRACK_DIR=docs/state/tracks/<existing-slug>/`.
+3. If no: create one now.
+   ```bash
+   mkdir -p docs/state/tracks/<YYYYMMDD>-<slug>/
+   ```
+   Write a minimal `docs/state/tracks/<YYYYMMDD>-<slug>/index.md`:
+   ```markdown
+   ↑ [Plan](../../plan.md)
+   → <destination docs, e.g. decisions.md or plan.md — fill in after analysis>
+
+   # Track: <Title>
+
+   **Status:** Investigation
+   **Opened:** <YYYYMMDD>
+   **Domain:** <Architecture | Feature | Fix | Process>
+
+   ## Why
+   <one sentence: what prompted this analysis>
+
+   ## Work log
+
+   ### <YYYYMMDD>
+   Analysis initiated.
+   ```
+   Set `TRACK_DIR=docs/state/tracks/<YYYYMMDD>-<slug>/`.
+
+All subsequent output files go under `TRACK_DIR`.
+
+---
+
+## Step 3 — Scope the work
 
 List the files in the target area. Identify up to 4 independent sub-areas that can be analyzed in parallel (e.g. by layer: models, services, routes, tests).
 
 ---
 
-## Step 3 — Call Task (parallel analysts)
+## Step 4 — Call Task (parallel analysts)
 
 For each sub-area, call Task. All calls may run in parallel.
 
@@ -55,7 +90,7 @@ Task(
     - Flag anything that will affect the answer
 
     ## Output
-    Write your findings to: docs/state/analysis-<sub-area-slug>-<YYYYMMDD>.md
+    Write your findings to: <TRACK_DIR>/analysis-<sub-area-slug>-<YYYYMMDD>.md
 
     Structure:
     ### What this area does
@@ -67,7 +102,7 @@ Task(
     - [GAP] <missing coverage or documentation>
 
     ## Return
-    DONE: docs/state/analysis-<sub-area-slug>-<YYYYMMDD>.md | <one-line finding> [| BLOCKER | CRUFT | GAP]
+    DONE: <TRACK_DIR>/analysis-<sub-area-slug>-<YYYYMMDD>.md | <one-line finding> [| BLOCKER | CRUFT | GAP]
 )
 ```
 
@@ -78,21 +113,21 @@ bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "analyst → <sub-a
 
 ---
 
-## Step 4 — Gate
+## Step 5 — Gate
 
 After all Task calls complete:
 - Verify each output file exists. If any is missing, re-run that Task before continuing.
 - If any return contains `BLOCKER`: surface it to the user — do not synthesize until resolved.
 - Stamp completions:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "analyst → docs/state/analysis-<sub-area>-<date>.md"
+bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "analyst → <TRACK_DIR>/analysis-<sub-area>-<date>.md"
 ```
 
 ---
 
-## Step 5 — Synthesize
+## Step 6 — Synthesize
 
-Read all output files. Write `docs/state/analysis-summary-<YYYYMMDD>.md`:
+Read all output files. Write `<TRACK_DIR>/analysis-summary-<YYYYMMDD>.md`:
 
 ```markdown
 # Analysis: <area> — <date>
@@ -113,11 +148,19 @@ Read all output files. Write `docs/state/analysis-summary-<YYYYMMDD>.md`:
 <recommended action: Spec / Design / Build / Defer — one sentence>
 ```
 
+Update the track's `index.md` work log with a one-line entry: `### <date>` + what was analyzed and what the answer was.
+
 ---
 
-## Step 6 — Stamp and hand off
+## Step 7 — Stamp and hand off
 ```bash
 bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "analyze: complete — <one-line answer>"
 ```
 
 Present the summary to the user. Propose the next step based on the `## Next step` field.
+
+**Graduation note:** findings in this track are starting points, not destinations. As they resolve:
+- Decisions → `docs/development/decisions.md` (or topic split)
+- Action items → `plan.md` backlog
+- Architecture facts → `docs/architecture/`
+- Stale/superseded analysis files → delete, leave a one-line note in the track work log
