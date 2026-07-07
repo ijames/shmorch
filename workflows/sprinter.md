@@ -41,7 +41,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
      description: "Sprinter: sprint status review",
      prompt: |
        ## Role
-       Read your role: check `.shmorch/agents/roles/sprinter.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/sprinter.md` (skill default). Act according to the role definition found.
+       Read your role: check `.shmorch/agents/roles/sprinter.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/sprinter.md` (skill default). Act according to the role definition found.
 
        ## Task
        Read docs/state/sprint.md to get the sprint goal, dates, and scope table.
@@ -112,7 +112,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 
    Tracks link to their own state directories for detail. Do not copy track content into the sprint doc.
 
-3. Stamp: `bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "sprint started: <goal>"`
+3. Stamp: `bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "sprint started: <goal>"`
 
 4. Confirm with user. Say: "Sprint is live. Use `/shmorch sprinter` to check status anytime."
 
@@ -142,7 +142,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 
 7. Update `docs/state/plan.md`: mark any completed tracks DONE, move deferred tracks back to backlog with a note.
 
-8. Stamp: `bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "sprint closed: <goal>"`
+8. Stamp: `bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "sprint closed: <goal>"`
 
 9. Ask: "New sprint, prioritize backlog, or take a break?"
 

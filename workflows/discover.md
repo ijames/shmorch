@@ -23,7 +23,7 @@ All paths relative to the project root.
 
 ## Step 1 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "discover: starting codebase audit"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "discover: starting codebase audit"
 ```
 
 ---
@@ -61,7 +61,7 @@ Task(
   description: "Analyst: <dirname>",
   prompt: |
     ## Role
-    Read your role: check `.shmorch/agents/roles/analyst.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/analyst.md` (skill default). Act according to the role definition found.
+    Read your role: check `.shmorch/agents/roles/analyst.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/analyst.md` (skill default). Act according to the role definition found.
 
     ## Task
     Analyze the directory: <dirname>
@@ -89,7 +89,7 @@ Task(
 
 Stamp each spawn:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "analyst → <dirname>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "analyst → <dirname>"
 ```
 
 ---
@@ -101,7 +101,7 @@ After all Task calls complete:
 - If any return contains `BLOCKER`: note it — surface in the final report but do not stop synthesis.
 - Stamp:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "analyst → docs/state/analysis-<dirname>-discover.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "analyst → docs/state/analysis-<dirname>-discover.md"
 ```
 
 ---
@@ -135,7 +135,7 @@ context.md and stack.md filled in — review before first session.
 
 ## Step 6 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "discover: complete"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "discover: complete"
 ```
 
 ---

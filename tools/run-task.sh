@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # run-task.sh — Invoke a Claude agent as a subprocess and return its text output
-# Usage: bash ~/.claude/skills/shmorch/tools/run-task.sh <role> <prompt>
+# Usage: bash $SHMORCH_HOME/tools/run-task.sh <role> <prompt>
 #
 # Manages session IDs per role so agents maintain context across turns.
 # Writes session state to docs/state/agents/<role>.json in the project root.
@@ -16,7 +16,7 @@ ROLE="${1:-}"
 PROMPT="${2:-}"
 
 if [ -z "$ROLE" ] || [ -z "$PROMPT" ]; then
-  echo "Usage: bash ~/.claude/skills/shmorch/tools/run-task.sh <role> <prompt>" >&2
+  echo "Usage: bash $SHMORCH_HOME/tools/run-task.sh <role> <prompt>" >&2
   exit 1
 fi
 

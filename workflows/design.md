@@ -24,7 +24,7 @@ Produce an architectural design before implementation. Reads the spec, proposes 
 
 ## Step 1 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "design: starting — <feature>"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "design: starting — <feature>"
 ```
 
 ---
@@ -62,7 +62,7 @@ Task(
   description: "Architect: <feature>",
   prompt: |
     ## Role
-    Read your role: check `.shmorch/agents/roles/architect.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/architect.md` (skill default). Act according to the role definition found.
+    Read your role: check `.shmorch/agents/roles/architect.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/architect.md` (skill default). Act according to the role definition found.
 
     ## Task
     Produce an architectural design for the feature described in: docs/state/spec.md
@@ -105,7 +105,7 @@ Task(
 
 Stamp:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "architect → <feature>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "architect → <feature>"
 ```
 
 ---
@@ -116,7 +116,7 @@ Verify `docs/state/design-<feature-slug>.md` exists.
 If BLOCKER: surface constraint conflict to developer — do not proceed.
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "architect → docs/state/design-<feature-slug>.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "architect → docs/state/design-<feature-slug>.md"
 ```
 
 ---
@@ -151,7 +151,7 @@ This step exists because architecture decisions cluster — resolving one often 
 
 ## Step 6 — Stamp and hand off
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "design: approved — <approach>"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "design: approved — <approach>"
 ```
 
 Update `docs/state/plan.md` track status to `Design done`. Propose: "Ready to build."

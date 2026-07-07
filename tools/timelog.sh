@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # timelog.sh — Append a timestamped event to docs/state/timelog.md
-# Usage: bash ~/.claude/skills/shmorch/tools/timelog.sh "EVENT" "detail"
+# Usage: bash $SHMORCH_HOME/tools/timelog.sh "EVENT" "detail"
 # Examples:
-#   bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_START" "resuming auth module"
-#   bash ~/.claude/skills/shmorch/tools/timelog.sh "TASK_START" "Build login endpoint"
-#   bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "analyst → src/payments/"
-#   bash ~/.claude/skills/shmorch/tools/timelog.sh "TASK_DONE" "Build login endpoint"
-#   bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_END" "spec approved"
+#   bash $SHMORCH_HOME/tools/timelog.sh "SESSION_START" "resuming auth module"
+#   bash $SHMORCH_HOME/tools/timelog.sh "TASK_START" "Build login endpoint"
+#   bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "analyst → src/payments/"
+#   bash $SHMORCH_HOME/tools/timelog.sh "TASK_DONE" "Build login endpoint"
+#   bash $SHMORCH_HOME/tools/timelog.sh "SESSION_END" "spec approved"
 
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"

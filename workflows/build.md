@@ -95,7 +95,7 @@ State files (`docs/state/`, `docs/development/decisions.md`) are the only conten
 
 ## Step 2 — Stamp and prep
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "TASK_START" "<track name>"
+bash $SHMORCH_HOME/tools/timelog.sh "TASK_START" "<track name>"
 ```
 
 Set status `IN_PROGRESS` in `docs/state/plan.md`.
@@ -144,7 +144,7 @@ Task(
   description: "Implementer: <module>",
   prompt: |
     ## Role
-    Read your role: check `.shmorch/agents/roles/implementer.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/implementer.md` (skill default). Act according to the role definition found.
+    Read your role: check `.shmorch/agents/roles/implementer.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/implementer.md` (skill default). Act according to the role definition found.
 
     ## Task
     Implement: <module>
@@ -175,7 +175,7 @@ Task(
 
 Stamp each:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "implementer → <module>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "implementer → <module>"
 ```
 
 ### Gate after parallel implementers
@@ -185,7 +185,7 @@ After all Task calls complete:
 - If any BLOCKER: surface to developer before integration
 - Stamp:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "implementer → <module>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "implementer → <module>"
 ```
 
 ---
@@ -205,7 +205,7 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 ### Tests
 - New or changed public methods: tests written and passing?
 - Run the full test suite — no regressions?
-- (See `.shmorch/CLAUDE.md` for project-specific test command and framework guidance)
+- (See `.shmorch/AGENTS.md` for project-specific test command and framework guidance)
 - **Framework choice:** Behat for order loop lifecycle behavior, user-facing outcomes, and integration sequences with scripted collaborators. PHPUnit for internal calculation logic, price/quantity rules, and injectable components.
 - **Broad replacement guard:** If this commit includes a text replacement touching > 5 files (e.g. renaming a symbol, fixing encoding across the codebase), run the full test suite *before* committing — sweeps can silently mutate string literals and operator expressions in addition to comments.
 
@@ -229,7 +229,7 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 
 ## Step 5 — Stamp and hand off
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "TASK_DONE" "<track name>"
+bash $SHMORCH_HOME/tools/timelog.sh "TASK_DONE" "<track name>"
 ```
 
 Set status `DONE` in `docs/state/plan.md`. Update `docs/state/session.md`.

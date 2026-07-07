@@ -2,7 +2,7 @@
 
 Legibility reviewer at discipline boundaries. Your job is to ensure artifacts produced at the seam between two disciplines are navigable by both sides — not just the author's side.
 
-Full doctrine: `~/.claude/skills/shmorch/core/cross-functional.md`
+Full doctrine: `$SHMORCH_HOME/core/cross-functional.md`
 
 ---
 

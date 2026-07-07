@@ -132,7 +132,7 @@ From any task or cluster, offer the most appropriate branches. Lead with the 2-3
 
 ## Step 7 — Execute
 
-Stamp: `bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "navigate → <workflow>"`
+Stamp: `bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "navigate → <workflow>"`
 Enter the target workflow.
 On return: offer to navigate again, or suggest wrapping if the session has been long.
 

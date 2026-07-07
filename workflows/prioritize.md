@@ -23,7 +23,7 @@ Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/state/plan
 
 ### Step 1 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "prioritize: starting"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "prioritize: starting"
 ```
 
 ### Step 2 — Read current state
@@ -40,7 +40,7 @@ Task(
   description: "Prioritizer: backlog ranking",
   prompt: |
     ## Role
-    Read your role: check `.shmorch/agents/roles/prioritizer.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/prioritizer.md` (skill default). Act according to the role definition found.
+    Read your role: check `.shmorch/agents/roles/prioritizer.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/prioritizer.md` (skill default). Act according to the role definition found.
 
     ## Task
     Analyze the backlog in docs/state/plan.md.
@@ -118,5 +118,5 @@ Files are named `YYYYMMDD_priority-proposal.md`. Applied proposals are kept as h
 Add a row for this run.
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "prioritize: complete"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "prioritize: complete"
 ```

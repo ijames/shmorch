@@ -15,3 +15,4 @@ Doctrine files loaded on demand by `shmorch-core.md`, workflows, and roles. Thes
 | `deployment.md` | Deployment manifest sync — dev env ≠ bundle, cross-platform wheel constraints |
 | `git-discipline.md` | Branch hygiene — pull after merge, rebase before work, never batch-merge |
 | `cross-functional.md` | Cross-functional artifact usability — intimacy gradient, naming-as-contract, discipline boundary signals |
+| `portability.md` | Cross-CLI portability — `$SHMORCH_HOME` indirection, context-file chain, capability adapter matrix, graceful degradation |

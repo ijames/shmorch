@@ -43,13 +43,13 @@ Wait for their response before continuing.
 
 Stamp session end:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_END" "brief summary from user"
+bash $SHMORCH_HOME/tools/timelog.sh "SESSION_END" "brief summary from user"
 ```
 
 If there's no SESSION_START for today, stamp that first:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_START" "topic"
-bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_END" "summary"
+bash $SHMORCH_HOME/tools/timelog.sh "SESSION_START" "topic"
+bash $SHMORCH_HOME/tools/timelog.sh "SESSION_END" "summary"
 ```
 
 ---
@@ -152,16 +152,16 @@ If no decisions, skip.
 ## Step 8 — Show duration
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/duration.sh today
+bash $SHMORCH_HOME/tools/duration.sh today
 ```
 
 Show the output to the user.
 
 ---
 
-## Step 8.4 — Update CLAUDE.md current state
+## Step 8.4 — Update Current State
 
-Update the "Current State" section in `CLAUDE.md` (project root):
+Update (or add) a "Current State" section in `.shmorch/AGENTS.md` — the shared project-instructions file both Claude Code and omp load (via their respective import chains):
 - Today's date
 - Current integration branch (usually `dev`)
 - Current passing test count (from the last test run this session, or check `docs/state/plan.md` for the last recorded count)
@@ -175,7 +175,7 @@ Three fields; do it inline without asking.
 Run docs-nav to keep sibling links current in every docs/ directory:
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/docs-nav.sh docs/
+bash $SHMORCH_HOME/tools/docs-nav.sh docs/
 ```
 
 If `docs/` does not exist in the project, skip silently. If any files were patched, stage them as part of the state commit in Step 8.5 — do not create a separate commit.
@@ -187,7 +187,7 @@ If `docs/` does not exist in the project, skip silently. If any files were patch
 After updating session.md, plan.md, decisions.md, and timelog.md, commit them so the working tree is clean at next session start.
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/commit-session-state.sh
+bash $SHMORCH_HOME/tools/commit-session-state.sh
 ```
 
 Skip silently if output is "Nothing to commit."
@@ -241,7 +241,7 @@ If on any other branch (feature, fix, docs, etc.):
 ## Step 8.6 — Developer prompts
 
 Read wrap prompts from two sources (both may exist):
-1. `~/.claude/skills/shmorch/wrap-prompts.md` — skill defaults (always read)
+1. `$SHMORCH_HOME/wrap-prompts.md` — skill defaults (always read)
 2. `.shmorch/wrap-prompts.md` — project additions (read if present, appended after defaults)
 
 Ask all prompts together in one message. Expect a brief reply or "nothing" per item.

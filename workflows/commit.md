@@ -44,8 +44,8 @@ The track tells you what you were working on, but let the diff tell you how to s
 
 **Typical groupings:**
 - **Feature unit**: code + its tests + its docs + track update → one commit per logical feature
-- **Shmorch state only**: `docs/state/`, `.shmorch/CLAUDE.md` → one commit
-- **Shmorch tooling**: `~/.claude/skills/shmorch/tools/`, `.shmorch/workflows/`, `.shmorch/agents/`, `.shmorch/.claude/` → one commit if changed
+- **Shmorch state only**: `docs/state/`, `.shmorch/AGENTS.md`, `.shmorch/CLAUDE.md` → one commit
+- **Shmorch tooling**: `$SHMORCH_HOME/tools/`, `.shmorch/workflows/`, `.shmorch/agents/`, `.shmorch/.claude/` → one commit if changed
 - **Config/infra**: `.claude/settings.local.json`, CI config, etc. → one commit
 
 ---

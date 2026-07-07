@@ -6,14 +6,14 @@ Default workflows and agent roles live in the **skill** — they are not copied 
 
 **Workflows:**
 1. `.shmorch/workflows/<name>.md` — project override (if present)
-2. `~/.claude/skills/shmorch/workflows/<name>.md` — skill default (fallback)
+2. `$SHMORCH_HOME/workflows/<name>.md` — skill default (fallback)
 
 **Agent roles:**
 1. `.shmorch/agents/roles/<name>.md` — project override (if present)
-2. `~/.claude/skills/shmorch/agents/roles/<name>.md` — skill default (fallback)
+2. `$SHMORCH_HOME/agents/roles/<name>.md` — skill default (fallback)
 
 **Core doctrine:**
-1. `~/.claude/skills/shmorch/core/<name>.md` — skill only; not overridden per-project
+1. `$SHMORCH_HOME/core/<name>.md` — skill only; not overridden per-project
 
 Both workflows and roles may reference `core/` files as needed for a specific task.
 
@@ -24,9 +24,9 @@ Both workflows and roles may reference `core/` files as needed for a specific ta
 Project workflow files are thin subclasses of skill defaults. They declare only the delta — added steps, tightened constraints, domain-specific rules — and inherit everything else from the skill.
 
 ```markdown
-# Extends: ~/.claude/skills/shmorch/workflows/build.md
+# Extends: $SHMORCH_HOME/workflows/build.md
 
-> Read the skill default first: `~/.claude/skills/shmorch/workflows/build.md`
+> Read the skill default first: `$SHMORCH_HOME/workflows/build.md`
 > Each section below replaces the matching section. Everything else follows the skill default.
 
 ## Step 1 — Branch setup (project override)

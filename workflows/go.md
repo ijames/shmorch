@@ -21,7 +21,7 @@ Orient, read state, and propose the next move at the start of a session.
 Check session state:
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/check-session-state.sh
+bash $SHMORCH_HOME/tools/check-session-state.sh
 ```
 
 - `CLEAN` (or script missing / no timelog yet): stamp SESSION_START normally.
@@ -41,7 +41,7 @@ Then execute these steps in order:
 
 **CW-1 — Close the previous session in the timelog:**
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_END" "auto-wrapped on reentry"
+bash $SHMORCH_HOME/tools/timelog.sh "SESSION_END" "auto-wrapped on reentry"
 ```
 
 **CW-2 — Infer what happened:**
@@ -64,13 +64,13 @@ For each match, prompt the user: "Track `<name>` is closed — graduate now or d
 
 **CW-6 — Commit state files:**
 ```bash
-bash ~/.claude/skills/shmorch/tools/commit-session-state.sh
+bash $SHMORCH_HOME/tools/commit-session-state.sh
 ```
 Skip silently if nothing to commit.
 
 **CW-7 — Stamp new session start:**
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_START" "DETAIL"
+bash $SHMORCH_HOME/tools/timelog.sh "SESSION_START" "DETAIL"
 ```
 
 Tell the user: "Catch-up wrap done. Continuing with session start."
@@ -90,7 +90,7 @@ If `SHMORCH_SELF=1` is set in the environment, skip this step entirely — the s
 
 ```bash
 PROJECT_VERSION=$(cat .shmorch/VERSION 2>/dev/null | tr -d '[:space:]')
-SKILL_VERSION=$(cat ~/.claude/skills/shmorch/VERSION 2>/dev/null | tr -d '[:space:]')
+SKILL_VERSION=$(cat $SHMORCH_HOME/VERSION 2>/dev/null | tr -d '[:space:]')
 echo "Project: $PROJECT_VERSION  Skill: $SKILL_VERSION"
 ```
 
@@ -116,7 +116,7 @@ If `context.md` is unfilled, run the Context Setup flow:
    - "Existing codebase or starting fresh?"
    - "PR merge strategy: merge, squash, or rebase? (merge preserves branch topology in git graph; squash = one commit per PR; rebase = linear history, no merge commits)"
    - "Anything I should never do without asking first?"
-3. Write answers to `docs/state/context.md` and the merge strategy to `.shmorch/CLAUDE.md` under Branching Discipline, confirm with user.
+3. Write answers to `docs/state/context.md` and the merge strategy to `.shmorch/AGENTS.md` under Branching Discipline, confirm with user.
 
 If filled, summarize in 1-2 sentences.
 
@@ -209,10 +209,10 @@ Active tracks live in `docs/state/tracks/`. Each has index.md, spec.md, plan.md.
 
 When starting work on a track:
 1. Read the track's spec and plan
-2. Stamp: `bash ~/.claude/skills/shmorch/tools/timelog.sh "TASK_START" "track name"`
+2. Stamp: `bash $SHMORCH_HOME/tools/timelog.sh "TASK_START" "track name"`
 3. Update `docs/state/plan.md` status to "In progress"
 4. Do the work
-5. Stamp: `bash ~/.claude/skills/shmorch/tools/timelog.sh "TASK_DONE" "track name"`
+5. Stamp: `bash $SHMORCH_HOME/tools/timelog.sh "TASK_DONE" "track name"`
 
 ## Workflow Phases
 
@@ -226,7 +226,7 @@ When starting work on a track:
 | Vacuum | `.shmorch/workflows/vacuum.md` | After build or on demand |
 
 Read the workflow file before starting each phase.
-Resolution order: `.shmorch/workflows/<name>.md` (project override) → `~/.claude/skills/shmorch/workflows/<name>.md` (skill default).
+Resolution order: `.shmorch/workflows/<name>.md` (project override) → `$SHMORCH_HOME/workflows/<name>.md` (skill default).
 
 ## When work is done for the day
 
@@ -240,7 +240,7 @@ You don't have to do all three every time. After a small change, commit + wrap i
 
 ## Timing — Log Events
 
-Use `bash ~/.claude/skills/shmorch/tools/timelog.sh "EVENT" "detail"` at transitions:
+Use `bash $SHMORCH_HOME/tools/timelog.sh "EVENT" "detail"` at transitions:
 
 | When | Event | Detail |
 |---|---|---|
@@ -251,7 +251,7 @@ Use `bash ~/.claude/skills/shmorch/tools/timelog.sh "EVENT" "detail"` at transit
 | Decision made | `DECISION` | brief description |
 | Session closes | `SESSION_END` | one-line summary |
 
-Run `bash ~/.claude/skills/shmorch/tools/duration.sh today` anytime to see elapsed times.
+Run `bash $SHMORCH_HOME/tools/duration.sh today` anytime to see elapsed times.
 
 ## Architecture Decisions
 

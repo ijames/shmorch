@@ -1,6 +1,6 @@
 # Shmorch Task Protocol
 
-How to spawn subagents using the Claude Code `Agent` tool. All workflow files that call agents must follow this protocol exactly.
+How to spawn subagents with **your CLI's task/agent tool**. Every workflow that calls agents follows this protocol. The gates and prompt template are identical across CLIs; only the tool call differs (Claude `Agent` + `SendMessage`; omp / Pi `task` + `irc`; CLIs without subagents → do the role's work inline). Per-CLI mapping: `$SHMORCH_HOME/core/portability.md`.
 
 ---
 
@@ -12,34 +12,35 @@ When in doubt: do it yourself.
 
 ---
 
-## When to call Agent
+## When to spawn a subagent
 
-Call Agent when **all three** are true:
+Spawn when **all three** are true:
 - **Parallelizable** — independent of other in-flight work; no shared write targets
 - **Role-specific** — a different persona (analyst, architect, critic) genuinely improves the output
 - **Low file overlap** — the agent won't re-read files already loaded in this conversation
 
-Skip Agent for: single-file edits, questions, tasks under ~2 minutes, anything with high file overlap.
+Skip subagents for: single-file edits, questions, tasks under ~2 minutes, anything with high file overlap.
 
 ---
 
-## One role per agent — session named after the role
+## One role per agent — name the session after the role
 
-Each agent gets exactly one role. Name the session after that role so it can be resumed with SendMessage instead of re-spawned.
+Each subagent gets exactly one role. Name the session after that role so it can be resumed instead of re-spawned. Use a model **tier**, never a vendor name: `default` for routine roles, `strong` for the critic.
 
+**Claude Code:**
 ```
 Agent(
   name: "<role>",              # "architect", "critic", "specwriter", etc.
-  model: "haiku",              # default; escalate to "sonnet" only if reasoning complexity requires it
+  model: "haiku",              # default tier; use "sonnet" (strong) only when reasoning demands it
   description: "<Role>: <brief action>",
   prompt: "<full self-contained prompt — see template below>"
 )
 ```
+Resume a named agent (cheaper than re-spawning): `SendMessage(to: "<role>", message: "<follow-up>")`.
 
-**To resume a named agent** (cheaper than re-spawning):
-```
-SendMessage(to: "<role>", message: "<follow-up or clarification>")
-```
+**omp / Pi:** spawn with the `task` tool (a `tasks[]` batch; each role maps to an agent type or a role prompt); message running agents via `irc`. Tiers: `default` / `slow` (strong).
+
+**CLIs without subagents (Codex, Cursor, Gemini, opencode, Antigravity):** do not spawn — adopt the role yourself and do the work inline. The role file still frames the worldview.
 
 Re-spawn only when the agent's task is complete or abandoned and a fresh context is needed.
 
@@ -52,7 +53,7 @@ The prompt must be fully self-contained — the agent has no conversation histor
 ```
 ## Role
 Read your role: check .shmorch/agents/roles/<name>.md first (project override);
-if not present, use ~/.claude/skills/shmorch/agents/roles/<name>.md (skill default).
+if not present, use $SHMORCH_HOME/agents/roles/<name>.md (skill default).
 Act according to that role only. Do not take on any other perspective.
 
 ## Task
@@ -105,22 +106,22 @@ Gate: verify all outputs exist
 
 ## Parallel calls
 
-Call multiple Agents in one step when they are truly independent (no shared write targets, no file overlap).
+Spawn multiple subagents in one step when they are truly independent (no shared write targets, no file overlap).
+
+- **Claude Code:** multiple `Agent(...)` calls in one step (cap ~4 — more creates coordination overhead that erases the gain).
+- **omp / Pi:** one `task` call with a `tasks[]` batch (the pool runs wider; still keep each batch focused).
 
 ```
-# Spawn in parallel
+# Claude Code example
 Agent(name="analyst-src",   description="Analyst: src/", prompt=<...>)
 Agent(name="analyst-tests", description="Analyst: tests/", prompt=<...>)
 Agent(name="analyst-config", description="Analyst: config/", prompt=<...>)
-
 # Wait for all, then gate
 ```
 
-Maximum 4 parallel agents. More than that creates coordination overhead that erases the gain.
-
 ---
 
-## Context hygiene — when to suggest /clear or /compact
+## Context hygiene — when to suggest a context reset (`/clear`, `/compact`, or your CLI's equivalent)
 
 The orchestrator should remind the user at these moments:
 
@@ -140,36 +141,36 @@ One reminder only. Never nag.
 
 Always resolve roles in this order:
 1. `.shmorch/agents/roles/<name>.md` — project override
-2. `~/.claude/skills/shmorch/agents/roles/<name>.md` — skill default
+2. `$SHMORCH_HOME/agents/roles/<name>.md` — skill default
 
 Include this line verbatim in every agent prompt:
 ```
-Read your role: check .shmorch/agents/roles/<name>.md first; if not present, use ~/.claude/skills/shmorch/agents/roles/<name>.md.
+Read your role: check .shmorch/agents/roles/<name>.md first; if not present, use $SHMORCH_HOME/agents/roles/<name>.md.
 ```
 
 ---
 
 ## Available roles
 
-| Role | Model | Purpose |
+| Role | Tier | Purpose |
 |---|---|---|
-| `analyst` | haiku | Code analysis, pattern detection, flag identification |
-| `architect` | haiku | Design decisions, structural proposals (no code) |
-| `specwriter` | haiku | Spec documents from requirements |
-| `implementer` | haiku | Code writing, test writing |
-| `documentarian` | haiku | Doc generation and maintenance |
-| `vacuumer` | haiku | Dead code and cruft detection |
-| `sprinter` | haiku | Sprint tracking and scope management |
-| `prioritizer` | haiku | Backlog ranking and effort assessment |
-| `researcher` | haiku | Self-improve or external research analysis |
-| `critic` | sonnet | Adversarial review at phase boundaries — finds failure modes |
+| `analyst` | default | Code analysis, pattern detection, flag identification |
+| `architect` | default | Design decisions, structural proposals (no code) |
+| `specwriter` | default | Spec documents from requirements |
+| `implementer` | default | Code writing, test writing |
+| `documentarian` | default | Doc generation and maintenance |
+| `vacuumer` | default | Dead code and cruft detection |
+| `sprinter` | default | Sprint tracking and scope management |
+| `prioritizer` | default | Backlog ranking and effort assessment |
+| `researcher` | default | Self-improve or external research analysis |
+| `critic` | strong | Adversarial review at phase boundaries — finds failure modes |
 
 ---
 
 ## Timelog
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "<role> → <target>"
-# ... Agent call ...
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "<role> → <output file>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "<role> → <target>"
+# ... spawn call ...
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "<role> → <output file>"
 ```

@@ -3,12 +3,15 @@ set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 PLAN="$ROOT/docs/state/plan.md"
 TIMELOG="$ROOT/docs/state/timelog.md"
+SHMORCH_HOME="${SHMORCH_HOME:-}"
+[ -n "$SHMORCH_HOME" ] || SHMORCH_HOME="$(cat "$ROOT/.shmorch/home" 2>/dev/null || true)"
+[ -n "$SHMORCH_HOME" ] || SHMORCH_HOME="$HOME/.claude/skills/shmorch"
 
 # Stamp SESSION_END if session is still open (SESSION_START with no SESSION_END)
 if [ -f "$TIMELOG" ]; then
   LAST=$(grep "SESSION_" "$TIMELOG" 2>/dev/null | tail -1 || true)
   if [[ "$LAST" == *"SESSION_START"* ]]; then
-    bash ~/.claude/skills/shmorch/tools/timelog.sh "SESSION_END" "auto-closed by stop hook"
+    bash "$SHMORCH_HOME/tools/timelog.sh" "SESSION_END" "auto-closed by stop hook"
   fi
 fi
 

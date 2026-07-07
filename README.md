@@ -1,14 +1,14 @@
 # Shmorch (Pronouced "Shmork" as in "Shming" + "Orchestra")
 
-Shmorch is an autonomous development orchestrator for Claude Code. It wraps a project with persistent state, structured workflows, specialist agent roles, and session continuity — so you can pick up exactly where you left off, and Claude behaves like an active development lead rather than a stateless assistant.
+Shmorch is an autonomous development orchestrator that runs on any agent CLI — omp (Oh My Pi), Pi, Codex, Gemini, opencode, Cursor, Antigravity, and Claude Code. It wraps a project with persistent state, structured workflows, specialist agent roles, and session continuity — so you can pick up exactly where you left off, switch CLIs freely, and the agent behaves like an active development lead rather than a stateless assistant.
 
-**Version:** 20260501.03
+**Version:** 20260707.02
 
 ---
 
 ## What Problem It Solves
 
-Claude Code starts fresh every conversation. Shmorch fixes that by maintaining state files the model reads at session start: what the project is, what's in flight, what was decided, and what happened last time. It also installs safety hooks that block destructive commands, and defines structured workflows so the model follows a consistent process from idea through shipping.
+Agent CLIs start fresh every conversation. Shmorch fixes that by maintaining state files the model reads at session start: what the project is, what's in flight, what was decided, and what happened last time. It also installs safety hooks that block destructive commands, and defines structured workflows so the model follows a consistent process from idea through shipping. It loads through whichever context file your CLI reads — `AGENTS.md`, `CLAUDE.md`, or `GEMINI.md` — all pointing at one source of truth (`.shmorch/AGENTS.md`).
 
 ---
 
@@ -16,13 +16,13 @@ Claude Code starts fresh every conversation. Shmorch fixes that by maintaining s
 
 Shmorch installs a `.shmorch/` directory inside your project. That directory contains:
 
-- **State files** — plain markdown files Claude reads and writes to track context, plans, decisions, and session history
+- **State files** — plain markdown files the agent reads and writes to track context, plans, decisions, and session history
 - **Workflow files** — step-by-step instructions for each phase of development (intake, analyze, spec, design, build, vacuum)
-- **Agent role files** — personas Claude adopts when spawning specialist subagents
+- **Agent role files** — personas the agent adopts when spawning specialist subagents
 - **Tool scripts** — bash utilities for timekeeping, checkpointing, and cleanup
-- **Safety hooks** — Claude Code hooks that block `rm -rf`, force-push, and other destructive commands
+- **Safety hooks** — block `rm -rf`, force-push, and other destructive commands (a Claude shell hook + an omp `tool_call` hook; other CLIs rely on their own approval mode plus the model-enforced safety rules)
 
-At the start of every session, Claude asks one question — `go`, `resume`, or `nothing` — describing what's already loaded (Shmorch identity via `CLAUDE.md`'s import chain) and what each option does, so you stay in control of when the full bootstrap or state read happens. This only fires on a real Claude Code session start, not on `/clear` — `/clear` has no hook, so nothing runs automatically after it; type `/shmorch go` or `/shmorch resume` directly.
+At the start of a session the agent asks one question — `go`, `resume`, or `nothing` — describing what's already loaded (Shmorch identity + project rules via the `AGENTS.md`/`CLAUDE.md`/`GEMINI.md` import chain) and what each option does, so you stay in control of when the full bootstrap or state read happens. On Claude Code this fires on the real session-start event; on other CLIs it runs on the first turn. After a `/clear`-style reset, type `/shmorch go` or `/shmorch resume` (or `shmorch go` as plain text) directly.
 
 ---
 
@@ -77,7 +77,7 @@ Closes the session — stamps end time, summarizes what happened, updates all st
 4. Stamps `SESSION_END`, writes a new entry to `session.md`, demotes the previous one
 5. Updates `plan.md` if any track statuses changed
 6. Appends to `decisions.md` if any architectural decisions were made
-7. Shows elapsed session time via `~/.claude/skills/shmorch/tools/duration.sh today`
+7. Shows elapsed session time via `$SHMORCH_HOME/tools/duration.sh today`
 
 ### `/shmorch commit`
 
@@ -183,7 +183,7 @@ Every significant transition is stamped to `docs/state/timelog.md` via `timelog.
 | `VACUUM` | Vacuum scan ran |
 | `DECISION` | Architectural decision recorded |
 
-Run `bash ~/.claude/skills/shmorch/tools/duration.sh today` to see elapsed session time. Run `~/.claude/skills/shmorch/tools/duration.sh last` to see time since the last event.
+Run `bash $SHMORCH_HOME/tools/duration.sh today` to see elapsed session time. Run `$SHMORCH_HOME/tools/duration.sh last` to see time since the last event.
 
 ---
 
@@ -209,7 +209,9 @@ Additional rules enforced by the model:
 
 ```
 .shmorch/           (installed inside your project)
-├── CLAUDE.md          — auto-loaded by Claude Code; imports shmorch-core.md + project overrides
+├── AGENTS.md          — project rules + overrides; imports shmorch-core.md (the source of truth)
+├── CLAUDE.md          — one-line @AGENTS.md shim (Claude Code import chain)
+├── home               — absolute skill path ($SHMORCH_HOME) for this machine
 ├── VERSION            — tracks which skill version was used to init/update
 ├── state/
 │   ├── context.md
@@ -240,20 +242,18 @@ Additional rules enforced by the model:
 │   ├── duration.sh
 │   ├── checkpoint.sh
 │   └── vacuum.sh
-└── .claude/
-    ├── settings.json
-    └── hooks/
-        ├── pre-tool.sh
-        └── stop.sh
+├── .claude/           — Claude adapter: settings.json + hooks (pre-tool, session-start, stop)
+└── .omp/              — omp adapter: hooks/pre/safety.ts
 
-shmorch.sh         (project root — launcher script)
+AGENTS.md / CLAUDE.md / GEMINI.md   (project root — thin pointers into .shmorch/, one per CLI convention)
+shmorch.sh                          (project root — launcher that selects your CLI)
 ```
 
 ---
 
 ## Skill Structure (this repo)
 
-This repository is the Shmorch Claude Code skill — the source installed into `~/.claude/skills/shmorch/` and copied into projects on `init`.
+This repository is the Shmorch skill — the source installed into `$SHMORCH_HOME/` (e.g. `~/.claude/skills/shmorch/`) and copied into projects on `init`.
 
 ```
 SKILL.md           — skill metadata and command dispatch table
