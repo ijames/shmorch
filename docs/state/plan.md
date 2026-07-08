@@ -88,6 +88,7 @@ None active.
 - [ ] **Beads integration investigation** — evaluate replacing markdown task files with [Beads](https://github.com/gastownhall/beads) (Dolt-backed dependency graph). Trial on one active project before committing.
   - Condition: after a project using Shmorch heavily enough to feel the pain of flat markdown task files, or when Beads has more documented usage examples.
   - Moved from: MoBoS plan.md 2026-05-19
+  - Related: `docs/state/tracks/20260707-entrypoint-consolidation/` (Phase 3 store shape — the `navigate`↔beads mapping was moved there 2026-07-07)
 
 ---
 

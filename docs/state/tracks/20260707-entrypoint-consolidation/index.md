@@ -66,6 +66,19 @@ remain directly invokable.
 - Optional: physically merge the two engines into one `provision.md` (low value; only if
   a single file proves clearly simpler in practice).
 
+## Store-shape candidate: Beads (moved from navigate.md 2026-07-07)
+
+Beads (Dolt-backed dependency graph) is one candidate backend for the Phase 3 store shape, and the subject of the standing `plan.md` item "Beads integration investigation." The `navigate` workflow's Beads-compatibility mapping lived inline in the live workflow; it's moved here since it shouldn't ship in `navigate.md` until/unless Beads is actually adopted.
+
+**If Beads were active (`bd` on PATH), navigate would map as:**
+- Step 1 (derive domains): from `bd list --tag domain` or project docs
+- Step 2 (map tasks): use tags on beads; `bd ready --json` surfaces unblocked tasks
+- Step 4 (drill-down): `bd show <id>` gives task detail; look up functions the same way
+- Branch verbs: Build → `bd update <id> --claim`; Break out → `bd dep add` with child IDs; Done → `bd close <id>`
+- Hierarchy: Epic (`bd-a3f8`) → Domain; Task (`bd-a3f8.1`) → Item; Sub-task (`bd-a3f8.1.1`) → Phase or function group
+
+A graph store like Beads is exactly the Phase 3 direction ("pull the current-focus subgraph instead of whole files"). Evaluate alongside the `graph-first-docs` / `state-file-discipline` prior art before adopting.
+
 ## Work log
 
 ### 2026-07-07
@@ -74,3 +87,4 @@ remain directly invokable.
   BEHIND→auto-update, added resumable overlay; updated `shmorch-core.md` session-start;
   tagged the engines. Verified state routing by trace + no dangling step refs. VERSION → 20260707.04.
 - Added the **shallow-orientation guardrail**: `orient` reads only `docs/state/*` + git metadata; no reading/grepping/analyzing source code (or spawning discovery) until the user gives a directive after `go`. Carved the same exception into `shmorch-core.md`'s "Always keep moving" line (the root cause). VERSION → 20260707.05.
+- Moved the Beads-compatibility mapping out of the live `navigate.md` into this track (Phase 3 store-shape candidate) and cross-linked the `plan.md` Beads item. navigate.md VERSION → 20260707.07.
