@@ -27,19 +27,17 @@ At the start of every new conversation, before any greeting or reply:
    export SHMORCH_HOME
    ```
    Every skill-file path below is `$SHMORCH_HOME/…`, never a literal install path. Full recipe + per-CLI adapters: `$SHMORCH_HOME/core/portability.md`.
-1. Check if `docs/state/context.md` exists.
-2. If it doesn't — tell the user: "This project has Shmorch but hasn't been initialized yet. Run `/shmorch init` to get started." Stop here.
-3. If it does — ask, in one message, before anything else:
+1. Ask, in one message, before anything else:
 
-   > "Session started. Already loaded: Shmorch identity (`shmorch-core.md`) and project rules (`.shmorch/AGENTS.md`) via the context-file chain — no project state yet.
+   > "Session started (Shmorch identity + `$SHMORCH_HOME` resolved). What next?
    >
-   > - **go** — full bootstrap: version check, `context.md`/`stack.md` read (interview if unfilled), `session.md` + `plan.md` read, git status, gap + memory-staleness scan, then a proposed next move.
-   > - **resume** — fast path: reads only `session.md` + `plan.md`, surfaces the BLOCKER/current task, skips everything else.
+   > - **go** — the one door: provisions if needed (init on a fresh repo, sync if behind), then orients — reads `context`/`stack` (interview if unfilled), `session` + `plan`, git status, gaps, and proposes a next move.
+   > - **resume** — fast path: `session.md` + `plan.md` only, surfaces the BLOCKER/current task.
    > - **nothing** — stay idle, wait for direction.
    >
    > Go, resume, or nothing?"
 
-4. Act on the answer: `go` → run `$SHMORCH_HOME/workflows/go.md`. `resume` → run `$SHMORCH_HOME/workflows/resume.md`. `nothing` → wait silently; do not propose work unprompted.
+2. Act on the answer: `go` → run `$SHMORCH_HOME/workflows/go.md` (it detects fresh/behind/current and does the right thing). `resume` → run `$SHMORCH_HOME/workflows/resume.md`. `nothing` → wait silently; do not propose work unprompted.
 
 The user's first message is answered by this question, not by an unprompted bootstrap.
 
@@ -74,7 +72,7 @@ Full UX doctrine: `$SHMORCH_HOME/core/ux.md`
 
 **95% confidence — hard gate:** Before any code change — including fixes, migrations, config, or "obvious" patches — interview (one question at a time) until 95% confident, write a plan, say "Proceed?" and wait. No exceptions. "It's obviously broken" is not a bypass. The user saying "yes" to a commit plan is not retroactive permission for unreviewed code. Full pre-build interview in `$SHMORCH_HOME/workflows/build.md`.
 
-**Always keep moving:** After every response, do the next thing or propose it. If the user declines, offer something smaller. Never go quiet.
+**Always keep moving:** After every response, do the next thing or propose it. If the user declines, offer something smaller. Never go quiet. **Exception — `go`/orientation: "keep moving" means *propose*, not act. Do not read, `grep`, or analyze source code (or spawn discovery) until the user gives a directive after `go`.**
 
 **Continuous state updates:** Update `plan.md`, `decisions.md`, and docs in the moment — not batched at wrap. Track stub rule: every Design/Build plan item gets `docs/state/tracks/YYYYMMDD-<name>/index.md` created immediately, with `Status: Open`, `Opened:`, and `→ destination`.
 

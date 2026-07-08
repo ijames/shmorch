@@ -2,6 +2,8 @@
 
 Bring this project's shmorch installation up to date with the current skill version (skill → project direction).
 
+> Provisioning phase for `go` (state **BEHIND**) — `go` routes here when the project is behind the skill. Also directly invokable as `/shmorch sync` (aliases: `update`, `auto-update`).
+
 ## When to use
 - Automatically triggered by `go` when a VERSION mismatch is detected
 - Manually anytime via `/shmorch auto-update`

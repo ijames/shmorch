@@ -2,6 +2,8 @@
 
 Initialize a Shmorch workspace at the given path (or current directory if no argument).
 
+> Provisioning phase for `go` (state **UNINITIALIZED**) — `go` routes here for a fresh repo and continues to orientation afterward. Also directly invokable as `/shmorch init [path]`.
+
 ## When to use
 - Setting up Shmorch in a new project
 - Adding Shmorch to an existing codebase

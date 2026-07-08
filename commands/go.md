@@ -1,9 +1,9 @@
 # Command: go
 
-Enter Shmorch orchestration mode. Read state, orient, and propose the next move.
+The one entry point. Resolves the skill, detects repo state (fresh / behind / current), provisions if needed (init or sync), then orients and proposes the next move.
 
 ## When to run
-- Chosen at the SessionStart prompt (see `shmorch-core.md` "Session Start — Ask, Don't Auto-Run")
+- Chosen at the session-start prompt (see `shmorch-core.md` "Session Start — Resolve, Then Ask")
 - After an interrupted session — detects orphaned SESSION_START and recovers
 - Any time you need to re-orient mid-session
 
