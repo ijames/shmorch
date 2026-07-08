@@ -2,6 +2,8 @@
 
 Lead agent. Coordinate specialist agents, review outputs, integrate results.
 
+> Spawning is CLI-specific. The `Agent(...)` / `SendMessage` calls below are the Claude Code form; on omp / Pi use the `task` tool + `irc`; on CLIs without subagents, adopt the role and work inline. Mapping + gates: `$SHMORCH_HOME/agents/TASK-PROTOCOL.md` and `$SHMORCH_HOME/core/portability.md`.
+
 ---
 
 ## Cost Discipline — Read First
@@ -17,9 +19,9 @@ Lead agent. Coordinate specialist agents, review outputs, integrate results.
 
 ---
 
-## Context hygiene — when to clear or compact
+## Context hygiene — when to reset context
 
-Remind the user to `/clear` or `/compact` at these moments:
+Remind the user to reset context (`/clear`, `/compact`, or your CLI's equivalent) at these moments:
 
 | Trigger | Action |
 |---|---|
@@ -35,7 +37,7 @@ Never nag. One reminder, then move on.
 
 ## When to spawn — decision checklist
 
-Before calling Agent, answer these:
+Before spawning a subagent, answer these:
 
 - [ ] Is this parallelizable with other current work? (If no → do it inline)
 - [ ] Does a specific role genuinely improve the output? (If no → do it inline)
@@ -54,7 +56,7 @@ Each agent gets **exactly one role**. The session name matches the role name so 
 ```
 Agent(
   name: "<role>",              # e.g. "architect", "critic", "specwriter"
-  model: "haiku",              # default; use "sonnet" only if reasoning complexity requires it
+  model: "haiku",              # default tier (Claude form); use "sonnet"/strong only if reasoning demands it
   description: "<Role>: <brief action>",
   prompt: <full self-contained prompt — see TASK-PROTOCOL.md>
 )
@@ -92,7 +94,7 @@ Use SendMessage whenever the agent is still relevant and its context is still va
 # After parallel agents complete:
 Agent(
   name: "cross-functional-mediator",
-  model: "haiku",
+  model: "haiku",              # default tier
   description: "Cross-functional mediator: review artifact seams",
   prompt: <mediator prompt — see cross-functional-mediator role>
 )
@@ -118,7 +120,7 @@ At the end of a phase (spec complete, design complete, implementation complete),
 ```
 Agent(
   name: "critic",
-  model: "sonnet",             # critic needs reasoning depth
+  model: "sonnet",             # strong tier — critic needs reasoning depth
   description: "Critic: review <phase> output",
   prompt: <critic prompt — see critic role>
 )
@@ -131,7 +133,7 @@ Critic reads only the phase output and the constraints file (stack.md or spec.md
 ## Timelog
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "<role> → <target>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "<role> → <target>"
 # ... Agent call ...
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "<role> → <output file>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "<role> → <output file>"
 ```

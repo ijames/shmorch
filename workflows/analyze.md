@@ -25,7 +25,7 @@ If either is unclear, ask one question before proceeding.
 
 ## Step 1 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "analyze: starting — <area>"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "analyze: starting — <area>"
 ```
 
 ---
@@ -87,7 +87,7 @@ Task(
   description: "Analyst: <sub-area>",
   prompt: |
     ## Role
-    Read your role: check `.shmorch/agents/roles/analyst.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/analyst.md` (skill default). Act according to the role definition found.
+    Read your role: check `.shmorch/agents/roles/analyst.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/analyst.md` (skill default). Act according to the role definition found.
 
     ## Task
     Analyze <sub-area> with focus on: <question from inputs>.
@@ -115,7 +115,7 @@ Task(
 
 Stamp each spawn:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "analyst → <sub-area>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "analyst → <sub-area>"
 ```
 
 ---
@@ -127,7 +127,7 @@ After all Task calls complete:
 - If any return contains `BLOCKER`: surface it to the user — do not synthesize until resolved.
 - Stamp completions:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "analyst → <TRACK_DIR>/analysis-<sub-area>-<date>.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "analyst → <TRACK_DIR>/analysis-<sub-area>-<date>.md"
 ```
 
 ---
@@ -163,7 +163,7 @@ Update the track's `index.md`:
 
 ## Step 7 — Stamp and hand off
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "analyze: complete — <one-line answer>"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "analyze: complete — <one-line answer>"
 ```
 
 Present the summary to the user. Propose the next step based on the `## Next step` field.

@@ -5,7 +5,7 @@ user-invocable: true
 allowed-tools: Bash, Read, Edit, Write, Grep, Glob, Agent, WebSearch
 ---
 
-Dispatch on the first word of `$ARGUMENTS`. Read **only** the matching command file, then execute it.
+Dispatch on the first word of the invocation arguments — `$ARGUMENTS` on Claude Code, the `User:` directive after `/skill:shmorch` on omp, or the words following `shmorch` when typed as plain text on any other CLI. Read **only** the matching command file, then execute it.
 
 | Argument | File to read |
 |---|---|
@@ -17,7 +17,7 @@ Dispatch on the first word of `$ARGUMENTS`. Read **only** the matching command f
 | `commit` | `commands/commit.md` |
 | `vacuum` | `commands/vacuum.md` |
 | `checkpoint` | `commands/checkpoint.md` |
-| `auto-update` | `commands/auto-update.md` |
+| `auto-update`, `sync`, or `update` | `commands/auto-update.md` |
 | `sprinter` | `commands/sprinter.md` |
 | `prioritize` | `commands/prioritize.md` |
 | `self-improve` | `commands/self-improve.md` |

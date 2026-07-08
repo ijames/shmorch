@@ -21,7 +21,7 @@ Proactive external research. Finds advances in AI-assisted development and LLM o
 
 ## Step 1 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "research: starting external practice review"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "research: starting external practice review"
 ```
 
 ---
@@ -43,7 +43,7 @@ Task(
   description: "Researcher: external practice research",
   prompt: |
     ## Role
-    Read your role: check `.shmorch/agents/roles/researcher.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/researcher.md` (skill default). Act according to the role definition found.
+    Read your role: check `.shmorch/agents/roles/researcher.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/researcher.md` (skill default). Act according to the role definition found.
     You are operating in EXTROSPECTIVE mode: use web search to find external evidence.
 
     ## Task
@@ -65,7 +65,7 @@ Task(
     Produce proposals only for practices that are (a) clearly working, (b) applicable, (c) not already in shmorch.
 
     ## Output
-    Write your research and proposals to: ~/.claude/skills/shmorch/research/research-<YYYYMMDD>.md
+    Write your research and proposals to: $SHMORCH_HOME/research/research-<YYYYMMDD>.md
     (create the directory if it doesn't exist)
     Research reports are skill-level artifacts — they inform shmorch improvements across all projects, not just the current one. Do not write them into the project's docs/state/.
 
@@ -95,24 +95,24 @@ Task(
     <findings that are real but not applicable now — note what would need to change for them to become relevant>
 
     ## Return
-    DONE: ~/.claude/skills/shmorch/research/research-<YYYYMMDD>.md | <N findings, M proposals> [| BLOCKER if search returned no usable results]
+    DONE: $SHMORCH_HOME/research/research-<YYYYMMDD>.md | <N findings, M proposals> [| BLOCKER if search returned no usable results]
 )
 ```
 
 Stamp:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "researcher → external research"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "researcher → external research"
 ```
 
 ---
 
 ## Step 4 — Gate
 
-Verify `~/.claude/skills/shmorch/research/research-<date>.md` exists.
+Verify `$SHMORCH_HOME/research/research-<date>.md` exists.
 If BLOCKER: web search may have failed — ask the developer if they want to retry with a narrower focus.
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "researcher → ~/.claude/skills/shmorch/research/research-<date>.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "researcher → $SHMORCH_HOME/research/research-<date>.md"
 ```
 
 ---
@@ -156,15 +156,15 @@ Then present each proposal one at a time, same as sync:
 One at a time. No batch-applying.
 
 When applying changes, use the same target rules as sync:
-- `commands/`, `shmorch-core.md`, `agents/` → SKILL at `~/.claude/skills/shmorch/<path>`
+- `commands/`, `shmorch-core.md`, `agents/` → SKILL at `$SHMORCH_HOME/<path>`
 - `.shmorch/workflows/` → project-local copy at `.shmorch/workflows/<file>`
-- Bump `~/.claude/skills/shmorch/VERSION` after any skill-level change.
+- Bump `$SHMORCH_HOME/VERSION` after any skill-level change.
 
 ---
 
 ## Step 6 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "research: complete — <M> changes applied"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "research: complete — <M> changes applied"
 ```
 
-Keep `~/.claude/skills/shmorch/research/research-<date>.md` — it's a permanent record. Do not delete it.
+Keep `$SHMORCH_HOME/research/research-<date>.md` — it's a permanent record. Do not delete it.

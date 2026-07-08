@@ -28,7 +28,7 @@ Define what to build before building it. Produces a spec in `docs/state/spec.md`
 
 ## Step 1 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "spec: starting — <feature>"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "spec: starting — <feature>"
 ```
 
 ---
@@ -52,7 +52,7 @@ Task(
   description: "Specwriter: <feature>",
   prompt: |
     ## Role
-    Read your role: check `.shmorch/agents/roles/specwriter.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/specwriter.md` (skill default). Act according to the role definition found.
+    Read your role: check `.shmorch/agents/roles/specwriter.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/specwriter.md` (skill default). Act according to the role definition found.
 
     ## Task
     Write a spec for: <feature>
@@ -93,7 +93,7 @@ Task(
 
 Stamp:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "specwriter → <feature>"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "specwriter → <feature>"
 ```
 
 ---
@@ -104,7 +104,7 @@ Verify `docs/state/spec.md` exists.
 If BLOCKER: surface the open question to the developer and resolve before continuing.
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "specwriter → docs/state/spec.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "specwriter → docs/state/spec.md"
 ```
 
 ---
@@ -119,7 +119,7 @@ Incorporate feedback and rewrite the spec in place (not appended — see shmorch
 
 ## Step 6 — Stamp and hand off
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "spec: approved — <feature>"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "spec: approved — <feature>"
 ```
 
 Update `docs/state/plan.md` to set the track status to `Spec done`. Propose: "Ready to design, or go straight to build?"

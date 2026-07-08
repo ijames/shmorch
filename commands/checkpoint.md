@@ -12,7 +12,7 @@ Quick-save shmorch state files to git. Use this mid-session to preserve planning
 ### Step 1 — Run checkpoint
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/checkpoint.sh
+bash $SHMORCH_HOME/tools/checkpoint.sh
 ```
 
 ### Step 2 — Report result

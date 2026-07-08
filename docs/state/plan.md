@@ -17,6 +17,8 @@ None active.
 ### Fixes
 
 
+- [ ] **Multi-CLI portability (omp / Pi / Codex / Gemini / opencode / Cursor / Antigravity)** — P0 + P1 done (2026-07-07): AGENTS.md-first context chain with per-CLI root files (AGENTS/CLAUDE/GEMINI) + plain-text bootstrap for literal-`@` CLIs; `$SHMORCH_HOME` indirection (recipe in `core/portability.md`, resolved at session start, stamped into `.shmorch/home`, 117 path refs codemod'd); CLI-neutral subagent protocol, dispatch, launchers, and omp TS safety hook; `/shmorch sync` migrates existing repos. Remaining (P2): full README rewrite; scheduler + memory-path prose. Full review + inventory: `docs/state/tracks/20260707-multi-cli-portability/index.md`.
+
 - [ ] **Init self-guard** — `init` must detect when `TARGET` is `~/.claude/skills/shmorch/` and skip the template-copy step entirely.
 
 - [ ] **wrap.md: BLOCKER tier** — split pick-up items into `**BLOCKER** (do first):` (max 2) and `**Next up:**`; `go.md` fast-path reads BLOCKER tier only. (`workflows/wrap.md`)
@@ -86,6 +88,7 @@ None active.
 - [ ] **Beads integration investigation** — evaluate replacing markdown task files with [Beads](https://github.com/gastownhall/beads) (Dolt-backed dependency graph). Trial on one active project before committing.
   - Condition: after a project using Shmorch heavily enough to feel the pain of flat markdown task files, or when Beads has more documented usage examples.
   - Moved from: MoBoS plan.md 2026-05-19
+  - Related: `docs/state/tracks/20260707-entrypoint-consolidation/` (Phase 3 store shape — the `navigate`↔beads mapping was moved there 2026-07-07)
 
 ---
 

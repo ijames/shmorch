@@ -21,7 +21,7 @@ Audit and repair the relationship between documentation, code, and tests. Docs a
 ## Step 1 — Stamp
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "documentarian: starting"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "documentarian: starting"
 ```
 
 ---
@@ -173,7 +173,7 @@ Add a row to `docs/state/documentarian/index.md` for this run:
 ```
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "documentarian: complete — N gaps closed, M items escalated"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "documentarian: complete — N gaps closed, M items escalated"
 ```
 
 Append a summary line to `docs/state/session.md`.

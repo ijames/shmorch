@@ -23,7 +23,7 @@ Retrospective self-improvement. Reads session history and timelog to surface fri
 
 ## Step 1 — Stamp
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "self-improve: starting"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "self-improve: starting"
 ```
 
 ---
@@ -31,7 +31,7 @@ bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "self-improve: starting"
 ## Step 2 — Check for evidence
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/check-self-improve-gate.sh
+bash $SHMORCH_HOME/tools/check-self-improve-gate.sh
 ```
 
 If output starts with `SKIP:` — tell the user which condition triggered and exit.
@@ -83,7 +83,7 @@ Task(
   description: "Researcher: self-improve — retrospective analysis",
   prompt: |
     ## Role
-    Read your role: check `.shmorch/agents/roles/researcher.md` first (project override); if not present, use `~/.claude/skills/shmorch/agents/roles/researcher.md` (skill default). Act according to the role definition found.
+    Read your role: check `.shmorch/agents/roles/researcher.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/researcher.md` (skill default). Act according to the role definition found.
     You are operating in INTROSPECTIVE mode: analyze internal evidence only, no web search.
 
     ## Task
@@ -137,7 +137,7 @@ Task(
 
 Stamp:
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "researcher → self-improve"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "researcher → self-improve"
 ```
 
 ---
@@ -146,7 +146,7 @@ bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_SPAWN" "researcher → sel
 
 Verify `~/.claude/self-improve-<date>-<project-slug>.md` exists.
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "AGENT_DONE" "researcher → ~/.claude/self-improve-<date>-<project-slug>.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "researcher → ~/.claude/self-improve-<date>-<project-slug>.md"
 ```
 
 If no proposals: tell the user "No patterns found — sessions look clean." Stamp and exit.
@@ -165,7 +165,7 @@ Present each proposal one at a time:
 **Two targets — different workflows for each:**
 
 **Skill-level changes** (`commands/`, `shmorch-core.md`, `agents/`, `tools/`, `workflows/` in the skill):
-1. `cd ~/.claude/skills/shmorch`
+1. `cd $SHMORCH_HOME`
 2. `git checkout -b <type>/YYYYMMDD-<concept>` — type is `feature`, `bug`, or `upgrade`
 3. Apply the changes to skill files
 4. Bump `VERSION` to `YYYYMMDD.NN`
@@ -186,7 +186,7 @@ Present each proposal one at a time:
    ```
 8. `git checkout main` — return to main after PR is open; do NOT merge
 
-**Project-local changes** (`.shmorch/workflows/` overrides, `.shmorch/CLAUDE.md`):
+**Project-local changes** (`.shmorch/workflows/` overrides, `.shmorch/AGENTS.md`):
 - Apply directly to the project file — no PR needed
 - Bump `.shmorch/VERSION`
 
@@ -194,12 +194,12 @@ Present each proposal one at a time:
 
 ## Step 7 — Clear addressed NOTES items and stamp
 
-Scan `.shmorch/NOTES.md` (or `~/.claude/skills/shmorch/NOTES.md` if no project NOTES.md exists). For each item, classify it mechanically:
+Scan `.shmorch/NOTES.md` (or `$SHMORCH_HOME/NOTES.md` if no project NOTES.md exists). For each item, classify it mechanically:
 
 ```bash
 # For each item, grep for the core concern in skill files
-grep -r "<keyword from NOTES item>" ~/.claude/skills/shmorch/shmorch-core.md \
-  ~/.claude/skills/shmorch/workflows/*.md 2>/dev/null | head -3
+grep -r "<keyword from NOTES item>" $SHMORCH_HOME/shmorch-core.md \
+  $SHMORCH_HOME/workflows/*.md 2>/dev/null | head -3
 ```
 
 Classification:
@@ -217,5 +217,5 @@ Removed: <N items> (addressed). Kept: <M items> (partial/unaddressed).
 - Append to `docs/state/session.md`: `Self-improve <date>: N proposals, M applied.`
 
 ```bash
-bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "self-improve: complete — <M> changes applied"
+bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "self-improve: complete — <M> changes applied"
 ```

@@ -1,6 +1,6 @@
 # .shmorch/workflows — Project Overrides
 
-Default workflows live in the skill at `~/.claude/skills/shmorch/workflows/`.
+Default workflows live in the skill at `$SHMORCH_HOME/workflows/`.
 This directory holds project-specific overrides and additions only.
 
 **Resolution:** Shmorch checks here first. If a file is absent, the skill default is used.
@@ -14,7 +14,7 @@ Use when the workflow is fundamentally different for this project — not just a
 Create a file with the same name and write it entirely from scratch.
 
 ```bash
-cp ~/.claude/skills/shmorch/workflows/navigate.md .shmorch/workflows/navigate.md
+cp $SHMORCH_HOME/workflows/navigate.md .shmorch/workflows/navigate.md
 # Rewrite entirely for project-specific navigation model
 ```
 
@@ -25,9 +25,9 @@ without duplicating everything else.
 Create the file with an `Extends:` header:
 
 ```markdown
-# Extends: ~/.claude/skills/shmorch/workflows/build.md
+# Extends: $SHMORCH_HOME/workflows/build.md
 
-> Read the skill default first: `~/.claude/skills/shmorch/workflows/build.md`
+> Read the skill default first: `$SHMORCH_HOME/workflows/build.md`
 > Then apply the overrides below. Each section here replaces the matching
 > section in the skill default. Everything else follows the skill default.
 

@@ -44,7 +44,7 @@ Print a concise project health snapshot — sprint progress, task state, backlog
 
 3. **Count timelog session starts from the project timelog:**
    ```bash
-   bash ~/.claude/skills/shmorch/tools/timelog.sh "STATUS_CHECK" "status command run" 2>/dev/null || true
+   bash $SHMORCH_HOME/tools/timelog.sh "STATUS_CHECK" "status command run" 2>/dev/null || true
    grep -c "SESSION_START" docs/state/timelog.md 2>/dev/null || echo "?"
    ```
 

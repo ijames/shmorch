@@ -2,6 +2,8 @@
 
 Bring this project's shmorch installation up to date with the current skill version (skill → project direction).
 
+> Provisioning phase for `go` (state **BEHIND**) — `go` routes here when the project is behind the skill. Also directly invokable as `/shmorch sync` (aliases: `update`, `auto-update`).
+
 ## When to use
 - Automatically triggered by `go` when a VERSION mismatch is detected
 - Manually anytime via `/shmorch auto-update`
@@ -9,11 +11,23 @@ Bring this project's shmorch installation up to date with the current skill vers
 
 ## Inputs
 - `.shmorch/VERSION` — project's current version
-- `~/.claude/skills/shmorch/VERSION` — latest skill version
-- `~/.claude/skills/shmorch/templates/.shmorch/` — skill template files
+- `$SHMORCH_HOME/VERSION` — latest skill version
+- `$SHMORCH_HOME/templates/.shmorch/` — skill template files
 
 ## Roles
 - None — runs inline
+
+---
+
+## Step 0 — Resolve skill location
+
+Resolve and export `$SHMORCH_HOME` (see `core/portability.md`) before anything else — this workflow may run standalone (`/shmorch sync`):
+```bash
+SHMORCH_HOME="${SHMORCH_HOME:-}"
+[ -n "$SHMORCH_HOME" ] || SHMORCH_HOME="$(cat .shmorch/home 2>/dev/null || true)"
+[ -n "$SHMORCH_HOME" ] || SHMORCH_HOME="$HOME/.claude/skills/shmorch"
+export SHMORCH_HOME
+```
 
 ---
 
@@ -21,7 +35,7 @@ Bring this project's shmorch installation up to date with the current skill vers
 
 ```bash
 PROJECT_VERSION=$(cat .shmorch/VERSION 2>/dev/null | tr -d '[:space:]')
-SKILL_VERSION=$(cat ~/.claude/skills/shmorch/VERSION 2>/dev/null | tr -d '[:space:]')
+SKILL_VERSION=$(cat "$SHMORCH_HOME/VERSION" 2>/dev/null | tr -d '[:space:]')
 echo "Project: $PROJECT_VERSION"
 echo "Skill:   $SKILL_VERSION"
 ```
@@ -96,6 +110,30 @@ If yes:
 If no: skip without comment.
 
 ---
+## Step 2.4 — Multi-CLI context-chain migration
+
+Bring the project onto the portable, multi-CLI context chain (`core/portability.md`). Every item is idempotent — skip any that is already in place. This is what propagates the portability upgrade to repos initialized before it existed.
+
+**a. Refresh `.shmorch/home`** — record where the skill lives on this machine:
+```bash
+printf '%s\n' "$SHMORCH_HOME" > .shmorch/home
+```
+
+**b. Enforce single-source `.shmorch/AGENTS.md` (no duplication).** `.shmorch/AGENTS.md` is the *only* context file that carries substance; `.shmorch/CLAUDE.md` must be the one-line shim `@AGENTS.md`. Reconcile whatever state the repo is in:
+- **AGENTS.md missing, CLAUDE.md is a full file (old inline layout):** create `.shmorch/AGENTS.md` from the CLAUDE.md body (everything after its `@…/shmorch-core.md` import), prefixed with the bootstrap block and the import stamped to `$SHMORCH_HOME/shmorch-core.md` (`~/`-relative when under `$HOME`) — shape per `init.md` Step 4. Then overwrite `.shmorch/CLAUDE.md` with the shim `@AGENTS.md`.
+- **CLAUDE.md is already `@AGENTS.md`:** nothing to migrate — just refresh AGENTS.md's stamped import path if the skill location changed.
+- **Both exist as full files (duplication — the case to fix strictly):** treat `.shmorch/AGENTS.md` as authoritative. Diff the two; if `.shmorch/CLAUDE.md` holds any substance not already in `.shmorch/AGENTS.md`, migrate it into `.shmorch/AGENTS.md` (confirm the merge with the user when they differ). Then overwrite `.shmorch/CLAUDE.md` with the shim `@AGENTS.md`. Never leave two files carrying the same overrides.
+
+**c. Root context files — pure shims (no duplication).** Root files carry no substance: a bootstrap comment plus one import, nothing else. For each of root `AGENTS.md`, `CLAUDE.md`, `GEMINI.md`: if missing, create the shim (`AGENTS.md`/`GEMINI.md` → `@.shmorch/AGENTS.md`; `CLAUDE.md` → `@.shmorch/CLAUDE.md`) with the bootstrap comment, per `init.md` Step 5. If a root file exists and carries substance beyond the import (project notes/overrides), migrate that substance into `.shmorch/AGENTS.md` (confirm with the user), then reduce the root file to the shim. If it merely lacks the import line, prepend it.
+
+**d. omp safety hook.** If `.omp/hooks/pre/safety.ts` is missing, copy it from `$SHMORCH_HOME/templates/.omp/hooks/pre/safety.ts`.
+
+**e. Launcher.** If `shmorch.sh` is the old Claude-only launcher (runs `claude` with no `SHMORCH_CLI` handling), offer to replace it with the current multi-CLI `$SHMORCH_HOME/templates/shmorch.sh`. Default yes — it is generated, not hand-edited.
+
+Report each action taken or skipped.
+
+---
+
 
 ## Step 2.5 — Artifact scan
 
@@ -120,7 +158,7 @@ If any matches: list them and ask "Delete migration artifacts? (yes/no)". If yes
 
 ## Step 2.7 — Orphaned project-local tool scripts
 
-Since version `20260516.01`, all shmorch tool scripts live in `~/.claude/skills/shmorch/tools/` and are called via absolute path. Projects no longer need local copies.
+Since version `20260516.01`, all shmorch tool scripts live in `$SHMORCH_HOME/tools/` and are called via absolute path. Projects no longer need local copies.
 
 Check for scripts that should now be removed from the project:
 
@@ -161,7 +199,7 @@ Ensure the project's `.githooks/` and `.claude/hooks/` files are in sync with th
 **Git hooks (`.githooks/`)**
 
 ```bash
-SKILL_HOOKS=~/.claude/skills/shmorch/templates/.githooks
+SKILL_HOOKS="$SHMORCH_HOME/templates/.githooks"
 PROJECT_HOOKS=./.githooks
 
 # Check if .githooks/ exists in project
@@ -196,7 +234,7 @@ git config core.hooksPath .githooks
 **Claude Code hooks (`.claude/hooks/`)**
 
 ```bash
-SKILL_CLAUDE_HOOKS=~/.claude/skills/shmorch/templates/.claude/hooks
+SKILL_CLAUDE_HOOKS="$SHMORCH_HOME/templates/.claude/hooks"
 PROJECT_CLAUDE_HOOKS=./.claude/hooks
 
 [ -d "$PROJECT_CLAUDE_HOOKS" ] || echo "MISSING: .claude/hooks/ directory"
@@ -219,7 +257,7 @@ Apply the same rules as git hooks above: offer to copy new files, show diffs for
 Run a concrete diff between the skill template and the project's shmorch files. This is the ground truth — semantic analysis comes after, not instead of, this.
 
 ```bash
-SKILL=~/.claude/skills/shmorch/templates/.shmorch
+SKILL="$SHMORCH_HOME/templates/.shmorch"
 PROJECT=./.shmorch
 
 # What files differ between skill template and project?
@@ -248,7 +286,7 @@ Read both versions (skill template + project copy). Classify the difference:
 | `project-specific` | Project version has customizations the skill doesn't know about | Preserve — note for CLAUDE.md |
 | `conflict` | Both sides changed the same section incompatibly | Ask developer to decide |
 
-Skip: `docs/state/**`, `.shmorch/CLAUDE.md`, `.shmorch/VERSION` — never touch these.
+Skip: `docs/state/**`, `.shmorch/AGENTS.md`, `.shmorch/CLAUDE.md`, `.shmorch/VERSION` — never touch these.
 
 Only read files that `diff` flagged. Do not analyze files that are identical.
 
@@ -271,7 +309,7 @@ For `generic-improvement` and `conflict` entries: show the specific diff (not th
 
 For `new-in-skill`: just copy without showing full content unless asked.
 
-For `project-specific`: note it. Ask if the developer wants to extract it to `.shmorch/CLAUDE.md` so the generic file can be cleanly updated. Never force this.
+For `project-specific`: note it. Ask if the developer wants to extract it to `.shmorch/AGENTS.md` so the generic file can be cleanly updated. Never force this.
 
 ---
 
@@ -282,7 +320,7 @@ For each confirmed item: copy or patch the file.
 Then update VERSION in the project:
 
 ```bash
-SKILL_VERSION=$(cat ~/.claude/skills/shmorch/VERSION | tr -d '[:space:]')
+SKILL_VERSION=$(cat "$SHMORCH_HOME/VERSION" | tr -d '[:space:]')
 echo "$SKILL_VERSION" > .shmorch/VERSION
 echo "Project shmorch updated to $SKILL_VERSION"
 ```
@@ -292,4 +330,4 @@ echo "Project shmorch updated to $SKILL_VERSION"
 ## Step 7 — Report
 
 List what was updated, what was skipped, and any project-specific customizations noted.
-If any `project-specific` content was identified but not extracted: remind the developer to consider moving it to `.shmorch/CLAUDE.md` so future updates don't require manual conflict resolution.
+If any `project-specific` content was identified but not extracted: remind the developer to consider moving it to `.shmorch/AGENTS.md` so future updates don't require manual conflict resolution.

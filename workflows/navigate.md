@@ -58,7 +58,7 @@ Order Types            [Mixed]         1 ready-to-build (BUYC test gap), 1 desig
 Schwab Endpoints       [Maintenance]   endpoint verification backlog
 Market & Pricing       [Clean]         no open items
 UI & Templates         [Mixed]         Trades tab (live), positions polling (backlog)
-Infrastructure         [Maintenance]   Beads/Conductor evaluation, workflow tooling just updated
+Infrastructure         [Maintenance]   task-store evaluation, workflow tooling just updated
 ```
 
 Ask: **"Which domain, or a specific item?"** — one question, wait.
@@ -132,17 +132,7 @@ From any task or cluster, offer the most appropriate branches. Lead with the 2-3
 
 ## Step 7 — Execute
 
-Stamp: `bash ~/.claude/skills/shmorch/tools/timelog.sh "PHASE" "navigate → <workflow>"`
+Stamp: `bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "navigate → <workflow>"`
 Enter the target workflow.
 On return: offer to navigate again, or suggest wrapping if the session has been long.
 
----
-
-## Compatibility with Beads
-
-When Beads is active (`bd` is available):
-- Step 1: derive domains from `bd list --tag domain` or project docs
-- Step 2: map using tags on beads; `bd ready --json` surfaces unblocked tasks
-- Step 4 drill-down: `bd show <id>` gives task detail; look up functions the same way
-- Branch verbs: Build → `bd update <id> --claim`; Break out → `bd dep add` with child IDs; Done → `bd close <id>`
-- Hierarchy maps directly: Epic (`bd-a3f8`) → Domain; Task (`bd-a3f8.1`) → Item; Sub-task (`bd-a3f8.1.1`) → Phase or function group

@@ -2,6 +2,8 @@
 
 Initialize a Shmorch workspace at the given path (or current directory if no argument).
 
+> Provisioning phase for `go` (state **UNINITIALIZED**) — `go` routes here for a fresh repo and continues to orientation afterward. Also directly invokable as `/shmorch init [path]`.
+
 ## When to use
 - Setting up Shmorch in a new project
 - Adding Shmorch to an existing codebase
@@ -20,18 +22,21 @@ Initialize a Shmorch workspace at the given path (or current directory if no arg
 Before anything else, resolve what the target directory will be (applying the same argument-expansion logic as Step 1), then check:
 
 ```bash
-SKILL_DIR="$(cd ~/.claude/skills/shmorch && pwd)"
+# Resolve the skill's own directory (portable across CLIs):
+SHMORCH_HOME="${SHMORCH_HOME:-}"
+[ -n "$SHMORCH_HOME" ] || SHMORCH_HOME="$HOME/.claude/skills/shmorch"
+SKILL_DIR="$(cd "$SHMORCH_HOME" && pwd)"
 TARGET_ABS="$(cd "${1:-$(pwd)}" && pwd)"
 [ "$TARGET_ABS" = "$SKILL_DIR" ] && echo "SELF" || echo "OK"
 ```
 
 If the result is `SELF`: stop immediately and tell the user:
 
-> `init` cannot be run on the shmorch skill directory itself (`~/.claude/skills/shmorch/`).
+> `init` cannot be run on the shmorch skill directory itself (`$SHMORCH_HOME`).
 > That directory is already a shmorch-managed project with its own live `docs/` — running init
 > would overwrite live docs with blank templates.
 >
-> To work on shmorch's own docs and roadmap, open a session in `~/.claude/skills/shmorch/`
+> To work on shmorch's own docs and roadmap, open a session in `$SHMORCH_HOME`
 > directly and use the existing `docs/state/plan.md`.
 
 Do not proceed past this point if `SELF`.
@@ -45,7 +50,7 @@ Do not proceed past this point if `SELF`.
 - `PROJECT_NAME` = the basename of `TARGET`
 - `SHMORCH_DIR` = `TARGET/.shmorch`
 
-If `SHMORCH_DIR` already exists and contains a `CLAUDE.md`, tell the user Shmorch is already initialized and stop.
+If `SHMORCH_DIR` already exists and contains an `AGENTS.md`, tell the user Shmorch is already initialized and stop.
 
 ---
 
@@ -76,11 +81,11 @@ The skill's `templates/` directory (located alongside `SKILL.md` and `commands/`
 Specifically:
 
 **`templates/.shmorch/` → `TARGET/.shmorch/`**
-Copy selectively — agents, workflows, and shmorch-core.md are NOT copied:
+Copy selectively — agents, workflows, `shmorch-core.md`, and the generated `CLAUDE.md`/`AGENTS.md` are NOT copied:
 - `VERSION`, `tools/`, `docs/` — copy in full
-- `shmorch-core.md` — **do NOT copy**. It lives only at `~/.claude/skills/shmorch/shmorch-core.md` and is referenced via absolute `@` path from `.shmorch/CLAUDE.md`.
-- `.shmorch/agents/` — copy `README.md` and `roles/README.md` only (stubs). Default agents live in the skill at `~/.claude/skills/shmorch/agents/` and are never copied into projects.
-- `.shmorch/workflows/` — copy `README.md` only (stub). Default workflows live in the skill at `~/.claude/skills/shmorch/workflows/` and are never copied into projects.
+- `shmorch-core.md`, `.shmorch/CLAUDE.md`, `.shmorch/AGENTS.md` — **do NOT copy**. `shmorch-core.md` lives only in the skill directory; the project's `.shmorch/CLAUDE.md` and `.shmorch/AGENTS.md` are generated with project-specific content in Step 4 (real skill path + detected stack).
+- `.shmorch/agents/` — copy `README.md` and `roles/README.md` only (stubs). Default agents live in the skill at `$SHMORCH_HOME/agents/` and are never copied into projects.
+- `.shmorch/workflows/` — copy `README.md` only (stub). Default workflows live in the skill at `$SHMORCH_HOME/workflows/` and are never copied into projects.
 
 Make all `.sh` files executable (chmod +x).
 
@@ -88,6 +93,15 @@ This gives the project empty override directories ready to receive project-speci
 
 **`templates/.claude/` → `TARGET/.claude/`**
 Copy hooks and settings. Skip if files already exist — never overwrite an existing hook.
+
+**`templates/.omp/` → `TARGET/.omp/`**
+Copy the omp-native safety hook(s). Skip if files already exist. This gives omp the equivalent of the Claude `.claude/` shell hooks (blocks `rm -rf` / force-push via a `pi.on("tool_call")` module).
+
+**Write `TARGET/.shmorch/home`** — a one-line file holding the resolved absolute skill path (`$SHMORCH_HOME`), so every future session under any CLI resolves the skill location deterministically:
+```bash
+printf '%s\n' "$SHMORCH_HOME" > "$SHMORCH_DIR/home"
+```
+Refresh this on every init/sync — it records where the skill lives on *this* machine, which may change.
 
 **`templates/docs/` → `TARGET/docs/`**
 Merge carefully — the rule is **skip-if-exists**: copy a file only if no file already exists at that destination path. Never overwrite.
@@ -114,12 +128,22 @@ After copying, tell the user what was created vs. skipped.
 
 ---
 
-## Step 4 — Write .shmorch/CLAUDE.md
+## Step 4 — Write .shmorch/AGENTS.md and .shmorch/CLAUDE.md
 
-Write `SHMORCH_DIR/CLAUDE.md` (only if it doesn't exist — covered by Step 3 skip rule, but write explicitly here):
+Shmorch's project instructions live in **`.shmorch/AGENTS.md`** so every agent CLI can load them: Claude Code and omp/Pi reach it through their import chains; Codex / Cursor / opencode / Gemini / Antigravity read `AGENTS.md` too. `.shmorch/CLAUDE.md` is a one-line shim that imports `AGENTS.md`, keeping a single source of truth.
 
+Resolve `SKILL_CORE` — the absolute path to this skill's `shmorch-core.md` (i.e. `$SHMORCH_HOME/shmorch-core.md`). Stamp the real location so the `@` import resolves wherever the skill is installed. When the path is under `$HOME`, write it in `~/`-relative form (Claude Code and omp expand `~/` in `@` imports). Default for a conventional Claude Code install: `~/.claude/skills/shmorch/shmorch-core.md`.
+
+`.shmorch/AGENTS.md` leads with a plain-text **bootstrap** before the import, so CLIs that do NOT expand `@` imports (Codex, Cursor, Antigravity) are still told to read `shmorch-core.md` with their file tool.
+
+Write `SHMORCH_DIR/AGENTS.md` (only if it doesn't exist):
 ```
-@~/.claude/skills/shmorch/shmorch-core.md
+<!-- SHMORCH BOOTSTRAP -->
+You are in a Shmorch-managed project. Before anything else, read the Shmorch operating
+manual at the path on the next line. If your CLI already expanded it inline below,
+continue; otherwise read that file now with your file-read tool.
+
+@SKILL_CORE
 
 ---
 
@@ -160,24 +184,30 @@ Every track gets its own branch. No direct-to-main commits except hotfixes confi
 <!-- fill in -->
 ```
 
+Then write `SHMORCH_DIR/CLAUDE.md` (only if it doesn't exist) — a thin shim so Claude Code's import chain reaches the same content:
+```
+@AGENTS.md
+```
+
 ---
 
-## Step 5 — Wire root CLAUDE.md
+## Step 5 — Wire root context files (AGENTS.md + CLAUDE.md + GEMINI.md)
 
-Check `TARGET/CLAUDE.md`:
+CLIs auto-load different root files: Claude Code reads root `CLAUDE.md`; omp / Pi / Codex / opencode / Cursor / Antigravity read a standalone root `AGENTS.md` (omp walks up to the repo root but skips dot-directories, so it discovers a **root** `AGENTS.md`, never `.shmorch/AGENTS.md`); Gemini CLI reads `GEMINI.md`. Wire all three. **Each is a pure shim** — a bootstrap comment plus one import, no project content. All substance lives in `.shmorch/AGENTS.md` (single source; no duplication).
 
-**If it does not exist:** Create it:
-```
-@.shmorch/CLAUDE.md
+For each of `TARGET/AGENTS.md`, `TARGET/CLAUDE.md`, `TARGET/GEMINI.md`:
 
-# PROJECT_NAME
+- `AGENTS.md` and `GEMINI.md` import `@.shmorch/AGENTS.md`; `CLAUDE.md` imports `@.shmorch/CLAUDE.md`.
+- **If the file does not exist,** create it (shown for `AGENTS.md`/`GEMINI.md`; use `@.shmorch/CLAUDE.md` in `CLAUDE.md`):
+  ```
+  <!-- SHMORCH: if your CLI did not expand the import below, read the referenced file now with your file tool. -->
+  @.shmorch/AGENTS.md
+  ```
+- **If it exists,** ensure it contains the matching `@.shmorch/…` import (prepend if missing). Any project content sitting in a root file belongs in `.shmorch/AGENTS.md` — move it there, then leave the root file as the shim.
 
-<!-- Add project-level context here that applies across all sessions. -->
-```
+Cursor also reads `AGENTS.md`, so no separate file is needed; optionally add `.cursor/rules/shmorch.mdc` pointing at `.shmorch/AGENTS.md` if the project uses Cursor rules.
 
-**If it exists:** Check whether it already contains `@.shmorch/CLAUDE.md`. If not, prepend that line (and a blank line after it) to the top of the existing file. Do not touch any other content.
-
-Explain to the user what was done (created vs. amended).
+Explain to the user what was done (created vs. amended) for each root file.
 
 ---
 
@@ -196,12 +226,15 @@ What got created:
   docs/state/           — State files (context, plan, decisions, session, stack)
   docs/product/ etc.    — SDLC doc scaffold (empty, ready to fill)
   docs/state/schedule/  — Closed sprint archive
-  .claude/hooks/        — Safety hooks (blocks rm -rf, git push --force)
-  shmorch.sh            — Launcher script
-  CLAUDE.md             — [created or amended to import .shmorch/CLAUDE.md]
+  .claude/hooks/        — Claude safety hooks (blocks rm -rf, git push --force)
+  .omp/hooks/           — omp safety hook (same guards, pi.on tool_call)
+  .shmorch/home         — resolved skill path for this machine
+  shmorch.sh            — Launcher script (selects your CLI)
+  AGENTS.md             — [created/amended → .shmorch/AGENTS.md; omp/Codex/Cursor/opencode/Antigravity]
+  CLAUDE.md             — [created/amended → .shmorch/CLAUDE.md; Claude Code]
+  GEMINI.md             — [created/amended → .shmorch/AGENTS.md; Gemini CLI]
 
-Launch: bash shmorch.sh
-  or just: claude (from TARGET)
+Launch: bash shmorch.sh   (or start any agent CLI from TARGET — the context chain loads either way)
 
 Shmorch will ask setup questions on your first /shmorch go session.
 ```

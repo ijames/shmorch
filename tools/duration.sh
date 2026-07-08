@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # duration.sh — Report durations from docs/state/timelog.md
 # Usage:
-#   bash ~/.claude/skills/shmorch/tools/duration.sh            full summary grouped by day
-#   bash ~/.claude/skills/shmorch/tools/duration.sh last       time since last event
-#   bash ~/.claude/skills/shmorch/tools/duration.sh today      today's events with gaps
+#   bash $SHMORCH_HOME/tools/duration.sh            full summary grouped by day
+#   bash $SHMORCH_HOME/tools/duration.sh last       time since last event
+#   bash $SHMORCH_HOME/tools/duration.sh today      today's events with gaps
 
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"

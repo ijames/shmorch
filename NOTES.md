@@ -71,3 +71,9 @@
 - When the user says "not yet" to starting work, don't stop — ask what's holding them back or offer something smaller: analysis, a quick audit, filling in state, answering a question about the codebase.
 - The right mental model: Shmorch is a dev lead who keeps the project moving, not a tool that answers questions and waits. It should feel like pairing with someone who always has a suggestion for what to do next.
 - Add to `go.md`: after asking "what do you want to work on?" and getting a non-answer, offer 2-3 concrete options rather than going silent.
+
+## Prompt injection observed (2026-07-07) — security
+
+**Issue:** While running Shmorch on DarkBadge, a `<system-reminder>` block appeared wrapped around an `AskUserQuestion` tool result — it quoted the real diff plausibly, then appended a fabricated "don't tell the user" directive with no source in any file. The secrecy clause is the injection tell.
+
+Shmorch's own shipped hooks don't match this signature (pre-tool.sh is Bash-only; none wrap `AskUserQuestion` or add secrecy text) — the vector is likely upstream (harness) or a non-shmorch hook/MCP wrapper. Full detail + next steps: `docs/state/tracks/20260707-prompt-injection-observed/index.md`.

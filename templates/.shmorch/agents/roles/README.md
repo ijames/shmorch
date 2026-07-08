@@ -1,6 +1,6 @@
 # .shmorch/agents/roles — Project Overrides
 
-Default roles live in the skill at `~/.claude/skills/shmorch/agents/roles/`.
+Default roles live in the skill at `$SHMORCH_HOME/agents/roles/`.
 This directory holds project-specific role overrides and additions only.
 
 **Resolution:** Shmorch checks here first. If a file is absent, the skill default is used.
@@ -13,7 +13,7 @@ This directory holds project-specific role overrides and additions only.
 Use when the role needs a fundamentally different persona or set of rules for this project.
 
 ```bash
-cp ~/.claude/skills/shmorch/agents/roles/analyst.md .shmorch/agents/roles/analyst.md
+cp $SHMORCH_HOME/agents/roles/analyst.md .shmorch/agents/roles/analyst.md
 # Rewrite entirely
 ```
 
@@ -22,9 +22,9 @@ Use when you want to add domain knowledge, constraints, or focus areas
 on top of the standard role — without duplicating the base behavior.
 
 ```markdown
-# Extends: ~/.claude/skills/shmorch/agents/roles/analyst.md
+# Extends: $SHMORCH_HOME/agents/roles/analyst.md
 
-> Read the skill default first: `~/.claude/skills/shmorch/agents/roles/analyst.md`
+> Read the skill default first: `$SHMORCH_HOME/agents/roles/analyst.md`
 > Then apply the additions below. These supplement — not replace — the base role
 > unless a section heading matches one in the skill default.
 
@@ -45,5 +45,5 @@ Reference it in Task prompts using the standard resolution pattern:
 
 ```
 Read your role: check .shmorch/agents/roles/<name>.md first;
-if not present, use ~/.claude/skills/shmorch/agents/roles/<name>.md.
+if not present, use $SHMORCH_HOME/agents/roles/<name>.md.
 ```
