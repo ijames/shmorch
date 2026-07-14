@@ -77,15 +77,22 @@ Check what exists in `docs/` that isn't in the canonical template. These may be 
 
 ```bash
 EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing"
+LOG=".shmorch/project_docs_log.md"
+LOGGED=""
+[ -f "$LOG" ] && LOGGED=$(grep -v '^#' "$LOG" 2>/dev/null)
 find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/state/tracks/" | sort | while read d; do
-  echo "$EXPECTED_DOCS" | grep -qw "$d" || echo "UNLISTED DIR: $d"
+  echo "$EXPECTED_DOCS" | grep -qw "$d" && continue
+  echo "$LOGGED" | grep -qxF "$d" && continue
+  echo "$LOGGED" | while read logged; do [ -n "$logged" ] && [[ "$d" == "$logged"/* ]] && exit 0; done && continue
+  echo "UNLISTED DIR: $d"
 done
 ```
 
 If any `UNLISTED DIR` entries appear:
 1. List them to the developer
-2. For each, ask: is this project-specific (skip) or a convention that should be added to the canonical scaffold?
-3. If it should be canonical: note it — propose adding it to the scaffold list in this file as part of Step 6, along with a PR to the skill.
+2. For each, ask: is this project-specific (append to `.shmorch/project_docs_log.md`) or a convention that should be added to the canonical scaffold?
+3. If project-specific: append the top-level dir to `.shmorch/project_docs_log.md` (one path per line; logging a top-level dir covers everything nested under it — no need for separate lines).
+4. If it should be canonical: note it — propose adding it to the scaffold list in this file as part of Step 6, along with a PR to the skill.
 
 Do **not** flag `docs/state/tracks/YYYYMMDD-*` subdirectories — those are per-project and expected to vary.
 
