@@ -7,6 +7,7 @@
   },
   "permissions": {
     "allow": ["Bash(git:*)", "Bash(find:*)", "Bash(grep:*)", "Bash(cat:*)", "Bash(ls:*)"],
-    "deny": ["Bash(rm -rf *)", "Bash(git push --force*)", "Bash(git push * main)", "Bash(git push * master)"]
+    "deny": ["Bash(rm -rf *)", "Bash(git push --force* * main)", "Bash(git push --force* * master)", "Bash(git push * main)", "Bash(git push * master)"],
+    "ask": ["Bash(git push --force*)"]
   }
 }
