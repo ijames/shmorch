@@ -12,14 +12,15 @@ done
 
 echo ""
 echo "Starting Shmorch (self-dev) — $(basename "$PWD")  [CLI: $CLI]"
-echo "  Running /shmorch go automatically."
+echo "  /shmorch go — orient and start a session"
+echo "  /shmorch resume — fast lane if a session was interrupted"
 echo "  /shmorch help — all commands"
 echo ""
 
 case "$CLI" in
   claude)
     export CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1
-    exec claude --dangerously-skip-permissions "/shmorch go"
+    exec claude --dangerously-skip-permissions
     ;;
   *) exec "$CLI" ;;
 esac

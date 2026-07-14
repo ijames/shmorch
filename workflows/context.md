@@ -6,15 +6,18 @@ Both kill productive development. This workflow defines how Shmorch recognizes a
 corrects both.
 
 ## When to use
+
 - Proactively: when a thread exceeds ~20 exchanges or context window is above ~40% utilization
 - When multiple unrelated concerns have drifted into the same thread
 - On any topic switch (hot-swap protocol)
 - When the conversation has lost focus and is circling
 
 ## Inputs
+
 - None — applies to the current conversation state
 
 ## Roles
+
 - None — runs inline
 
 ---
@@ -38,11 +41,13 @@ level must stay focused — scattered implementation threads produce bad code.
 When the user shifts topic, instruction, or track — even briefly — that's a context switch.
 
 **Triggers:**
+
 - User mentions a different track, a bug, a question, or a side concern
 - A clean stopping point is reached (commit made, feature complete, tests green)
 - The current thread has accomplished its goal
 
 **What to do:**
+
 1. If the current thread is at a clean point: commit or checkpoint first
 2. Write one line in session.md noting where the interrupted thread stands
 3. Name the switch explicitly: "Switching context from [X] to [Y]."
@@ -58,6 +63,7 @@ name it: "Resuming [X] — we were at [brief state]."
 ## Compaction Triggers
 
 Compact when any of the following is true:
+
 - Context window estimated above ~40% utilization
 - Thread has exceeded ~20 exchanges without a clean stopping point
 - Tool outputs accumulating without being referenced again
@@ -90,6 +96,7 @@ Or just do it if the stopping point is clear:
 > "Clean stopping point. Compacting — [brief what-was-done]. Continuing with [next]."
 
 **Compaction steps:**
+
 0. Clear processed tool outputs first — highest-volume, lowest-value tokens; discard entirely, do not summarize.
 1. Identify what the thread accomplished
 2. Write decisions to decisions.md — architectural decisions and unresolved issues must survive compaction verbatim, with no information loss.
@@ -105,12 +112,14 @@ A context window should serve one concern. If you notice two or more distinct co
 mixing — stop and separate them.
 
 **Signs of mixing:**
+
 - Fixing a bug while designing a feature
 - Implementing while also re-architecting
 - A long explanation that's really two different decisions
 - Tests for one thing while the code under test belongs to a different track
 
 **When you notice mixing:**
+
 1. Name it: "These are two separate concerns — [X] and [Y]."
 2. Finish one cleanly before starting the other
 3. Or explicitly park one: "Setting [Y] aside — I'll pick it up after [X] is done."
