@@ -1,7 +1,7 @@
 ---
 status: Active
 updated: 2026-07-17
-summary: No current task; backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for the entrypoint-consolidation and state-store-shape tracks.
+summary: No current task; backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for state-store-shape and the new docs-solidification-framework track.
 ---
 
 # Shmorch Plan
@@ -50,6 +50,8 @@ None active.
 ### Architecture
 
 - [ ] **State store shape** — evaluate a graph/wiki backend for state (tracks/decisions) so `go` pulls the current-focus subgraph, not whole files; includes the Beads candidate and a richer structured-front-matter candidate. Split from entrypoint-consolidation's Phase 3. → [track](tracks/20260717-state-store-shape/index.md)
+
+- [ ] **Docs solidification framework** — deterministic, resumable, project-agnostic procedure (`workflows/solidify.md`) that restructures any project's docs/knowledge tree onto the Skeleton Principle shape, reusing documentarian's triage and graph-first-docs' target model. The missing executor connecting graph-first-docs (shape), state-store-shape (backend), state-file-discipline (state ownership), and documentarian (parity audit). → [track](tracks/20260717-docs-solidification-framework/index.md)
 
 - [ ] **shmorch-core.md breakup** — god doc consuming session context; break into focused sub-documents loaded JIT by the workflow that needs them. → [track](tracks/20260601-core-breakup/index.md)
 

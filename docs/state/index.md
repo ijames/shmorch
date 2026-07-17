@@ -27,6 +27,7 @@ first for a pulse check before opening the whole file. Convention:
 | [20260707-multi-cli-portability](tracks/20260707-multi-cli-portability/index.md) | Closed |
 | [20260707-entrypoint-consolidation](tracks/20260707-entrypoint-consolidation/index.md) | Closed |
 | [20260717-state-store-shape](tracks/20260717-state-store-shape/index.md) | Open |
+| [20260717-docs-solidification-framework](tracks/20260717-docs-solidification-framework/index.md) | Open |
 | [20260614-shared-state-branch](tracks/20260614-shared-state-branch/index.md) | Investigation |
 | [20260609-state-file-discipline](tracks/20260609-state-file-discipline/index.md) | Open |
 | [20260602-scheduler-integration](tracks/20260602-scheduler-integration/index.md) | Open |

@@ -38,6 +38,9 @@ WORK
   /shmorch documentarian    Audit docs/code/tests parity. Verify closed tracks delivered knowledge
                              to their destination docs. Find undocumented features, stale content,
                              and skeleton gaps — feed them to the backlog.
+  /shmorch solidify         Deterministic, checkpointed restructure of a project's docs/state tree
+                             onto the Skeleton Principle shape. For docs that never followed the
+                             skeleton at all — resumable across sessions, same result every run.
 
 END-OF-SESSION SEQUENCE (suggested)
   1. /shmorch vacuum        Catch waste before it's committed.
