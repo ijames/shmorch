@@ -34,8 +34,8 @@ Initializes a new Shmorch workspace. If a path is given, installs there; otherwi
 
 - Detects whether a codebase already exists (by looking for `package.json`, `Cargo.toml`, `pyproject.toml`, `go.mod`, etc.)
 - Copies all templates into `.shmorch/`
-- Writes `CLAUDE.md` with a project-specific override section
-- Writes `shmorch.sh`, a launcher that sets env vars and opens Claude
+- Writes `.shmorch/AGENTS.md` (the source of truth, with a project-specific override section) plus thin root shims — `AGENTS.md`, `CLAUDE.md`, `GEMINI.md` — so whichever context file your CLI reads resolves to it
+- Writes `shmorch.sh`, a launcher that picks and opens your CLI (Claude Code, omp, etc.)
 - If existing code is detected: immediately runs `/shmorch discover` without waiting for the user
 
 ### `/shmorch discover`
@@ -189,12 +189,11 @@ Run `bash $SHMORCH_HOME/tools/duration.sh today` to see elapsed session time. Ru
 
 ## Safety
 
-Shmorch installs Claude Code hooks in `.shmorch/.claude/hooks/`:
+Shmorch installs a safety hook per CLI adapter:
 
-- **pre-tool hook** — blocks `rm -rf`, `git push --force`, and other destructive commands before they run
-- **stop hook** — fires at session end (used for cleanup or reminders)
-
-`.shmorch/.claude/settings.json` pre-allows common read-only commands so Claude doesn't prompt for permission on routine operations.
+- **Claude Code** (`.shmorch/.claude/hooks/`) — a pre-tool hook blocks `rm -rf`, `git push --force`, and other destructive commands before they run; a stop hook fires at session end. `.shmorch/.claude/settings.json` pre-allows common read-only commands so Claude doesn't prompt for permission on routine operations.
+- **omp** (`.shmorch/.omp/hooks/pre/safety.ts`) — a `tool_call` hook enforcing the same destructive-command blocklist.
+- **Other CLIs** rely on their own approval mode plus the model-enforced safety rules below.
 
 Additional rules enforced by the model:
 - Never delete without user confirmation

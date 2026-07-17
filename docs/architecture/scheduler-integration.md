@@ -16,6 +16,8 @@ A scheduler integration makes Shmorch proactive. Instead of waiting to be invoke
 
 ---
 
+**CLI scope:** this design targets Claude Code's in-REPL `CronCreate`/`CronList`/`CronDelete` tools — there is no equivalent primitive under omp or other CLIs today. On those CLIs, ambient scheduling isn't available in-session; use external/system cron (or the harness's `schedule` skill for remote agents, [see below](#open-questions)) to fire prompts instead. Everything else in Shmorch's scheduler design (the event table, presets, sidecar job-tracking) is a Claude-only feature until a CLI-neutral primitive exists.
+
 ## Available Primitives
 
 Claude Code's harness exposes three scheduler tools:

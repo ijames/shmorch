@@ -3,7 +3,7 @@
 
 # Track: Multi-CLI portability (omp / Codex / Cursor, not just Claude Code)
 
-**Status:** Active
+**Status:** Done (P0/P1/P2 all closed)
 **Started:** 2026-07-07
 **Domain:** Init & templates / runtime coupling
 
@@ -134,9 +134,14 @@ Severity: **P0** blocks omp use · **P1** degrades gracefully / manual workaroun
   inline fallback); omp TS safety hook (`templates/.omp/hooks/pre/safety.ts`);
   CLI-selecting launchers; session-start trigger made CLI-neutral. The capability
   adapter matrix in `core/portability.md` maps every affordance across CLIs.
-- **P2 — docs/cosmetic (H, I, K, L, M, N): partial.** Checkpoints / MCP-naming /
-  model-tier prose generalized in `shmorch-core.md`; the README full rewrite and the
-  scheduler + memory-path prose remain open.
+- **P2 — docs/cosmetic (H, I, K, L, M, N): DONE.** Checkpoints / MCP-naming /
+  model-tier prose generalized in `shmorch-core.md`. README's remaining Claude-only
+  spots fixed (init step now describes the AGENTS.md-first shim chain; Safety section
+  now lists the Claude and omp hook adapters separately). Scheduler doc now opens with
+  an explicit CLI-scope note: `CronCreate`/`CronList`/`CronDelete` are Claude-only,
+  other CLIs need external/system cron or the `schedule` skill's remote agents.
+  Memory-path prose (`core/documentation.md`, `research/research-20260501.md`) checked
+  and found already generic or historical — no change needed there.
 
 ---
 
@@ -187,3 +192,14 @@ Severity: **P0** blocks omp use · **P1** degrades gracefully / manual workaroun
   placeholder that invited drift); `core/portability.md` states the invariant. VERSION → 20260707.03.
 - Verified against DarkBadge's exact two-identical-files state: collapses to one source + shims,
   all three CLI entry points still resolve core + overrides.
+
+### 2026-07-17
+
+- Closed the two remaining P2 items. `README.md`: init-command bullets now describe the
+  AGENTS.md-first shim chain instead of stale "writes CLAUDE.md"/"opens Claude" language;
+  Safety section split into per-adapter (Claude hook / omp hook / other-CLI approval mode)
+  instead of Claude-only framing. `docs/architecture/scheduler-integration.md`: added an
+  explicit CLI-scope note up front — `CronCreate`/`CronList`/`CronDelete` are Claude-only,
+  other CLIs need external/system cron or the `schedule` skill's remote agents. Checked
+  memory-path prose (`core/documentation.md`, `research/research-20260501.md`) — already
+  generic or a dated historical record, no edit needed. Track status → Done.
