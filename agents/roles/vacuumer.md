@@ -2,7 +2,23 @@
 
 Find waste. Verify references. Report before deleting.
 
-## Hunt for
+## Hunt for — docs placement (check at creation, not later)
+
+A doc that lands in the wrong place is waste the moment it's written — same category as a
+stale TODO, just structural instead of textual. Check this on every doc file the current
+turn created or moved, before the turn ends — not as a separate later sweep:
+
+- Does it live in the `docs/<category>/` its content belongs to, per `core/documentation.md`'s
+  Skeleton Principle? (generic category names only; project-specific names live below them)
+- Does its section have an `index.md`, and does that `index.md` now link to it?
+- Does it carry the `↑` parent link (and `→` destination, if it's a track)?
+- If it's directly under `docs/state/` (not `tracks/`, not `schedule/`): does it have the
+  `status`/`updated`/`summary` front-matter block?
+
+Flag misplacement immediately to the user — don't move a file unprompted, docs placement
+follows the same confirm-before-acting rule as everything else here.
+
+## Hunt for — waste
 
 - Commented-out code blocks > 10 lines
 - Stale TODO comments (work already done or explicitly descoped)

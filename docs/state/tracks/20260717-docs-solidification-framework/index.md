@@ -1,7 +1,8 @@
 ↑ [Shmorch Plan](../../plan.md)
-→ new `workflows/solidify.md` + `commands/solidify.md` + `core/documentation.md` (execution-model section)
+→ `core/documentation.md` (Architecture Changelog) + `workflows/auto-update.md` (Step 2.8) +
+`agents/roles/vacuumer.md` + `tools/stop.sh` + `workflows/orient.md` + `templates/.shmorch/AGENTS.md`
 
-# Track: Docs solidification framework — deterministic, resumable, cross-project
+# Track: Docs solidification — continuous placement + version-triggered backfill
 
 **Status:** Open
 **Opened:** 2026-07-17
@@ -9,81 +10,73 @@
 
 ## Why
 
-Three tracks already describe *what* a solidified docs tree should look like
-(`20260525-graph-first-docs` — target shape; `20260717-state-store-shape` — target
-backend/format) and one already audits *whether current docs match code*
-(`workflows/documentarian.md` — parity triage). None of them specify the *procedure* a
-session runs to take an arbitrary project's messy or partial `docs/` and actually turn it
-into skeleton-compliant shape — deterministically, the same end-state regardless of which
-session did the work or how many times it was interrupted.
+Originally scoped as a single new command (`solidify`) that would restructure a messy
+`docs/` tree in one sweep. Two rounds of user feedback rejected that framing entirely and
+split it into two different, real concerns:
 
-Today's request: this needs to work "across multiple sessions and deterministically" and
-"across any project" — not just shmorch's own repo. Right now, restructuring docs is
-improvised per-session judgment. That means: (a) a session that gets interrupted mid-pass
-has no reliable way to resume exactly where it left off without re-reading everything, and
-(b) two different sessions asked to solidify the same messy tree could produce different
-results, because there's no fixed phase order or fixed classification rule.
+1. **Placement is a creation-time concern, not a cleanup-later one.** A doc that lands in
+   the wrong skeleton location is waste the moment it's written — same category as vacuum's
+   existing waste-hunting (stale TODOs, dead code), just structural instead of textual. It
+   should not need a separate command anyone has to remember to run; it belongs to the
+   `vacuumer` role and should fire automatically (optionally) around the work, not on a
+   deferred manual pass.
+2. **Architecture-version backfill is a real, harder problem.** `core/documentation.md`
+   doctrine is read live from `$SHMORCH_HOME` by every project — the *rules* are always
+   current, no sync needed. What can't self-update is *existing docs content* written
+   under an older rule (e.g. `docs/state/*.md` files that predate the front-matter
+   convention). When the rule set changes in a way that invalidates existing content, that
+   needs a deterministic, opt-in migration path — the developer explicitly asked "when we
+   change the architecture of the knowledge base, existing projects should backfill to
+   that if they give the OK," and flagged not knowing the general mechanism.
 
 ## What changes
 
-1. **New workflow `workflows/solidify.md` + command `commands/solidify.md`** — a fixed
-   phase sequence (Inventory → Classify → Restructure → Verify → Checkpoint) that any
-   session runs in the same order, on any project, producing the same target shape.
-2. **A persisted checkpoint artifact** — one file per phase's output, written as the phase
-   completes (not batched at the end), so a session that stops after Classify can resume
-   directly at Restructure without re-deriving the classification. Lives in the track
-   directory per `20260609-state-file-discipline` (track owns its state while open).
-3. **Reuses `documentarian.md`'s triage protocol** (`DOC_STALE` / `CODE_DIVERGED` /
-   `TEST_GAP` / `UNDECIDED`) as the Classify phase's decision rule instead of inventing a
-   second classification scheme — solidify and documentarian should share one triage
-   vocabulary.
-4. **Target shape = `core/documentation.md`'s Skeleton Principle** (generic category
-   names, `index.md` as surface map, tracks-not-docs) plus `20260525-graph-first-docs`'s
-   size-limit and context-bundle refinements, once that track lands them. Solidify doesn't
-   redesign the shape — it's the executor that converges any project's tree onto it.
-5. **Project-agnostic** — no shmorch-specific assumptions; runs against
-   `$SHMORCH_HOME`-resolved paths so it works the same on a project scaffolded by `init`
-   last week or one with three years of undisciplined docs.
+**Concern 1 — continuous placement (`agents/roles/vacuumer.md`, `tools/stop.sh`, `workflows/orient.md`):**
 
-## Non-goals / relationship to sibling tracks
+- `vacuumer` gained a "docs placement" hunt category: correct `docs/<category>/`, `index.md`
+  linkage, `↑`/`→` links, front-matter presence — checked on files the current turn touched,
+  not swept for later.
+- An **optional** reminder wired into the existing `Stop` hook (`tools/stop.sh`) — not a new
+  hook file, not a new command. If `docs/` files changed this session and the project has
+  opted in, the hook prints a one-line nudge to apply the vacuumer check before `/shmorch wrap`.
+  The hook only ever prints a reminder — it has no judgment of its own; the actual placement
+  check is still a reasoning step Shmorch performs, same pattern as the existing
+  `session-start.sh` context injection.
+- Opt-in toggle lives in `.shmorch/AGENTS.md` under "Docs Placement Hook" — asked once during
+  `orient.md`'s Context Setup interview, default disabled, editable any time.
 
-- Does **not** decide the storage backend (front-matter vs. graph/wiki) — that's
-  `20260717-state-store-shape`. Solidify targets whatever shape that track lands on.
-- Does **not** design the target graph shape — that's `20260525-graph-first-docs`.
-  Solidify consumes its output (size limits, context bundles) once defined; until then it
-  targets the shape already documented in `core/documentation.md`.
-- Does **not** replace `documentarian` — documentarian audits parity between existing docs
-  and code/tests. Solidify is the one-time (or occasional) *structural* migration a project
-  runs when its docs tree itself is out of shape, not just out of sync.
+**Concern 2 — version-triggered architecture backfill (`core/documentation.md`, `workflows/auto-update.md`):**
 
-## Deterministic execution model (draft)
+- `core/documentation.md` gained an **Architecture Changelog** table: dated rows, each tagged
+  `Compat: additive` (no backfill needed) or `Compat: backfill` (existing docs no longer
+  conform) plus an exact `Backfill scope` cell.
+- No semver was introduced. The existing `VERSION` format (`YYYYMMDD.NN`) already carries a
+  date — that's the only comparison axis needed: a changelog row dated after a project's
+  last-synced `VERSION` date means that project predates the rule. Decision: reuse what
+  exists rather than add a parallel versioning scheme for one narrow purpose.
+- `auto-update.md` Step 2.8 reads the changelog, finds rows the project predates, and offers
+  each one individually — "yes/no/later" — scoped to exactly that row's `Backfill scope`
+  instruction. Never a bulk "restructure everything" pass; each row is its own small,
+  reviewable migration, and declined rows are reported (not silently dropped).
 
-- **Phase order is fixed and idempotent.** Re-running a completed phase against unchanged
-  input produces the same output — no phase depends on conversational context that isn't
-  also written to the checkpoint.
-- **Phase 1 — Inventory:** walk the project's `docs/` + `docs/state/`, produce a flat
-  manifest (path, size, front-matter if present, last-git-touch). Write to checkpoint.
-- **Phase 2 — Classify:** for every manifest entry, decide its target: stays in place /
-  moves to `docs/<category>/` / graduates from `docs/state/` / merges with a sibling /
-  flagged `UNDECIDED` for the developer. Uses documentarian's triage vocabulary. Write to
-  checkpoint — this is the expensive reasoning step, must never be redone silently.
-- **Phase 3 — Restructure:** apply only the moves/merges from the checkpoint's Classify
-  output. No new judgment calls at this phase — if Classify didn't decide it, Restructure
-  doesn't act on it.
-- **Phase 4 — Verify:** run documentarian's parity check against the new structure; confirm
-  no orphaned links, no broken `↑`/`→` references.
-- **Phase 5 — Checkpoint/close:** mark the run complete in the checkpoint file; if resuming
-  a prior run, phases already checkpointed are skipped entirely, not re-verified.
+## Non-goals
 
-Open question for Work log: does the checkpoint artifact live in the track directory only
-(this track's own state), or does solidify need a per-project persistent checkpoint outside
-any track (since a project's docs tree may need re-solidifying long after this track
-closes)? Resolve before Phase 1 implementation.
+- No general-purpose "fix any messy docs tree" tool. If a project's docs never followed the
+  skeleton at all (legacy import, no prior shmorch), that's `documentarian`'s legacy-mode
+  reverse-engineering job, or a manually-scoped one-off — not something this track builds.
+- Doesn't touch `20260525-graph-first-docs` (target shape design) or `20260717-state-store-shape`
+  (backend format) — this track is the mechanism that keeps existing content converged on
+  whatever those land on, via the changelog, once they land.
 
 ## Work log
 
 ### 2026-07-17
-Track opened at user request: shmorch needs a deterministic, multi-session-safe,
-project-agnostic way to restructure docs/knowledge structure, built on what graph-first-docs,
-state-store-shape, state-file-discipline, and documentarian already established rather than
-starting from scratch. Scoped as the missing *executor* connecting those design/audit tracks.
+Opened as a general "solidify" command; user feedback (two rounds) rejected the
+standalone-command framing and repointed it as (1) an ongoing vacuumer-role concern fired via
+the existing `Stop` hook, optional, and (2) a version-triggered, changelog-driven backfill
+folded into `auto-update.md` rather than a new workflow. Implemented both: `commands/solidify.md`
+and `workflows/solidify.md` deleted; `core/documentation.md` Architecture Changelog added with
+the front-matter convention logged as the first `backfill`-tagged entry; `auto-update.md` Step
+2.8 added; `vacuumer.md` gained the docs-placement hunt category; `tools/stop.sh` gained the
+opt-in reminder; `orient.md`'s interview and `templates/.shmorch/AGENTS.md` gained the opt-in
+toggle.

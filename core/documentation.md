@@ -87,3 +87,32 @@ clean" — the front matter is current reality, not a log of past states).
 first rung of graph-first documentation (`tracks/20260525-graph-first-docs`) — cheap
 partial reads before expensive full ones — applied narrowly to `docs/state/` rather than
 the whole `docs/` tree.
+
+---
+
+## Architecture Changelog
+
+This doctrine is not mirrored into projects (unlike `templates/.shmorch/`, which
+`auto-update.md` diffs and syncs file-by-file) — every project reads this file live from
+`$SHMORCH_HOME/core/documentation.md`, so the *rules* are always current automatically.
+What can't update itself is a project's *existing docs content* written under an older
+version of these rules. This changelog is how `auto-update.md` knows when that content
+needs a backfill pass, and how big a pass.
+
+**Only log an entry here when a rule changes what existing docs *should already contain*
+or *where they should already live* — not for wording or clarification edits.** Every entry
+gets a `Compat` tag:
+
+- `Compat: additive` — new option, doesn't invalidate anything already written. No backfill offered.
+- `Compat: backfill` — existing docs written before this date no longer conform. `auto-update.md` offers a scoped backfill for this entry specifically.
+
+No separate semver scheme — the date already in `VERSION` (`YYYYMMDD.NN`) is the only
+comparison axis `auto-update.md` needs: an entry's date > the project's last-synced date
+means the project predates that rule.
+
+| Date | Rule | Compat | Backfill scope |
+|---|---|---|---|
+| 2026-07-17 | `docs/state/*.md` (not `tracks/`, not `schedule/`) require the `status`/`updated`/`summary` front-matter block (see § Front-Matter Previews) | `backfill` | Add the block to any `docs/state/*.md` file that lacks one. Derive `status`/`summary` from the file's current content — don't guess, read it. |
+
+Add new rows here, newest first, whenever a change in this doctrine falls into the
+`backfill` category.

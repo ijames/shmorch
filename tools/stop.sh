@@ -16,9 +16,17 @@ if [ -f "$TIMELOG" ]; then
 fi
 
 # Remind about active tracks
-[ -f "$PLAN" ] || exit 0
-if grep -q "| In progress |" "$PLAN" 2>/dev/null; then
+if [ -f "$PLAN" ] && grep -q "| In progress |" "$PLAN" 2>/dev/null; then
   echo "Reminder: active track in progress — run /shmorch wrap before ending session."
+fi
+
+# Docs placement reminder — opt-in via .shmorch/AGENTS.md "Docs Placement Hook" Status
+AGENTS="$ROOT/.shmorch/AGENTS.md"
+if [ -f "$AGENTS" ] && grep -A1 "Docs Placement Hook" "$AGENTS" 2>/dev/null | grep -qi "enabled"; then
+  TOUCHED=$(git -C "$ROOT" status --porcelain -- docs/ 2>/dev/null | grep -v "docs/state/tracks/\|docs/state/plan.md\|docs/state/session.md\|docs/state/timelog.md" || true)
+  if [ -n "$TOUCHED" ]; then
+    echo "Docs changed this session — apply the vacuumer role's docs-placement check (agents/roles/vacuumer.md) before wrap."
+  fi
 fi
 
 exit 0
