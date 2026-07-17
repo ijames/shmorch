@@ -17,6 +17,15 @@ Read **only** `docs/state/*` (context, stack, session, plan) and git status/log 
 
 ---
 
+## Step 0 — Pulse check
+
+If `docs/state/index.md` exists, read it first — the front-matter `summary` lines (see
+`core/documentation.md` § Front-Matter Previews) give a cheap overview of what's changed
+before opening the full files in Steps 1–3. If it's missing, skip straight to Step 1 (older
+projects may not have it yet — not an error).
+
+---
+
 ## Step 1 — Read context and stack
 
 Read `docs/state/context.md` and `docs/state/stack.md` in parallel.

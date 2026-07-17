@@ -3,7 +3,7 @@
 
 # Track: Entry-point consolidation — go as the one door
 
-**Status:** Active (Phase 1 landed)
+**Status:** Done (Phase 1 + 2 landed; Phase 3 split to `tracks/20260717-state-store-shape`)
 **Started:** 2026-07-07
 **Domain:** Entry flow / context management
 
@@ -54,30 +54,39 @@ remain directly invokable.
 - `shmorch-core.md` session-start no longer stops uninitialized repos with "run init" — it
   routes everything through `go`, which provisions as needed.
 
+## Phase 2 — landed (this track)
+
+- `core/operations.md` **new** — Timing, Communication Notifications, Vacuum Protocol,
+  Checkpoints, Version + skill-change-workflow sections carved out of `shmorch-core.md`
+  (kept as reference material, loaded on demand). `shmorch-core.md` 257 → 203 lines
+  (~21% cut) — the always-on kernel now covers only what's needed every session; the
+  moved sections are consulted at specific moments (a commit, a PR, a checkpoint), not
+  every turn.
+- **Front-matter previews** — `docs/state/*.md` files (not `tracks/`, not `schedule/`)
+  now open with a 3-line `status`/`updated`/`summary` YAML block (convention documented in
+  `core/documentation.md` § Front-Matter Previews). `docs/state/index.md` is the skeleton
+  index that surfaces these; `orient.md` gained a new **Step 0 — pulse check** that reads
+  it first, before the full Step 1–3 reads. Applied to `templates/docs/state/` (seeded to
+  new projects) and to this repo's own `docs/state/plan.md` / `session.md`
+  (`docs/state/index.md` created here too — this repo had none before).
+- This is a narrower version of the original "~10-line skeleton index" idea: front matter
+  lives on the files themselves rather than a single separate summary file, and the
+  convention is `docs/state/`-scoped rather than a new artifact to keep in sync.
+
+## Split out
+
+- **Phase 3 — store shape** (evaluate a graph/wiki backend for state so `go` pulls the
+  current-focus subgraph, not whole files) moved to its own track:
+  `tracks/20260717-state-store-shape/index.md`. It was blocking this track's closure on a
+  decision with no committed timeline; splitting it lets entrypoint-consolidation close on
+  its actual (dispatcher + context-trim) scope. The Beads store-shape candidate write-up
+  moved there too.
+
 ## Deferred
 
-- **Phase 2 — context trim:** split `shmorch-core.md` into a tiny always-on kernel +
-  on-demand doctrine; add a ~10-line `.shmorch/state.md` skeleton index so `orient` reads a
-  summary before pulling whole state files.
-- **Phase 3 — store shape:** evaluate a graph/wiki backend for state (tracks/decisions)
-  so `go` pulls the current-focus subgraph, not whole files. Prior art:
-  `tracks/20260525-graph-first-docs`, `tracks/20260609-state-file-discipline`,
-  `tracks/20260608-cross-project-knowledge`. Do only after measuring Phase 1/2 gains.
-- Optional: physically merge the two engines into one `provision.md` (low value; only if
-  a single file proves clearly simpler in practice).
-
-## Store-shape candidate: Beads (moved from navigate.md 2026-07-07)
-
-Beads (Dolt-backed dependency graph) is one candidate backend for the Phase 3 store shape, and the subject of the standing `plan.md` item "Beads integration investigation." The `navigate` workflow's Beads-compatibility mapping lived inline in the live workflow; it's moved here since it shouldn't ship in `navigate.md` until/unless Beads is actually adopted.
-
-**If Beads were active (`bd` on PATH), navigate would map as:**
-- Step 1 (derive domains): from `bd list --tag domain` or project docs
-- Step 2 (map tasks): use tags on beads; `bd ready --json` surfaces unblocked tasks
-- Step 4 (drill-down): `bd show <id>` gives task detail; look up functions the same way
-- Branch verbs: Build → `bd update <id> --claim`; Break out → `bd dep add` with child IDs; Done → `bd close <id>`
-- Hierarchy: Epic (`bd-a3f8`) → Domain; Task (`bd-a3f8.1`) → Item; Sub-task (`bd-a3f8.1.1`) → Phase or function group
-
-A graph store like Beads is exactly the Phase 3 direction ("pull the current-focus subgraph instead of whole files"). Evaluate alongside the `graph-first-docs` / `state-file-discipline` prior art before adopting.
+- Optional: physically merge `init.md` + `auto-update.md` into one `provision.md` (low
+  value; only if a single file proves clearly simpler in practice). Still parked here —
+  it's about the dispatcher, not the store shape.
 
 ## Work log
 
@@ -88,3 +97,14 @@ A graph store like Beads is exactly the Phase 3 direction ("pull the current-foc
   tagged the engines. Verified state routing by trace + no dangling step refs. VERSION → 20260707.04.
 - Added the **shallow-orientation guardrail**: `orient` reads only `docs/state/*` + git metadata; no reading/grepping/analyzing source code (or spawning discovery) until the user gives a directive after `go`. Carved the same exception into `shmorch-core.md`'s "Always keep moving" line (the root cause). VERSION → 20260707.05.
 - Moved the Beads-compatibility mapping out of the live `navigate.md` into this track (Phase 3 store-shape candidate) and cross-linked the `plan.md` Beads item. navigate.md VERSION → 20260707.07.
+
+### 2026-07-17
+
+- Landed Phase 2: carved `core/operations.md` out of `shmorch-core.md` (Timing/Comms/Vacuum/
+  Checkpoints/Version sections), registered it in `core/index.md`; added the front-matter
+  preview convention (`core/documentation.md`), applied it to `templates/docs/state/` and
+  this repo's own `docs/state/`, created this repo's first `docs/state/index.md`, and added
+  `orient.md` Step 0 to read it. VERSION → 20260717.01.
+- Split Phase 3 (store shape) out to `tracks/20260717-state-store-shape/index.md` — moved
+  the Beads candidate write-up with it, since this track's own scope (dispatcher +
+  context trim) is now fully landed. Track closed.

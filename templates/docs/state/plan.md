@@ -1,3 +1,9 @@
+---
+status: Open
+updated: YYYY-MM-DD
+summary: (none yet — no active task or backlog)
+---
+
 # Plan
 
 ## Current Task

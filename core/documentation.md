@@ -60,3 +60,30 @@ Track closing process:
 **External memory (e.g. `~/.claude/projects/...`):** User preferences and feedback belong there. Project state — plans, specs, architecture, decisions — belongs in `docs/state/` or `docs/`, version-controlled with the code.
 
 **Memory placement rule:** Universal Shmorch process guidance belongs in the skill — `shmorch-core.md` or the relevant workflow. Project memory is for project-specific signal only. If a feedback memory would apply equally to any Shmorch project, migrate it to the skill instead.
+
+---
+
+## Front-Matter Previews
+
+Every file directly under `docs/state/` (not `tracks/`, not `schedule/`) opens with a
+three-line YAML block so an agent — or `docs/state/index.md` — can preview the file's
+gist by reading the first few lines, without opening the whole thing:
+
+```yaml
+---
+status: <Open | Active | Blocked | Done>
+updated: YYYY-MM-DD
+summary: <one line — what this file currently says>
+---
+```
+
+`status`/`updated`/`summary` only — this is a preview, not a metadata system. Update the
+block whenever the file's content changes materially (same discipline as "Documents stay
+clean" — the front matter is current reality, not a log of past states).
+
+`docs/state/index.md` is the skeleton index: one row per state file, its purpose, and
+(once front matter is standard) a place to surface the `summary` line without a full read.
+`orient.md` Step 0 reads it first for a fast pulse before pulling whole files. This is the
+first rung of graph-first documentation (`tracks/20260525-graph-first-docs`) — cheap
+partial reads before expensive full ones — applied narrowly to `docs/state/` rather than
+the whole `docs/` tree.

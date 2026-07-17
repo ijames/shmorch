@@ -1,3 +1,9 @@
+---
+status: Active
+updated: 2026-07-17
+summary: Multi-CLI portability track closed out (PR #52); entrypoint-consolidation Phase 2 (core split + front-matter previews) in progress, Phase 3 split to its own track.
+---
+
 # Session Log
 
 ## Latest Session — 2026-07-14
