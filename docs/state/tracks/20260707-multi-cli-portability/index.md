@@ -3,8 +3,9 @@
 
 # Track: Multi-CLI portability (omp / Codex / Cursor, not just Claude Code)
 
-**Status:** Done (P0/P1/P2 all closed)
+**Status:** Closed
 **Started:** 2026-07-07
+**Closed:** 2026-07-17
 **Domain:** Init & templates / runtime coupling
 
 ## Why

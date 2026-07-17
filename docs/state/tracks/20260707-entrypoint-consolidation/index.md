@@ -3,8 +3,9 @@
 
 # Track: Entry-point consolidation — go as the one door
 
-**Status:** Done (Phase 1 + 2 landed; Phase 3 split to `tracks/20260717-state-store-shape`)
+**Status:** Closed (Phase 1 + 2 landed; Phase 3 split to `tracks/20260717-state-store-shape`)
 **Started:** 2026-07-07
+**Closed:** 2026-07-17
 **Domain:** Entry flow / context management
 
 ## Why
