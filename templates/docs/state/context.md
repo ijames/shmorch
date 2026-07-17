@@ -1,3 +1,9 @@
+---
+status: Open
+updated: YYYY-MM-DD
+summary: (none yet — filled in on first Shmorch session)
+---
+
 # Project Context
 > Filled in on first Shmorch session, or edit directly.
 > For dependency versions, pinned runtimes, and external constraints — see state/stack.md.

@@ -1,3 +1,9 @@
+---
+status: Active
+updated: 2026-07-17
+summary: No current task; backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for the entrypoint-consolidation and state-store-shape tracks.
+---
+
 # Shmorch Plan
 
 > **What belongs here:** What to build and in what order — for Shmorch itself.
@@ -45,6 +51,10 @@ None active.
 
 ### Architecture
 
+- [x] **Entry-point consolidation** — `go` as the single dispatcher (provision → orient); Phase 2 context trim (`core/operations.md` carve-out, front-matter previews on `docs/state/*.md`, `docs/state/index.md` skeleton index, `orient.md` Step 0 pulse check). Phase 3 (store shape) split out. → [track](tracks/20260707-entrypoint-consolidation/index.md)
+
+- [ ] **State store shape** — evaluate a graph/wiki backend for state (tracks/decisions) so `go` pulls the current-focus subgraph, not whole files; includes the Beads candidate and a richer structured-front-matter candidate. Split from entrypoint-consolidation's Phase 3. → [track](tracks/20260717-state-store-shape/index.md)
+
 - [ ] **shmorch-core.md breakup** — god doc consuming session context; break into focused sub-documents loaded JIT by the workflow that needs them. → [track](tracks/20260601-core-breakup/index.md)
 
 - [ ] **Core / role / workflow / command boundary cleanup** — content in wrong layers causing collision and duplication; define exclusive ownership per layer, move violators. Depends on core-breakup. → [track](tracks/20260601-boundary-cleanup/index.md)
@@ -88,7 +98,7 @@ None active.
 - [ ] **Beads integration investigation** — evaluate replacing markdown task files with [Beads](https://github.com/gastownhall/beads) (Dolt-backed dependency graph). Trial on one active project before committing.
   - Condition: after a project using Shmorch heavily enough to feel the pain of flat markdown task files, or when Beads has more documented usage examples.
   - Moved from: MoBoS plan.md 2026-05-19
-  - Related: `docs/state/tracks/20260707-entrypoint-consolidation/` (Phase 3 store shape — the `navigate`↔beads mapping was moved there 2026-07-07)
+  - Related: `docs/state/tracks/20260717-state-store-shape/` (the `navigate`↔beads mapping lives there — moved from `entrypoint-consolidation` Phase 3 on 2026-07-17, originally from `navigate.md` 2026-07-07)
 
 ---
 

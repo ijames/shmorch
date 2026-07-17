@@ -2,6 +2,10 @@
 
 Everything here is temporary. Content either graduates to another `docs/` layer when complete, or is discarded.
 
+Each file below opens with a `status`/`updated`/`summary` front-matter block — read that
+first for a pulse check before opening the whole file. Convention: `core/documentation.md`
+§ Front-Matter Previews.
+
 ↑ [docs/index.md](../index.md)
 
 ---
