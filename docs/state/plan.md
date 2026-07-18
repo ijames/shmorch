@@ -1,7 +1,7 @@
 ---
 status: Active
 updated: 2026-07-17
-summary: No current task; backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for state-store-shape and the new docs-solidification-framework track.
+summary: No current task; docs-solidification-framework closed (PR #55 merged). Backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for state-store-shape.
 ---
 
 # Shmorch Plan
@@ -50,8 +50,6 @@ None active.
 ### Architecture
 
 - [ ] **State store shape** — evaluate a graph/wiki backend for state (tracks/decisions) so `go` pulls the current-focus subgraph, not whole files; includes the Beads candidate and a richer structured-front-matter candidate. Split from entrypoint-consolidation's Phase 3. → [track](tracks/20260717-state-store-shape/index.md)
-
-- [ ] **Docs solidification: continuous placement + version-triggered backfill** — not a standalone command. (1) `vacuumer` role + optional `PostToolUse` hook (fires right after each docs write, not batched at session end) catches docs placed wrong at creation time, same spirit as vacuum's waste-hunting. (2) `core/documentation.md`'s new Architecture Changelog + `auto-update.md` Step 2.8 offer a scoped, opt-in backfill when a doctrine change invalidates existing docs content — gated per-entry, no bulk restructuring, no new semver (reuses the date already in `VERSION`). → [track](tracks/20260717-docs-solidification-framework/index.md)
 
 - [ ] **shmorch-core.md breakup** — god doc consuming session context; break into focused sub-documents loaded JIT by the workflow that needs them. → [track](tracks/20260601-core-breakup/index.md)
 
@@ -109,3 +107,5 @@ None active.
 - [x] **Multi-CLI portability (omp / Pi / Codex / Gemini / opencode / Cursor / Antigravity)** — P0 + P1 + P2 all done: AGENTS.md-first context chain with per-CLI root files (AGENTS/CLAUDE/GEMINI) + plain-text bootstrap for literal-`@` CLIs; `$SHMORCH_HOME` indirection (recipe in `core/portability.md`, resolved at session start, stamped into `.shmorch/home`, 117 path refs codemod'd); CLI-neutral subagent protocol, dispatch, launchers, and omp TS safety hook; `/shmorch sync` migrates existing repos; README stale Claude-only spots fixed; scheduler doc scoped as Claude-only. `docs/state/tracks/20260707-multi-cli-portability/index.md`. Closed 2026-07-17.
 
 - [x] **Entry-point consolidation** — `go` as the single dispatcher (provision → orient); Phase 2 context trim (`core/operations.md` carve-out, front-matter previews on `docs/state/*.md`, `docs/state/index.md` skeleton index, `orient.md` Step 0 pulse check). Phase 3 (store shape) split to `tracks/20260717-state-store-shape/`. `docs/state/tracks/20260707-entrypoint-consolidation/index.md`. Closed 2026-07-17.
+
+- [x] **Docs solidification: continuous placement + version-triggered backfill** — `vacuumer` role gained a "docs placement" hunt category backed by an optional `PostToolUse` hook (`templates/.claude/hooks/post-tool-docs.sh`) that fires right after each docs write/edit; opt-in via `.shmorch/AGENTS.md`. `core/documentation.md` gained an Architecture Changelog (`Compat: additive | backfill`); `auto-update.md` Step 2.8 offers scoped, per-entry, opt-in backfill using the existing `VERSION` date as the comparison axis — no new semver. Standalone `solidify` command dropped after feedback split the problem into these two concerns. `docs/state/tracks/20260717-docs-solidification-framework/index.md`. PR #55 merged 2026-07-17.
