@@ -22,6 +22,16 @@ User specifies area, or default to: files changed in the last 10 commits and the
 
 ---
 
+## Step 1.5 — Untracked file scan
+
+```bash
+git status --porcelain | grep '^??' | awk '{print $2}'
+```
+
+For each untracked file not covered by `.gitignore` and not part of the expected scaffold, check `docs/state/vacuum-report-*.md` from prior runs (or session.md "next up" notes) for whether this same path was already flagged. If it was flagged in 2 or more prior vacuum passes and still exists: escalate — do not add it as another "next up" note that can silently drop. Instead, create a named backlog item (a track stub or a `docs/state/plan.md` entry) with the file's provenance if known, and say so explicitly to the user: "`<path>` has survived N vacuum passes — opening it as a backlog item instead of re-flagging."
+
+---
+
 ## Step 2 — Reference check (before flagging anything dead)
 
 For every candidate item, verify references **before** classifying it:

@@ -219,6 +219,7 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 - Is this tied to an open track step? Mark it done.
 - No track exists and this is non-trivial? Create one using `.shmorch/docs/track-template.md`.
 - Update `docs/state/plan.md`.
+- **Before opening the PR:** update the track's `index.md` Status field to reflect the state the merge will produce (e.g. `Open — Intent + Spec` → `Shipped` / `Closed`), not the state it's in mid-build. Stale status fields caught only by later documentarian sweeps are the recurring failure mode this guards against — fix it at the point of change, not in batch later.
 
 ### Plan alignment
 - Does the implementation use the patterns and dependencies specified in the design? Actively verify — no deprecated API, no undeclared new dependency, no undeclared framework introduced.
