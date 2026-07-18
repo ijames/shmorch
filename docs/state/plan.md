@@ -1,7 +1,7 @@
 ---
 status: Active
 updated: 2026-07-17
-summary: No current task; backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for the entrypoint-consolidation and state-store-shape tracks.
+summary: No current task; backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for state-store-shape and the new docs-solidification-framework track.
 ---
 
 # Shmorch Plan
@@ -50,6 +50,8 @@ None active.
 ### Architecture
 
 - [ ] **State store shape** — evaluate a graph/wiki backend for state (tracks/decisions) so `go` pulls the current-focus subgraph, not whole files; includes the Beads candidate and a richer structured-front-matter candidate. Split from entrypoint-consolidation's Phase 3. → [track](tracks/20260717-state-store-shape/index.md)
+
+- [ ] **Docs solidification: continuous placement + version-triggered backfill** — not a standalone command. (1) `vacuumer` role + optional `PostToolUse` hook (fires right after each docs write, not batched at session end) catches docs placed wrong at creation time, same spirit as vacuum's waste-hunting. (2) `core/documentation.md`'s new Architecture Changelog + `auto-update.md` Step 2.8 offer a scoped, opt-in backfill when a doctrine change invalidates existing docs content — gated per-entry, no bulk restructuring, no new semver (reuses the date already in `VERSION`). → [track](tracks/20260717-docs-solidification-framework/index.md)
 
 - [ ] **shmorch-core.md breakup** — god doc consuming session context; break into focused sub-documents loaded JIT by the workflow that needs them. → [track](tracks/20260601-core-breakup/index.md)
 

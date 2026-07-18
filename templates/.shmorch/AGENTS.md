@@ -35,5 +35,15 @@ Every track gets its own branch. No direct-to-main commits except hotfixes confi
 
 **Use:** `gh pr merge --STRATEGY`
 
+### Docs Placement Hook
+
+**Status:** <!-- enabled | disabled — default disabled until asked -->
+
+When enabled, a `PostToolUse` hook fires right after each docs file is written or edited —
+while it's still the only thing in view, not batched up with everything else touched that
+session — and reminds to apply the vacuumer role's docs-placement check
+(`agents/roles/vacuumer.md`) then and there. Opt-in: ask once during the context interview;
+toggle any time by editing this line.
+
 ### Never Do Without Asking
 <!-- fill in — e.g. "delete records", "push to main", "change schema" -->

@@ -16,8 +16,7 @@ if [ -f "$TIMELOG" ]; then
 fi
 
 # Remind about active tracks
-[ -f "$PLAN" ] || exit 0
-if grep -q "| In progress |" "$PLAN" 2>/dev/null; then
+if [ -f "$PLAN" ] && grep -q "| In progress |" "$PLAN" 2>/dev/null; then
   echo "Reminder: active track in progress — run /shmorch wrap before ending session."
 fi
 
