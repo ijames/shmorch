@@ -3,7 +3,8 @@
   "hooks": {
     "SessionStart": [{"matcher": "", "hooks": [{"type": "command", "command": "bash .claude/hooks/session-start.sh 2>/dev/null || true"}]}],
     "Stop": [{"matcher": "", "hooks": [{"type": "command", "command": "bash \"$(cat .shmorch/home 2>/dev/null || echo $HOME/.claude/skills/shmorch)/tools/stop.sh\""}]}],
-    "PreToolUse": [{"matcher": "Bash", "hooks": [{"type": "command", "command": "bash .claude/hooks/pre-tool.sh"}]}]
+    "PreToolUse": [{"matcher": "Bash", "hooks": [{"type": "command", "command": "bash .claude/hooks/pre-tool.sh"}]}],
+    "PostToolUse": [{"matcher": "Write|Edit", "hooks": [{"type": "command", "command": "bash .claude/hooks/post-tool-docs.sh 2>/dev/null || true"}]}]
   },
   "permissions": {
     "allow": ["Bash(git:*)", "Bash(find:*)", "Bash(grep:*)", "Bash(cat:*)", "Bash(ls:*)"],

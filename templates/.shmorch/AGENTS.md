@@ -39,10 +39,11 @@ Every track gets its own branch. No direct-to-main commits except hotfixes confi
 
 **Status:** <!-- enabled | disabled — default disabled until asked -->
 
-When enabled, the session-end (`Stop`) hook flags docs files touched this session that may
-be misplaced per the Skeleton Principle, as a reminder to run the vacuumer role's docs-placement
-check (`agents/roles/vacuumer.md`) before wrapping — not a separate manual sweep. Opt-in: ask
-once during the context interview; toggle any time by editing this line.
+When enabled, a `PostToolUse` hook fires right after each docs file is written or edited —
+while it's still the only thing in view, not batched up with everything else touched that
+session — and reminds to apply the vacuumer role's docs-placement check
+(`agents/roles/vacuumer.md`) then and there. Opt-in: ask once during the context interview;
+toggle any time by editing this line.
 
 ### Never Do Without Asking
 <!-- fill in — e.g. "delete records", "push to main", "change schema" -->

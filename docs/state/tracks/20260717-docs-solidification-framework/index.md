@@ -31,19 +31,23 @@ split it into two different, real concerns:
 
 ## What changes
 
-**Concern 1 — continuous placement (`agents/roles/vacuumer.md`, `tools/stop.sh`, `workflows/orient.md`):**
+**Concern 1 — continuous placement (`agents/roles/vacuumer.md`, `templates/.claude/hooks/post-tool-docs.sh`, `workflows/orient.md`):**
 
 - `vacuumer` gained a "docs placement" hunt category: correct `docs/<category>/`, `index.md`
-  linkage, `↑`/`→` links, front-matter presence — checked on files the current turn touched,
-  not swept for later.
-- An **optional** reminder wired into the existing `Stop` hook (`tools/stop.sh`) — not a new
-  hook file, not a new command. If `docs/` files changed this session and the project has
-  opted in, the hook prints a one-line nudge to apply the vacuumer check before `/shmorch wrap`.
-  The hook only ever prints a reminder — it has no judgment of its own; the actual placement
-  check is still a reasoning step Shmorch performs, same pattern as the existing
+  linkage, `↑`/`→` links, front-matter presence — checked on the one file just touched, not
+  swept for later.
+- An **optional** `PostToolUse` hook (`templates/.claude/hooks/post-tool-docs.sh`, matcher
+  `Write|Edit`) fires immediately after each docs file is written or edited. First attempt
+  used the existing session-end `Stop` hook instead — rejected: by session end, everything
+  touched that session has already piled up, which is exactly the "context already overblown"
+  failure this was supposed to avoid. `PostToolUse` fires while only that one file is in view.
+  The hook only ever prints a one-line reminder — it has no judgment of its own; the actual
+  placement check is still a reasoning step Shmorch performs, same pattern as the existing
   `session-start.sh` context injection.
 - Opt-in toggle lives in `.shmorch/AGENTS.md` under "Docs Placement Hook" — asked once during
-  `orient.md`'s Context Setup interview, default disabled, editable any time.
+  `orient.md`'s Context Setup interview, default disabled, editable any time. `init.md` and
+  `auto-update.md` Step 2.9 already generically copy/diff `.claude/hooks/*` and offer new
+  files, so this hook reaches existing projects without any special-casing.
 
 **Concern 2 — version-triggered architecture backfill (`core/documentation.md`, `workflows/auto-update.md`):**
 
@@ -71,12 +75,18 @@ split it into two different, real concerns:
 ## Work log
 
 ### 2026-07-17
-Opened as a general "solidify" command; user feedback (two rounds) rejected the
-standalone-command framing and repointed it as (1) an ongoing vacuumer-role concern fired via
-the existing `Stop` hook, optional, and (2) a version-triggered, changelog-driven backfill
-folded into `auto-update.md` rather than a new workflow. Implemented both: `commands/solidify.md`
-and `workflows/solidify.md` deleted; `core/documentation.md` Architecture Changelog added with
-the front-matter convention logged as the first `backfill`-tagged entry; `auto-update.md` Step
-2.8 added; `vacuumer.md` gained the docs-placement hunt category; `tools/stop.sh` gained the
-opt-in reminder; `orient.md`'s interview and `templates/.shmorch/AGENTS.md` gained the opt-in
-toggle.
+Opened as a general "solidify" command; user feedback (three rounds) rejected the
+standalone-command framing and repointed it as (1) an ongoing vacuumer-role concern, and (2) a
+version-triggered, changelog-driven backfill folded into `auto-update.md` rather than a new
+workflow. `commands/solidify.md` and `workflows/solidify.md` deleted; `core/documentation.md`
+Architecture Changelog added with the front-matter convention logged as the first
+`backfill`-tagged entry; `auto-update.md` Step 2.8 added; `vacuumer.md` gained the
+docs-placement hunt category.
+
+First pass wired the placement reminder into the existing `Stop` hook — wrong: by session end
+everything touched has already piled up, the exact "context already overblown" problem this
+was meant to avoid. Replaced with a new `PostToolUse` hook
+(`templates/.claude/hooks/post-tool-docs.sh`, matcher `Write|Edit`) that fires right after
+each docs write, while only that one file is in view. `tools/stop.sh` reverted to its prior
+state (active-track reminder only). `orient.md`'s interview and `templates/.shmorch/AGENTS.md`
+still carry the opt-in toggle, wording updated to match.
