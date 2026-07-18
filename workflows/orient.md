@@ -49,7 +49,13 @@ If filled, summarize in 1-2 sentences.
 
 ## Step 2 — Read last session
 
-Read `docs/state/session.md`. Summarize what happened last time in 1-2 sentences.
+`session.md` grows without bound across a project's life — do not `Read` the whole file. Extract only the most recent entry (from the top `## Latest Session` heading down to the next `---` or `##`):
+
+```bash
+awk '/^## (Latest Session|[0-9]{4}-[0-9]{2}-[0-9]{2})/{n++} n==1{print} n==2{exit}' docs/state/session.md
+```
+
+Summarize what happened last time in 1-2 sentences. Only read further back in the file if the user asks about history older than the last session, or if the current entry references something unresolved from an earlier one by name.
 
 ---
 

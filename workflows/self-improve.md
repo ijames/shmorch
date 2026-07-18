@@ -42,7 +42,7 @@ If output is `PROCEED` — continue to Step 3.
 ## Step 3 — Gather evidence (parallel reads, no agents)
 
 Read in parallel:
-- `docs/state/timelog.md` — repeated patterns: stalled phases, re-run agents, frequent BLOCKERs
+- `docs/state/timelog.md` **tail only** — it's append-only and grows without bound; never `Read` it whole. Use `tail -200 docs/state/timelog.md` to look for repeated patterns: stalled phases, re-run agents, frequent BLOCKERs
 - `docs/state/session.md` — friction noted across recent sessions
 - `.shmorch/NOTES.md` — manually recorded issues (may not exist)
 - `docs/development/decisions.md` — decisions later revised or reversed
