@@ -20,8 +20,12 @@ Close the current session — stamp the end time, summarize what happened, and u
 Read these files in parallel:
 - `docs/state/session.md`
 - `docs/state/plan.md`
-- `docs/state/timelog.md`
 - `docs/development/decisions.md`
+
+`timelog.md` is append-only and grows without bound — never `Read` it whole. Pull only the current session's entries:
+```bash
+tail -100 docs/state/timelog.md | awk '/SESSION_START/{buf=""} {buf=buf$0"\n"} END{print buf}'
+```
 
 ---
 
