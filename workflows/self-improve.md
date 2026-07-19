@@ -104,7 +104,13 @@ Task(
     - Workarounds noted in session notes
     - Decisions revisited or reversed
 
-    For each pattern, propose a specific change to a shmorch file:
+    Before proposing a pattern, cross-check whether it was already resolved: grep
+    `docs/development/decisions.md` and `.shmorch/AGENTS.md` (or `CLAUDE.md`) for a prior
+    entry addressing the same concern. If found, do not re-propose it as an open pattern —
+    list it under "Already addressed" instead, citing the resolving commit/PR/decision entry.
+    Only propose patterns that evidence shows are still live.
+
+    For each remaining pattern, propose a specific change to a shmorch file:
     - Which file (commands/, workflows/, agents/roles/, shmorch-core.md)
     - What specifically to add, remove, or rewrite
     - Why this pattern indicates a gap
@@ -130,6 +136,9 @@ Task(
     **File:** <path>
     **Change:** <specific text or structural change>
     **Improvement:** <what gets better>
+
+    ### Already addressed
+    <patterns whose resolution was found in decisions.md/AGENTS.md/CLAUDE.md — cite the resolving commit/PR>
 
     ### No-action observations
     <patterns seen once — keep for next run>

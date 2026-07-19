@@ -125,6 +125,12 @@ Then extract and surface the first **BLOCKER** from session.md:
 grep -A1 "BLOCKER\|Pick up immediately" docs/state/session.md | head -4
 ```
 
+**CW-8 — Escalate if this is recurring:**
+```bash
+grep -c "auto-wrapped on reentry" docs/state/timelog.md 2>/dev/null || echo 0
+```
+If this count is 3 or more, sessions are habitually ending without a real `/shmorch wrap` (context exhaustion or abrupt stop, not deliberate close). Surface this once during orientation as a named observation — not a blocker, just visibility — e.g.: "Note: N sessions in a row ended without wrap; catch-up reconstruction is covering it, but consider whether the wrap trigger itself needs attention." Do not repeat this nudge every session once said — say it, then let it drop unless the count keeps climbing.
+
 ---
 
 ## Step 4 — Orient
