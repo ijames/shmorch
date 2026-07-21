@@ -1,7 +1,7 @@
 ---
 status: Active
-updated: 2026-07-17
-summary: No current task; docs-solidification-framework closed (PR #55 merged). Backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for state-store-shape.
+updated: 2026-07-18
+summary: No current task; wrap-friction fixes + bounded context reads shipped (PR #58, #57). Backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for state-store-shape.
 ---
 
 # Shmorch Plan
@@ -101,6 +101,10 @@ None active.
 ## Completed
 
 <!-- Items closed here when the skill change is merged to main. -->
+
+- [x] **Wrap-friction fixes (self-improve)** — `go.md` escalates when 3+ sessions in a row end without a real wrap; `build.md` syncs track `index.md` Status before opening the PR; `self-improve.md` cross-checks `decisions.md`/`AGENTS.md` before re-proposing an already-resolved pattern; `vacuum.md` gained an untracked-file scan escalating to a backlog item after 2+ passes. PR #58 merged 2026-07-18.
+
+- [x] **Bounded timelog/session reads** — `orient.md`, `wrap.md`, `self-improve.md` no longer `Read` `session.md`/`timelog.md` whole; bounded to current/most-recent entries via `tail`/`awk`. PR #57 merged 2026-07-18.
 
 - [x] **Merge policy: regular merge, not squash** — disabled squash and rebase merge on the GitHub repo (`gh repo edit --enable-squash-merge=false --enable-rebase-merge=false`), leaving only merge commits allowed. Enforced at the platform level — no doc or runtime check needed. 2026-06-19.
 
