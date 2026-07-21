@@ -149,6 +149,22 @@ made together.
 
 ## Work log
 
+### 2026-07-21
+
+Real-world evidence for the front-matter/rotation candidate, from the DarkBadge project's
+own `docs/state/context-overhead-trim` track: `session.md` (1030+ lines) and `plan.md`
+(530+ lines) had drifted two full working sessions out of date by the time a `resume` ran
+— PR #108–#112 shipped without either file being touched. Root cause wasn't only context
+tokens: a 500–1000-line file is unpleasant enough to hand-edit that updates get skipped
+mid-session, and each skipped update makes the *next* resume more expensive (bigger
+stale-gap reconciliation), independent of token cost. Reinforces that the rotation
+threshold this track eventually picks (whichever backend/front-matter shape wins) should
+be low enough that hand-editing never feels like the wrong tool — not just low enough to
+satisfy a token budget. `decisions.md` already got a topic-split treatment for the same
+reason; `session.md`/`plan.md` never did, in either shmorch's own repo or in projects using
+it. See also the standalone `resume.md` bounded-tail-reads fix in `plan.md` Fixes — that's
+the narrow tactical piece; this track is the structural one.
+
 ### 2026-07-17
 
 - Split out of `entrypoint-consolidation` (that track's Phase 3) so entrypoint-consolidation
