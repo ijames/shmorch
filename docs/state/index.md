@@ -26,6 +26,7 @@ first for a pulse check before opening the whole file. Convention:
 |-------|--------|
 | [20260707-multi-cli-portability](tracks/20260707-multi-cli-portability/index.md) | Closed |
 | [20260707-entrypoint-consolidation](tracks/20260707-entrypoint-consolidation/index.md) | Closed |
+| [20260721-workflow-subagent-delegation](tracks/20260721-workflow-subagent-delegation/index.md) | Open |
 | [20260721-messaging-provider](tracks/20260721-messaging-provider/index.md) | Open |
 | [20260717-state-store-shape](tracks/20260717-state-store-shape/index.md) | Open |
 | [20260717-docs-solidification-framework](tracks/20260717-docs-solidification-framework/index.md) | Open |

@@ -54,6 +54,8 @@ summary: Two concurrent processes on this repo — see Current Task. Messaging-p
 
 ### Architecture
 
+- [ ] **Workflow subagent delegation** — run rote, shmorch-specific (not project-specific) workflow steps as subagents instead of inline on the main thread: `go`/`resume`/`wrap` follow a clear deterministic path today but still pay full file-read cost in main-thread context; move that cost into a disposable subagent context and return a small structured JSON package sized to the caller (rich for go/resume — focus, active track, next moves; thin for wrap/self-improve/documentarian — pass/fail + summary). Deterministic version/patch mechanics stay scripted, not agent-ified. Surfaced 2026-07-21. → [track](tracks/20260721-workflow-subagent-delegation/index.md)
+
 - [ ] **Messaging provider — optional, per-project, not hardcoded to one Zulip workspace** — separate thin provider skills (Zulip, Slack, etc.), opt-in per project via `AGENTS.md` pointer (mirrors Docs Placement Hook), keys live in MCP config/`.env` never in Shmorch, scoped to post+read (not a fully generic integration abstraction). Surfaced 2026-07-21. → [track](tracks/20260721-messaging-provider/index.md)
 
 - [ ] **State store shape** — evaluate a graph/wiki backend for state (tracks/decisions) so `go` pulls the current-focus subgraph, not whole files; includes the Beads candidate and a richer structured-front-matter candidate. Split from entrypoint-consolidation's Phase 3. → [track](tracks/20260717-state-store-shape/index.md)
