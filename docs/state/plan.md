@@ -1,7 +1,7 @@
 ---
 status: Active
-updated: 2026-07-18
-summary: No current task; wrap-friction fixes + bounded context reads shipped (PR #58, #57). Backlog spans Fixes/Design/Architecture/Features/Deferred — see Architecture for state-store-shape.
+updated: 2026-07-21
+summary: Two concurrent processes on this repo — see Current Task. Messaging-provider track opened; wrap-friction fixes + bounded context reads already shipped (PR #58, #57).
 ---
 
 # Shmorch Plan
@@ -14,7 +14,10 @@ summary: No current task; wrap-friction fixes + bounded context reads shipped (P
 
 ## Current Task
 
-None active.
+**Two independent processes are active on this repo concurrently as of 2026-07-21 — keep them separate, do not merge into one track or one commit:**
+
+1. **Messaging provider design** (this session) — → [track](tracks/20260721-messaging-provider/index.md). Interactive design work, not yet built.
+2. **Self-improve** (separate automated process — see prior commit `cc2997a` "upgrade(shmorch): wrap-friction fixes from self-improve") — periodically proposes and PRs its own findings directly; not scoped by or dependent on the messaging-provider track. If its output lands mid-session, log it under its own commit/PR, not folded into messaging-provider work.
 
 ---
 
@@ -48,6 +51,8 @@ None active.
 ---
 
 ### Architecture
+
+- [ ] **Messaging provider — optional, per-project, not hardcoded to one Zulip workspace** — separate thin provider skills (Zulip, Slack, etc.), opt-in per project via `AGENTS.md` pointer (mirrors Docs Placement Hook), keys live in MCP config/`.env` never in Shmorch, scoped to post+read (not a fully generic integration abstraction). Surfaced 2026-07-21. → [track](tracks/20260721-messaging-provider/index.md)
 
 - [ ] **State store shape** — evaluate a graph/wiki backend for state (tracks/decisions) so `go` pulls the current-focus subgraph, not whole files; includes the Beads candidate and a richer structured-front-matter candidate. Split from entrypoint-consolidation's Phase 3. → [track](tracks/20260717-state-store-shape/index.md)
 
@@ -90,6 +95,10 @@ None active.
 ---
 
 ### Deferred
+
+- [ ] **Generic external-integration provider abstraction** — broaden the messaging-provider pattern (post/read, opt-in, `AGENTS.md` pointer, no secrets in Shmorch) beyond messaging to any external service (deploy notifications, issue trackers, etc.).
+  - Condition: only after a second non-messaging need actually appears — premature until then.
+  - Related: `docs/state/tracks/20260721-messaging-provider/`
 
 - [ ] **Beads integration investigation** — evaluate replacing markdown task files with [Beads](https://github.com/gastownhall/beads) (Dolt-backed dependency graph). Trial on one active project before committing.
   - Condition: after a project using Shmorch heavily enough to feel the pain of flat markdown task files, or when Beads has more documented usage examples.
