@@ -1,3 +1,9 @@
+---
+status: Open
+updated: 2026-07-17
+summary: Docs placement folded into vacuumer's role (PostToolUse hook) and architecture-version backfill folded into auto-update.md's Architecture Changelog (Compat additive/backfill) — both concerns shipped in PR #55, standalone `solidify` command dropped.
+---
+
 ↑ [Shmorch Plan](../../plan.md)
 → `core/documentation.md` (Architecture Changelog) + `workflows/auto-update.md` (Step 2.8) +
 `agents/roles/vacuumer.md` + `tools/stop.sh` + `workflows/orient.md` + `templates/.shmorch/AGENTS.md`

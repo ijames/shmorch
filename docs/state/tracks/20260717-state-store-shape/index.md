@@ -1,3 +1,9 @@
+---
+status: Open
+updated: 2026-07-21
+summary: Evaluating a graph/wiki backend (incl. Beads) for tracks/decisions so go pulls a current-focus subgraph instead of whole files; OKF front-matter comparison + deterministic rebuild/backlinks candidate logged, not yet implemented.
+---
+
 ↑ [Shmorch Plan](../../plan.md)
 → `docs/architecture/` (once a backend is chosen and adopted)
 

@@ -1,3 +1,9 @@
+---
+status: Investigation
+updated: 2026-06-14
+summary: Evaluating an orphan `state` git branch + permanent worktree to decouple mutable state files from the branch merge graph entirely; supersedes state-file-discipline if adopted.
+---
+
 ↑ [State File Discipline](../20260609-state-file-discipline/index.md)
 → [Architecture: Decisions](../../../development/decisions.md), [Plan](../../plan.md)
 
