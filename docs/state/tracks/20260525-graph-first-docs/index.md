@@ -25,3 +25,39 @@ Source: DarkBadge `docs/development/notes.md` §Graph-First Documentation Archit
 
 ### 2026-05-25
 Design concept surfaced during DarkBadge session.
+
+### 2026-07-21 — concrete gap found, principle hardened, first instance shipped
+
+`workflows/orient.md` § Working with Tracks has said "Each has index.md, spec.md,
+plan.md" since this doctrine was written — but every track folder in this repo (14/14,
+checked 2026-07-21) is index.md-only, with everything (why, design, open questions,
+research findings) crammed into one growing file. The graph-first principle was written
+down but never actually enforced or defaulted-to; tracks accreted content the same way
+`docs/state/plan.md` did (see `tracks/20260721-workflow-subagent-delegation/findings.md`
+for the plan.md measurement — 665/411-char bullets shrink to 149/144 chars as pure index
+entries).
+
+**Principle, hardened:** no file too big — full stop — except a file whose entire job
+*is* being an index (clean `status`/`updated`/`summary` front matter, thin body, a
+`Backlinks` section) and therefore doesn't accumulate prose by construction. A folder
+with only `index.md` and growing is a signal the index absorbed content it should have
+delegated.
+
+**First instance:** `tracks/20260721-workflow-subagent-delegation/` split into
+`index.md` (surface map: why, file table, related tracks, backlinks) + `spec.md` (the
+design) + `findings.md` (simulation + feasibility research) — each under 120 lines, each
+carrying the `status`/`updated`/`summary` front matter this doctrine already mandates for
+`docs/state/*.md` (§ Front-Matter Previews, `core/documentation.md`) but explicitly
+excludes `tracks/` from. That exclusion is the actual bug — tracks are where this matters
+most, since they're the files most likely to grow across a long open period.
+
+**Follow-on backlog, not yet actioned:**
+- `core/documentation.md` § Front-Matter Previews: extend the front-matter mandate to
+  `docs/state/tracks/**/*.md`, not just `docs/state/*.md`.
+- `workflows/orient.md` § Working with Tracks: either make "index.md, spec.md, plan.md"
+  true (documentarian/build.md scaffold it) or correct the line to describe what tracks
+  actually default to (index.md + auxiliary files added as content demands them, not a
+  fixed three-file template every track must have from open).
+- Retrofit is optional, not required — apply the split when a track's index.md is
+  visibly carrying multiple concerns (design + research + log), not preemptively to
+  every existing track.
