@@ -20,6 +20,17 @@ Fast re-entry: latest session knowledge and current focus — plus a cheap stale
 
 Read `docs/state/session.md` and `docs/state/plan.md` in parallel. No `context.md`, no `stack.md`, no version check, no memory scan.
 
+## Step 1.5 — Stamp session start
+
+`resume` is a session entry point just like `go`, but historically never stamped the timelog — post-`/clear` sessions then got SESSION_START and SESSION_END written in the same second at wrap, making `duration.sh` output meaningless. Stamp now, unless today's timelog already has a SESSION_START after the last SESSION_END (i.e. the session is already open):
+
+```bash
+LAST=$(grep "SESSION_" docs/state/timelog.md 2>/dev/null | tail -1 || true)
+if [[ "$LAST" != *"SESSION_START"* ]]; then
+  bash "$SHMORCH_HOME/tools/timelog.sh" "SESSION_START" "resume: <current task one-liner from session.md>"
+fi
+```
+
 ## Step 2 — Cross-check, don't trust blindly
 
 `session.md` and `plan.md` are only as fresh as the last `/shmorch wrap` or in-the-moment edit. A `/clear` is invisible to shmorch — nothing runs automatically after it — so the gap between "what these docs say" and "what main actually looks like" can be hours or days, even mid-sprint. Run this cross-check every time, not just when something feels off:
