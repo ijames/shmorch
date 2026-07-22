@@ -23,6 +23,12 @@ instance: `tracks/20260721-workflow-subagent-delegation/`, 2026-07-21). Ongoing 
 write; the backfill across existing tracks is a bounded one-time job, likely one agent per
 track per the state-store-shape candidate — not started yet.
 
+**2026-07-21 — tooling landed for the backfill:** `tools/track-graph-audit.sh` (deterministic
+chunk-size + front-matter + closed-graduation scan, wired into `documentarian.md` Step 2)
+and `templates/.shmorch/docs/track-template.md` now stamps the front-matter block on every
+new track — closes the gap where new tracks would immediately re-violate the rule this
+backfill exists to fix. The 13-track backfill itself is still not started.
+
 **Two other processes were active on this repo 2026-07-21 — keep separate, do not merge
 into one track or commit:**
 
