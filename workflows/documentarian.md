@@ -156,6 +156,16 @@ For DOC_STALE and TEST_GAP items, get batch approval then execute.
 
 ## Step 8 — Execute approved changes
 
+**Preflight branch check.** This step writes to `docs/product/`, `docs/architecture/`, and
+other non-state paths — the same category the pre-commit hook blocks on `main` (only
+`docs/state/` and `decisions.md` may commit there directly). Before writing any file in this
+step:
+```bash
+git branch --show-current
+```
+If on `main`: create or switch to an appropriate branch first (`docs/YYYYMMDD-<slug>` by
+default) rather than writing the files and discovering the block at commit time.
+
 Apply in this order:
 1. Docs updates (DOC_STALE) — write to the correct section, not a new file
 2. Plan.md additions (TEST_GAP) — file as backlog items
