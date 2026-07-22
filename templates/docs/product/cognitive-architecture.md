@@ -1,3 +1,9 @@
+---
+status: Draft
+updated: YYYY-MM-DD
+summary: <one line — what this file currently says>
+---
+
 # Product — Cognitive Architecture
 
 ↑ parent: [docs/index.md](../index.md)\

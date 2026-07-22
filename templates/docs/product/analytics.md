@@ -1,3 +1,9 @@
+---
+status: Draft
+updated: YYYY-MM-DD
+summary: <one line — what this file currently says>
+---
+
 # Analytics Strategy
 
 ↑ [Product](index.md)

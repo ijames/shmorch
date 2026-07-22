@@ -1,3 +1,9 @@
+---
+status: Draft
+updated: YYYY-MM-DD
+summary: <one line — what this file currently says>
+---
+
 # SEO / GEO Strategy
 
 ↑ [Product](index.md)
