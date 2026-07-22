@@ -14,10 +14,20 @@ summary: Two concurrent processes on this repo — see Current Task. Messaging-p
 
 ## Current Task
 
-**Two independent processes are active on this repo concurrently as of 2026-07-21 — keep them separate, do not merge into one track or one commit:**
+**Next up: Shmorch docs cleanup** — bring `docs/state/` (root files + all 14 track
+folders) to clean, navigable, human-readable chunks with minimal context explosion:
+frontmatter + backlinks per `tracks/20260717-state-store-shape/index.md`'s rebuild
+candidate, index/spec/findings splits per `tracks/20260525-graph-first-docs/` (first
+instance: `tracks/20260721-workflow-subagent-delegation/`, 2026-07-21). Ongoing rigor
+(don't let a file drift while you're touching it) is a `core/documentation.md` rule to
+write; the backfill across existing tracks is a bounded one-time job, likely one agent per
+track per the state-store-shape candidate — not started yet.
 
-1. **Messaging provider design** (this session) — → [track](tracks/20260721-messaging-provider/index.md). Interactive design work, not yet built.
-2. **Self-improve** (separate automated process — see prior commit `cc2997a` "upgrade(shmorch): wrap-friction fixes from self-improve") — periodically proposes and PRs its own findings directly; not scoped by or dependent on the messaging-provider track. If its output lands mid-session, log it under its own commit/PR, not folded into messaging-provider work.
+**Two other processes were active on this repo 2026-07-21 — keep separate, do not merge
+into one track or commit:**
+
+1. **Messaging provider design** — → [track](tracks/20260721-messaging-provider/index.md). Interactive design work, not yet built.
+2. **Self-improve** (separate automated process — see prior commit `cc2997a` "upgrade(shmorch): wrap-friction fixes from self-improve") — periodically proposes and PRs its own findings directly. If its output lands mid-session, log it under its own commit/PR.
 
 ---
 
@@ -37,6 +47,8 @@ summary: Two concurrent processes on this repo — see Current Task. Messaging-p
 - [ ] **Version monitoring across projects** — detect VERSION drift at session start; flag if `.shmorch/VERSION` ≠ skill VERSION before go.md auto-update check runs.
 
 - [ ] **resume.md: bounded-tail reads** — PR #57 bounded `session.md`/`timelog.md` reads in `orient.md`/`wrap.md`/`self-improve.md` but never extended the fix to `resume.md`, which still does a full `Read`. Concrete case 2026-07-21 (DarkBadge project): a plain `/shmorch resume` hit the 25K-token page-truncation cap on `plan.md` (531 lines) alone, on top of the token cost of reading it in full. (`workflows/resume.md`)
+
+- [ ] **orient.md Step 3: bound `plan.md` reads** — same gap as the item above, one workflow over: `orient.md` Step 3 still `Read`s `plan.md` in full (measured 2026-07-21 on this repo: ~3,868 tokens, unbounded, growing every session). → [findings](tracks/20260721-workflow-subagent-delegation/findings.md)
 
 ---
 
