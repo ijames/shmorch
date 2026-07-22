@@ -1,3 +1,9 @@
+---
+status: Closed
+updated: 2026-07-17
+summary: Multi-CLI portability shipped — P0/P1/P2 coupling items all done (AGENTS.md-first context chain, $SHMORCH_HOME indirection, CLI-neutral subagent protocol, sync migration path). Front-matter backfilled 2026-07-21 via tools/track-graph-audit.sh.
+---
+
 ↑ [Shmorch Plan](../../plan.md)
 → [workflows/init.md](../../../../workflows/init.md) · [shmorch-core.md](../../../../shmorch-core.md) · new `core/portability.md` (proposed)
 

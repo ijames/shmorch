@@ -65,9 +65,10 @@ Track closing process:
 
 ## Front-Matter Previews
 
-Every file directly under `docs/state/` (not `tracks/`, not `schedule/`) opens with a
-three-line YAML block so an agent — or `docs/state/index.md` — can preview the file's
-gist by reading the first few lines, without opening the whole thing:
+Every file directly under `docs/state/` (not `tracks/`, not `schedule/`) or
+`docs/product/` (not `index.md` — the index is pure navigation, nothing to preview)
+opens with a three-line YAML block so an agent — or the section's `index.md` — can
+preview the file's gist by reading the first few lines, without opening the whole thing:
 
 ```yaml
 ---
@@ -81,12 +82,13 @@ summary: <one line — what this file currently says>
 block whenever the file's content changes materially (same discipline as "Documents stay
 clean" — the front matter is current reality, not a log of past states).
 
-`docs/state/index.md` is the skeleton index: one row per state file, its purpose, and
-(once front matter is standard) a place to surface the `summary` line without a full read.
-`orient.md` Step 0 reads it first for a fast pulse before pulling whole files. This is the
-first rung of graph-first documentation (`tracks/20260525-graph-first-docs`) — cheap
-partial reads before expensive full ones — applied narrowly to `docs/state/` rather than
-the whole `docs/` tree.
+`docs/state/index.md` and `docs/product/index.md` are the skeleton indexes: one row per
+file in that section, its purpose, and (once front matter is standard) a place to surface
+the `summary` line without a full read. `orient.md` Step 0 reads `docs/state/index.md`
+first for a fast pulse before pulling whole files. This is the first rung of graph-first
+documentation (`tracks/20260525-graph-first-docs`) — cheap partial reads before expensive
+full ones — applied to `docs/state/` and `docs/product/` rather than the whole `docs/`
+tree.
 
 ---
 
@@ -114,6 +116,7 @@ means the project predates that rule.
 |---|---|---|---|
 | 2026-07-21 | `docs/state/tracks/**/*.md` require the same front-matter block as `docs/state/*.md`, and closed tracks (`Status: Closed`) whose `→ destination` doc doesn't reference them back are graduation candidates (see `tracks/20260525-graph-first-docs`) | `backfill` | Run `bash $SHMORCH_HOME/tools/track-graph-audit.sh`. Add front-matter to every `MISSING_FRONTMATTER` file (derive from content, don't guess). For every `CLOSED_UNGRADUATED` line, read the track and its destination doc, confirm whether knowledge actually landed, and integrate what's missing — the script only finds candidates, it doesn't conclude. |
 | 2026-07-17 | `docs/state/*.md` (not `tracks/`, not `schedule/`) require the `status`/`updated`/`summary` front-matter block (see § Front-Matter Previews) | `backfill` | Add the block to any `docs/state/*.md` file that lacks one. Derive `status`/`summary` from the file's current content — don't guess, read it. |
+| 2026-07-22 | `docs/product/*.md` (not `index.md`) require the same `status`/`updated`/`summary` front-matter block as `docs/state/*.md` (see § Front-Matter Previews) | `backfill` | Add the block to any `docs/product/*.md` file (excluding `index.md`) that lacks one. Derive `status`/`summary` from the file's current content — don't guess, read it. |
 
 Add new rows here, newest first, whenever a change in this doctrine falls into the
 `backfill` category.
