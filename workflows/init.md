@@ -112,6 +112,8 @@ Walk the full `templates/docs/` tree recursively. For each file:
 
 This includes all `index.md` stubs, state file templates, and `.gitkeep` placeholders. The skip-if-exists rule protects existing project content while ensuring new projects get the full skeleton including `index.md` stubs in every docs subdirectory.
 
+**Exception — `templates/docs/development/code-styleguides/` is stack-filtered, not copied wholesale.** Files named after a stack (`javascript.md`, and any future `<stack>.md` added to the template) are copied only if `DETECTED_STACK` (from Step 2) matches that language; skip stack-named files that don't match. `general.md` and `index.md` always copy regardless of stack — they're stack-agnostic. This prevents e.g. a PHP-only project from acquiring an irrelevant `javascript.md` guide on every init/sync.
+
 **`templates/shmorch.sh` → `TARGET/shmorch.sh`**
 Copy only if `TARGET/shmorch.sh` does not exist. Make executable.
 
