@@ -1,3 +1,9 @@
+---
+status: Open
+updated: 2026-07-21
+summary: Deterministic traversal + graduation check shipped as tools/track-graph-audit.sh, wired into documentarian.md and the Architecture Changelog backfill row.
+---
+
 ↑ [Shmorch Plan](../../plan.md)
 → `core/documentation.md` + `workflows/documentarian.md` + `workflows/init.md`
 
@@ -51,9 +57,18 @@ carrying the `status`/`updated`/`summary` front matter this doctrine already man
 excludes `tracks/` from. That exclusion is the actual bug — tracks are where this matters
 most, since they're the files most likely to grow across a long open period.
 
+### 2026-07-21 — deterministic traversal + graduation check shipped
+
+Added `tools/track-graph-audit.sh`: a read-only script (chunk-size cap, front-matter
+presence, closed-but-ungraduated candidates) run by `documentarian.md` Step 2 instead of
+inline greps, keeping the mechanical scan off the main thread
+(`tracks/20260721-workflow-subagent-delegation`). Logged as a `Compat: backfill` row in
+`core/documentation.md` § Architecture Changelog so other projects pick it up via
+`auto-update.md` Step 2.8. Graduation detection is a proxy (destination doc references
+the track dir name back) — false-positive-prone by design, never silently concluding;
+Step 3 of `documentarian.md` still does the real read-and-confirm.
+
 **Follow-on backlog, not yet actioned:**
-- `core/documentation.md` § Front-Matter Previews: extend the front-matter mandate to
-  `docs/state/tracks/**/*.md`, not just `docs/state/*.md`.
 - `workflows/orient.md` § Working with Tracks: either make "index.md, spec.md, plan.md"
   true (documentarian/build.md scaffold it) or correct the line to describe what tracks
   actually default to (index.md + auxiliary files added as content demands them, not a
