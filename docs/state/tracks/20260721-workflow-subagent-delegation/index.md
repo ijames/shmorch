@@ -63,6 +63,58 @@ parts of their work.
   does a fair amount of file reading/writing inline? That's exactly the kind of rote path
   this track would move off the main thread.
 
+## Simulation against this repo's own state files (2026-07-21)
+
+Used this repo's `docs/state/plan.md` and `session.md` as the measurable worst case —
+they're the largest, longest-lived state files Shmorch has (this skill's own dev history),
+and tonight's session already grew `plan.md` by ~1,100 chars across two new backlog
+bullets, so real before/after numbers were available without waiting.
+
+**Measured today:**
+- `plan.md`: 128 lines / 15,473 chars (~3,868 tokens) — read in FULL by `orient.md` Step 3
+  and `resume.md` Step 1, every call, unbounded.
+- `session.md`: 102 lines / 6,962 chars (~1,740 tokens) full; 1,468 chars (~367 tokens)
+  bounded to the latest entry — `orient.md`/`wrap.md` already bound this (PR #57);
+  `resume.md` does not (matches the already-logged `resume.md: bounded-tail reads`
+  backlog item and the DarkBadge 25K-token-cap incident that surfaced it).
+- **`resume.md` today: ~22,435 chars / ~5,609 tokens of main-thread context per call**,
+  from these two files alone, growing every session.
+
+**A cheaper lever than subagent delegation, found by measuring: `plan.md` isn't actually
+acting as the index it was meant to be.** The two backlog bullets added earlier this
+session (`workflow subagent delegation`, `messaging provider`) run 665 and 411 chars —
+full-paragraph rationale duplicated from their track files. Rewritten as pure index
+entries (one line + link, detail lives only in the track), the same two entries measure
+149 and 144 chars — a 78%/65% cut. Extrapolating that ratio across `plan.md`'s ~15
+similarly-shaped bullets: **est. ~5,400 chars (~1,350 tokens)**, a document that's
+supposed to be an index (per this session's user expectation and the intent already
+described in `tracks/20260525-graph-first-docs/`) but drifted into carrying full prose
+because nothing enforces the boundary.
+
+**Layered result:**
+
+| Approach | Main-thread cost (resume.md, 2 files) | Reduction | Added latency/cost |
+|---|---|---|---|
+| Today (unbounded) | ~5,609 tokens | — | — |
+| Bounded reads + index-only `plan.md` bullets | ~1,721 tokens | **69%** | **none** — deterministic, no subagent |
+| + full subagent delegation (JSON return only) | ~112 tokens | 98% | subagent still pays ~1,721 tokens to read the *already-bounded* files itself, in disposable context — plus spawn latency (multi-second round trip vs. inline reads in the same turn) |
+
+**Conclusion — sequencing, not either/or.** Bounded reads + index discipline are strictly
+better with no downside and should ship first: they already close 69% of the gap for
+free. Subagent delegation is real and still worth doing, but its marginal win (69% → 98%)
+only justifies the added latency/cost once the *cheap* fixes are exhausted and a repo's
+state files are still large enough to matter — which is likely true here (this skill's own
+multi-month dev history) but not true for a fresh project. Don't reach for the subagent
+lever before the index lever; measure again after the index fix ships to see how much
+headroom is actually left.
+
+**New backlog item from this simulation:** `plan.md` needs bullet-size discipline enforced
+somewhere (documentarian pass, or a vacuumer check) — one line + link, no restated
+rationale — or it will re-balloon the moment the next few tracks open. Not yet added to
+`plan.md` itself, to avoid the exact bloat this finding is about; tracking here until a
+decision on where the discipline gets encoded (`vacuumer` role vs. `build.md` DoD vs. a
+`core/documentation.md` rule).
+
 ## Feasibility findings (2026-07-21)
 
 Researched against Shmorch's own existing subagent doctrine (`agents/TASK-PROTOCOL.md`,
