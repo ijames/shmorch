@@ -1,3 +1,9 @@
+---
+status: Draft
+updated: YYYY-MM-DD
+summary: <one line — what this file currently says>
+---
+
 # Product Roadmap
 
 ↑ parent: [docs/index.md](../index.md)
