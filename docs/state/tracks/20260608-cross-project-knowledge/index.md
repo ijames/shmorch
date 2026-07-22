@@ -1,3 +1,9 @@
+---
+status: Open
+updated: 2026-06-08
+summary: Proposed knowledge/ directory to persist cross-project learnings with concept, date, project link, and commit provenance.
+---
+
 ↑ [Shmorch Plan](../../plan.md)
 → new `knowledge/` directory in `~/.claude/skills/shmorch/`
 
