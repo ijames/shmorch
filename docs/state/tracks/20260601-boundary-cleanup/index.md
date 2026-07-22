@@ -1,3 +1,9 @@
+---
+status: Open
+updated: 2026-06-01
+summary: Layer boundary cleanup across core/role/workflow/command — define exclusive ownership per layer, move violators. Depends on core-breakup track.
+---
+
 ↑ [Shmorch Plan](../../plan.md)
 → `core/index.md` + affected `workflows/` and `commands/` files
 

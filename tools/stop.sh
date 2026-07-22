@@ -11,7 +11,10 @@ SHMORCH_HOME="${SHMORCH_HOME:-}"
 if [ -f "$TIMELOG" ]; then
   LAST=$(grep "SESSION_" "$TIMELOG" 2>/dev/null | tail -1 || true)
   if [[ "$LAST" == *"SESSION_START"* ]]; then
-    bash "$SHMORCH_HOME/tools/timelog.sh" "SESSION_END" "auto-closed by stop hook"
+    # Carry minimal context so auto-closed sessions are reconstructable from the ledger
+    BRANCH=$(git -C "$ROOT" branch --show-current 2>/dev/null || true)
+    LASTC=$(git -C "$ROOT" log --oneline -1 2>/dev/null || true)
+    bash "$SHMORCH_HOME/tools/timelog.sh" "SESSION_END" "auto-closed by stop hook — ${BRANCH:-?} @ ${LASTC:-?}"
   fi
 fi
 

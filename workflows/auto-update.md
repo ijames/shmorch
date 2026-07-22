@@ -77,7 +77,7 @@ If anything is missing: list it, then ask "Create missing scaffold? (yes/no)". I
 Check what exists in `docs/` that isn't in the canonical template. These may be legitimate project-specific dirs, or they may indicate the template has drifted from actual convention.
 
 ```bash
-EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing"
+EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing docs/development/code-styleguides docs/to_review"
 LOG=".shmorch/project_docs_log.md"
 LOGGED=""
 [ -f "$LOG" ] && LOGGED=$(grep -v '^#' "$LOG" 2>/dev/null)

@@ -7,6 +7,12 @@ Fill in the two header links first — they are the track's address in the doc t
 ---
 
 ```markdown
+---
+status: Active
+updated: YYYY-MM-DD
+summary: <one line — what this track is currently doing, kept current as it changes>
+---
+
 ↑ [<source doc title>](<relative path to source doc>)
 → [<destination doc title>](<relative path to destination doc>)
 
@@ -38,6 +44,12 @@ don't batch at the end.
 ```
 
 ---
+
+## Keeping the front-matter current
+
+Update `status`/`updated`/`summary` whenever the track's state changes materially — same
+discipline as any `docs/state/*.md` file. `bash $SHMORCH_HOME/tools/track-graph-audit.sh`
+flags any track file missing this block or grown past the single-responsibility line cap.
 
 ## Filling in the header links
 

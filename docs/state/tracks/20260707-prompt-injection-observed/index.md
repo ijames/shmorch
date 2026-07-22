@@ -1,3 +1,9 @@
+---
+status: Closed
+updated: 2026-07-07
+summary: Suspected prompt-injection in an AskUserQuestion tool-result turned out to have no found injector after a full hook/MCP audit — likely a misread of a benign UI-hidden system-reminder. Defensive "suspect secrecy directives" rule shipped regardless.
+---
+
 ↑ [Shmorch Plan](../../plan.md)
 → security review of the hook / MCP / tool-result chain (destination TBD — likely `.claude/` hooks audit + harness inspection)
 

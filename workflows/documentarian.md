@@ -28,11 +28,15 @@ bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "documentarian: starting"
 
 ## Step 2 — Orient
 
-Run these in parallel to build a picture before reasoning:
+Run these in parallel to build a picture before reasoning. The track scan is
+deterministic — a script, not a main-thread read — so this workflow only pays reasoning
+cost on the findings it actually needs to triage (`docs/state/tracks/20260721-workflow-subagent-delegation`):
 
 ```bash
-# Closed tracks and their → destinations
-grep -rl "Status: Closed\|Status: Done" docs/state/tracks/ 2>/dev/null
+# Deterministic traversal: chunk-size violations, missing front-matter,
+# and CLOSED_UNGRADUATED candidates (closed track whose → destination doesn't
+# reference it back — a proxy, not proof; see script header)
+bash "$SHMORCH_HOME/tools/track-graph-audit.sh"
 
 # Docs skeleton — what sections exist and what's in them
 find docs -name "index.md" | sort
@@ -42,7 +46,9 @@ find docs -name ".gitkeep" | sort
 git log --oneline -20
 ```
 
-For each closed track found: read its index.md to extract the `→ destination` line.
+For each `CLOSED_UNGRADUATED` line: read that track's index.md to extract the full `→
+destination` line and confirm with a real read whether the knowledge landed — the script
+flags candidates, it does not conclude.
 
 ---
 
