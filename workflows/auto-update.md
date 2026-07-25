@@ -13,7 +13,7 @@ Bring this project's shmorch installation up to date with the current skill vers
 - `.shmorch/VERSION` — project's current version
 - `$SHMORCH_HOME/VERSION` — latest skill version
 - `$SHMORCH_HOME/templates/.shmorch/` — skill template files
-- `$SHMORCH_HOME/core/documentation.md` § Architecture Changelog — rule changes that may need a docs-content backfill (Step 2.8)
+- `$SHMORCH_HOME/core/documentation.md` § Architecture Changelog — rule changes that may need a docs-content backfill (Step 1.9)
 
 ## Roles
 - None — runs inline
@@ -42,6 +42,47 @@ echo "Skill:   $SKILL_VERSION"
 ```
 
 If versions match: tell the user "Already up to date ($PROJECT_VERSION)." and stop.
+
+---
+
+## Step 1.9 — Architecture backfill
+
+`core/documentation.md` doctrine isn't mirrored into projects — it's read live from
+`$SHMORCH_HOME`, so rule text is always current automatically. What can't self-update is
+docs *content* written under an older rule. Its `## Architecture Changelog` table is the
+list of rule changes that invalidate existing content; check it against this project's
+pre-update `.shmorch/VERSION` date:
+
+```bash
+PROJECT_DATE="${PROJECT_VERSION%%.*}"   # YYYYMMDD portion, captured before Step 6 overwrites VERSION
+```
+
+Read `core/documentation.md`'s Architecture Changelog table. For every row with `Compat:
+backfill` and a date **after** `$PROJECT_DATE`: this project predates that rule.
+
+For each such row, ask (one at a time, do not batch):
+> "Docs architecture changed since your last sync: '<rule>' (<date>). Existing docs written
+> before then don't conform. Backfill now? (yes/no/later)"
+
+- **no/later** — skip; note it in the Step 7 report so it isn't silently forgotten.
+- **yes** — run a scoped pass using that row's `Backfill scope` cell as the exact instruction
+  (e.g. "add front-matter to any `docs/project/*.md` file that lacks one"). If the cell names
+  a script (e.g. `tools/backfill-docs-taxonomy.sh`), run it first for the mechanical part,
+  then do the judgment pass it reports as needed — read each such file before writing; derive
+  required values (e.g. `summary`) from actual content, never invent them. Scope is always
+  bounded to what that one row describes — never a general docs audit. Report each file
+  touched (moved and hand-edited).
+
+This is deliberately per-row and per-project-opt-in, not a bulk "restructure everything"
+pass — each changelog entry is small and reviewable on its own.
+
+This step runs **before** Step 2's scaffold diff, not after: Step 2 compares the project's
+`docs/` against the *current* template and offers to create anything "missing." On a project
+still on an old-taxonomy tree, everything the current template expects reads as missing — if
+Step 2 ran first and the user accepted its scaffold offer, it could create files/dirs at the
+exact destination paths this step's backfill script is about to `git mv` real content into,
+and `git mv` fails (or clobbers) on an existing target. Running backfill first means Step 2
+only ever sees genuine gaps.
 
 ---
 
@@ -198,39 +239,6 @@ for f in "${FOUND[@]}"; do git rm --force ".shmorch/tools/$f" 2>/dev/null || rm 
 If `.shmorch/tools/` is now empty (only README.md or nothing), note that it is now a workflows/agents override directory only — tools live in the skill.
 
 If no: skip without comment.
-
----
-
-## Step 2.8 — Architecture backfill
-
-`core/documentation.md` doctrine isn't mirrored into projects — it's read live from
-`$SHMORCH_HOME`, so rule text is always current automatically. What can't self-update is
-docs *content* written under an older rule. Its `## Architecture Changelog` table is the
-list of rule changes that invalidate existing content; check it against this project's
-pre-update `.shmorch/VERSION` date:
-
-```bash
-PROJECT_DATE="${PROJECT_VERSION%%.*}"   # YYYYMMDD portion, captured before Step 6 overwrites VERSION
-```
-
-Read `core/documentation.md`'s Architecture Changelog table. For every row with `Compat:
-backfill` and a date **after** `$PROJECT_DATE`: this project predates that rule.
-
-For each such row, ask (one at a time, do not batch):
-> "Docs architecture changed since your last sync: '<rule>' (<date>). Existing docs written
-> before then don't conform. Backfill now? (yes/no/later)"
-
-- **no/later** — skip; note it in the Step 7 report so it isn't silently forgotten.
-- **yes** — run a scoped pass using that row's `Backfill scope` cell as the exact instruction
-  (e.g. "add front-matter to any `docs/project/*.md` file that lacks one"). If the cell names
-  a script (e.g. `tools/backfill-docs-taxonomy.sh`), run it first for the mechanical part,
-  then do the judgment pass it reports as needed — read each such file before writing; derive
-  required values (e.g. `summary`) from actual content, never invent them. Scope is always
-  bounded to what that one row describes — never a general docs audit. Report each file
-  touched (moved and hand-edited).
-
-This is deliberately per-row and per-project-opt-in, not a bulk "restructure everything"
-pass — each changelog entry is small and reviewable on its own.
 
 ---
 
