@@ -7,10 +7,10 @@ Retrospective self-improvement. Reads session history and timelog to surface fri
 - Manually after a frustrating session, after a sprint closes, when NOTES.md has accumulated items
 
 ## Inputs
-- `docs/state/timelog.md`
-- `docs/state/session.md`
+- `docs/project/timelog.md`
+- `docs/project/session.md`
 - `.shmorch/NOTES.md` (if present)
-- `docs/development/decisions.md`
+- `docs/{product,technology}/decisions/ (topic-appropriate)`
 
 ## Roles
 - `agents/roles/researcher.md` (introspective mode)
@@ -42,10 +42,10 @@ If output is `PROCEED` — continue to Step 3.
 ## Step 3 — Gather evidence (parallel reads, no agents)
 
 Read in parallel:
-- `docs/state/timelog.md` **tail only** — it's append-only and grows without bound; never `Read` it whole. Use `tail -200 docs/state/timelog.md` to look for repeated patterns: stalled phases, re-run agents, frequent BLOCKERs
-- `docs/state/session.md` — friction noted across recent sessions
+- `docs/project/timelog.md` **tail only** — it's append-only and grows without bound; never `Read` it whole. Use `tail -200 docs/project/timelog.md` to look for repeated patterns: stalled phases, re-run agents, frequent BLOCKERs
+- `docs/project/session.md` — friction noted across recent sessions
 - `.shmorch/NOTES.md` — manually recorded issues (may not exist)
-- `docs/development/decisions.md` — decisions later revised or reversed
+- `docs/{product,technology}/decisions/ (topic-appropriate)` — decisions later revised or reversed
 
 Also run these structural checks and capture output as evidence:
 
@@ -61,11 +61,11 @@ Any file flagged is a full copy that will silently diverge from skill updates. I
 
 **Scaffold reverse check** (docs/ dirs not in canonical template):
 ```bash
-EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing docs/development/code-styleguides docs/to_review"
+EXPECTED_DOCS="docs docs/project docs/project/tracks docs/project/schedule docs/project/process docs/product docs/product/strategy docs/product/design docs/product/features docs/product/decisions docs/technology docs/technology/architecture docs/technology/development docs/technology/decisions docs/reference docs/reference/instructions docs/reference/research docs/inbox"
 LOG=".shmorch/project_docs_log.md"
 LOGGED=""
 [ -f "$LOG" ] && LOGGED=$(grep -v '^#' "$LOG" 2>/dev/null)
-find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/state/tracks/" | sort | while read d; do
+find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/project/tracks/" | sort | while read d; do
   echo "$EXPECTED_DOCS" | grep -qw "$d" && continue
   # A dir is covered if it's logged directly, or nested under a logged top-level dir
   echo "$LOGGED" | grep -qxF "$d" && continue
@@ -92,10 +92,10 @@ Task(
 
     ## Task
     Review the shmorch session evidence:
-    - docs/state/timelog.md
-    - docs/state/session.md
+    - docs/project/timelog.md
+    - docs/project/session.md
     - .shmorch/NOTES.md (if present)
-    - docs/development/decisions.md
+    - docs/{product,technology}/decisions/ (topic-appropriate)
 
     Identify friction patterns (minimum 2 occurrences to count as a pattern):
     - Workflow phases that appear repeatedly before completing (stalling)
@@ -105,7 +105,7 @@ Task(
     - Decisions revisited or reversed
 
     Before proposing a pattern, cross-check whether it was already resolved: grep
-    `docs/development/decisions.md` and `.shmorch/AGENTS.md` (or `CLAUDE.md`) for a prior
+    `docs/{product,technology}/decisions/ (topic-appropriate)` and `.shmorch/AGENTS.md` (or `CLAUDE.md`) for a prior
     entry addressing the same concern. If found, do not re-propose it as an open pattern —
     list it under "Already addressed" instead, citing the resolving commit/PR/decision entry.
     Only propose patterns that evidence shows are still live.
@@ -122,7 +122,7 @@ Task(
     One file per project per date — multiple projects may write notes on the same date
     without conflict because filenames include the project slug.
 
-    **IMPORTANT: NEVER write self-improve output to the project's `docs/state/` directory.**
+    **IMPORTANT: NEVER write self-improve output to the project's `docs/project/` directory.**
     The `~/.claude/` location is deliberate — self-improve output is a shmorch tool artifact,
     not a project document. Writing to the project mixes tool output with project state and
     creates cruft that must be manually cleaned up.
@@ -227,7 +227,7 @@ Rewrite NOTES.md with only surviving (non-ADDRESSED) items. Record the cleanup i
 Removed: <N items> (addressed). Kept: <M items> (partial/unaddressed).
 ```
 
-- Append to `docs/state/session.md`: `Self-improve <date>: N proposals, M applied.`
+- Append to `docs/project/session.md`: `Self-improve <date>: N proposals, M applied.`
 
 ```bash
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "self-improve: complete — <M> changes applied"

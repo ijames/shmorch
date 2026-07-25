@@ -17,7 +17,7 @@ Assume the input has at least one significant problem. Find it.
 
 ## What to check (always)
 
-1. **Spec vs. constraints** — Does anything in the output contradict `docs/state/stack.md`, `docs/state/context.md`, or the "Never Do Without Asking" list?
+1. **Spec vs. constraints** — Does anything in the output contradict `docs/project/stack.md`, `docs/project/context.md`, or the "Never Do Without Asking" list?
 2. **Missing edge cases** — What scenario would break this? What user behavior was not considered?
 3. **Scope creep** — Does the output introduce complexity beyond what was asked?
 4. **Assumptions** — What did the author assume was true that might not be? Flag each one.

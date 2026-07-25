@@ -7,9 +7,9 @@ Fast re-entry: latest session knowledge and current focus — plus a cheap stale
 - `go` was already run this session
 
 ## Inputs
-- `docs/state/session.md`, `docs/state/plan.md`
+- `docs/project/session.md`, `docs/project/plan.md`
 - `git branch --show-current`, `git log --oneline -10`, `gh pr list --state merged --limit 5`
-- Most-recently-modified files under `docs/state/` and the working tree (cheap signal for in-flight work never logged)
+- Most-recently-modified files under `docs/project/` and the working tree (cheap signal for in-flight work never logged)
 
 ## Roles
 - None — runs inline
@@ -18,14 +18,14 @@ Fast re-entry: latest session knowledge and current focus — plus a cheap stale
 
 ## Step 1 — Read the minimum
 
-Read `docs/state/session.md` and `docs/state/plan.md` in parallel. No `context.md`, no `stack.md`, no version check, no memory scan.
+Read `docs/project/session.md` and `docs/project/plan.md` in parallel. No `context.md`, no `stack.md`, no version check, no memory scan.
 
 ## Step 1.5 — Stamp session start
 
 `resume` is a session entry point just like `go`, but historically never stamped the timelog — post-`/clear` sessions then got SESSION_START and SESSION_END written in the same second at wrap, making `duration.sh` output meaningless. Stamp now, unless today's timelog already has a SESSION_START after the last SESSION_END (i.e. the session is already open):
 
 ```bash
-LAST=$(grep "SESSION_" docs/state/timelog.md 2>/dev/null | tail -1 || true)
+LAST=$(grep "SESSION_" docs/project/timelog.md 2>/dev/null | tail -1 || true)
 if [[ "$LAST" != *"SESSION_START"* ]]; then
   bash "$SHMORCH_HOME/tools/timelog.sh" "SESSION_START" "resume: <current task one-liner from session.md>"
 fi
@@ -37,7 +37,7 @@ fi
 
 1. `git branch --show-current` + `git log --oneline -10` — does the branch match what session.md says is "in progress"? Are there merge commits or PRs referenced in the log that session.md's latest entry doesn't mention?
 2. `gh pr list --state merged --limit 5` (best-effort; skip silently if `gh` fails or isn't authenticated) — any merged PR not named in session.md's last entry is a sign docs are behind reality.
-3. Most-recently-touched files (e.g. `git log -1 --name-only`, or `find docs/state -newer docs/state/session.md`) — a cheap clue toward work that happened but was never logged, especially uncommitted or just-committed changes the session log doesn't know about.
+3. Most-recently-touched files (e.g. `git log -1 --name-only`, or `find docs/project -newer docs/project/session.md`) — a cheap clue toward work that happened but was never logged, especially uncommitted or just-committed changes the session log doesn't know about.
 
 If branch/log/PRs line up with session.md's account: proceed to Step 3 normally, no need to mention the check.
 

@@ -1,6 +1,6 @@
 # Workflow: discover
 
-Deep audit of an existing codebase. Fills in `docs/state/context.md` and `docs/state/stack.md` from what's actually in the project — not from guesses.
+Deep audit of an existing codebase. Fills in `docs/project/context.md` and `docs/project/stack.md` from what's actually in the project — not from guesses.
 
 ## When to use
 - After `init` on an existing project
@@ -70,7 +70,7 @@ Task(
     - Identify what this module does, key classes/functions, notable patterns
 
     ## Output
-    Write your findings to: docs/state/analysis-<dirname>-discover.md
+    Write your findings to: docs/project/analysis-<dirname>-discover.md
 
     Structure:
     ### What this module does
@@ -83,7 +83,7 @@ Task(
     - [GAP] <missing tests or documentation>
 
     ## Return
-    DONE: docs/state/analysis-<dirname>-discover.md | <one-line summary> [| BLOCKER | CRUFT | GAP]
+    DONE: docs/project/analysis-<dirname>-discover.md | <one-line summary> [| BLOCKER | CRUFT | GAP]
 )
 ```
 
@@ -97,11 +97,11 @@ bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "analyst → <dirname>"
 ## Step 4 — Gate
 
 After all Task calls complete:
-- Verify each `docs/state/analysis-<dirname>-discover.md` exists. Re-run missing ones.
+- Verify each `docs/project/analysis-<dirname>-discover.md` exists. Re-run missing ones.
 - If any return contains `BLOCKER`: note it — surface in the final report but do not stop synthesis.
 - Stamp:
 ```bash
-bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "analyst → docs/state/analysis-<dirname>-discover.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "analyst → docs/project/analysis-<dirname>-discover.md"
 ```
 
 ---
@@ -110,20 +110,20 @@ bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "analyst → docs/state/analysi
 
 After all parallel work completes, write:
 
-**`docs/state/context.md`** — fill every section with real findings:
+**`docs/project/context.md`** — fill every section with real findings:
 - Project name and what it does (from README + entry points)
 - Tech stack summary
 - Existing codebase: list key directories
 - Leave Preferences and Never Do as `<!-- fill in -->` — developer sets those
 
-**`docs/state/stack.md`** — fill every section:
+**`docs/project/stack.md`** — fill every section:
 - Runtime: version and what pins it
 - Key dependencies: top 8–12 with versions and purpose
 - External constraints: hosting, API versions, upgrade limits
 - Best practice notes: 1–2 bullets per major framework component
 - Leave Upgrade Opportunities empty
 
-**Update `docs/state/session.md`**:
+**Update `docs/project/session.md`**:
 ```
 ## Latest Session
 Discovery completed on DATE.
@@ -150,5 +150,5 @@ Print:
 
 Ask: "Want to review what I found, or jump straight into working on something?"
 
-If review: walk through `docs/state/context.md` and `docs/state/stack.md`, let them correct anything.
+If review: walk through `docs/project/context.md` and `docs/project/stack.md`, let them correct anything.
 If work: transition to the `go` flow (read `workflows/go.md` from Step 4 onward — skip re-reading context/stack since we just wrote them).

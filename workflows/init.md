@@ -37,7 +37,7 @@ If the result is `SELF`: stop immediately and tell the user:
 > would overwrite live docs with blank templates.
 >
 > To work on shmorch's own docs and roadmap, open a session in `$SHMORCH_HOME`
-> directly and use the existing `docs/state/plan.md`.
+> directly and use the existing `docs/project/plan.md`.
 
 Do not proceed past this point if `SELF`.
 
@@ -112,7 +112,7 @@ Walk the full `templates/docs/` tree recursively. For each file:
 
 This includes all `index.md` stubs, state file templates, and `.gitkeep` placeholders. The skip-if-exists rule protects existing project content while ensuring new projects get the full skeleton including `index.md` stubs in every docs subdirectory.
 
-**Exception — `templates/docs/development/code-styleguides/` is stack-filtered, not copied wholesale.** Files named after a stack (`javascript.md`, and any future `<stack>.md` added to the template) are copied only if `DETECTED_STACK` (from Step 2) matches that language; skip stack-named files that don't match. `general.md` and `index.md` always copy regardless of stack — they're stack-agnostic. This prevents e.g. a PHP-only project from acquiring an irrelevant `javascript.md` guide on every init/sync.
+**Exception — `templates/docs/technology/development/code-styleguides/` is stack-filtered, not copied wholesale.** Files named after a stack (`javascript.md`, and any future `<stack>.md` added to the template) are copied only if `DETECTED_STACK` (from Step 2) matches that language; skip stack-named files that don't match. `general.md` and `index.md` always copy regardless of stack — they're stack-agnostic. This prevents e.g. a PHP-only project from acquiring an irrelevant `javascript.md` guide on every init/sync.
 
 **`templates/shmorch.sh` → `TARGET/shmorch.sh`**
 Copy only if `TARGET/shmorch.sh` does not exist. Make executable.
@@ -224,14 +224,14 @@ Report to user:
 Shmorch initialized in .shmorch/
 
 What got created:
-  .shmorch/              — Shmorch workspace (core, tools, agents, workflows)
-  docs/state/           — State files (context, plan, decisions, session, stack)
-  docs/product/ etc.    — SDLC doc scaffold (empty, ready to fill)
-  docs/state/schedule/  — Closed sprint archive
-  .claude/hooks/        — Claude safety hooks (blocks rm -rf, git push --force)
-  .omp/hooks/           — omp safety hook (same guards, pi.on tool_call)
-  .shmorch/home         — resolved skill path for this machine
-  shmorch.sh            — Launcher script (selects your CLI)
+  .shmorch/                — Shmorch workspace (core, tools, agents, workflows)
+  docs/project/            — State files (context, plan, session, stack)
+  docs/product/ etc.       — SDLC doc scaffold (empty, ready to fill)
+  docs/project/schedule/   — Closed sprint archive
+  .claude/hooks/           — Claude safety hooks (blocks rm -rf, git push --force)
+  .omp/hooks/              — omp safety hook (same guards, pi.on tool_call)
+  .shmorch/home            — resolved skill path for this machine
+  shmorch.sh               — Launcher script (selects your CLI)
   AGENTS.md             — [created/amended → .shmorch/AGENTS.md; omp/Codex/Cursor/opencode/Antigravity]
   CLAUDE.md             — [created/amended → .shmorch/CLAUDE.md; Claude Code]
   GEMINI.md             — [created/amended → .shmorch/AGENTS.md; Gemini CLI]
@@ -245,7 +245,7 @@ Stop here. The go flow handles context setup.
 
 ### If HAS_EXISTING_CODE:
 
-Write `docs/state/session.md` (overwrite template default only):
+Write `docs/project/session.md` (overwrite template default only):
 ```
 ## Latest Session
 Initialized on existing project via /shmorch init on DATE.

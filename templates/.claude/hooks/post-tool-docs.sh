@@ -12,9 +12,9 @@ INPUT=$(cat)
 FILE=$(echo "$INPUT" | python3 -c "import sys,json; d=json.load(sys.stdin); print(d.get('tool_input',{}).get('file_path',''))" 2>/dev/null || echo "")
 
 case "$FILE" in
-  */docs/state/tracks/*) exit 0 ;;   # tracks own their own shape rules
+  */docs/project/tracks/*) exit 0 ;;   # tracks own their own shape rules
   */docs/*.md)
-    echo "Just wrote $FILE — check vacuumer's docs-placement rules now (agents/roles/vacuumer.md): right docs/<category>/, index.md links it, front-matter if under docs/state/."
+    echo "Just wrote $FILE — check vacuumer's docs-placement rules now (agents/roles/vacuumer.md): right docs/<category>/, index.md links it, front-matter if under docs/project/."
     ;;
 esac
 exit 0

@@ -3,7 +3,7 @@
 # Used by self-improve.md Step 2. Call from any project root — uses git to locate it.
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-TIMELOG="$ROOT/docs/state/timelog.md"
+TIMELOG="$ROOT/docs/project/timelog.md"
 
 if [ ! -f "$TIMELOG" ]; then
   echo "SKIP:no-timelog"

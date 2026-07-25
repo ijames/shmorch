@@ -13,8 +13,8 @@ up the relevant functions in the actual code, and presents a navigable picture.
 - Any time priorities feel unclear or you need orientation
 
 ## Inputs
-- `docs/architecture/domains.md` (or derive from `docs/architecture/` if absent)
-- `docs/state/plan.md`
+- `docs/technology/architecture/domains.md` (or derive from `docs/technology/architecture/` if absent)
+- `docs/project/plan.md`
 
 ## Roles
 - None — runs inline
@@ -23,19 +23,19 @@ up the relevant functions in the actual code, and presents a navigable picture.
 
 ## Step 1 — Derive domain areas
 
-Read `docs/architecture/domains.md` for this project's domain decomposition —
+Read `docs/technology/architecture/domains.md` for this project's domain decomposition —
 functional purpose, technical ownership, and current balance per domain.
 
-If `docs/architecture/domains.md` does not exist: derive domains from
-`docs/architecture/` and the actual directory structure, then prompt the user
-to confirm before proceeding. Once confirmed, write `docs/architecture/domains.md`
+If `docs/technology/architecture/domains.md` does not exist: derive domains from
+`docs/technology/architecture/` and the actual directory structure, then prompt the user
+to confirm before proceeding. Once confirmed, write `docs/technology/architecture/domains.md`
 so future sessions don't re-derive from scratch.
 
 ---
 
 ## Step 2 — Map tasks to domains
 
-For each open item in `docs/state/plan.md`, assign it to a domain. One item can
+For each open item in `docs/project/plan.md`, assign it to a domain. One item can
 span two domains — list it in both but note the primary one.
 
 Also note, per domain, the current **balance**:
@@ -120,12 +120,12 @@ From any task or cluster, offer the most appropriate branches. Lead with the 2-3
 
 ### Break out
 1. List natural sub-tasks — ask user to confirm or adjust
-2. Write sub-tasks to `docs/state/plan.md` under the parent, with file/function references
+2. Write sub-tasks to `docs/project/plan.md` under the parent, with file/function references
 3. Re-navigate to the first sub-task
 
 ### Consolidate
 1. Identify the unifying theme and propose a merged outcome statement
-2. Update `docs/state/plan.md` — remove old items, add merged one with references
+2. Update `docs/project/plan.md` — remove old items, add merged one with references
 3. Navigate to the merged item
 
 ---

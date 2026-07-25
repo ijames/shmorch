@@ -42,13 +42,13 @@ Track closing process:
 1. Write knowledge into the `→ destination` doc(s) — integrate it, don't dump it
 2. Set `Status: Closed` and `Closed: YYYY-MM-DD` in the track index
 3. Update `plan.md` (move to Completed)
-4. Track directory stays in `docs/state/tracks/` as project management history
+4. Track directory stays in `docs/project/tracks/` as project management history
 5. Run `/shmorch documentarian` to verify knowledge landed correctly
 
 **State diminishes as docs grow.** A project near completion has:
-- `docs/state/` — only current in-flight work (plan.md, active tracks, spec.md if active)
+- `docs/project/` — only current in-flight work (plan.md, active tracks, spec.md if active)
 - `docs/` — nearly complete skeleton
-- `docs/state/tracks/` — only open track directories; closed ones have their `→` destinations updated
+- `docs/project/tracks/` — only open track directories; closed ones have their `→` destinations updated
 
 ---
 
@@ -133,7 +133,7 @@ means the project predates that rule.
 
 | Date | Rule | Compat | Backfill scope |
 |---|---|---|---|
-| 2026-07-24 | Top-level `docs/` taxonomy replaced: `architecture/`, `development/`, `product/`, `reference/`, `state/`, `to_review/` → `product/`, `technology/` (architecture + development merged under it), `reference/` (Diataxis-scoped `instructions/` + `research/`), `project/` (was `state/`), `inbox/` (was `to_review/`). Decisions split into `product/decisions/` + `technology/decisions/` only (no unified log, no `project/decisions/`). See `tracks/20260724-docs-taxonomy-redesign` | `backfill` | Full migration mechanics tracked separately in `tracks/20260724-dev-docs-taxonomy-backfill` (not yet designed) — until that lands, migrate manually per this row's mapping, preserving file content, before running `/shmorch documentarian` |
+| 2026-07-24 | Top-level `docs/` taxonomy replaced: `architecture/`, `development/`, `product/`, `reference/`, `state/`, `to_review/` → `product/`, `technology/` (architecture + development merged under it), `reference/` (Diataxis-scoped `instructions/` + `research/`), `project/` (was `state/`), `inbox/` (was `to_review/`). Decisions split into `product/decisions/` + `technology/decisions/` only (no unified log, no `project/decisions/`). See `tracks/20260724-docs-taxonomy-redesign` | `backfill` | Run `tools/backfill-docs-taxonomy.sh` for the mechanical `git mv`s, then a judgment pass on the files it reports (decisions/anti-decisions splits, dev notes, deployment content, and any other real-content file with no 1:1 new home) per `tracks/20260724-dev-docs-taxonomy-backfill` |
 | 2026-07-21 | `docs/state/tracks/**/*.md` require the same front-matter block as `docs/state/*.md`, and closed tracks (`Status: Closed`) whose `→ destination` doc doesn't reference them back are graduation candidates (see `tracks/20260525-graph-first-docs`) | `backfill` | Run `bash $SHMORCH_HOME/tools/track-graph-audit.sh`. Add front-matter to every `MISSING_FRONTMATTER` file (derive from content, don't guess). For every `CLOSED_UNGRADUATED` line, read the track and its destination doc, confirm whether knowledge actually landed, and integrate what's missing — the script only finds candidates, it doesn't conclude. |
 | 2026-07-17 | `docs/state/*.md` (not `tracks/`, not `schedule/`) require the `status`/`updated`/`summary` front-matter block (see § Front-Matter Previews) | `backfill` | Add the block to any `docs/state/*.md` file that lacks one. Derive `status`/`summary` from the file's current content — don't guess, read it. |
 | 2026-07-22 | `docs/product/*.md` (not `index.md`) require the same `status`/`updated`/`summary` front-matter block as `docs/state/*.md` (see § Front-Matter Previews) | `backfill` | Add the block to any `docs/product/*.md` file (excluding `index.md`) that lacks one. Derive `status`/`summary` from the file's current content — don't guess, read it. |

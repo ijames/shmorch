@@ -34,13 +34,13 @@ bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "analyze: starting — <area>"
 
 Analysis artifacts need a home with a lifecycle. Before scoping:
 
-1. Ask: does a track in `docs/state/tracks/` already cover this area? (`ls docs/state/tracks/` to check)
-2. If yes: use it. Set `TRACK_DIR=docs/state/tracks/<existing-slug>/`.
+1. Ask: does a track in `docs/project/tracks/` already cover this area? (`ls docs/project/tracks/` to check)
+2. If yes: use it. Set `TRACK_DIR=docs/project/tracks/<existing-slug>/`.
 3. If no: create one now. Include `analysis` in the slug.
    ```bash
-   mkdir -p docs/state/tracks/<YYYYMMDD>-analysis-<slug>/
+   mkdir -p docs/project/tracks/<YYYYMMDD>-analysis-<slug>/
    ```
-   Write a minimal `docs/state/tracks/<YYYYMMDD>-analysis-<slug>/index.md`:
+   Write a minimal `docs/project/tracks/<YYYYMMDD>-analysis-<slug>/index.md`:
    ```markdown
    ↑ [Plan](../../plan.md)
    → <destination docs, e.g. decisions.md or plan.md — fill in after analysis>
@@ -64,7 +64,7 @@ Analysis artifacts need a home with a lifecycle. Before scoping:
    ### <YYYYMMDD>
    Analysis initiated.
    ```
-   Set `TRACK_DIR=docs/state/tracks/<YYYYMMDD>-analysis-<slug>/`.
+   Set `TRACK_DIR=docs/project/tracks/<YYYYMMDD>-analysis-<slug>/`.
 
 Note: if attaching to an existing track that wasn't created by analyze, add an `## Analysis Files` section to its `index.md` rather than renaming the track.
 
@@ -169,7 +169,7 @@ bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "analyze: complete — <one-line ans
 Present the summary to the user. Propose the next step based on the `## Next step` field.
 
 **Graduation note:** findings in this track are starting points, not destinations. As they resolve:
-- Decisions → `docs/development/decisions.md` (or topic split)
+- Decisions → `docs/{product,technology}/decisions/` (topic-appropriate)
 - Action items → `plan.md` backlog
-- Architecture facts → `docs/architecture/`
+- Architecture facts → `docs/technology/architecture/`
 - Stale/superseded analysis files → delete, leave a one-line note in the track work log

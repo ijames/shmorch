@@ -12,7 +12,7 @@ Confirm that documentation, code, and tests are in sync. Documentation describin
 - `features.gherkin` — scenario definitions
 - `docs/` — realized-feature descriptions
 - `tests/e2e/steps/` — step definitions
-- `docs/development/setup.md` — setup commands
+- `docs/reference/instructions/install.md` — setup commands
 
 ## Roles
 - None — runs inline
@@ -43,7 +43,7 @@ For each component directory (`app/frontend/`, `app/api/`, `app/worker/`, `tests
 
 1. Does a `README.md` exist?
 2. Is it project-specific? Flag if it contains: "bootstrapped with create-next-app", "This is the example for", "no test specified", or other generic boilerplate strings.
-3. Does it include: a one-line description of the component, run commands, a link to `docs/development/setup.md`?
+3. Does it include: a one-line description of the component, run commands, a link to `docs/reference/instructions/install.md`?
 4. Are the run commands accurate? Spot-check by verifying the referenced files exist (`package.json`, `pyproject.toml`, entry points).
 
 Report: list of READMEs with pass/fail/flag per criterion.
@@ -92,7 +92,7 @@ Conversely: scan `features.gherkin` for any scenario with no corresponding secti
 
 ## Step 5 — Setup.md accuracy
 
-For each command block in `docs/development/setup.md`:
+For each command block in `docs/reference/instructions/install.md`:
 1. Verify referenced package manager binaries exist (`pnpm`, `uv`, `node`, etc.)
 2. Verify referenced config files exist (`package.json`, `pyproject.toml`, `playwright.config.ts`)
 3. Verify referenced install commands match actual dependency manifests (e.g. if setup.md says `pnpm install`, `package.json` must exist)
@@ -102,7 +102,7 @@ For each command block in `docs/development/setup.md`:
 
 ## Step 6 — Write parity report
 
-Write `docs/state/parity-report-<YYYY-MM-DD>.md`:
+Write `docs/project/parity-report-<YYYY-MM-DD>.md`:
 
 ```markdown
 # Parity Report — <date>

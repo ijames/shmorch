@@ -10,27 +10,27 @@ Print a concise project health snapshot — sprint progress, task state, backlog
 ## Steps
 
 1. **Read state files in parallel:**
-   - `docs/state/plan.md` — current task + backlog count
-   - `docs/state/session.md` — last session summary (first 40 lines)
-   - `docs/state/context.md` — project name, stage, sprint target
+   - `docs/project/plan.md` — current task + backlog count
+   - `docs/project/session.md` — last session summary (first 40 lines)
+   - `docs/project/context.md` — project name, stage, sprint target
 
 2. **Collect metrics from shell (run in parallel):**
    ```bash
    # Open backlog items
-   grep -c "^\- \[ \]" docs/state/plan.md 2>/dev/null
+   grep -c "^\- \[ \]" docs/project/plan.md 2>/dev/null
 
    # Closed/done items
-   grep -c "^\- \[x\]" docs/state/plan.md 2>/dev/null
+   grep -c "^\- \[x\]" docs/project/plan.md 2>/dev/null
 
    # Acceptance criteria: red (unchecked MVP items, excluding Post-MVP section)
    # Count [ ] items before the Post-MVP heading
-   awk '/^## Post-MVP/{exit} /^\- \[ \]/{count++} END{print count+0}' docs/state/acceptance.md 2>/dev/null || echo "?"
+   awk '/^## Post-MVP/{exit} /^\- \[ \]/{count++} END{print count+0}' docs/project/acceptance.md 2>/dev/null || echo "?"
 
    # Acceptance criteria: green (checked MVP items, excluding Post-MVP section)
-   awk '/^## Post-MVP/{exit} /^\- \[x\]/{count++} END{print count+0}' docs/state/acceptance.md 2>/dev/null || echo "?"
+   awk '/^## Post-MVP/{exit} /^\- \[x\]/{count++} END{print count+0}' docs/project/acceptance.md 2>/dev/null || echo "?"
 
    # Next 5 open backlog items (active section only)
-   grep "^\- \[ \]" docs/state/plan.md 2>/dev/null | head -5 | sed 's/^- \[ \] \*\*\([^*]*\)\*\*.*/  · \1/'
+   grep "^\- \[ \]" docs/project/plan.md 2>/dev/null | head -5 | sed 's/^- \[ \] \*\*\([^*]*\)\*\*.*/  · \1/'
 
    # Recent commits
    git log --oneline -5 2>/dev/null
@@ -39,13 +39,13 @@ Print a concise project health snapshot — sprint progress, task state, backlog
    git branch --show-current 2>/dev/null
 
    # Test counts — look for the most recent passing summary in session.md
-   grep -E "[0-9]+ (tests|unit|api) GREEN" docs/state/session.md 2>/dev/null | head -3
+   grep -E "[0-9]+ (tests|unit|api) GREEN" docs/project/session.md 2>/dev/null | head -3
    ```
 
 3. **Count timelog session starts from the project timelog:**
    ```bash
    bash $SHMORCH_HOME/tools/timelog.sh "STATUS_CHECK" "status command run" 2>/dev/null || true
-   grep -c "SESSION_START" docs/state/timelog.md 2>/dev/null || echo "?"
+   grep -c "SESSION_START" docs/project/timelog.md 2>/dev/null || echo "?"
    ```
 
 4. **Format output** — adapt to what data exists. Target: fits in 35 lines. Example shape:
@@ -76,7 +76,7 @@ Print a concise project health snapshot — sprint progress, task state, backlog
    ────────────────────────────────────────────────────────────
    ```
 
-   - **Always show the AC red/green line** — if `docs/state/acceptance.md` doesn't exist, print a warning: `⚠️  No acceptance.md — run /shmorch spec to create one`
+   - **Always show the AC red/green line** — if `docs/project/acceptance.md` doesn't exist, print a warning: `⚠️  No acceptance.md — run /shmorch spec to create one`
    - If all MVP AC items are green: print `🚢 All MVP criteria green — ready to ship?`
    - Omit any other line where data isn't available
    - For test counts: pull from the last session summary if `make test` isn't run live — note "(as of last session)"

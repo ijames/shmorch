@@ -40,10 +40,10 @@ Initializes a new Shmorch workspace. If a path is given, installs there; otherwi
 
 ### `/shmorch discover`
 
-Deep audit of an existing codebase. Fills in `docs/state/context.md` and `docs/state/stack.md` from what's actually in the project — not from guesses.
+Deep audit of an existing codebase. Fills in `docs/project/context.md` and `docs/project/stack.md` from what's actually in the project — not from guesses.
 
 1. Runs a structural sweep in parallel: top-level layout, dependency files, runtime constraints, entry points, README, test setup
-2. Spawns analyst agents (up to 4 in parallel) — one per major code directory — each writing an analysis file to `docs/state/`
+2. Spawns analyst agents (up to 4 in parallel) — one per major code directory — each writing an analysis file to `docs/project/`
 3. Synthesizes findings into `context.md` and `stack.md`
 4. Reports blockers and cruft found, then hands off to the `go` flow
 
@@ -96,7 +96,7 @@ Safety rules: never commits secrets, never force-pushes, never skips hooks, neve
 
 Scans the project for waste — TODOs, FIXMEs, HACKs, empty test files — then triages with the user one finding at a time.
 
-1. Runs `vacuum.sh` to generate a timestamped report in `docs/state/`
+1. Runs `vacuum.sh` to generate a timestamped report in `docs/project/`
 2. Summarizes findings: count and location of annotations, empty test files
 3. Walks through findings one at a time: "Delete, keep, or address now?"
 4. Acts on decisions — deletes with confirmation, logs new tracks in `plan.md`, or fixes inline
@@ -104,7 +104,7 @@ Scans the project for waste — TODOs, FIXMEs, HACKs, empty test files — then 
 
 ### `/shmorch checkpoint`
 
-Quick-save: commits only `docs/state/` files to git. Use mid-session to preserve planning state without running a full commit.
+Quick-save: commits only `docs/project/` files to git. Use mid-session to preserve planning state without running a full commit.
 
 ### `/shmorch update`
 
@@ -153,7 +153,7 @@ Agents are spawned when work is parallelizable, needs a different role, or would
 
 ## Persistent State Files
 
-All state lives in `docs/state/` as plain markdown.
+All state lives in `docs/project/` as plain markdown.
 
 | File | Purpose |
 |---|---|
@@ -169,7 +169,7 @@ All state lives in `docs/state/` as plain markdown.
 
 ## Timekeeping
 
-Every significant transition is stamped to `docs/state/timelog.md` via `timelog.sh`.
+Every significant transition is stamped to `docs/project/timelog.md` via `timelog.sh`.
 
 | Event | When |
 |---|---|

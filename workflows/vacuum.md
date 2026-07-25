@@ -28,7 +28,7 @@ User specifies area, or default to: files changed in the last 10 commits and the
 git status --porcelain | grep '^??' | awk '{print $2}'
 ```
 
-For each untracked file not covered by `.gitignore` and not part of the expected scaffold, check `docs/state/vacuum-report-*.md` from prior runs (or session.md "next up" notes) for whether this same path was already flagged. If it was flagged in 2 or more prior vacuum passes and still exists: escalate — do not add it as another "next up" note that can silently drop. Instead, create a named backlog item (a track stub or a `docs/state/plan.md` entry) with the file's provenance if known, and say so explicitly to the user: "`<path>` has survived N vacuum passes — opening it as a backlog item instead of re-flagging."
+For each untracked file not covered by `.gitignore` and not part of the expected scaffold, check `docs/project/vacuum-report-*.md` from prior runs (or session.md "next up" notes) for whether this same path was already flagged. If it was flagged in 2 or more prior vacuum passes and still exists: escalate — do not add it as another "next up" note that can silently drop. Instead, create a named backlog item (a track stub or a `docs/project/plan.md` entry) with the file's provenance if known, and say so explicitly to the user: "`<path>` has survived N vacuum passes — opening it as a backlog item instead of re-flagging."
 
 ---
 
@@ -37,8 +37,8 @@ For each untracked file not covered by `.gitignore` and not part of the expected
 For every candidate item, verify references **before** classifying it:
 - `grep -r` / ripgrep for all usages: `require_once`, class name, method name, constant name
 - Check test files for direct coverage
-- Check `docs/architecture/` for documentation references
-- Check `docs/state/context/*.api.md` for API surface entries
+- Check `docs/technology/architecture/` for documentation references
+- Check `docs/project/context/*.api.md` for API surface entries
 
 **Do not flag something as dead unless you've confirmed zero external references.**
 
@@ -62,7 +62,7 @@ For every candidate item, verify references **before** classifying it:
 
 ## Step 4 — Write report
 
-Write `docs/state/vacuum-report-<timestamp>.md`:
+Write `docs/project/vacuum-report-<timestamp>.md`:
 - **Auto-safe:** path + reason + lines saved
 - **[CONFIRM]:** path + reason + specific risk if deletion is wrong
 - **Estimated total reduction:** lines and files
@@ -93,5 +93,5 @@ Do not delete anything at this step.
 2. Present [CONFIRM] items **one group at a time**, never all at once
 3. On confirmation: delete
 4. **After each deletion batch: run the full test suite.** If tests fail, stop — do not proceed to the next batch. Diagnose and fix before continuing.
-5. Log all confirmed deletions to `docs/development/decisions.md` with date, path, and reason
+5. Log all confirmed deletions to `docs/{product,technology}/decisions/ (topic-appropriate)` with date, path, and reason
 6. Auto-safe deletions: execute first, then report what was removed

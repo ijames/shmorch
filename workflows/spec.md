@@ -1,6 +1,6 @@
 # Workflow: Spec
 
-Define what to build before building it. Produces a spec in `docs/state/spec.md` (or a track-level spec).
+Define what to build before building it. Produces a spec in `docs/project/spec.md` (or a track-level spec).
 
 > **Read `.shmorch/agents/TASK-PROTOCOL.md` before starting.**
 
@@ -19,7 +19,7 @@ Define what to build before building it. Produces a spec in `docs/state/spec.md`
 ## Inputs
 
 - Feature or track name
-- Any existing analysis (`docs/state/analysis-*.md`) or design context
+- Any existing analysis (`docs/project/analysis-*.md`) or design context
 
 ## Roles
 - `agents/roles/specwriter.md`
@@ -60,7 +60,7 @@ Task(
     Developer-provided context:
     <summary of interview answers>
 
-    Existing analysis (if any): read docs/state/analysis-*.md files relevant to this feature.
+    Existing analysis (if any): read docs/project/analysis-*.md files relevant to this feature.
 
     The spec must answer:
     - What is being built and why
@@ -70,8 +70,8 @@ Task(
     - Open questions that need a decision before implementation
 
     ## Output
-    Write the spec to: docs/state/spec.md
-    (If this is a track-level spec, write to docs/state/tracks/<track-name>/spec.md instead — use whichever path was specified.)
+    Write the spec to: docs/project/spec.md
+    (If this is a track-level spec, write to docs/project/tracks/<track-name>/spec.md instead — use whichever path was specified.)
 
     Structure:
     ### Feature: <name>
@@ -87,7 +87,7 @@ Task(
     - [ ] <question — owner: developer>
 
     ## Return
-    DONE: docs/state/spec.md | <one-line feature summary> [| BLOCKER if any open question blocks writing the spec]
+    DONE: docs/project/spec.md | <one-line feature summary> [| BLOCKER if any open question blocks writing the spec]
 )
 ```
 
@@ -100,11 +100,11 @@ bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "specwriter → <feature>"
 
 ## Step 4 — Gate
 
-Verify `docs/state/spec.md` exists.
+Verify `docs/project/spec.md` exists.
 If BLOCKER: surface the open question to the developer and resolve before continuing.
 
 ```bash
-bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "specwriter → docs/state/spec.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "specwriter → docs/project/spec.md"
 ```
 
 ---
@@ -122,4 +122,4 @@ Incorporate feedback and rewrite the spec in place (not appended — see shmorch
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "spec: approved — <feature>"
 ```
 
-Update `docs/state/plan.md` to set the track status to `Spec done`. Propose: "Ready to design, or go straight to build?"
+Update `docs/project/plan.md` to set the track status to `Spec done`. Propose: "Ready to design, or go straight to build?"

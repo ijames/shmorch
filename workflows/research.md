@@ -67,7 +67,7 @@ Task(
     ## Output
     Write your research and proposals to: $SHMORCH_HOME/research/research-<YYYYMMDD>.md
     (create the directory if it doesn't exist)
-    Research reports are skill-level artifacts — they inform shmorch improvements across all projects, not just the current one. Do not write them into the project's docs/state/.
+    Research reports are skill-level artifacts — they inform shmorch improvements across all projects, not just the current one. Do not write them into the project's docs/project/.
 
     Structure:
     ### Research Report — <date>

@@ -32,7 +32,7 @@ export SHMORCH_HOME
 Cheap probes, in order — this decides which phases run:
 
 - **SELF** — `$SHMORCH_SELF=1`, or the current directory *is* `$SHMORCH_HOME`: this is the skill's own repo. Skip provisioning entirely; go straight to Step 3.
-- **UNINITIALIZED** — no `.shmorch/AGENTS.md` and no `docs/state/context.md`: the repo has no Shmorch yet → provision fresh (Step 2a).
+- **UNINITIALIZED** — no `.shmorch/AGENTS.md` and no `docs/project/context.md`: the repo has no Shmorch yet → provision fresh (Step 2a).
 - Otherwise read versions:
   ```bash
   PROJECT_VERSION=$(cat .shmorch/VERSION 2>/dev/null | tr -d '[:space:]')
@@ -93,7 +93,7 @@ bash "$SHMORCH_HOME/tools/timelog.sh" "SESSION_END" "auto-wrapped on reentry"
 ```bash
 git log --oneline -10
 ```
-Read `docs/state/session.md` to find the last session entry date. Commits since that date are what the previous session produced.
+Read `docs/project/session.md` to find the last session entry date. Commits since that date are what the previous session produced.
 
 **CW-3 — Update session.md:**
 Write a session entry (or update today's if one exists) using the standard session.md format from `workflows/wrap.md` Step 5. Use git log as the source for "What was done" and "Commits". Set the focus line to "Session ended without wrap — reconstructed from git log." Demote the previous "Latest Session" heading to a date heading.
@@ -103,7 +103,7 @@ Check if any tracks or tasks visible in git commits have a status that should no
 
 **CW-5 — Graduate closed tracks:**
 ```bash
-grep -rl "Status: Closed\|Status: Done" docs/state/tracks/ 2>/dev/null
+grep -rl "Status: Closed\|Status: Done" docs/project/tracks/ 2>/dev/null
 ```
 For each match, prompt the user: "Track `<name>` is closed — graduate now or defer?" (one question, non-blocking).
 
@@ -122,12 +122,12 @@ Tell the user: "Catch-up wrap done. Continuing with session start."
 
 Then extract and surface the first **BLOCKER** from session.md:
 ```bash
-grep -A1 "BLOCKER\|Pick up immediately" docs/state/session.md | head -4
+grep -A1 "BLOCKER\|Pick up immediately" docs/project/session.md | head -4
 ```
 
 **CW-8 — Escalate if this is recurring:**
 ```bash
-grep -c "auto-wrapped on reentry" docs/state/timelog.md 2>/dev/null || echo 0
+grep -c "auto-wrapped on reentry" docs/project/timelog.md 2>/dev/null || echo 0
 ```
 If this count is 3 or more, sessions are habitually ending without a real `/shmorch wrap` (context exhaustion or abrupt stop, not deliberate close). Surface this once during orientation as a named observation — not a blocker, just visibility — e.g.: "Note: N sessions in a row ended without wrap; catch-up reconstruction is covering it, but consider whether the wrap trigger itself needs attention." Do not repeat this nudge every session once said — say it, then let it drop unless the count keeps climbing.
 

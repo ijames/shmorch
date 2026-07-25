@@ -9,8 +9,8 @@ Clarify the goal before routing to the right workflow.
 - Any time you're uncertain which workflow to enter
 
 ## Inputs
-- `docs/state/context.md`
-- `docs/state/session.md`
+- `docs/project/context.md`
+- `docs/project/session.md`
 
 ## Roles
 - None — runs inline
@@ -19,7 +19,7 @@ Clarify the goal before routing to the right workflow.
 
 ## Steps
 
-1. If not already read: read `docs/state/context.md` + `docs/state/session.md`
+1. If not already read: read `docs/project/context.md` + `docs/project/session.md`
 2. Summarize where things stand in 1-2 sentences — orient yourself out loud
 3. Ask ONE open-ended question: **"What do you want to work on?"** — then wait
 4. Clarify until you can answer all three:
@@ -37,7 +37,7 @@ Clarify the goal before routing to the right workflow.
 | Remove dead code or stale docs | **Vacuum** |
 | Sync docs/Zulip/tests with code | **Curate** |
 
-6. Write to `docs/state/plan.md` (STATUS: PENDING) with enough detail to hand off to the target workflow
+6. Write to `docs/project/plan.md` (STATUS: PENDING) with enough detail to hand off to the target workflow
 7. Confirm the route with the user, then enter the target workflow — stamp `PHASE: intake → <next>`
 
 ---
