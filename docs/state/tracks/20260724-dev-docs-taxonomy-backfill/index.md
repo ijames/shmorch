@@ -87,3 +87,27 @@ correctly: `core/documentation.md`'s dated Architecture Changelog rows (historic
 of what a rule said on that date) and shmorch's own still-unmigrated `docs/state/**`
 content (that's what this track's actual backfill work migrates). `VERSION` bumped to
 `20260724.03` for this fix, committed separately from the backfill script itself.
+
+### 2026-07-24 — backfill script written and piloted on Treeclusion
+
+Wrote `tools/backfill-docs-taxonomy.sh`: a fixed old-path → new-path mapping (23 mechanical
+`git mv`s, directories included) plus a `JUDGMENT` list of paths with real content and no
+1:1 new home, left in place and reported rather than moved. `VERSION` bumped to `20260724.04`.
+
+Ran it against Treeclusion (`/Users/james/Projects/treeclusion`, the smallest-footprint
+pilot picked per the order above): all 23 mappings applied cleanly as `git mv` renames
+(verified via `git status` — all show as `R`, not delete+add, so history is preserved),
+empty leftover dirs (`docs/architecture/`, `docs/development/`, `docs/to_review/`) were
+removed. Five judgment-flagged files correctly left untouched: `architecture/decisions.md`,
+`development/decisions.md`, `development/anti-decisions.md`, `development/notes.md`,
+`development/guides/index.md` — plus `product/cognitive-architecture.md`, which turned out
+to have real content (not an empty stub like the audit assumed) and has no direct mapping
+target; added it to the script's judgment list, fixed a report-formatting bug the parenthetical
+in its message caused (line matching against a path containing `(...)` silently failed to
+print). Changes are staged in Treeclusion's working tree, not yet committed there — pending
+user confirmation before committing in another repo, and before the judgment-file pass runs.
+
+Not yet done: wire `tools/backfill-docs-taxonomy.sh` into `workflows/auto-update.md` Step 2.8
+(replace the "migrate manually" placeholder), update the 2026-07-24 Architecture Changelog
+row's "Backfill scope" cell in `core/documentation.md` to point at the script, and the
+judgment-file pass on Treeclusion itself.
