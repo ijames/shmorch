@@ -6,20 +6,20 @@ provisioning (or directly, when the repo is already current). Invoked by
 
 ## Inputs
 - Optional topic/detail (passed through from `go`, used as timelog detail)
-- Standard state files: `docs/state/context.md`, `docs/state/stack.md`, `docs/state/session.md`, `docs/state/plan.md`
+- Standard state files: `docs/project/context.md`, `docs/project/stack.md`, `docs/project/session.md`, `docs/project/plan.md`
 
 ## Roles
 - None — runs inline
 
 ## Orientation is shallow — no code until a directive
 
-Read **only** `docs/state/*` (context, stack, session, plan) and git status/log metadata. Do **not** open, read, `grep`, or analyze source code, and do **not** spawn discovery/analyst agents, during orientation. Reading code is the Analyze / Build phase (or `discover`) — it begins only after the user answers your proposal with a directive. If a good next move needs code investigation, *offer* it ("want me to analyze X?") instead of doing it now.
+Read **only** `docs/project/*` (context, stack, session, plan) and git status/log metadata. Do **not** open, read, `grep`, or analyze source code, and do **not** spawn discovery/analyst agents, during orientation. Reading code is the Analyze / Build phase (or `discover`) — it begins only after the user answers your proposal with a directive. If a good next move needs code investigation, *offer* it ("want me to analyze X?") instead of doing it now.
 
 ---
 
 ## Step 0 — Pulse check
 
-If `docs/state/index.md` exists, read it first — the front-matter `summary` lines (see
+If `docs/project/index.md` exists, read it first — the front-matter `summary` lines (see
 `core/documentation.md` § Front-Matter Previews) give a cheap overview of what's changed
 before opening the full files in Steps 1–3. If it's missing, skip straight to Step 1 (older
 projects may not have it yet — not an error).
@@ -28,7 +28,7 @@ projects may not have it yet — not an error).
 
 ## Step 1 — Read context and stack
 
-Read `docs/state/context.md` and `docs/state/stack.md` in parallel.
+Read `docs/project/context.md` and `docs/project/stack.md` in parallel.
 
 If `stack.md` is missing or empty, note it: "Stack inventory hasn't been filled in yet — I'll build it up as we work, or you can run `/shmorch vacuum` to kick off a stack analysis."
 
@@ -41,7 +41,7 @@ If `context.md` is unfilled, run the Context Setup flow:
    - "PR merge strategy: merge, squash, or rebase? (merge preserves branch topology in git graph; squash = one commit per PR; rebase = linear history, no merge commits)"
    - "Enable the docs-placement reminder right after each docs file is written? (flags possible wrong skeleton location while it's fresh, not batched at session end — off by default)"
    - "Anything I should never do without asking first?"
-3. Write answers to `docs/state/context.md`, the merge strategy to `.shmorch/AGENTS.md` under Branching Discipline, and the docs-placement choice to `.shmorch/AGENTS.md` under Docs Placement Hook `**Status:**`, confirm with user.
+3. Write answers to `docs/project/context.md`, the merge strategy to `.shmorch/AGENTS.md` under Branching Discipline, and the docs-placement choice to `.shmorch/AGENTS.md` under Docs Placement Hook `**Status:**`, confirm with user.
 
 If filled, summarize in 1-2 sentences.
 
@@ -52,7 +52,7 @@ If filled, summarize in 1-2 sentences.
 `session.md` grows without bound across a project's life — do not `Read` the whole file. Extract only the most recent entry (from the top `## Latest Session` heading down to the next `---` or `##`):
 
 ```bash
-awk '/^## (Latest Session|[0-9]{4}-[0-9]{2}-[0-9]{2})/{n++} n==1{print} n==2{exit}' docs/state/session.md
+awk '/^## (Latest Session|[0-9]{4}-[0-9]{2}-[0-9]{2})/{n++} n==1{print} n==2{exit}' docs/project/session.md
 ```
 
 Summarize what happened last time in 1-2 sentences. Only read further back in the file if the user asks about history older than the last session, or if the current entry references something unresolved from an earlier one by name.
@@ -61,7 +61,7 @@ Summarize what happened last time in 1-2 sentences. Only read further back in th
 
 ## Step 3 — Read plan
 
-Read `docs/state/plan.md`. Show the active tracks table and current focus.
+Read `docs/project/plan.md`. Show the active tracks table and current focus.
 
 ---
 
@@ -79,14 +79,14 @@ Run `git status` and `git log --oneline -5` in parallel. Then:
 
 ## Step 5 — Untracked test failures check
 
-Scan `docs/state/session.md` for lines containing `failing`, `outstanding`, `pre-existing`, or `test failure` (case-insensitive):
+Scan `docs/project/session.md` for lines containing `failing`, `outstanding`, `pre-existing`, or `test failure` (case-insensitive):
 
 ```bash
-grep -i "failing\|outstanding\|pre-existing\|test failure" docs/state/session.md | head -10
+grep -i "failing\|outstanding\|pre-existing\|test failure" docs/project/session.md | head -10
 ```
 
 For each failure cluster found:
-1. Check `docs/state/plan.md` — is there already a backlog item tracking it?
+1. Check `docs/project/plan.md` — is there already a backlog item tracking it?
 2. If **no plan item exists**: add one immediately to the Backlog section of `plan.md`:
    ```
    - [ ] Fix pre-existing test failures: <component/area> (<N> failures) — tracked <YYYY-MM-DD>
@@ -128,12 +128,12 @@ If the user declines all options or says "not yet", ask what's holding them back
 
 ## Working with Tracks
 
-Active tracks live in `docs/state/tracks/`. Each has index.md, spec.md, plan.md.
+Active tracks live in `docs/project/tracks/`. Each has index.md, spec.md, plan.md.
 
 When starting work on a track:
 1. Read the track's spec and plan
 2. Stamp: `bash "$SHMORCH_HOME/tools/timelog.sh" "TASK_START" "track name"`
-3. Update `docs/state/plan.md` status to "In progress"
+3. Update `docs/project/plan.md` status to "In progress"
 4. Do the work
 5. Stamp: `bash "$SHMORCH_HOME/tools/timelog.sh" "TASK_DONE" "track name"`
 
@@ -164,14 +164,14 @@ You don't have to do all three every time. After a small change, commit + wrap i
 ## Stack Awareness
 
 Before recommending any package, upgrade, pattern, or API:
-1. Check `docs/state/stack.md` — is there a version constraint that rules this out?
+1. Check `docs/project/stack.md` — is there a version constraint that rules this out?
 2. If the stack has external constraints (hosting platform, client environment, API compatibility), respect them without asking the user to re-explain them every session
 3. If you discover a new constraint during work (e.g. a package can't be upgraded because of a transitive dependency), add it to `stack.md` immediately
 4. The "Upgrade Opportunities" section in `stack.md` is where good ideas go when they can't be acted on yet — log them there, not as inline TODOs
 
 ## Architecture Decisions
 
-When a significant decision is made, append to `docs/development/decisions.md`:
+When a significant decision is made, append to `docs/{product,technology}/decisions/ (topic-appropriate)`:
 
 ```markdown
 ### [YYYY-MM-DD] Decision title

@@ -1,6 +1,6 @@
 # Command: sprinter
 
-Manage the active sprint. Reads and updates `docs/state/sprint.md`.
+Manage the active sprint. Reads and updates `docs/project/sprint.md`.
 
 ## When to run
 - To check current sprint health and risk flags
@@ -13,4 +13,4 @@ Manage the active sprint. Reads and updates `docs/state/sprint.md`.
 ## Variants
 - `/shmorch sprinter` or `/shmorch sprinter status` — show current sprint state, flag risks
 - `/shmorch sprinter new` — start a new sprint
-- `/shmorch sprinter close` — close the current sprint and archive to docs/state/schedule/
+- `/shmorch sprinter close` — close the current sprint and archive to docs/project/schedule/

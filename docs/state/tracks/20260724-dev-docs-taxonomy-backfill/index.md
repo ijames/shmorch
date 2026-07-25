@@ -1,16 +1,17 @@
 ---
-status: Blocked
+status: Active
 updated: 2026-07-24
-summary: Stub — backfill mechanism for migrating already-provisioned projects (appadd, mobos, darkbadge, shmorch's own docs/) onto the new docs taxonomy. Not designed yet, blocked on being picked up.
+summary: Backfill mechanism design underway. Internal-reference bug found and fixed (tools/workflows/commands/agents still pointed at old docs/ paths). Next: mechanical backfill script + Treeclusion pilot.
 ---
 
 ↑ [tracks/20260724-docs-taxonomy-redesign](../20260724-docs-taxonomy-redesign/index.md)
 → `workflows/auto-update.md` (Step 2.8-style scoped backfill offer) +
-`core/documentation.md` § Architecture Changelog (the 2026-07-24 row this track resolves)
+`core/documentation.md` § Architecture Changelog (the 2026-07-24 row this track resolves) +
+`tools/backfill-docs-taxonomy.sh` (new)
 
 # Track: Docs taxonomy backfill mechanism
 
-**Status:** Blocked — pending design
+**Status:** Active
 **Opened:** 2026-07-24
 **Domain:** Documentation architecture
 
@@ -31,21 +32,58 @@ and shmorch's own `docs/state/` (still on the old `state/` naming — see
 
 ## What changes
 
-Not yet decided — this is a stub. Open questions to resolve before design starts:
+Design resolved 2026-07-24 (see Work log for detail):
 
-- Is this a scripted mechanical rename (git mv old path → new path per a fixed mapping)
-  or does it need per-project judgment calls the way the original template restructure
-  did (e.g. deciding whether a project's `development/notes.md` folds into `concepts/` or
-  stays separate, genericizing project-specific content that leaked into docs)?
-- How does `auto-update.md` Step 2.8 offer this — same `Compat: backfill` mechanism as
-  other Architecture Changelog rows, or does the scale of this one (whole-tree rename, not
-  a localized addition) need a dedicated workflow step?
-- Order of migration across the known projects — shmorch's own `docs/state/` first (dogfood
-  the mechanism before offering it to managed projects), or a managed project first (real
-  external validation)?
+- **Hybrid mechanism.** `tools/backfill-docs-taxonomy.sh` does the ~35 mechanical
+  `git mv`s (fixed old-path → new-path mapping, same one used for `templates/docs/`).
+  A handful of files need agent judgment and are left in place, flagged: per-project
+  `decisions.md`/`anti-decisions.md` (split by entry into `product/decisions/` vs
+  `technology/decisions/`), `development/notes.md` (fold into
+  `technology/development/concepts/` or keep separate), `development/guides/index.md`
+  deployment content (→ flat `reference/instructions/deployment.md`, not a subfolder —
+  real content doesn't get the "start flat, drop it" treatment the empty template got).
+- **Wired into `auto-update.md` Step 2.8**, same `Compat: backfill` yes/no/later opt-in —
+  "yes" now runs the script for the mechanical part, then an agent judgment pass, instead
+  of today's placeholder text ("migrate manually").
+- **Order: Treeclusion first** (smallest footprint — audited 2026-07-24, its `docs/` is
+  still the untouched empty scaffold, so it's a near-zero-risk mechanical-only test), then
+  shmorch's own `docs/state/` (still unmigrated, low-risk dogfood), then
+  appadd/mobos/darkbadge (real content — exercises the judgment pass).
 
 ## Work log
 
 ### 2026-07-24
 Opened as a stub per the deferred-intent-must-have-a-stub-track rule, directly from
 `tracks/20260724-docs-taxonomy-redesign`'s closing instructions. No design work done yet.
+
+### 2026-07-24 — design resolved, internal-reference bug found and fixed
+
+Design session with the user resolved all three open questions (see What changes).
+Original plan was to dogfood on shmorch's own `docs/state/` first; revised to
+Treeclusion after the user pointed out it has the smallest footprint — confirmed by
+audit: `development/decisions.md`, `anti-decisions.md`, `notes.md`,
+`cognitive-architecture.md` are all still empty template stubs there, so migrating it
+exercises only the mechanical path, not the judgment path.
+
+Before writing the backfill script, discovered a bigger, more urgent problem while
+scoping it: `tools/*.sh`, `workflows/*.md`, `commands/*.md`, and `agents/**` — all read
+live from `$SHMORCH_HOME` for *every* project, new or legacy — still had ~250 references
+to the old `docs/state/`, `docs/architecture/`, `docs/development/` paths. This was
+broken for brand-new `/shmorch init` projects too, not just already-provisioned ones,
+because the original `20260724-docs-taxonomy-redesign` track only updated
+`core/documentation.md`, `shmorch-core.md`, and `templates/docs/` — it missed the actual
+operational tooling. User confirmed: these are real operational paths (scripts `git add`
+and `find` against them, workflows instruct agents to read/write them at literal paths),
+not just links — and asked to fix them now, mechanically, rather than build a
+legacy-fallback path-resolution shim (not worth the complexity for the five known
+affected projects). Fixed via a mechanical sed sweep plus hand-fixes for the sites sed
+couldn't safely rewrite: the `EXPECTED_DOCS`/scaffold-diff arrays in `auto-update.md` and
+`self-improve.md` (rewritten to the full new directory list), `tools/commit-session-state.sh`
+(the naive `decisions.md` → prose-placeholder swap broke its bash array syntax; rewritten
+as a proper loop over both `docs/product/decisions/` and `docs/technology/decisions/`),
+and a handful of `docs/development/decisions.md` prose references across workflows/agents
+rewritten to `docs/{product,technology}/decisions/` (topic-appropriate). Left untouched,
+correctly: `core/documentation.md`'s dated Architecture Changelog rows (historical record
+of what a rule said on that date) and shmorch's own still-unmigrated `docs/state/**`
+content (that's what this track's actual backfill work migrates). `VERSION` bumped to
+`20260724.03` for this fix, committed separately from the backfill script itself.

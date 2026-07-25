@@ -12,7 +12,7 @@ turn created or moved, before the turn ends — not as a separate later sweep:
   Skeleton Principle? (generic category names only; project-specific names live below them)
 - Does its section have an `index.md`, and does that `index.md` now link to it?
 - Does it carry the `↑` parent link (and `→` destination, if it's a track)?
-- If it's directly under `docs/state/` (not `tracks/`, not `schedule/`): does it have the
+- If it's directly under `docs/project/` (not `tracks/`, not `schedule/`): does it have the
   `status`/`updated`/`summary` front-matter block?
 
 Flag misplacement immediately to the user — don't move a file unprompted, docs placement
@@ -35,11 +35,11 @@ follows the same confirm-before-acting rule as everything else here.
 Run `grep -r` / ripgrep for every candidate:
 - Class name, method name, constant name, file path
 - Check test files separately
-- Check `docs/architecture/` for documentation references
+- Check `docs/technology/architecture/` for documentation references
 
 **Do not classify something as dead without verified zero references.**
 
-## Output → `docs/state/vacuum-report-<timestamp>.md`
+## Output → `docs/project/vacuum-report-<timestamp>.md`
 
 Structure:
 ```
@@ -59,5 +59,5 @@ Structure:
 
 - Never delete without a report first
 - Never flag something dead without a reference check
-- Log all confirmed deletions to `docs/development/decisions.md` with date, path, reason
+- Log all confirmed deletions to `docs/{product,technology}/decisions/ (topic-appropriate)` with date, path, reason
 - After each deletion batch: signal that the test suite must be run before continuing

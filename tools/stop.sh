@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-PLAN="$ROOT/docs/state/plan.md"
-TIMELOG="$ROOT/docs/state/timelog.md"
+PLAN="$ROOT/docs/project/plan.md"
+TIMELOG="$ROOT/docs/project/timelog.md"
 SHMORCH_HOME="${SHMORCH_HOME:-}"
 [ -n "$SHMORCH_HOME" ] || SHMORCH_HOME="$(cat "$ROOT/.shmorch/home" 2>/dev/null || true)"
 [ -n "$SHMORCH_HOME" ] || SHMORCH_HOME="$HOME/.claude/skills/shmorch"

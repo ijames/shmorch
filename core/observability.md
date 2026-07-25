@@ -21,7 +21,7 @@ Every track that introduces a new pipeline step must answer in its spec: *"What 
 
 ## Template
 
-`docs/architecture/observability.md` — scaffolded by `init` for all projects. Three sections: audiences + questions, log event catalog, tooling decision.
+`docs/technology/architecture/observability.md` — scaffolded by `init` for all projects. Three sections: audiences + questions, log event catalog, tooling decision.
 
 ## Interaction with Other Dimensions
 

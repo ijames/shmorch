@@ -52,7 +52,7 @@ In practice — especially with AI-assisted development — code frequently exis
 
 **A bottom-up item without interrogation is a liability.** It might be wrong, stale, or an accidental artefact with no backing intent.
 
-**For `docs/state/acceptance.md`:**
+**For `docs/project/acceptance.md`:**
 - Each item carries a creation date: `- [ ] YYYY-MM-DD · criterion text`
 - Completed items carry both dates: `- [x] YYYY-MM-DD → YYYY-MM-DD · criterion text`
 - Retrospective items (AC written after implementation) are noted: `_(retrospective)_`
@@ -74,16 +74,16 @@ In practice — especially with AI-assisted development — code frequently exis
 |---|---|
 | Intent | Next feature has no spec or scenario yet |
 | Spec / BDD | At least one unimplemented scenario exists |
-| `docs/state/acceptance.md` | At least one unchecked `- [ ]` item in the MVP sections |
+| `docs/project/acceptance.md` | At least one unchecked `- [ ]` item in the MVP sections |
 | Unit / integration tests | At least one failing test for the next planned behaviour |
 | Manual UX | At least one open UX acceptance criterion |
 | Deployment | Not yet live at a public URL |
 
-**`docs/state/acceptance.md` is a first-class test artefact.** Every unchecked `- [ ]` item in the MVP sections counts as a failing test. The project is not done until every MVP box is checked. `/shmorch status` must show the AC red/green split alongside unit test counts.
+**`docs/project/acceptance.md` is a first-class test artefact.** Every unchecked `- [ ]` item in the MVP sections counts as a failing test. The project is not done until every MVP box is checked. `/shmorch status` must show the AC red/green split alongside unit test counts.
 
 **How to count AC red items** (stops at the `## Post-MVP` boundary):
 ```bash
-awk '/^## Post-MVP/{exit} /^\- \[ \]/{count++} END{print count+0}' docs/state/acceptance.md
+awk '/^## Post-MVP/{exit} /^\- \[ \]/{count++} END{print count+0}' docs/project/acceptance.md
 ```
 
 **When the user reports "all tests green":** Ask immediately — are there AC items still unchecked? If yes, the project is not done.
@@ -118,7 +118,7 @@ The always-red rule and a passing CI gate are not in conflict — they refer to 
 
 ## Acceptance Criteria Document
 
-Every project must have `docs/state/acceptance.md`. Create it as part of the spec phase (before code), not after.
+Every project must have `docs/project/acceptance.md`. Create it as part of the spec phase (before code), not after.
 
 **Structure:**
 ```

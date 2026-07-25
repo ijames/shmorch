@@ -9,7 +9,7 @@ Audit and repair the relationship between documentation, code, and tests. Docs a
 - When a new developer needs to be onboarded (docs should tell the story without gaps)
 
 ## Inputs
-- `docs/state/tracks/` — closed track directories with `→ destination` headers
+- `docs/project/tracks/` — closed track directories with `→ destination` headers
 - `docs/` — skeleton structure and existing docs
 - `git log --oneline -20` — recent code changes
 
@@ -30,7 +30,7 @@ bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "documentarian: starting"
 
 Run these in parallel to build a picture before reasoning. The track scan is
 deterministic — a script, not a main-thread read — so this workflow only pays reasoning
-cost on the findings it actually needs to triage (`docs/state/tracks/20260721-workflow-subagent-delegation`):
+cost on the findings it actually needs to triage (`docs/project/tracks/20260721-workflow-subagent-delegation`):
 
 ```bash
 # Deterministic traversal: chunk-size violations, missing front-matter,
@@ -89,7 +89,7 @@ For every discrepancy between docs, code, and tests — **docs are the primary s
 2. **Read the tests** — what behavior is verified?
 3. **Read the code** — what does it actually do?
 4. **Check git log** for all three files — when did each last change, and why?
-5. **Check `docs/development/decisions.md`** — was there a decision that explains the divergence?
+5. **Check `docs/{product,technology}/decisions/ (topic-appropriate)`** — was there a decision that explains the divergence?
 6. **Check Zulip** (if connected) — was there a discussion about this behavior?
 
 Then classify:
@@ -106,14 +106,14 @@ Then classify:
 
 Ensure the run artifacts directory exists:
 ```bash
-mkdir -p docs/state/documentarian
+mkdir -p docs/project/documentarian
 ```
 
-If `docs/state/documentarian/index.md` does not exist, create it:
+If `docs/project/documentarian/index.md` does not exist, create it:
 ```markdown
 # Documentarian Runs
 
-↑ [docs/state/](../index.md)
+↑ [docs/project/](../index.md)
 
 Parity reports from `/shmorch documentarian` runs. Each file is a point-in-time audit.
 Files are named `YYYYMMDD_parity-report.md`. The most recent run is the authoritative current state.
@@ -124,8 +124,8 @@ Files are named `YYYYMMDD_parity-report.md`. The most recent run is the authorit
 |---|---|---|---|
 ```
 
-Write `docs/state/documentarian/YYYYMMDD_parity-report.md` (replace YYYYMMDD with today's date):
-**Never write to `docs/state/parity-report-*.md` at the root level.**
+Write `docs/project/documentarian/YYYYMMDD_parity-report.md` (replace YYYYMMDD with today's date):
+**Never write to `docs/project/parity-report-*.md` at the root level.**
 
 ```markdown
 # Parity Report — YYYY-MM-DD
@@ -162,9 +162,9 @@ For DOC_STALE and TEST_GAP items, get batch approval then execute.
 
 ## Step 8 — Execute approved changes
 
-**Preflight branch check.** This step writes to `docs/product/`, `docs/architecture/`, and
+**Preflight branch check.** This step writes to `docs/product/`, `docs/technology/architecture/`, and
 other non-state paths — the same category the pre-commit hook blocks on `main` (only
-`docs/state/` and `decisions.md` may commit there directly). Before writing any file in this
+`docs/project/` and `decisions.md` may commit there directly). Before writing any file in this
 step:
 ```bash
 git branch --show-current
@@ -183,7 +183,7 @@ After each batch of changes, verify the docs still form a consistent skeleton (n
 
 ## Step 9 — Update index and stamp
 
-Add a row to `docs/state/documentarian/index.md` for this run:
+Add a row to `docs/project/documentarian/index.md` for this run:
 ```
 | YYYY-MM-DD | [YYYYMMDD_parity-report.md](YYYYMMDD_parity-report.md) | N findings (summary) | Applied / Pending |
 ```
@@ -192,4 +192,4 @@ Add a row to `docs/state/documentarian/index.md` for this run:
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "documentarian: complete — N gaps closed, M items escalated"
 ```
 
-Append a summary line to `docs/state/session.md`.
+Append a summary line to `docs/project/session.md`.

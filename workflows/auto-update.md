@@ -52,17 +52,18 @@ Check whether the project is missing any directories or seed files that the curr
 ```bash
 # Directories expected by current template
 for d in \
-  docs/state docs/state/tracks docs/state/schedule \
-  docs/product docs/development docs/architecture docs/reference \
-  docs/development/guides docs/development/testing \
+  docs/project docs/project/tracks docs/project/schedule docs/project/process \
+  docs/product docs/product/strategy docs/product/design docs/product/features docs/product/decisions \
+  docs/technology docs/technology/architecture docs/technology/development docs/technology/decisions \
+  docs/reference docs/reference/instructions docs/reference/research docs/inbox \
   .shmorch/tools .shmorch/workflows .shmorch/agents/roles .claude/hooks; do
   [ -d "$d" ] || echo "MISSING DIR: $d"
 done
 
 # Seed files expected (only if their parent dir exists)
-# Note: docs/tracks/ does NOT exist — tracks live in docs/state/tracks/YYYYMMDD-<name>/
+# Note: docs/tracks/ does NOT exist — tracks live in docs/project/tracks/YYYYMMDD-<name>/
 for f in \
-  docs/state/schedule/README.md \
+  docs/project/schedule/README.md \
   .shmorch/agents/TASK-PROTOCOL.md; do
   [ -f "$f" ] || echo "MISSING FILE: $f"
 done
@@ -77,11 +78,11 @@ If anything is missing: list it, then ask "Create missing scaffold? (yes/no)". I
 Check what exists in `docs/` that isn't in the canonical template. These may be legitimate project-specific dirs, or they may indicate the template has drifted from actual convention.
 
 ```bash
-EXPECTED_DOCS="docs docs/state docs/state/tracks docs/state/schedule docs/product docs/development docs/architecture docs/reference docs/development/guides docs/development/testing docs/development/code-styleguides docs/to_review"
+EXPECTED_DOCS="docs docs/project docs/project/tracks docs/project/schedule docs/project/process docs/product docs/product/strategy docs/product/design docs/product/features docs/product/decisions docs/technology docs/technology/architecture docs/technology/development docs/technology/decisions docs/reference docs/reference/instructions docs/reference/research docs/inbox"
 LOG=".shmorch/project_docs_log.md"
 LOGGED=""
 [ -f "$LOG" ] && LOGGED=$(grep -v '^#' "$LOG" 2>/dev/null)
-find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/state/tracks/" | sort | while read d; do
+find docs -maxdepth 2 -mindepth 1 -type d | grep -v "^docs/project/tracks/" | sort | while read d; do
   echo "$EXPECTED_DOCS" | grep -qw "$d" && continue
   echo "$LOGGED" | grep -qxF "$d" && continue
   echo "$LOGGED" | while read logged; do [ -n "$logged" ] && [[ "$d" == "$logged"/* ]] && exit 0; done && continue
@@ -95,7 +96,7 @@ If any `UNLISTED DIR` entries appear:
 3. If project-specific: append the top-level dir to `.shmorch/project_docs_log.md` (one path per line; logging a top-level dir covers everything nested under it — no need for separate lines).
 4. If it should be canonical: note it — propose adding it to the scaffold list in this file as part of Step 6, along with a PR to the skill.
 
-Do **not** flag `docs/state/tracks/YYYYMMDD-*` subdirectories — those are per-project and expected to vary.
+Do **not** flag `docs/project/tracks/YYYYMMDD-*` subdirectories — those are per-project and expected to vary.
 
 ---
 
@@ -221,7 +222,7 @@ For each such row, ask (one at a time, do not batch):
 
 - **no/later** — skip; note it in the Step 7 report so it isn't silently forgotten.
 - **yes** — run a scoped pass using that row's `Backfill scope` cell as the exact instruction
-  (e.g. "add front-matter to any `docs/state/*.md` file that lacks one"). Scope is always
+  (e.g. "add front-matter to any `docs/project/*.md` file that lacks one"). Scope is always
   bounded to what that one row describes — never a general docs audit. Read each affected
   file before writing; derive required values (e.g. `summary`) from actual content, never
   invent them. Report each file touched.
@@ -325,7 +326,7 @@ Read both versions (skill template + project copy). Classify the difference:
 | `project-specific` | Project version has customizations the skill doesn't know about | Preserve — note for CLAUDE.md |
 | `conflict` | Both sides changed the same section incompatibly | Ask developer to decide |
 
-Skip: `docs/state/**`, `.shmorch/AGENTS.md`, `.shmorch/CLAUDE.md`, `.shmorch/VERSION` — never touch these.
+Skip: `docs/project/**`, `.shmorch/AGENTS.md`, `.shmorch/CLAUDE.md`, `.shmorch/VERSION` — never touch these.
 
 Only read files that `diff` flagged. Do not analyze files that are identical.
 

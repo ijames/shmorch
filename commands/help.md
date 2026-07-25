@@ -23,7 +23,7 @@ SESSION
 
 SETUP
   /shmorch init [path]      Initialize Shmorch in a project (new or existing). Creates .shmorch/,
-                             docs/state/, doc skeleton, hooks, and shmorch.sh launcher.
+                             docs/project/, doc skeleton, hooks, and shmorch.sh launcher.
   /shmorch discover         Deep audit of existing codebase. Fills context.md and stack.md
                              from what's actually built, not what was planned.
   /shmorch auto-update      Bring project shmorch files up to date with current skill version.
@@ -49,7 +49,7 @@ PLANNING
                              counts, recent commits, and one risk or next-step call.
   /shmorch sprinter          Show current sprint status and flag risks.
   /shmorch sprinter new      Start a new sprint — goal, dates, scope, definition of done.
-  /shmorch sprinter close    Close sprint, update track outcomes, archive to docs/state/schedule/.
+  /shmorch sprinter close    Close sprint, update track outcomes, archive to docs/project/schedule/.
   /shmorch prioritize        Re-rank full backlog by value, effort, blocking, and risk.
   /shmorch prioritize sprint Re-rank within current sprint scope only.
 

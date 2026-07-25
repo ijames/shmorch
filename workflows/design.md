@@ -13,9 +13,9 @@ Produce an architectural design before implementation. Reads the spec, proposes 
 
 ## Inputs
 
-- Approved spec (`docs/state/spec.md` or track-level spec)
-- Stack constraints (`docs/state/stack.md`)
-- Existing architecture (`docs/architecture/` if present)
+- Approved spec (`docs/project/spec.md` or track-level spec)
+- Stack constraints (`docs/project/stack.md`)
+- Existing architecture (`docs/technology/architecture/` if present)
 
 ## Roles
 - `agents/roles/architect.md`
@@ -49,7 +49,7 @@ For each requirement in the spec, answer:
    - **Monetary cost**: per-request pricing, egress fees, cold-start overhead
    - **Risk**: anything that is "green in dev, broken in prod" is high-risk and must be resolved before the build starts — not discovered during it
 
-4. **Record findings** — if any flag, gap, or trade-off is non-trivial, record it now in `docs/development/decisions.md` under a dated entry titled "Stack compatibility: <feature>". This creates the paper trail if the approach needs to be reconsidered later.
+4. **Record findings** — if any flag, gap, or trade-off is non-trivial, record it now in `docs/{product,technology}/decisions/ (topic-appropriate)` under a dated entry titled "Stack compatibility: <feature>". This creates the paper trail if the approach needs to be reconsidered later.
 
 If Step 1b finds a blocking incompatibility (a requirement that cannot be met by the chosen stack without significant rework): surface it to the developer now, before the architect is spawned. Do not proceed to Step 2 until resolved.
 
@@ -65,11 +65,11 @@ Task(
     Read your role: check `.shmorch/agents/roles/architect.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/architect.md` (skill default). Act according to the role definition found.
 
     ## Task
-    Produce an architectural design for the feature described in: docs/state/spec.md
+    Produce an architectural design for the feature described in: docs/project/spec.md
 
     Also read:
-    - docs/state/stack.md — respect all version constraints and external limits
-    - docs/architecture/ — check for existing patterns to follow or extend
+    - docs/project/stack.md — respect all version constraints and external limits
+    - docs/technology/architecture/ — check for existing patterns to follow or extend
 
     The design must cover:
     - Where this feature lives in the existing structure (new files, new modules, or extension of existing ones)
@@ -80,12 +80,12 @@ Task(
     - For each approach: integration effort (low/medium/high), dev-to-prod parity risk, and cost dimensions (time, money, risk)
 
     ## Output
-    Write the design to: docs/state/design-<feature-slug>.md
+    Write the design to: docs/project/design-<feature-slug>.md
 
     Structure:
     ### Design: <feature>
     **Date:** <today>
-    **Spec:** docs/state/spec.md
+    **Spec:** docs/project/spec.md
 
     ### Placement
     ### Data model
@@ -99,7 +99,7 @@ Task(
     - [ ] <decision needed — default: <default if developer doesn't respond>>
 
     ## Return
-    DONE: docs/state/design-<feature-slug>.md | <one-line approach summary> [| BLOCKER if a constraint makes any approach unworkable]
+    DONE: docs/project/design-<feature-slug>.md | <one-line approach summary> [| BLOCKER if a constraint makes any approach unworkable]
 )
 ```
 
@@ -112,18 +112,18 @@ bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "architect → <feature>"
 
 ## Step 3 — Gate
 
-Verify `docs/state/design-<feature-slug>.md` exists.
+Verify `docs/project/design-<feature-slug>.md` exists.
 If BLOCKER: surface constraint conflict to developer — do not proceed.
 
 ```bash
-bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "architect → docs/state/design-<feature-slug>.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "architect → docs/project/design-<feature-slug>.md"
 ```
 
 ---
 
 ## Step 4 — Review open decisions
 
-Present the design. For each open decision: ask the developer once, record the answer in `docs/development/decisions.md`:
+Present the design. For each open decision: ask the developer once, record the answer in `docs/{product,technology}/decisions/ (topic-appropriate)`:
 
 ```markdown
 ### [YYYY-MM-DD] <decision title>
@@ -138,7 +138,7 @@ Rewrite the design to reflect the decisions made (no amendments — clean curren
 
 ## Step 5 — Decision closure sweep
 
-Before closing the design session, scan `docs/development/decisions.md` for any entries containing "open", "TBD", "next session", or unchecked `- [ ]` items.
+Before closing the design session, scan `docs/{product,technology}/decisions/ (topic-appropriate)` for any entries containing "open", "TBD", "next session", or unchecked `- [ ]` items.
 
 For each open decision found:
 - Attempt to resolve it now using available context
@@ -154,4 +154,4 @@ This step exists because architecture decisions cluster — resolving one often 
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "design: approved — <approach>"
 ```
 
-Update `docs/state/plan.md` track status to `Design done`. Propose: "Ready to build."
+Update `docs/project/plan.md` track status to `Design done`. Propose: "Ready to build."

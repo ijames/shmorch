@@ -14,7 +14,7 @@ Group all changes into logical, independent units and commit them — each with 
 
 ## Inputs
 - Working tree changes (staged and unstaged)
-- `docs/state/plan.md` — to identify the active track name
+- `docs/project/plan.md` — to identify the active track name
 
 ## Roles
 - None — runs inline
@@ -29,7 +29,7 @@ Run in parallel:
 - `git diff --cached`
 - `git log --oneline -5`
 
-Also read `docs/state/plan.md` to know the active track name (marked "In progress"). If none, use "general".
+Also read `docs/project/plan.md` to know the active track name (marked "In progress"). If none, use "general".
 
 ---
 
@@ -44,7 +44,7 @@ The track tells you what you were working on, but let the diff tell you how to s
 
 **Typical groupings:**
 - **Feature unit**: code + its tests + its docs + track update → one commit per logical feature
-- **Shmorch state only**: `docs/state/`, `.shmorch/AGENTS.md`, `.shmorch/CLAUDE.md` → one commit
+- **Shmorch state only**: `docs/project/`, `.shmorch/AGENTS.md`, `.shmorch/CLAUDE.md` → one commit
 - **Shmorch tooling**: `$SHMORCH_HOME/tools/`, `.shmorch/workflows/`, `.shmorch/agents/`, `.shmorch/.claude/` → one commit if changed
 - **Config/infra**: `.claude/settings.local.json`, CI config, etc. → one commit
 
@@ -66,14 +66,14 @@ For each code-containing group, verify before committing:
 
 **Docs**
 - Any new public API, architectural change, or new model/exception type → docs must be updated
-- Check `docs/architecture/` and `docs/development/` for the relevant doc
+- Check `docs/technology/architecture/` and `docs/technology/development/` for the relevant doc
 - If missing: update docs now, or get user sign-off
 - **Doc changes that alter logic or behaviour descriptions require developer review** —
   docs encode business intent, not just implementation. Flag doc logic changes
   in the commit plan the same way as test changes.
 
 **Track**
-- Is this work tied to an open step in `docs/state/tracks/`?
+- Is this work tied to an open step in `docs/project/tracks/`?
 - If yes: mark the step done or update progress in the track file before committing
 - If no track exists and this is non-trivial: ask the user if a new track is needed
 
@@ -86,7 +86,7 @@ Output a numbered list:
 ```
 Planned commits:
 1. feat(track-name): description — files: biz.py, test_biz.py, docs/api.md, tracks/auth/plan.md
-2. chore(shmorch): wrap state — files: docs/state/plan.md, docs/state/session.md
+2. chore(shmorch): wrap state — files: docs/project/plan.md, docs/project/session.md
 3. config: description — files: .claude/settings.local.json
 ```
 

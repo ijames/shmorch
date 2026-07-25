@@ -15,19 +15,22 @@ if [ ! -d ".git" ]; then
 fi
 
 STATE_FILES=(
-  docs/state/plan.md
-  docs/state/session.md
-  docs/state/timelog.md
-  docs/development/decisions.md
+  docs/project/plan.md
+  docs/project/session.md
+  docs/project/timelog.md
 )
 
 for f in "${STATE_FILES[@]}"; do
   [ -f "$f" ] && git add "$f" 2>/dev/null || true
 done
 
+for d in docs/product/decisions docs/technology/decisions; do
+  [ -d "$d" ] && git add "$d" 2>/dev/null || true
+done
+
 while IFS= read -r -d '' f; do
   git add "$f" 2>/dev/null || true
-done < <(find docs/state -name 'self-improve-*.md' -print0 2>/dev/null)
+done < <(find docs/project -name 'self-improve-*.md' -print0 2>/dev/null)
 
 if git diff --cached --quiet; then
   echo "Nothing to commit."

@@ -18,13 +18,13 @@ Close the current session — stamp the end time, summarize what happened, and u
 ## Step 1 — Read current state
 
 Read these files in parallel:
-- `docs/state/session.md`
-- `docs/state/plan.md`
-- `docs/development/decisions.md`
+- `docs/project/session.md`
+- `docs/project/plan.md`
+- `docs/{product,technology}/decisions/ (topic-appropriate)`
 
 `timelog.md` is append-only and grows without bound — never `Read` it whole. Pull only the current session's entries:
 ```bash
-tail -100 docs/state/timelog.md | awk '/SESSION_START/{buf=""} {buf=buf$0"\n"} END{print buf}'
+tail -100 docs/project/timelog.md | awk '/SESSION_START/{buf=""} {buf=buf$0"\n"} END{print buf}'
 ```
 
 ---
@@ -99,10 +99,10 @@ Check if any track statuses changed. If so, update the Active Tracks table and B
 
 ## Step 6.5 — Graduate closed tracks
 
-Scan `docs/state/tracks/` for tracks marked Closed, Done, or Complete:
+Scan `docs/project/tracks/` for tracks marked Closed, Done, or Complete:
 
 ```bash
-grep -rl "Status: Closed\|Status: Done\|Status: Complete" docs/state/tracks/ 2>/dev/null
+grep -rl "Status: Closed\|Status: Done\|Status: Complete" docs/project/tracks/ 2>/dev/null
 ```
 
 For each match, read the track's `→ destination` line. Then check whether the destination file was touched after the track was opened:
@@ -122,13 +122,13 @@ If defer: note in session.md under "Next up — plans".
 
 ## Step 6.6 — Clear stale spec.md
 
-Check `docs/state/spec.md`. If it references a track, check whether that track is still active.
+Check `docs/project/spec.md`. If it references a track, check whether that track is still active.
 
 ```bash
-grep -i "track\|Status" docs/state/spec.md 2>/dev/null | head -5
+grep -i "track\|Status" docs/project/spec.md 2>/dev/null | head -5
 ```
 
-If the referenced track is closed, or if no active track exists, replace `docs/state/spec.md` with:
+If the referenced track is closed, or if no active track exists, replace `docs/project/spec.md` with:
 
 ```markdown
 # Active Spec
@@ -168,7 +168,7 @@ Show the output to the user.
 Update (or add) a "Current State" section in `.shmorch/AGENTS.md` — the shared project-instructions file both Claude Code and omp load (via their respective import chains):
 - Today's date
 - Current integration branch (usually `dev`)
-- Current passing test count (from the last test run this session, or check `docs/state/plan.md` for the last recorded count)
+- Current passing test count (from the last test run this session, or check `docs/project/plan.md` for the last recorded count)
 
 Three fields; do it inline without asking.
 

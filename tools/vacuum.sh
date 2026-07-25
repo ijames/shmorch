@@ -3,7 +3,7 @@ set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
 cd "$ROOT"
 TS=$(date '+%Y%m%d-%H%M%S')
-REPORT="docs/state/vacuum-report-$TS.md"
+REPORT="docs/project/vacuum-report-$TS.md"
 echo "# Vacuum Report — $TS" > "$REPORT"
 echo "## TODOs / FIXMEs" >> "$REPORT"
 grep -rn "TODO\|FIXME\|HACK" \

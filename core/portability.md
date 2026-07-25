@@ -125,7 +125,7 @@ the CLI has no equivalent — it always keeps the workflow correct.
 | Session-start prompt | `SessionStart` hook | first turn / on invocation | first turn | ask go/resume/nothing on the first user turn |
 | Checkpoints | `Esc Esc` / `/rewind` | `rewind` / `checkpoint` tools | git only | `/shmorch checkpoint` (git commit of state) — CLI-neutral |
 | Scheduler | `CronCreate/List/Delete` | none in-REPL | none | system cron / external scheduler; document, don't rely |
-| External memory | `~/.claude/projects/**/memory` | `memory://`, retain/recall | none | `docs/state/` + `docs/` in the repo (already the source of truth) |
+| External memory | `~/.claude/projects/**/memory` | `memory://`, retain/recall | none | `docs/project/` + `docs/` in the repo (already the source of truth) |
 | MCP tools | `mcp__<server>__<tool>` | `mcp://<uri>` | varies | "your CLI's MCP tools for <server>" |
 
 **Model tiers, CLI-neutral:** where a role names a model, read it as a *tier* —

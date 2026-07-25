@@ -3,7 +3,7 @@
 # Usage: bash $SHMORCH_HOME/tools/run-task.sh <role> <prompt>
 #
 # Manages session IDs per role so agents maintain context across turns.
-# Writes session state to docs/state/agents/<role>.json in the project root.
+# Writes session state to docs/project/agents/<role>.json in the project root.
 #
 # Output: the agent's text response (from Claude's JSON envelope)
 # Exit 1: if Claude fails or agent returns no status signal
@@ -20,8 +20,8 @@ if [ -z "$ROLE" ] || [ -z "$PROMPT" ]; then
   exit 1
 fi
 
-STATE_FILE="docs/state/agents/${ROLE}.json"
-mkdir -p docs/state/agents
+STATE_FILE="docs/project/agents/${ROLE}.json"
+mkdir -p docs/project/agents
 
 # resume an existing session if one exists for this role
 SESSION_ID=$(jq -r '.session_id // empty' "$STATE_FILE" 2>/dev/null || true)

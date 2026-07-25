@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# timelog.sh — Append a timestamped event to docs/state/timelog.md
+# timelog.sh — Append a timestamped event to docs/project/timelog.md
 # Usage: bash $SHMORCH_HOME/tools/timelog.sh "EVENT" "detail"
 # Examples:
 #   bash $SHMORCH_HOME/tools/timelog.sh "SESSION_START" "resuming auth module"
@@ -15,7 +15,7 @@ EVENT="${1:-EVENT}"
 DETAIL="${2:-}"
 TS=$(date '+%Y-%m-%d %H:%M:%S')
 ENTRY="[$TS] $EVENT | $DETAIL"
-LOG="$ROOT/docs/state/timelog.md"
+LOG="$ROOT/docs/project/timelog.md"
 
 # Self-healing guard: a SESSION_START immediately after another SESSION_START
 # (no intervening SESSION_END) means some entry path bypassed go/resume's

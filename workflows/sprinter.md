@@ -1,23 +1,23 @@
 # Workflow: sprinter
 
-Manage the active sprint. Reads and updates `docs/state/sprint.md`.
+Manage the active sprint. Reads and updates `docs/project/sprint.md`.
 
 ## When to use
 - `status` (or no sub-command): check current sprint health and flag risks
 - `new`: start a new sprint
-- `close`: close the current sprint and archive to docs/state/schedule/
+- `close`: close the current sprint and archive to docs/project/schedule/
 
 ## Inputs
-- `docs/state/sprint.md` — active sprint (must exist for status/close)
-- `docs/state/plan.md` — backlog reference (for new and close)
-- `docs/state/context.md` — project stage (affects risk interpretation)
+- `docs/project/sprint.md` — active sprint (must exist for status/close)
+- `docs/project/plan.md` — backlog reference (for new and close)
+- `docs/project/context.md` — project stage (affects risk interpretation)
 
 ## Roles
 - `agents/roles/sprinter.md` (used for status sub-command)
 
 ## Variants
 - `new` — start a new sprint
-- `close` — close the current sprint and archive to docs/state/schedule/
+- `close` — close the current sprint and archive to docs/project/schedule/
 - `status` (or empty) — show current sprint state, flag risks
 
 ---
@@ -28,7 +28,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 
 ## sprinter status (default)
 
-1. Read `docs/state/sprint.md` and `docs/state/context.md` in parallel. Note the project `stage` — it changes what "at risk" means:
+1. Read `docs/project/sprint.md` and `docs/project/context.md` in parallel. Note the project `stage` — it changes what "at risk" means:
    - `R&D`: daily shape changes are normal, not risk signals
    - `proof-sprint`: undecided tech after Day 2 is a risk; missing Gherkin before code is a risk
    - `productionization`/`maintenance`: any missing coverage or unsettled docs is a risk
@@ -44,9 +44,9 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
        Read your role: check `.shmorch/agents/roles/sprinter.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/sprinter.md` (skill default). Act according to the role definition found.
 
        ## Task
-       Read docs/state/sprint.md to get the sprint goal, dates, and scope table.
+       Read docs/project/sprint.md to get the sprint goal, dates, and scope table.
 
-       For each track in scope, read its current state from docs/state/tracks/<track-slug>/
+       For each track in scope, read its current state from docs/project/tracks/<track-slug>/
        (index.md or plan.md — whatever exists). Do not read track files for ~~struck-through~~ rows;
        those are dropped from scope.
 
@@ -57,7 +57,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
        - Is the sprint goal achievable in the remaining time?
 
        ## Output
-       Write your assessment to: docs/state/sprint-status.md
+       Write your assessment to: docs/project/sprint-status.md
 
        Keep it short — this is a status, not a report.
 
@@ -73,11 +73,11 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
        <only if something requires developer input — otherwise omit this section>
 
        ## Return
-       DONE: docs/state/sprint-status.md | <one-line overall status> [| BLOCKER if critical]
+       DONE: docs/project/sprint-status.md | <one-line overall status> [| BLOCKER if critical]
    )
    ```
 
-3. Gate: verify `docs/state/sprint-status.md` exists. If BLOCKER, surface immediately.
+3. Gate: verify `docs/project/sprint-status.md` exists. If BLOCKER, surface immediately.
 
 4. Show the status. Ask: "Anything to adjust?"
 
@@ -91,7 +91,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
    - "Which tracks from the backlog are in scope?" (show plan.md backlog briefly)
    - "Definition of done for this sprint specifically?"
 
-2. Write `docs/state/sprint.md` using the sprint template format:
+2. Write `docs/project/sprint.md` using the sprint template format:
 
 ```markdown
 # Sprint: <goal>
@@ -120,7 +120,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 
 ## sprinter close
 
-1. Read `docs/state/sprint.md` and `docs/state/plan.md`.
+1. Read `docs/project/sprint.md` and `docs/project/plan.md`.
 
 2. Update the sprint doc before archiving:
    - Set Status to `Closed`
@@ -131,16 +131,16 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 3. Ask: "Anything to add to the changelog before I archive this?"
    Incorporate their answer as a final changelog entry.
 
-4. Archive: copy `docs/state/sprint.md` to `docs/state/schedule/sprint-<start-date>.md`.
+4. Archive: copy `docs/project/sprint.md` to `docs/project/schedule/sprint-<start-date>.md`.
 
-5. Update `docs/state/schedule/README.md` — append a row to the Sprints table:
+5. Update `docs/project/schedule/README.md` — append a row to the Sprints table:
    ```
    | [Sprint: <goal>](sprint-<start-date>.md) | <start> → <end> | <one-line outcome> |
    ```
 
-6. Delete `docs/state/sprint.md` (after confirming with user).
+6. Delete `docs/project/sprint.md` (after confirming with user).
 
-7. Update `docs/state/plan.md`: mark any completed tracks DONE, move deferred tracks back to backlog with a note.
+7. Update `docs/project/plan.md`: mark any completed tracks DONE, move deferred tracks back to backlog with a note.
 
 8. Stamp: `bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "sprint closed: <goal>"`
 
@@ -150,7 +150,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 
 ## Scope changes mid-sprint
 
-When a track is added or dropped during an active sprint (outside of `sprinter new` or `sprinter close`), update `docs/state/sprint.md` directly:
+When a track is added or dropped during an active sprint (outside of `sprinter new` or `sprinter close`), update `docs/project/sprint.md` directly:
 
 - **Drop a track:** Strike through its row with `~~track name~~`, add a Changelog entry: `YYYY-MM-DD: Dropped <track> — <reason>`
 - **Add a track:** Add a new row, add a Changelog entry: `YYYY-MM-DD: Added <track> — <reason>`

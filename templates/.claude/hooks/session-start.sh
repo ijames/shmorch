@@ -17,7 +17,7 @@ if [ -f "$SPRINT_CAL" ]; then
 fi
 
 # Last session summary
-SESSION="$ROOT/docs/state/session.md"
+SESSION="$ROOT/docs/project/session.md"
 if [ -f "$SESSION" ]; then
   echo "--- Last session ---"
   # Print from top through first blank line after the first "What was done" block
@@ -26,7 +26,7 @@ if [ -f "$SESSION" ]; then
 fi
 
 # Blockers only
-PLAN="$ROOT/docs/state/plan.md"
+PLAN="$ROOT/docs/project/plan.md"
 if [ -f "$PLAN" ]; then
   BLOCKERS=$(grep -i "BLOCKER\|\*\*BLOCKER" "$PLAN" 2>/dev/null | head -3 || true)
   if [ -n "$BLOCKERS" ]; then

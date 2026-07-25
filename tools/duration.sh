@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# duration.sh — Report durations from docs/state/timelog.md
+# duration.sh — Report durations from docs/project/timelog.md
 # Usage:
 #   bash $SHMORCH_HOME/tools/duration.sh            full summary grouped by day
 #   bash $SHMORCH_HOME/tools/duration.sh last       time since last event
@@ -7,7 +7,7 @@
 
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-LOG="$ROOT/docs/state/timelog.md"
+LOG="$ROOT/docs/project/timelog.md"
 [ -f "$LOG" ] || { echo "No timelog found."; exit 0; }
 
 MODE="${1:-summary}"

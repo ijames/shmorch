@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# track-graph-audit.sh — deterministic traversal of docs/state/tracks/ for
+# track-graph-audit.sh — deterministic traversal of docs/project/tracks/ for
 # graph-first-docs conformance (tracks/20260525-graph-first-docs) and closed-track
 # graduation (core/documentation.md § Skeleton Principle, Track closing process).
 #
@@ -10,7 +10,7 @@
 #
 # Used by workflows/documentarian.md Step 2 in place of ad hoc inline greps, so the
 # mechanical scan runs as a deterministic script rather than main-thread/agent reads
-# (docs/state/tracks/20260721-workflow-subagent-delegation). Judgment — whether a
+# (docs/project/tracks/20260721-workflow-subagent-delegation). Judgment — whether a
 # CLOSED_UNGRADUATED track's knowledge actually landed, and writing it if not — stays
 # a documentarian pass (Step 3+); this script only finds candidates.
 #
@@ -19,7 +19,7 @@
 
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-TRACKS="$ROOT/docs/state/tracks"
+TRACKS="$ROOT/docs/project/tracks"
 CHUNK_MAX="${CHUNK_MAX:-400}"
 
 [ -d "$TRACKS" ] || { echo "No $TRACKS — nothing to audit."; exit 0; }

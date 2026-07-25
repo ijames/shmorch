@@ -75,9 +75,9 @@ The documentarian doesn't just close gaps — they map them. A gap map produced 
 ## Output
 
 - Updated docs sections (parity fixes, legacy reverse-engineering, planned-section stubs)
-- `docs/state/parity-report-<date>.md` — what was found, how it was classified, what was changed
+- `docs/project/parity-report-<date>.md` — what was found, how it was classified, what was changed
 - `plan.md` additions — gap items filed with appropriate tags
-- Confirmed or updated `docs/state/spec.md` if planned sections reveal an undocumented active intent
+- Confirmed or updated `docs/project/spec.md` if planned sections reveal an undocumented active intent
 
 ---
 

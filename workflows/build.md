@@ -12,9 +12,9 @@ Implement an approved spec and design. Produces committed, tested, documented co
 - After Design workflow has produced an approved design
 
 ## Inputs
-- Approved spec (`docs/state/spec.md` or track-level spec)
-- Design doc (`docs/state/design-<feature>.md` if present)
-- `docs/state/stack.md` — version constraints and external limits
+- Approved spec (`docs/project/spec.md` or track-level spec)
+- Design doc (`docs/project/design-<feature>.md` if present)
+- `docs/project/stack.md` — version constraints and external limits
 
 ## Roles
 - `agents/roles/implementer.md` (one per module for large features, run in parallel)
@@ -89,7 +89,7 @@ If on `main`: prompt the user to create an appropriate feature branch before pro
 
 Default branch naming: `<type>/YYYYMMDD-<short-description>` where type is one of `feat`, `fix`, `chore`, `refactor`, `docs`. Example: `feat/20260519-order-ticker`, `chore/20260519-vacuum`. If the project has a different convention in `decisions.md` or a project `build.md` override, apply that instead.
 
-State files (`docs/state/`, `docs/development/decisions.md`) are the only content that commits directly to main — via `/shmorch wrap`, never manually during a build.
+State files (`docs/project/`, `docs/{product,technology}/decisions/ (topic-appropriate)`) are the only content that commits directly to main — via `/shmorch wrap`, never manually during a build.
 
 ---
 
@@ -98,11 +98,11 @@ State files (`docs/state/`, `docs/development/decisions.md`) are the only conten
 bash $SHMORCH_HOME/tools/timelog.sh "TASK_START" "<track name>"
 ```
 
-Set status `IN_PROGRESS` in `docs/state/plan.md`.
+Set status `IN_PROGRESS` in `docs/project/plan.md`.
 
 Read the approved spec and design:
-- `docs/state/spec.md` (or track-level spec)
-- `docs/state/design-<feature>.md` (if exists)
+- `docs/project/spec.md` (or track-level spec)
+- `docs/project/design-<feature>.md` (if exists)
 
 Read only these files at session start. Do not pre-load architecture docs or source files not directly referenced by the spec — retrieve dynamically via targeted reads as needed.
 
@@ -121,9 +121,9 @@ Before writing code, enumerate:
 2. **Affected tests:** Which existing tests are likely to need updating? List them. If none, confirm why.
 3. **Affected decisions:** Does this implementation require a new entry in decisions.md, or update an existing one?
 
-Write this list to `docs/state/plan.md` under the active task.
+Write this list to `docs/project/plan.md` under the active task.
 
-4. **Seed scripts (stage-gated):** If this implementation writes or modifies any migration files (`db/migrations/`, `migrations/`, `alembic/versions/`, or similar), apply the following check based on the project `stage` from `docs/state/context.md`:
+4. **Seed scripts (stage-gated):** If this implementation writes or modifies any migration files (`db/migrations/`, `migrations/`, `alembic/versions/`, or similar), apply the following check based on the project `stage` from `docs/project/context.md`:
    - **R&D / proof-sprint:** List every seed/fixture script that populates the affected tables. Flag each as "potentially stale — verify schema alignment before running `make db-seed` or equivalent." Updating stale seeds is part of the Definition of Done for this task, not a follow-up.
    - **productionization / maintenance:** Seed scripts are not the authoritative data source in production. Instead: flag that this migration must be validated against a production branch restore (e.g. Neon copy-on-write branch from the production branch) before applying. Seeds are a dev scaffold only — live data comes from backups, not seeds.
 
@@ -149,15 +149,15 @@ Task(
     ## Task
     Implement: <module>
 
-    Spec: docs/state/spec.md
-    Design: docs/state/design-<feature>.md (read if present)
-    Stack constraints: docs/state/stack.md (read this; for other context load only what the task requires — do not pre-scan the whole codebase)
+    Spec: docs/project/spec.md
+    Design: docs/project/design-<feature>.md (read if present)
+    Stack constraints: docs/project/stack.md (read this; for other context load only what the task requires — do not pre-scan the whole codebase)
 
     Write production code and corresponding tests. Follow the existing patterns in the codebase.
     Do not change test logic to make tests pass — if tests fail after your change, the code is wrong.
 
     ## Output
-    Write a completion note to: docs/state/build-<module-slug>.md
+    Write a completion note to: docs/project/build-<module-slug>.md
 
     Structure:
     ### Module: <module>
@@ -169,7 +169,7 @@ Task(
     <anything the orchestrator should know before integration>
 
     ## Return
-    DONE: docs/state/build-<module-slug>.md | <one-line summary> [| BLOCKER if a design gap or constraint prevented completion]
+    DONE: docs/project/build-<module-slug>.md | <one-line summary> [| BLOCKER if a design gap or constraint prevented completion]
 )
 ```
 
@@ -181,7 +181,7 @@ bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "implementer → <module>"
 ### Gate after parallel implementers
 
 After all Task calls complete:
-- Verify each `docs/state/build-<module>.md` exists
+- Verify each `docs/project/build-<module>.md` exists
 - If any BLOCKER: surface to developer before integration
 - Stamp:
 ```bash
@@ -210,15 +210,15 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 - **Broad replacement guard:** If this commit includes a text replacement touching > 5 files (e.g. renaming a symbol, fixing encoding across the codebase), run the full test suite *before* committing — sweeps can silently mutate string literals and operator expressions in addition to comments.
 
 ### Documentation
-- Public API, architectural pattern, or data model changed? Update `docs/architecture/` or `docs/development/`.
+- Public API, architectural pattern, or data model changed? Update `docs/technology/architecture/` or `docs/technology/development/`.
 - New service, model, or exception type? Document in the relevant architecture doc.
-- Does `docs/state/tracks/` need updating?
+- Does `docs/project/tracks/` need updating?
 - Did this change countermand something previously documented? Rewrite that section — don't append.
 
 ### Track
 - Is this tied to an open track step? Mark it done.
 - No track exists and this is non-trivial? Create one using `.shmorch/docs/track-template.md`.
-- Update `docs/state/plan.md`.
+- Update `docs/project/plan.md`.
 - **Before opening the PR:** update the track's `index.md` Status field to reflect the state the merge will produce (e.g. `Open — Intent + Spec` → `Shipped` / `Closed`), not the state it's in mid-build. Stale status fields caught only by later documentarian sweeps are the recurring failure mode this guards against — fix it at the point of change, not in batch later.
 
 ### Plan alignment
@@ -233,6 +233,6 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 bash $SHMORCH_HOME/tools/timelog.sh "TASK_DONE" "<track name>"
 ```
 
-Set status `DONE` in `docs/state/plan.md`. Update `docs/state/session.md`.
+Set status `DONE` in `docs/project/plan.md`. Update `docs/project/session.md`.
 
 Suggest: `/shmorch vacuum` → `/shmorch commit` → `/shmorch wrap`
