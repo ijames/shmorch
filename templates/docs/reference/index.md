@@ -11,7 +11,7 @@ categorical wrapper layer.
 | Section | Purpose |
 |----------|---------|
 | [research/](research/index.md) | Collected facts and interpretations *about* facts — never design/development reasoning |
-| [instructions/](instructions/index.md) | How-tos, tutorials, explanations — task- and understanding-oriented docs |
+| [instructions/](instructions/index.md) | Task- and understanding-oriented docs — starts flat (install, quickstart), grows into Diataxis subfolders only if needed |
 | `<topic>/` | One flat folder per topic or vendor, named plainly — e.g. `reference/api/` |
 
 <!-- List topic folders here as they are created, e.g.:

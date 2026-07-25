@@ -210,3 +210,16 @@ example paths updated).
 Backfill for already-provisioned projects explicitly **not** done here — split to
 `tracks/20260724-dev-docs-taxonomy-backfill` per the user's instruction. `VERSION` bumped
 to `20260724.01` as part of closing this out (skill-file changes per `core/operations.md`).
+
+### 2026-07-24 — follow-up: instructions/ starts flat
+
+User feedback during PR review: don't pre-expand `reference/instructions/` into
+`howtos/`/`tutorials/`/`explanations/` — usage doesn't justify it yet. Flattened to two
+files, `install.md` (renamed from `setup.md`) and a new `quickstart.md` (the two docs
+"we know are necessary"), with `deployment.md`'s skeleton dropped for now (YAGNI —
+add back when there's real deploy content). `instructions/index.md` now documents the
+Diataxis subfolder split as something to do *when* content volume justifies it, not
+up front. Updated `core/documentation.md`'s Skeleton Principle table to match; the
+"Proposed taxonomy" ASCII diagram above is left as the historical record of what this
+track originally proposed — the flat start is a post-close refinement, not a rewrite
+of that history.

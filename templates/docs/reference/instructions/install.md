@@ -1,10 +1,10 @@
-# Setup Guide
+# Install
 
 > Recreate the full dev environment from scratch.
 > Fill in each section as the scaffold is built — this doc is written alongside the code, not after.
 
-↑ parent: [howtos/](index.md)
-↔ related: [technology/decisions/](../../../technology/decisions/index.md)
+↑ parent: [instructions/](index.md)
+↔ related: [technology/decisions/](../../technology/decisions/index.md)
 
 > **Parity rule:** This doc, each component's README, and the code must stay in sync. If a command here is wrong, or a README is missing, run `/shmorch verify` to catch it.
 
@@ -28,14 +28,6 @@ Verify:
 ```bash
 git clone <repo-url>
 cd <project>
-```
-
----
-
-## Quick start (after all prerequisites installed)
-
-```bash
-cp .env.template .env.local   # fill in secrets — see .env.template for where to get each value
 ```
 
 ---

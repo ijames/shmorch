@@ -21,7 +21,7 @@
 |---|---|---|
 | `product/` | What the system does and why, for the user | `strategy/`, `design/` (+ `concepts/`), `features/`, `decisions/` |
 | `technology/` | How it's built | `architecture/` (+ `concepts/`, includes infrastructure as a topic, not a sibling), `development/` (+ `concepts/`, `features/`, `code-styleguides/`, `testing/`), `decisions/` |
-| `reference/` | Lookup-only material — no design/development reasoning | `research/` (facts + interpretation of facts, never proposals), `instructions/` (`howtos/`, `tutorials/`, `explanations/` — Diataxis scoped narrowly here, not across the whole tree), flat `<topic>/` folders otherwise |
+| `reference/` | Lookup-only material — no design/development reasoning | `research/` (facts + interpretation of facts, never proposals), `instructions/` (starts flat — `install.md` + `quickstart.md` — grows into Diataxis's `howtos/`/`tutorials/`/`explanations/` only once there's enough content to need the split), flat `<topic>/` folders otherwise |
 | `project/` | In-flight, ephemeral — replaces the old `state/` | `sprints/`, `schedule/`, `process/` (paved-road divergences + overrides), `tracks/` (flat; `design-`/`dev-`/`impl-` are filename *prefixes* for readability, not subfolders) |
 | `inbox/` | Pre-ingestion holding pen | — |
 
