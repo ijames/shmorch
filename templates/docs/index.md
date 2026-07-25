@@ -1,7 +1,7 @@
 # {{Project Name}} — Documentation Index
 
 > Start here. Every document in the project is reachable from this page.
-> Permanent docs live under `docs/`. In-flight work lives under `docs/state/`.
+> Permanent docs live under `docs/`. In-flight work lives under `docs/project/`.
 
 ---
 
@@ -13,53 +13,34 @@
 
 ## Permanent Documentation
 
-### Product
-Understanding what this project does and why.
+### [Product](product/index.md)
+What this project does and why — vision, features, strategy, design, decisions.
 
-- [product.md](product/product.md) — Vision, goals, features, target audience, non-goals
+### [Technology](technology/index.md)
+How it's built — architecture, development practice, technology decisions.
 
-### Architecture
-How the system is structured at a conceptual level. Tech-agnostic.
-
-- [System Overview](architecture/system-overview.md) — Environments, config, overall system shape
-- [System Domains](architecture/domains.md) — Logical areas and file ownership
-
-### Reference
-Source material and foundational documents.
-
-<!-- Add links as reference docs are created, e.g.:
-- [name.md](reference/name.md) — description
--->
-
-### Development Record
-Permanent decisions and paths not taken. Never deleted.
-
-- [Decisions](development/decisions.md) — Every product, architecture, process, and tooling decision
-- [Anti-Decisions](development/anti-decisions.md) — Paths explicitly considered and rejected
-- [Notes](development/notes.md) — Captured concepts, design philosophy, and feature ideas
+### [Reference](reference/index.md)
+Lookup material — research, instructions (how-tos/tutorials/explanations), topic folders.
 
 ---
 
 ## In-Flight State
 
-> These files represent work in progress. Contents change daily.
-> When a track closes or a spec is fully implemented, content graduates to permanent docs above.
+> `docs/project/` — work in progress, changes daily. On close, knowledge graduates
+> to the permanent sections above.
 
-### Current Focus
-- [Plan](state/plan.md) — Current task + backlog
-- [Spec](state/spec.md) — Active feature specification ⚠️ _draft — not locked_
-- [Session](state/session.md) — Cross-session continuity notes
-- [Stack](state/stack.md) — Tech stack inventory ⚠️ _TBD until explicitly locked_
-- [Context](state/context.md) — Project identity and preferences
+- [Plan](project/plan.md) — Current task + backlog
+- [Spec](project/spec.md) — Active feature specification ⚠️ _draft — not locked_
+- [Session](project/session.md) — Cross-session continuity notes
+- [Context](project/context.md) — Project identity and preferences
+- [Process](project/process/index.md) — Divergences from Shmorch's paved-road defaults
+- [Tracks](project/tracks/index.md) — Work-in-progress and closed track history
+- [Schedule](project/schedule/index.md) — Sprint schedule
+- [Timelog](project/timelog.md) — Session and task timing
 
-### Active Tracks
-<!-- Add tracks here as they are opened, e.g.:
-- [Track Name](state/tracks/YYYYMMDD-name/index.md) — description
--->
+## Inbox
 
-### Records
-- [Timelog](state/timelog.md) — Session and task timing
-- [Closed Sprints](state/schedule/README.md)
+- [inbox/](inbox/index.md) — drop specs/plans here for Shmorch to integrate
 
 ---
 
@@ -74,4 +55,4 @@ Permanent decisions and paths not taken. Never deleted.
 
 ---
 
-↓ children: all documents listed above
+↓ children: [product/](product/index.md), [technology/](technology/index.md), [reference/](reference/index.md), [project/](project/index.md), [inbox/](inbox/index.md)

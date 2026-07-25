@@ -1,6 +1,7 @@
 # Product
 
-Intent — what this project does and why. Functional specs, business rules, user-facing behaviour. Language a non-engineer could read.
+Intent — what this project does and why. Functional specs, business rules, user-facing
+behaviour. Language a non-engineer could read.
 
 ↑ [docs/index.md](../index.md)
 
@@ -10,6 +11,7 @@ Intent — what this project does and why. Functional specs, business rules, use
 |----------|---------|
 | [product.md](product.md) | Vision, goals, features, target audience, non-goals |
 | [product-guidelines.md](product-guidelines.md) | Brand, UX principles, communication style |
-| [roadmap.md](roadmap.md) | Strategic direction |
-| [design.md](design.md) | Visual design and interaction patterns |
-| [seo-geo.md](seo-geo.md) | SEO/GEO strategy — target queries, content model, structured data, GEO citation requirements |
+| [strategy/](strategy/index.md) | Roadmap, SEO/GEO, analytics — strategic direction |
+| [design/](design/index.md) | Visual design, interaction patterns, living design concepts |
+| [features/](features/index.md) | Permanent feature descriptions |
+| [decisions/](decisions/index.md) | Product-level decisions and anti-decisions |

@@ -74,14 +74,14 @@ Full UX doctrine: `$SHMORCH_HOME/core/ux.md`
 
 **Always keep moving:** After every response, do the next thing or propose it. If the user declines, offer something smaller. Never go quiet. **Exception — `go`/orientation: "keep moving" means *propose*, not act. Do not read, `grep`, or analyze source code (or spawn discovery) until the user gives a directive after `go`.**
 
-**Continuous state updates:** Update `plan.md`, `decisions.md`, and docs in the moment — not batched at wrap. Track stub rule: every Design/Build plan item gets `docs/state/tracks/YYYYMMDD-<name>/index.md` created immediately, with `Status: Open`, `Opened:`, and `→ destination`.
+**Continuous state updates:** Update `plan.md`, `decisions/`, and docs in the moment — not batched at wrap. Track stub rule: every Design/Build plan item gets `docs/project/tracks/YYYYMMDD-<name>/index.md` created immediately, with `Status: Open`, `Opened:`, and `→ destination`.
 
 **Deferred intent must have a stub track:** If an intent discussion ends without implementation — decision pending, more review needed, or blocked on external input — open a stub track immediately with `Status: Blocked — pending [the specific decision]` and the open question documented. Never park a deferred intent only in `session.md` next-up notes. The stub is the parking place; the session note is just a pointer to it.
 
 **Context management:** When topic shifts, note where interrupted thinking stands in one line, then start new focus clean. Compress proactively when threads get long or tangled. Separate concerns: one focus at a time.
 Full protocol: `$SHMORCH_HOME/workflows/context.md`
 
-**Documents stay clean:** Rewrite docs to reflect current reality — don't layer amendments or leave stale content. History lives in the timelog and git — `decisions.md` states current decisions only, not how they were revised.
+**Documents stay clean:** Rewrite docs to reflect current reality — don't layer amendments or leave stale content. History lives in the timelog and git — `decisions/` states current decisions only, not how they were revised.
 
 ---
 
@@ -125,18 +125,18 @@ Raise these at intent stage for every applicable project. Templates scaffolded b
 
 ## Persistent State
 
-**`docs/state/`** — in-flight only. Nothing permanent lives here.
+**`docs/project/`** — in-flight only. Nothing permanent lives here.
 
 | File | Purpose |
 |---|---|
-| `docs/state/context.md` | Project identity, stack, preferences |
-| `docs/state/plan.md` | Current task and backlog |
-| `docs/state/spec.md` | Active spec |
-| `docs/state/session.md` | Cross-session summary |
-| `docs/state/stack.md` | Tech stack inventory and constraints |
+| `docs/project/context.md` | Project identity, stack, preferences |
+| `docs/project/plan.md` | Current task and backlog |
+| `docs/project/spec.md` | Active spec |
+| `docs/project/session.md` | Cross-session summary |
+| `docs/project/stack.md` | Tech stack inventory and constraints |
 
-**`docs/architecture/`** — permanent architectural record.
-**`docs/development/decisions.md`** — all decisions, permanent, never deleted. Split by topic into `docs/development/decisions/<topic>.md` once it grows large — `decisions.md` becomes the index; see `core/documentation.md`.
+**`docs/technology/architecture/`** — permanent architectural record.
+**`docs/product/decisions/`** and **`docs/technology/decisions/`** — all decisions, permanent, never deleted. Each splits by topic into `<topic>.md` files once it grows large — `decisions/index.md` becomes the index; see `core/documentation.md`.
 
 End of every session: run `/shmorch wrap`.
 
@@ -187,7 +187,7 @@ on stale TODOs/dead tests. Full tables and detail: `$SHMORCH_HOME/core/operation
 - Never delete without user confirmation
 - Never git push without user confirmation
 - Never switch branches without asking
-- Write `docs/state/plan.md` before multi-file changes
+- Write `docs/project/plan.md` before multi-file changes
 - One question at a time
 - **Tests and docs encode intended behavior — code does not.** Never change test logic to make tests pass. Flag all test/doc logic changes and wait for developer confirmation.
 - **Deployment manifest sync:** After any dependency change, sync all deployment manifests before committing — dev environment ≠ deployment bundle (e.g. `pyproject.toml` → `uv export` → `requirements.txt`). Verify cross-platform wheel availability for the target runtime. Full detail: `$SHMORCH_HOME/core/deployment.md`

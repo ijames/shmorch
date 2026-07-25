@@ -1,7 +1,7 @@
 ---
 status: Active
-updated: 2026-07-21
-summary: Two concurrent processes on this repo — see Current Task. Messaging-provider track opened; wrap-friction fixes + bounded context reads already shipped (PR #58, #57).
+updated: 2026-07-24
+summary: Docs taxonomy redesign closed and implemented (templates/docs/** restructured); backfill for already-provisioned projects split to its own not-yet-started track. Two other concurrent processes remain — see Current Task.
 ---
 
 # Shmorch Plan
@@ -61,6 +61,8 @@ into one track or commit:**
 ### Design & Docs
 
 - [ ] **Curated hand-held init of shmorch skill repo** — run through the init interview on the shmorch skill repo itself to populate `docs/state/context.md`, `docs/state/session.md`, `docs/architecture/`, etc. The "shmorch shmorch" bootstrapping moment.
+
+- [ ] **Docs taxonomy backfill mechanism** — design and implement the migration mechanics for already-provisioned projects (appadd, mobos, darkbadge, shmorch's own `docs/`) onto the new `product/technology/reference/project/inbox` taxonomy landed by `tracks/20260724-docs-taxonomy-redesign`. Not designed yet — deliberately deferred. → [track](tracks/20260724-dev-docs-taxonomy-backfill/index.md)
 
 - [ ] **Subagent usage guide for solo dev** — document when/how Shmorch spawns subagents during solo development: parallel test-writing while fixing, research isolation, Gherkin generation. Goal: proactively spawns without being asked.
   - Candidate patterns: subagent writes tests → main thread validates; subagent researches root cause → main thread decides fix; subagent writes docs in parallel with code
@@ -132,6 +134,8 @@ into one track or commit:**
 ## Completed
 
 <!-- Items closed here when the skill change is merged to main. -->
+
+- [x] **Docs taxonomy redesign** — new top-level `docs/` skeleton (`product/`, `technology/`, `reference/`, `project/`, `inbox/`) replacing `architecture/development/product/reference/state/to_review`; resolved the architecture-vs-reference content-type conflict (technology/architecture/ = narrative, reference/ = lookup-only), split decisions into `product/decisions/` + `technology/decisions/` only, scoped Diataxis narrowly inside `reference/instructions/`. Implemented in `templates/docs/**`, `core/documentation.md`, `shmorch-core.md`, `templates/.shmorch/docs/track-template.md`. Backfill for already-provisioned projects split to its own track (see Backlog). `docs/state/tracks/20260724-docs-taxonomy-redesign/index.md`. Closed 2026-07-24.
 
 - [x] **Wrap-friction fixes (self-improve)** — `go.md` escalates when 3+ sessions in a row end without a real wrap; `build.md` syncs track `index.md` Status before opening the PR; `self-improve.md` cross-checks `decisions.md`/`AGENTS.md` before re-proposing an already-resolved pattern; `vacuum.md` gained an untracked-file scan escalating to a backlog item after 2+ passes. PR #58 merged 2026-07-18.
 
