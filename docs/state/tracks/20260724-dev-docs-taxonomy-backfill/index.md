@@ -5,7 +5,7 @@ summary: Backfill mechanism design underway. Internal-reference bug found and fi
 ---
 
 ↑ [tracks/20260724-docs-taxonomy-redesign](../20260724-docs-taxonomy-redesign/index.md)
-→ `workflows/auto-update.md` (Step 2.8-style scoped backfill offer) +
+→ `workflows/auto-update.md` (Step 1.9 scoped backfill offer) +
 `core/documentation.md` § Architecture Changelog (the 2026-07-24 row this track resolves) +
 `tools/backfill-docs-taxonomy.sh` (new)
 
@@ -136,3 +136,20 @@ Closed the three remaining items:
 `VERSION` bumped to `20260724.05`. This track's core design-and-implementation work is
 done; remaining scope is applying the same script + judgment pass to shmorch's own
 `docs/state/` (dogfood), then appadd/mobos/darkbadge.
+
+### 2026-07-24 — fixed ordering bug: backfill must run before scaffold diff
+
+PR #70 merged, then user tested `auto-update`/`go` against a real project and hit exactly
+the collision this design should have anticipated: `workflows/auto-update.md` ran Step 2
+(structural scaffold diff) *before* Step 2.8 (the backfill). On an old-taxonomy project,
+Step 2 sees every current-template path as "missing" (since the project's docs/ is still
+on the old skeleton) and offers to scaffold them — at the exact destination paths the
+backfill script is about to `git mv` real content into. Accepting Step 2's offer first
+means the backfill's `git mv` then fails or clobbers on an existing target.
+
+Fix: moved the backfill step earlier, renumbered `Step 2.8` → `Step 1.9`, now running
+immediately after Step 1 (version check) and before Step 2. Checked the other 2.x steps
+(2.1 reverse scaffold check, 2.3 legacy `shmorch/` rename, 2.4 multi-CLI context chain,
+2.5 artifact scan, 2.7 orphaned tool scripts, 2.9 hook sync) — none of them read or write
+`docs/` layout, so only the backfill needed to move; nothing else was reordered. `VERSION`
+bumped to `20260724.06`.
