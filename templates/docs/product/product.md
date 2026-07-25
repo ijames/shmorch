@@ -4,7 +4,7 @@ updated: YYYY-MM-DD
 summary: <one line — what this file currently says>
 ---
 
-↑ [product/index.md](index.md)
+↑ [product/](index.md)
 
 # Product: 
 
