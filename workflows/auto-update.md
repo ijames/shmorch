@@ -222,10 +222,12 @@ For each such row, ask (one at a time, do not batch):
 
 - **no/later** — skip; note it in the Step 7 report so it isn't silently forgotten.
 - **yes** — run a scoped pass using that row's `Backfill scope` cell as the exact instruction
-  (e.g. "add front-matter to any `docs/project/*.md` file that lacks one"). Scope is always
-  bounded to what that one row describes — never a general docs audit. Read each affected
-  file before writing; derive required values (e.g. `summary`) from actual content, never
-  invent them. Report each file touched.
+  (e.g. "add front-matter to any `docs/project/*.md` file that lacks one"). If the cell names
+  a script (e.g. `tools/backfill-docs-taxonomy.sh`), run it first for the mechanical part,
+  then do the judgment pass it reports as needed — read each such file before writing; derive
+  required values (e.g. `summary`) from actual content, never invent them. Scope is always
+  bounded to what that one row describes — never a general docs audit. Report each file
+  touched (moved and hand-edited).
 
 This is deliberately per-row and per-project-opt-in, not a bulk "restructure everything"
 pass — each changelog entry is small and reviewable on its own.

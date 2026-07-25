@@ -111,3 +111,28 @@ Not yet done: wire `tools/backfill-docs-taxonomy.sh` into `workflows/auto-update
 (replace the "migrate manually" placeholder), update the 2026-07-24 Architecture Changelog
 row's "Backfill scope" cell in `core/documentation.md` to point at the script, and the
 judgment-file pass on Treeclusion itself.
+
+### 2026-07-24 — wiring complete, Treeclusion judgment pass done
+
+Closed the three remaining items:
+
+- `core/documentation.md`'s 2026-07-24 changelog row's `Backfill scope` cell now points at
+  `tools/backfill-docs-taxonomy.sh` + this track, replacing the old "not yet designed /
+  migrate manually" placeholder.
+- `workflows/auto-update.md` Step 2.8's "yes" branch now says explicitly: if the `Backfill
+  scope` cell names a script, run it for the mechanical part first, then do the judgment
+  pass it reports.
+- Treeclusion judgment pass: `architecture/decisions.md`, `development/decisions.md`, and
+  `development/anti-decisions.md` were all empty stubs (no real entries) — replaced with
+  the new `product/decisions/` + `technology/decisions/` template pairs rather than
+  "splitting" nothing. `development/notes.md` (also empty) kept standalone at
+  `technology/development/notes.md`. `development/guides/index.md` was **not** touched —
+  its content (PHP/phpunit, Schwab API TOML, "MoBoS") doesn't belong to Treeclusion at all;
+  looks like stale copy-paste from another project's docs, unrelated to this migration.
+  Left in place and flagged to the user rather than folding wrong content into the new
+  structure. Committed on Treeclusion's `docs/20260724-taxonomy-backfill` branch (two
+  commits: the mechanical move, then the judgment pass) — not yet pushed/PR'd there.
+
+`VERSION` bumped to `20260724.05`. This track's core design-and-implementation work is
+done; remaining scope is applying the same script + judgment pass to shmorch's own
+`docs/state/` (dogfood), then appadd/mobos/darkbadge.
