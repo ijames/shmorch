@@ -14,10 +14,10 @@ Changes here do **not** bump `VERSION`. Version tracks skill behaviour changes, 
 
 ## Structure (filling in over time)
 
-- `docs/state/plan.md` — shmorch backlog and in-flight work
-- `docs/state/context.md` — project identity (to be populated via curated init)
-- `docs/architecture/` — design decisions for shmorch internals
-- `docs/development/decisions.md` — permanent record of all shmorch design choices
+- `docs/project/plan.md` — shmorch backlog and in-flight work
+- `docs/project/context.md` — project identity (to be populated via curated init)
+- `docs/technology/architecture/` — design decisions for shmorch internals
+- `docs/technology/decisions/` — permanent record of shmorch technical design choices
 
 ## Working on Shmorch
 

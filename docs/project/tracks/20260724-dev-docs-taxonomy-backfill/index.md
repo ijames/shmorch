@@ -1,7 +1,7 @@
 ---
-status: Active
-updated: 2026-07-24
-summary: Backfill mechanism design underway. Internal-reference bug found and fixed (tools/workflows/commands/agents still pointed at old docs/ paths). Next: mechanical backfill script + Treeclusion pilot.
+status: Closed
+updated: 2026-07-30
+summary: Backfill mechanism built, piloted on Treeclusion, wired into auto-update.md, and now run on shmorch's own docs/ (the last item in this track's original scope). Remaining scope (appadd/mobos/darkbadge) is the developer's own follow-up, not blocking this track's close.
 ---
 
 ↑ [tracks/20260724-docs-taxonomy-redesign](../20260724-docs-taxonomy-redesign/index.md)
@@ -153,3 +153,46 @@ immediately after Step 1 (version check) and before Step 2. Checked the other 2.
 2.5 artifact scan, 2.7 orphaned tool scripts, 2.9 hook sync) — none of them read or write
 `docs/` layout, so only the backfill needed to move; nothing else was reordered. `VERSION`
 bumped to `20260724.06`.
+
+### 2026-07-30 — shmorch's own dogfood backfill run, track closed
+
+Ran `self-improve` on shmorch itself; its gate script (`check-self-improve-gate.sh`,
+hardcoded to `docs/project/timelog.md`) returned `SKIP:no-timelog` because shmorch's own
+`docs/` was still the old skeleton — the exact scenario this track exists to fix, just
+encountered from the tooling side instead of a scaffold-diff collision. Ran
+`tools/backfill-docs-taxonomy.sh` against shmorch's own repo on branch
+`docs/20260730-shmorch-dogfood-backfill`:
+
+- 5 mechanical `git mv`s from its mapping (`docs/state/{plan,session,timelog,index}.md`,
+  `docs/state/tracks/` → `docs/project/`).
+- Found 3 files the script's fixed mapping didn't know about (not flagged as JUDGMENT
+  either — a real gap in the script, left as-is since it's a one-off for this repo, not
+  worth generalizing for three files): `docs/state/pre-planning.md` (moved to
+  `docs/project/`, stale deferred-ideas note, content left untouched), and two
+  `docs/architecture/*.md` files not in the script's four-file architecture mapping
+  (`feedback-systems.md`, `scheduler-integration.md`, moved to
+  `docs/technology/architecture/` matching the existing pattern for that mapping's other
+  four files). Also moved `docs/architecture/how-shmorch-works-together.md` (added earlier
+  this session, before this migration ran) to the same new location.
+- Fixed the now-broken `↑ [Architecture](../index.md)` parent links in the two moved
+  architecture docs (a pre-existing dead link even before the move — `docs-audit.sh`
+  already flagged it) to `../../README.md`, matching the convention used elsewhere.
+- `docs/technology/architecture/scheduler-integration.md` has ~10 literal
+  `docs/state/*.md` path references inside cron-job prompt text (operational, not
+  historical — the same category as the 2026-07-24 tools/workflows/agents path-reference
+  fix) — mechanically rewritten to `docs/project/*.md`.
+- `docs/README.md` (this repo's own docs entry point) was stale, still describing the old
+  `docs/state/`/`docs/architecture/` layout — updated to the current structure.
+- Left untouched, correctly: `core/documentation.md`'s dated Architecture Changelog rows
+  (historical record) and `docs/project/{plan,session}.md` / closed track `index.md`
+  prose mentioning old paths in past-dated log entries (accurate record of what was true
+  then).
+- Verified via `docs-audit.sh`: no remaining `DEAD_LINK` findings point at the moved
+  files; all findings that remain (a historical track cross-reference, missing
+  frontmatter/parent-links on `plan.md`/`session.md`/`timelog.md`/`pre-planning.md`,
+  duplicate-content in track files) pre-date this migration and are documentarian-pass
+  scope, not backfill scope.
+
+This was the last item in this track's original scope (Treeclusion → shmorch → appadd/
+mobos/darkbadge). Closing the track here; appadd/mobos/darkbadge remain the developer's
+own follow-up.

@@ -1,6 +1,6 @@
 # Scheduler Integration — Architecture
 
-↑ [Architecture](../index.md)
+↑ [Architecture](../../README.md)
 
 ---
 
@@ -41,7 +41,7 @@ These fire during a working session and disappear when it ends.
 | Event | Trigger | Prompt behavior |
 |-------|---------|-----------------|
 | **Wrap reminder** | N hours after SESSION_START | Surface to developer: "You've been in this session for ~3 hours. Run `/shmorch wrap` before you lose context." |
-| **Focus check** | Every 90 min | Read `docs/state/plan.md` current task; confirm developer is still on the active task, not sliding into adjacent work. |
+| **Focus check** | Every 90 min | Read `docs/project/plan.md` current task; confirm developer is still on the active task, not sliding into adjacent work. |
 | **Commit nudge** | Every 2 hours | Check `git status`; if uncommitted changes exist and last commit was >2h ago, suggest `/shmorch commit`. |
 
 These are short-circuit fires — they prompt once, the developer acts or ignores, and that's it. They don't read heavy state or spawn agents.
@@ -52,16 +52,16 @@ These persist across sessions and represent regular project cadences.
 
 | Event | Cron | Prompt behavior |
 |-------|------|-----------------|
-| **Daily kickoff** | `57 8 * * 1-5` | Read `docs/state/context.md`, `session.md`, `plan.md`. Surface: current sprint day, active tracks, any open blockers, first proposed task. |
+| **Daily kickoff** | `57 8 * * 1-5` | Read `docs/project/context.md`, `session.md`, `plan.md`. Surface: current sprint day, active tracks, any open blockers, first proposed task. |
 | **Weekly vacuum** | `3 9 * * 1` | Run `/shmorch vacuum` with full scan scope. Report findings. |
-| **Weekly timelog digest** | `7 9 * * 1` | Run `bash ~/.claude/skills/shmorch/tools/duration.sh week`. Format as table of sessions × tasks × durations. Log to `docs/state/timelog-digest.md`. |
-| **Stale track scan** | `17 9 * * 2,4` | Scan `docs/state/tracks/` for any track with `Status: In Progress` that has no timelog entry in the last 72h. Surface to developer for triage. |
+| **Weekly timelog digest** | `7 9 * * 1` | Run `bash ~/.claude/skills/shmorch/tools/duration.sh week`. Format as table of sessions × tasks × durations. Log to `docs/project/timelog-digest.md`. |
+| **Stale track scan** | `17 9 * * 2,4` | Scan `docs/project/tracks/` for any track with `Status: In Progress` that has no timelog entry in the last 72h. Surface to developer for triage. |
 
 **7-day auto-expiry caveat:** CronCreate recurring jobs expire after 7 days. A `/shmorch schedule renew` operation or a session-start check (`go.md`) should detect and re-register durable recurring jobs that have expired. This is the main lifecycle management concern.
 
 ### Tier 3 — Sprint Boundary Events (durable, one-shot)
 
-These fire at specific sprint milestones, read from `docs/state/plan.md` or `docs/state/schedule/sprints/`.
+These fire at specific sprint milestones, read from `docs/project/plan.md` or `docs/project/schedule/sprints/`.
 
 | Event | When | Prompt behavior |
 |-------|------|-----------------|
@@ -88,8 +88,8 @@ For example, the daily kickoff prompt:
 
 ```
 /shmorch go daily-kickoff
-Context: This is a scheduled daily-kickoff event. Read docs/state/context.md,
-docs/state/session.md, and docs/state/plan.md. Present: sprint day number,
+Context: This is a scheduled daily-kickoff event. Read docs/project/context.md,
+docs/project/session.md, and docs/project/plan.md. Present: sprint day number,
 active tracks, any open blockers from last session, and 2-3 proposed tasks
 ordered by sprint priority. Do not ask what to work on before surfacing these.
 ```
@@ -180,7 +180,7 @@ The first two jobs to implement when this moves to build. Both are registered by
 
 ### Job 1: 25-Minute Focus Check
 
-**What it does:** Every 25 minutes, reads `docs/state/plan.md` (current task) and the timelog (last event) and asks: is the current session activity consistent with the plan priority? If drifting — e.g., working on a backlog item when a higher-priority track is active — surfaces a one-line nudge.
+**What it does:** Every 25 minutes, reads `docs/project/plan.md` (current task) and the timelog (last event) and asks: is the current session activity consistent with the plan priority? If drifting — e.g., working on a backlog item when a higher-priority track is active — surfaces a one-line nudge.
 
 **Cron:** `3,28,53 * * * *` (fires at :03, :28, :53 — avoids the :00 and :30 cluster)
 
@@ -189,8 +189,8 @@ The first two jobs to implement when this moves to build. Both are registered by
 **Prompt when it fires:**
 ```
 /shmorch status focus-check
-Read docs/state/plan.md (current task section only) and the last 3 lines of
-docs/state/timelog.md. Are we on the active task? If yes, say nothing (output nothing).
+Read docs/project/plan.md (current task section only) and the last 3 lines of
+docs/project/timelog.md. Are we on the active task? If yes, say nothing (output nothing).
 If the timelog shows activity outside the current task, surface exactly one line:
 "Focus check: [active task] is the plan priority — currently doing [what timelog shows]."
 ```
@@ -212,7 +212,7 @@ The key behavior: **no output if on task**. The check is ambient; it should be i
 /shmorch wrap
 Context: This is a scheduled end-of-day wrap. It is 5pm.
 Proceed with the full wrap workflow: summarize what was done, check for uncommitted
-changes, update docs/state/session.md, stamp SESSION_END in timelog.
+changes, update docs/project/session.md, stamp SESSION_END in timelog.
 ```
 
 **Why 5pm and not "after N hours":** A fixed time is predictable — the developer knows it's coming and can plan around it. A duration-based trigger fires at unpredictable times. If the developer isn't working at 5pm, the prompt fires into an idle session harmlessly.

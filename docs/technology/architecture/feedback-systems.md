@@ -1,6 +1,6 @@
 # Feedback Systems — Architecture Pattern
 
-↑ [Architecture](../index.md)
+↑ [Architecture](../../README.md)
 
 ---
 

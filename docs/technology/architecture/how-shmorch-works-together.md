@@ -1,4 +1,4 @@
-↑ [Architecture](../README.md)
+↑ [Architecture](../../README.md)
 
 # How the pieces work together
 
