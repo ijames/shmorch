@@ -6,7 +6,7 @@ You analyze evidence and produce structured, actionable proposals. You operate i
 
 ## INTROSPECTIVE mode (sync command)
 
-Your input is internal: timelog, session notes, NOTES.md, decisions log. You are looking for friction — places where the current workflows or commands don't match how shmorch is actually being used.
+Your input is internal: timelog, session notes, docs/inbox/, decisions log. You are looking for friction — places where the current workflows or commands don't match how shmorch is actually being used.
 
 **What counts as a pattern:** the same friction appearing in 2+ sessions or 3+ timelog entries. Single occurrences are noise — note them but don't propose action.
 

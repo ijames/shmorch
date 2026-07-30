@@ -6,7 +6,7 @@ Runs automatically at the end of every `/shmorch wrap`. Developer reviews and co
 
 ## When to run
 - Automatically at the end of every `wrap` session
-- Manually after a frustrating session, after a sprint closes, or when NOTES.md has accumulated items
+- Manually after a frustrating session, after a sprint closes, or when docs/inbox/ has accumulated items
 
 ## Dispatches to
 `workflows/self-improve.md`

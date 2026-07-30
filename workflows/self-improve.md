@@ -4,12 +4,12 @@ Retrospective self-improvement. Reads session history and timelog to surface fri
 
 ## When to use
 - Automatically at the end of every `wrap` session (lightweight mode)
-- Manually after a frustrating session, after a sprint closes, when NOTES.md has accumulated items
+- Manually after a frustrating session, after a sprint closes, when `docs/inbox/` has accumulated items
 
 ## Inputs
 - `docs/project/timelog.md`
 - `docs/project/session.md`
-- `.shmorch/NOTES.md` (if present)
+- `docs/inbox/` (project) or `$SHMORCH_HOME/docs/inbox/` (skill, if no project inbox exists) — one file per captured observation
 - `docs/{product,technology}/decisions/ (topic-appropriate)`
 
 ## Roles
@@ -44,7 +44,7 @@ If output is `PROCEED` — continue to Step 3.
 Read in parallel:
 - `docs/project/timelog.md` **tail only** — it's append-only and grows without bound; never `Read` it whole. Use `tail -200 docs/project/timelog.md` to look for repeated patterns: stalled phases, re-run agents, frequent BLOCKERs
 - `docs/project/session.md` — friction noted across recent sessions
-- `.shmorch/NOTES.md` — manually recorded issues (may not exist)
+- `docs/inbox/*.md` (project) — manually captured observations; if the project has no `docs/inbox/`, fall back to `$SHMORCH_HOME/docs/inbox/*.md` (skill's own inbox)
 - `docs/{product,technology}/decisions/ (topic-appropriate)` — decisions later revised or reversed
 
 Also run these structural checks and capture output as evidence:
@@ -94,7 +94,7 @@ Task(
     Review the shmorch session evidence:
     - docs/project/timelog.md
     - docs/project/session.md
-    - .shmorch/NOTES.md (if present)
+    - docs/inbox/*.md (project), or $SHMORCH_HOME/docs/inbox/*.md if no project inbox exists
     - docs/{product,technology}/decisions/ (topic-appropriate)
 
     Identify friction patterns (minimum 2 occurrences to count as a pattern):
@@ -205,26 +205,26 @@ Present each proposal one at a time:
 
 ---
 
-## Step 7 — Clear addressed NOTES items and stamp
+## Step 7 — Clear addressed inbox items and stamp
 
-Scan `.shmorch/NOTES.md` (or `$SHMORCH_HOME/NOTES.md` if no project NOTES.md exists). For each item, classify it mechanically:
+Scan `docs/inbox/*.md` (project) or `$SHMORCH_HOME/docs/inbox/*.md` (skill, if no project inbox exists) — skip `index.md`. For each file, classify it mechanically:
 
 ```bash
-# For each item, grep for the core concern in skill files
-grep -r "<keyword from NOTES item>" $SHMORCH_HOME/shmorch-core.md \
+# For each inbox file, grep for its core concern in skill files
+grep -r "<keyword from the inbox item>" $SHMORCH_HOME/shmorch-core.md \
   $SHMORCH_HOME/workflows/*.md 2>/dev/null | head -3
 ```
 
 Classification:
-- **ADDRESSED** — the concern is reflected verbatim or substantively in a skill file → remove the item now; do not leave it as archive (git history carries it)
-- **PARTIAL** — the concept exists but the specific proposal isn't implemented → append `_(partial — <what's missing>)_` and keep
-- **UNADDRESSED** — not found in any skill file → keep as-is; include in no-action observations in the proposals output
+- **ADDRESSED** — the concern is reflected verbatim or substantively in a skill file → delete the file now; do not leave it as archive (git history carries it)
+- **PARTIAL** — the concept exists but the specific proposal isn't implemented → prepend `_(partial — <what's missing>)_` to the file and keep it in place
+- **UNADDRESSED** — not found in any skill file → keep the file as-is; include in no-action observations in the proposals output
 
-Rewrite NOTES.md with only surviving (non-ADDRESSED) items. Record the cleanup in the proposals file:
+Record the cleanup in the proposals file:
 
 ```
-### NOTES.md cleanup — <date>
-Removed: <N items> (addressed). Kept: <M items> (partial/unaddressed).
+### Inbox cleanup — <date>
+Removed: <N files> (addressed). Kept: <M files> (partial/unaddressed).
 ```
 
 - Append to `docs/project/session.md`: `Self-improve <date>: N proposals, M applied.`
