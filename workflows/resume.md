@@ -1,13 +1,13 @@
 # Workflow: resume
 
-Fast re-entry: latest session knowledge and current focus — plus a cheap staleness check, since `resume`'s whole premise (just cleared, mid-session) means real time may have passed and `session.md`/`plan.md` may not reflect it. Use when `go`'s full bootstrap (version check, context interview, gap scanning, memory staleness check) isn't needed — you're already oriented, you just need the thread picked back up *correctly*.
+Fast re-entry: latest session knowledge and current focus — plus a cheap staleness check, since `resume`'s whole premise (just cleared, mid-session) means real time may have passed and `session.md`/`plan/` may not reflect it. Use when `go`'s full bootstrap (version check, context interview, gap scanning, memory staleness check) isn't needed — you're already oriented, you just need the thread picked back up *correctly*.
 
 ## When to use
 - Re-entering a session that's already underway (context reset, new tab, quick check-in)
 - `go` was already run this session
 
 ## Inputs
-- `docs/project/session.md`, `docs/project/plan.md`
+- `docs/project/session.md`, `docs/project/plan/`
 - `git branch --show-current`, `git log --oneline -10`, `gh pr list --state merged --limit 5`
 - Most-recently-modified files under `docs/project/` and the working tree (cheap signal for in-flight work never logged)
 
@@ -18,7 +18,7 @@ Fast re-entry: latest session knowledge and current focus — plus a cheap stale
 
 ## Step 1 — Read the minimum
 
-Read `docs/project/session.md` and `docs/project/plan.md` in parallel. No `context.md`, no `stack.md`, no version check, no memory scan.
+Read `docs/project/session.md` and `docs/project/plan/` in parallel. No `context.md`, no `stack.md`, no version check, no memory scan.
 
 ## Step 1.5 — Stamp session start
 
@@ -33,7 +33,7 @@ fi
 
 ## Step 2 — Cross-check, don't trust blindly
 
-`session.md` and `plan.md` are only as fresh as the last `/shmorch wrap` or in-the-moment edit. A `/clear` is invisible to shmorch — nothing runs automatically after it — so the gap between "what these docs say" and "what main actually looks like" can be hours or days, even mid-sprint. Run this cross-check every time, not just when something feels off:
+`session.md` and `plan/` are only as fresh as the last `/shmorch wrap` or in-the-moment edit. A `/clear` is invisible to shmorch — nothing runs automatically after it — so the gap between "what these docs say" and "what main actually looks like" can be hours or days, even mid-sprint. Run this cross-check every time, not just when something feels off:
 
 1. `git branch --show-current` + `git log --oneline -10` — does the branch match what session.md says is "in progress"? Are there merge commits or PRs referenced in the log that session.md's latest entry doesn't mention?
 2. `gh pr list --state merged --limit 5` (best-effort; skip silently if `gh` fails or isn't authenticated) — any merged PR not named in session.md's last entry is a sign docs are behind reality.
@@ -46,7 +46,7 @@ If they don't line up: say so plainly before proposing next steps — name what'
 ## Step 3 — Surface and propose
 
 1. If `session.md` has a "Pick up immediately" or **BLOCKER** note *and it's still consistent with the cross-check*, lead with it.
-2. Otherwise, state the current task — from `plan.md` if it checks out, or from what git/PRs actually show if it doesn't — in one line and propose continuing it.
+2. Otherwise, state the current task — from `plan/` if it checks out, or from what git/PRs actually show if it doesn't — in one line and propose continuing it.
 3. If there's no current task, fall back to the top 2-3 backlog items as options.
 
 Keep the whole response to a few lines — this is a reminder, not a re-orientation. If the user wants the full check (version, gaps, memory staleness), point them at `/shmorch go`.

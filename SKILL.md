@@ -25,6 +25,6 @@ Dispatch on the first word of the invocation arguments — `$ARGUMENTS` on Claud
 | `research` | `commands/research.md` |
 | `status` | `commands/status.md` |
 | `help` or empty | `commands/help.md` |
-| anything else | **Shmorch prompt** — treat the full args as a question or directive addressed to Shmorch in the current project context. Read `docs/project/context.md`, `docs/project/session.md`, and `docs/project/plan.md` to orient, then respond as Shmorch: actively, concisely, and with a next-step proposal. Do not read any command file. |
+| anything else | **Shmorch prompt** — treat the full args as a question or directive addressed to Shmorch in the current project context. Read `docs/project/context.md`, `docs/project/session.md`, and `docs/project/plan/` to orient, then respond as Shmorch: actively, concisely, and with a next-step proposal. Do not read any command file. |
 
 Do not read command files you don't need — they're large and only the relevant one matters.

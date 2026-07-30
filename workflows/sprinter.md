@@ -9,7 +9,7 @@ Manage the active sprint. Reads and updates `docs/project/sprint.md`.
 
 ## Inputs
 - `docs/project/sprint.md` — active sprint (must exist for status/close)
-- `docs/project/plan.md` — backlog reference (for new and close)
+- `docs/project/plan/` — backlog reference (for new and close)
 - `docs/project/context.md` — project stage (affects risk interpretation)
 
 ## Roles
@@ -47,7 +47,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
        Read docs/project/sprint.md to get the sprint goal, dates, and scope table.
 
        For each track in scope, read its current state from docs/project/tracks/<track-slug>/
-       (index.md or plan.md — whatever exists). Do not read track files for ~~struck-through~~ rows;
+       (index.md or plan/ — whatever exists). Do not read track files for ~~struck-through~~ rows;
        those are dropped from scope.
 
        Assess:
@@ -88,7 +88,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 1. Ask one at a time:
    - "Sprint goal? (one sentence)"
    - "Start and end dates?"
-   - "Which tracks from the backlog are in scope?" (show plan.md backlog briefly)
+   - "Which tracks from the backlog are in scope?" (show plan/ backlog briefly)
    - "Definition of done for this sprint specifically?"
 
 2. Write `docs/project/sprint.md` using the sprint template format:
@@ -120,7 +120,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 
 ## sprinter close
 
-1. Read `docs/project/sprint.md` and `docs/project/plan.md`.
+1. Read `docs/project/sprint.md` and `docs/project/plan/`.
 
 2. Update the sprint doc before archiving:
    - Set Status to `Closed`
@@ -140,7 +140,7 @@ Sprint docs are intentionally terse — they reference tracks for detail. The sp
 
 6. Delete `docs/project/sprint.md` (after confirming with user).
 
-7. Update `docs/project/plan.md`: mark any completed tracks DONE, move deferred tracks back to backlog with a note.
+7. Update `docs/project/plan/`: mark any completed tracks DONE, move deferred tracks back to backlog with a note.
 
 8. Stamp: `bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "sprint closed: <goal>"`
 

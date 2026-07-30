@@ -4,7 +4,7 @@ updated: 2026-07-21
 summary: Deterministic traversal + graduation check shipped as tools/track-graph-audit.sh, wired into documentarian.md and the Architecture Changelog backfill row.
 ---
 
-↑ [Shmorch Plan](../../plan.md)
+↑ [Shmorch Plan](../../plan/index.md)
 → `core/documentation.md` + `workflows/documentarian.md` + `workflows/init.md`
 
 # Track: Graph-first documentation

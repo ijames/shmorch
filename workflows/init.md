@@ -37,7 +37,7 @@ If the result is `SELF`: stop immediately and tell the user:
 > would overwrite live docs with blank templates.
 >
 > To work on shmorch's own docs and roadmap, open a session in `$SHMORCH_HOME`
-> directly and use the existing `docs/project/plan.md`.
+> directly and use the existing `docs/project/plan/`.
 
 Do not proceed past this point if `SELF`.
 

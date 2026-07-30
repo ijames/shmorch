@@ -4,7 +4,7 @@ updated: 2026-07-21
 summary: Design for an opt-in, per-project messaging provider (thin Zulip/Slack skills, keys never in Shmorch) replacing the hardcoded single-Zulip-workspace assumption. Scope settled; implementation not started.
 ---
 
-↑ [Shmorch Plan](../../plan.md)
+↑ [Shmorch Plan](../../plan/index.md)
 → `templates/.shmorch/AGENTS.md`, `core/operations.md`, `docs/architecture/feedback-systems.md` (once shipped)
 
 # Track: Messaging provider — optional, per-project, not hardcoded to one Zulip workspace

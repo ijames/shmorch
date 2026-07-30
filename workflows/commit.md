@@ -2,7 +2,7 @@
 
 > **Composability note:** This workflow wraps the **smart-commit** base procedure with a Shmorch DoD layer.
 > Steps 1–2 (assess/group) and Step 5 (commit mechanics) follow the same pattern as smart-commit.
-> Steps 3 (DoD: tests/docs/track) and the track-name context from `plan.md` are Shmorch additions.
+> Steps 3 (DoD: tests/docs/track) and the track-name context from `plan/` are Shmorch additions.
 > If the commit mechanics in smart-commit are updated, sync them here too.
 
 Group all changes into logical, independent units and commit them — each with tests, docs, and track updates included.
@@ -14,7 +14,7 @@ Group all changes into logical, independent units and commit them — each with 
 
 ## Inputs
 - Working tree changes (staged and unstaged)
-- `docs/project/plan.md` — to identify the active track name
+- `docs/project/plan/` — to identify the active track name
 
 ## Roles
 - None — runs inline
@@ -29,7 +29,7 @@ Run in parallel:
 - `git diff --cached`
 - `git log --oneline -5`
 
-Also read `docs/project/plan.md` to know the active track name (marked "In progress"). If none, use "general".
+Also read `docs/project/plan/` to know the active track name (marked "In progress"). If none, use "general".
 
 ---
 
@@ -86,7 +86,7 @@ Output a numbered list:
 ```
 Planned commits:
 1. feat(track-name): description — files: biz.py, test_biz.py, docs/api.md, tracks/auth/plan.md
-2. chore(shmorch): wrap state — files: docs/project/plan.md, docs/project/session.md
+2. chore(shmorch): wrap state — files: docs/project/plan/, docs/project/session.md
 3. config: description — files: .claude/settings.local.json
 ```
 

@@ -77,10 +77,16 @@ while IFS= read -r -d '' f; do
 done < <(find "$DOCS" -name '*.md' -print0)
 
 # --- UNLINKED_FROM_INDEX ---
+# docs/{project,state}/plan/ is a directory-scan registry by design (like inbox/'s inverse):
+# backlog items are found by listing the directory, never by an index.md line, so concurrent
+# stub tracks adding items never collide on a shared index.md edit. Skip it here.
 while IFS= read -r -d '' f; do
   base="$(basename "$f")"
   [ "$base" = "index.md" ] && continue
   dir="$(dirname "$f")"
+  case "$dir" in
+    "$DOCS/project/plan"|"$DOCS/state/plan") continue ;;
+  esac
   index="$dir/index.md"
   [ -f "$index" ] || continue
   grep -qF "$base" "$index" 2>/dev/null || echo "UNLINKED_FROM_INDEX $f"

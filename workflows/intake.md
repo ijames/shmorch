@@ -37,7 +37,7 @@ Clarify the goal before routing to the right workflow.
 | Remove dead code or stale docs | **Vacuum** |
 | Sync docs/Zulip/tests with code | **Curate** |
 
-6. Write to `docs/project/plan.md` (STATUS: PENDING) with enough detail to hand off to the target workflow
+6. Write to `docs/project/plan/` (STATUS: PENDING) with enough detail to hand off to the target workflow
 7. Confirm the route with the user, then enter the target workflow — stamp `PHASE: intake → <next>`
 
 ---

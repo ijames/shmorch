@@ -4,7 +4,7 @@ updated: 2026-07-17
 summary: go is now the single dispatcher (provision → orient); Phase 1+2 landed (dispatcher, orient.md carve-out, core/operations.md carve-out, front-matter previews). Phase 3 (store shape) split to state-store-shape.
 ---
 
-↑ [Shmorch Plan](../../plan.md)
+↑ [Shmorch Plan](../../plan/index.md)
 → [workflows/go.md](../../../../workflows/go.md) · [workflows/orient.md](../../../../workflows/orient.md) · [shmorch-core.md](../../../../shmorch-core.md)
 
 # Track: Entry-point consolidation — go as the one door

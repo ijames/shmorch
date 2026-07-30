@@ -55,7 +55,7 @@ Starts a working session. Claude reads state, orients, and asks what to do.
 2. Checks if the skill version is newer than the project version; prompts to update if so
 3. Reads `context.md` and `stack.md` — runs a Context Setup interview if unfilled
 4. Reads `session.md` — summarizes what happened last time
-5. Reads `plan.md` — shows active tracks and current focus
+5. Reads `plan/` — shows active tracks and current focus
 6. Checks `git status` — flags uncommitted changes
 7. Asks: "What do you want to work on?"
 
@@ -63,7 +63,7 @@ Starts a working session. Claude reads state, orients, and asks what to do.
 
 Fast re-entry into a session that's already underway — skips everything `go` does except the essentials.
 
-1. Reads `session.md` and `plan.md` only — no version check, no context/stack interview, no git status, no gap or memory scanning
+1. Reads `session.md` and `plan/` only — no version check, no context/stack interview, no git status, no gap or memory scanning
 2. Leads with the BLOCKER / "Pick up immediately" note if one exists, otherwise the current task
 3. Points to `/shmorch go` if the full check is actually needed
 
@@ -75,7 +75,7 @@ Closes the session — stamps end time, summarizes what happened, updates all st
 2. Runs `git log` to identify commits since the last session entry
 3. Asks one question: "What was the focus of this session? Any decisions worth recording?"
 4. Stamps `SESSION_END`, writes a new entry to `session.md`, demotes the previous one
-5. Updates `plan.md` if any track statuses changed
+5. Updates `plan/` if any track statuses changed
 6. Appends to `decisions.md` if any architectural decisions were made
 7. Shows elapsed session time via `$SHMORCH_HOME/tools/duration.sh today`
 
@@ -99,7 +99,7 @@ Scans the project for waste — TODOs, FIXMEs, HACKs, empty test files — then 
 1. Runs `vacuum.sh` to generate a timestamped report in `docs/project/`
 2. Summarizes findings: count and location of annotations, empty test files
 3. Walks through findings one at a time: "Delete, keep, or address now?"
-4. Acts on decisions — deletes with confirmation, logs new tracks in `plan.md`, or fixes inline
+4. Acts on decisions — deletes with confirmation, logs new tracks in `plan/`, or fixes inline
 5. Stamps `VACUUM` in the timelog
 
 ### `/shmorch checkpoint`
@@ -158,7 +158,7 @@ All state lives in `docs/project/` as plain markdown.
 | File | Purpose |
 |---|---|
 | `context.md` | Project identity, tech stack, preferences, never-do rules |
-| `plan.md` | Current task (with status), backlog, completed work |
+| `plan/` | Current task (with status), backlog, completed work |
 | `spec.md` | Active specification |
 | `decisions.md` | Architecture decision log |
 | `session.md` | Cross-session summary — what happened each time |
@@ -199,7 +199,7 @@ Additional rules enforced by the model:
 - Never delete without user confirmation
 - Never push to git without user confirmation
 - Never switch branches without asking
-- Always write `plan.md` before multi-file changes
+- Always write `plan/` before multi-file changes
 - One question at a time — never a barrage
 
 ---

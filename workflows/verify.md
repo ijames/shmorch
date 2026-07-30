@@ -134,6 +134,6 @@ N issues found. M auto-fixable (generic README boilerplate). K require developer
 
 ## Step 7 — Surface and act
 
-Present the summary to the user. Auto-fixable items (empty test scripts, generic README boilerplate) can be fixed inline with confirmation. Structural gaps and coverage gaps require developer attention — open a `plan.md` item for each unresolved gap.
+Present the summary to the user. Auto-fixable items (empty test scripts, generic README boilerplate) can be fixed inline with confirmation. Structural gaps and coverage gaps require developer attention — open a `plan/` item for each unresolved gap.
 
 Never silently pass a parity check that has failures. The point of this workflow is that broken parity is visible.

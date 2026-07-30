@@ -15,7 +15,6 @@ if [ ! -d ".git" ]; then
 fi
 
 STATE_FILES=(
-  docs/project/plan.md
   docs/project/session.md
   docs/project/timelog.md
 )
@@ -23,6 +22,8 @@ STATE_FILES=(
 for f in "${STATE_FILES[@]}"; do
   [ -f "$f" ] && git add "$f" 2>/dev/null || true
 done
+
+[ -d docs/project/plan ] && git add docs/project/plan 2>/dev/null || true
 
 for d in docs/product/decisions docs/technology/decisions; do
   [ -d "$d" ] && git add "$d" 2>/dev/null || true

@@ -4,7 +4,7 @@ updated: 2026-06-01
 summary: Break the shmorch-core.md god doc into focused core/*.md sub-documents loaded JIT; prerequisite for boundary-cleanup.
 ---
 
-↑ [Shmorch Plan](../../plan.md)
+↑ [Shmorch Plan](../../plan/index.md)
 → `shmorch-core.md` refactored into `core/*.md` sub-documents
 
 # Track: shmorch-core.md breakup

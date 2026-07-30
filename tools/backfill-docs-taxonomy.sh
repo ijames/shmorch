@@ -68,6 +68,11 @@ for pair in "${MAPPING[@]}"; do
   MOVED+=("$old -> $new")
 done
 
+# Chain into the plan.md -> plan/ directory backfill if this run just landed a flat plan.md.
+if [ -f docs/project/plan.md ] && [ ! -d docs/project/plan ]; then
+  bash "$(dirname "$0")/backfill-plan-dir.sh" "$ROOT"
+fi
+
 # Empty leftover dirs (old skeleton dirs with nothing left but a .gitkeep or judgment files).
 for d in docs/architecture docs/development docs/development/guides docs/to_review docs/state; do
   if [ -d "$d" ] && [ -z "$(find "$d" -mindepth 1 -not -name '.gitkeep')" ]; then

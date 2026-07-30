@@ -4,7 +4,7 @@ updated: 2026-07-30
 summary: Built tools/docs-audit.sh (dead links, frontmatter placement, parent-link presence, index linkage, one-way ↔ related, line-overlap duplicates) and wired it into documentarian.md Step 2 alongside track-graph-audit.sh.
 ---
 
-↑ [Shmorch Plan](../../plan.md)
+↑ [Shmorch Plan](../../plan/index.md)
 → `tools/docs-audit.sh` (new) + `workflows/documentarian.md` § Step 2 (Orient)
 
 # Track: Docs-audit tool

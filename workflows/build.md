@@ -99,7 +99,7 @@ State files (`docs/project/`, `docs/{product,technology}/decisions/ (topic-appro
 bash $SHMORCH_HOME/tools/timelog.sh "TASK_START" "<track name>"
 ```
 
-Set status `IN_PROGRESS` in `docs/project/plan.md`.
+Set `status: in-progress` on the active track's item file in `docs/project/plan/`.
 
 Read the approved spec and design:
 - `docs/project/spec.md` (or track-level spec)
@@ -122,7 +122,7 @@ Before writing code, enumerate:
 2. **Affected tests:** Which existing tests are likely to need updating? List them. If none, confirm why.
 3. **Affected decisions:** Does this implementation require a new entry in decisions.md, or update an existing one?
 
-Write this list to `docs/project/plan.md` under the active task.
+Write this list to `docs/project/plan/` under the active task.
 
 4. **Seed scripts (stage-gated):** If this implementation writes or modifies any migration files (`db/migrations/`, `migrations/`, `alembic/versions/`, or similar), apply the following check based on the project `stage` from `docs/project/context.md`:
    - **R&D / proof-sprint:** List every seed/fixture script that populates the affected tables. Flag each as "potentially stale — verify schema alignment before running `make db-seed` or equivalent." Updating stale seeds is part of the Definition of Done for this task, not a follow-up.
@@ -252,7 +252,7 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 - Fill in the track's `↑` source and `→` destination links before writing anything else — if you can't fill in the destination, the track isn't scoped. Do this before implementation, not retroactively at this checklist.
 - Is this tied to an open track step? Mark it done.
 - No track exists and this is non-trivial? Create one using `.shmorch/docs/track-template.md`.
-- Update `docs/project/plan.md`.
+- Update `docs/project/plan/`.
 - **Before opening the PR:** update the track's `index.md` Status field to reflect the state the merge will produce (e.g. `Open — Intent + Spec` → `Shipped` / `Closed`), not the state it's in mid-build. Stale status fields caught only by later documentarian sweeps are the recurring failure mode this guards against — fix it at the point of change, not in batch later.
 
 ### Plan alignment
@@ -277,6 +277,6 @@ Before committing, confirm all four:
 bash $SHMORCH_HOME/tools/timelog.sh "TASK_DONE" "<track name>"
 ```
 
-Set status `DONE` in `docs/project/plan.md`. Update `docs/project/session.md`.
+Set `status: done` on the active track's item file in `docs/project/plan/` (or delete it — git history keeps it, matching the inbox ADDRESSED convention). Update `docs/project/session.md`.
 
 Suggest: `/shmorch vacuum` → `/shmorch commit` → `/shmorch wrap`

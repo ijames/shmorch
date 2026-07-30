@@ -13,7 +13,7 @@ Use `bash "$SHMORCH_HOME/tools/timelog.sh" "EVENT" "detail"` at every transition
 | When | Event | Detail |
 |---|---|---|
 | Session opens | `SESSION_START` | topic or "resuming X" |
-| Task begins | `TASK_START` | task name from plan.md |
+| Task begins | `TASK_START` | task name from plan/ |
 | Agent spawned | `AGENT_SPAWN` | "role → target" |
 | Agent done | `AGENT_DONE` | "role → output file" |
 | Phase changes | `PHASE` | e.g. "intake → spec" |

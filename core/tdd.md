@@ -56,7 +56,7 @@ In practice — especially with AI-assisted development — code frequently exis
 - Each item carries a creation date: `- [ ] YYYY-MM-DD · criterion text`
 - Completed items carry both dates: `- [x] YYYY-MM-DD → YYYY-MM-DD · criterion text`
 - Retrospective items (AC written after implementation) are noted: `_(retrospective)_`
-- Every item cites its intent source: `← intent-source` (BDD scenario, plan.md item, decision)
+- Every item cites its intent source: `← intent-source` (BDD scenario, plan/ item, decision)
 - Items without intent sources are interrogated before the AC document is considered valid
 - Items are never silently deleted — if descoped, they move to a `## Descoped` section with date and reason
 
