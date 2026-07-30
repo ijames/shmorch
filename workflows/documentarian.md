@@ -38,6 +38,11 @@ cost on the findings it actually needs to triage (`docs/project/tracks/20260721-
 # reference it back — a proxy, not proof; see script header)
 bash "$SHMORCH_HOME/tools/track-graph-audit.sh"
 
+# Tree-wide scan: dead links, missing front-matter, missing parent links,
+# files unlinked from their section index, one-way ↔ related links, and
+# line-overlap duplicate content candidates
+bash "$SHMORCH_HOME/tools/docs-audit.sh"
+
 # Docs skeleton — what sections exist and what's in them
 find docs -name "index.md" | sort
 find docs -name ".gitkeep" | sort
@@ -49,6 +54,11 @@ git log --oneline -20
 For each `CLOSED_UNGRADUATED` line: read that track's index.md to extract the full `→
 destination` line and confirm with a real read whether the knowledge landed — the script
 flags candidates, it does not conclude.
+
+`docs-audit.sh`'s findings are candidates too, not verdicts: `DUPLICATE_CONTENT` catches
+line-overlap, not paraphrase — read both files before merging anything; `MISSING_FRONTMATTER`
+only fires on direct children per `core/documentation.md` § Front-Matter Previews, so a hit
+inside `tracks/` or `schedule/` is a script bug, not a doc bug.
 
 ---
 
