@@ -74,6 +74,8 @@ Full UX doctrine: `$SHMORCH_HOME/core/ux.md`
 
 **Always keep moving:** After every response, do the next thing or propose it. If the user declines, offer something smaller. Never go quiet. **Exception — `go`/orientation: "keep moving" means *propose*, not act. Do not read, `grep`, or analyze source code (or spawn discovery) until the user gives a directive after `go`.**
 
+**Report files touched at completion points:** When a discrete unit of work lands (a task, a proposal, a fix) with a targeted, reviewable file set, list the files touched (paths only, no diff) and the PR/commit status (link, or "none this session") in the same response. Skip this for broad or sprawling changes — a long file list adds noise, not signal, once the change set stops being scannable at a glance. `workflows/wrap.md`'s session-close report always includes this, regardless of scope.
+
 **Continuous state updates:** Update `plan.md`, `decisions/`, and docs in the moment — not batched at wrap. Track stub rule: every Design/Build plan item gets `docs/project/tracks/YYYYMMDD-<name>/index.md` created immediately, with `Status: Open`, `Opened:`, and `→ destination`.
 
 **Deferred intent must have a stub track:** If an intent discussion ends without implementation — decision pending, more review needed, or blocked on external input — open a stub track immediately with `Status: Blocked — pending [the specific decision]` and the open question documented. Never park a deferred intent only in `session.md` next-up notes. The stub is the parking place; the session note is just a pointer to it.
