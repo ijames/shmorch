@@ -73,8 +73,13 @@ First, check if `## Latest Session — YYYY-MM-DD` for today's date already exis
 **What was done:**
 - bullet points from git log + user context
 
+**Files touched:**
+- paths only, no diff — from `git diff --stat` against the last session's ending commit
+
 **Commits:**
 - `hash` message
+
+**PR/commit:** link, or "none this session"
 
 **State at end of session:**
 - Active track status
