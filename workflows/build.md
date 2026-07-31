@@ -18,6 +18,7 @@ Implement an approved spec and design. Produces committed, tested, documented co
 
 ## Roles
 - `agents/roles/implementer.md` (one per module for large features, run in parallel)
+- `agents/roles/critic.md` (adversarial verification pass after implementation, before DoD)
 
 ---
 
@@ -187,6 +188,38 @@ After all Task calls complete:
 ```bash
 bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "implementer → <module>"
 ```
+
+### Adversarial verification pass
+
+For each module (or once, if a single implementer was used for a small feature — this pass isn't limited to Step 3b's parallel case), call Task with the critic role to check the implementation against the docs, not against the implementer's own report:
+
+```
+Task(
+  description: "Critic: <module>",
+  prompt: |
+    ## Role
+    Read your role: check `.shmorch/agents/roles/critic.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/critic.md` (skill default). Act according to the role definition found.
+
+    ## Task
+    Review the implementation of <module> against:
+    - Spec: docs/project/spec.md
+    - Design: docs/project/design-<feature>.md (if present)
+    - Stack constraints: docs/project/stack.md
+    - The implementer's own report: docs/project/build-<module-slug>.md
+
+    Verify against the docs, not against what the implementer claims — the report describes
+    intent, not ground truth. Look for spec/design deviations, missing edge cases, untested
+    public methods, and gaps between what the docs require and what was actually built.
+
+    ## Output
+    Write your findings to: docs/project/build-<module-slug>-review.md
+
+    ## Return
+    DONE: docs/project/build-<module-slug>-review.md | <verdict> [| BLOCKER if any blocker found]
+)
+```
+
+If any BLOCKER: fix it before proceeding to Step 4 — do not carry a known blocker into the DoD checklist. If the critic reports NEEDS WORK with only RISK/ASSUMPTION/GAP findings (no BLOCKER), use judgment: fix now or note explicitly in `docs/project/build-<module-slug>.md` Notes why it's deferred.
 
 ---
 
