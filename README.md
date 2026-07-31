@@ -259,7 +259,7 @@ SKILL.md           — skill metadata and command dispatch table
 VERSION            — skill version (format: YYYYMMDD.NN)
 commands/          — one file per command (/shmorch go, init, wrap, etc.)
 templates/         — everything copied into a project on /shmorch init
-NOTES.md           — development notes and known gaps
+docs/inbox/        — captured observations awaiting self-improve triage
 ```
 
 ---
