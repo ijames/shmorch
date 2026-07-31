@@ -359,7 +359,7 @@ For `generic-improvement` and `conflict` entries: show the specific diff (not th
 
 For `new-in-skill`: just copy without showing full content unless asked.
 
-For `project-specific`: note it. Ask if the developer wants to extract it to `.shmorch/AGENTS.md` so the generic file can be cleanly updated. Never force this.
+For `project-specific`: note it. Ask if the developer wants to extract it to `.shmorch/AGENTS.md` so the generic file can be cleanly updated. Never force this. Before leaving a customized file untouched because it "differs from the template," verify any doc paths it references still resolve in the current project doc tree — a customization can itself be stale from an earlier docs-taxonomy restructure (see `workflows/documentarian.md` Step 4.5).
 
 ---
 
