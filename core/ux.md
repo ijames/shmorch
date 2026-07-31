@@ -9,6 +9,8 @@ An interface where elements flash in or out, or change state abruptly, is inflic
 2. **State changes** — which transitions are load-bearing? (open/closed, loading/done, error/success)
 3. **Exit** — how does it leave?
 
+**System-driven state gets the same treatment.** When the OS already exposes a relevant preference — light/dark via `prefers-color-scheme` is the concrete case — default to it rather than making the user restate it in-app; an explicit in-app override is additive, not the only path. Because the user didn't initiate the change, the transition should stay off their conscious attention: a snap flash forces them to notice something they never asked about, where a smooth fade lets it pass unnoticed. CSS custom properties for themed values plus a blanket `transition` on the affected properties handles both the system-level flip and a manual override with the same mechanism — no JS-driven repaint, no flash-of-wrong-theme.
+
 "We'll add animation later" signals that the component's interaction design is unfinished — not that the feature is nearly done. A spec with no transition story is an incomplete spec.
 
 **The honest framing:** Software UIs are inherently smoke and mirrors — visual chrome that helps the user form and maintain a mental model of an underlying state machine. Animation makes that fiction coherent. Without it, the mental model breaks on every state change. The goal is to make the fiction so coherent that the user never notices the seams.
