@@ -122,4 +122,4 @@ Incorporate feedback and rewrite the spec in place (not appended — see shmorch
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "spec: approved — <feature>"
 ```
 
-Update `docs/project/plan.md` to set the track status to `Spec done`. Propose: "Ready to design, or go straight to build?"
+Update `docs/project/plan/` to set the track status to `Spec done`. Propose: "Ready to design, or go straight to build?"

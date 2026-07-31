@@ -1,6 +1,6 @@
 # Command: prioritize
 
-Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/project/plan.md` only after developer confirmation.
+Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/project/plan/` only after developer confirmation.
 
 ## When to run
 - Before starting a new sprint

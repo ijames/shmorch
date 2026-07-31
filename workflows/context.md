@@ -28,7 +28,7 @@ Every conversation operates at two levels simultaneously:
 
 | Level | Contents | Lives in |
 |---|---|---|
-| **Architectural** | Why this exists, what it connects to, constraints | decisions.md, plan.md, track docs |
+| **Architectural** | Why this exists, what it connects to, constraints | decisions.md, plan/, track docs |
 | **Implementation** | What we're doing right now, the specific code | Active conversation thread |
 
 The architectural level must always be visible — it's the compass. The implementation
@@ -100,7 +100,7 @@ Or just do it if the stopping point is clear:
 0. Clear processed tool outputs first — highest-volume, lowest-value tokens; discard entirely, do not summarize.
 1. Identify what the thread accomplished
 2. Write decisions to decisions.md — architectural decisions and unresolved issues must survive compaction verbatim, with no information loss.
-3. Write state to session.md / plan.md (what's done, what's next)
+3. Write state to session.md / plan/ (what's done, what's next)
 4. Commit if there's uncommitted work
 5. Clear the implementation thread — start the next topic fresh
 

@@ -42,8 +42,8 @@ Analysis artifacts need a home with a lifecycle. Before scoping:
    ```
    Write a minimal `docs/project/tracks/<YYYYMMDD>-analysis-<slug>/index.md`:
    ```markdown
-   ↑ [Plan](../../plan.md)
-   → <destination docs, e.g. decisions.md or plan.md — fill in after analysis>
+   ↑ [Plan](../../plan/index.md)
+   → <destination docs, e.g. decisions.md or plan/ — fill in after analysis>
 
    # Track: <Title> — Analysis
 
@@ -170,6 +170,6 @@ Present the summary to the user. Propose the next step based on the `## Next ste
 
 **Graduation note:** findings in this track are starting points, not destinations. As they resolve:
 - Decisions → `docs/{product,technology}/decisions/` (topic-appropriate)
-- Action items → `plan.md` backlog
+- Action items → `plan/` backlog
 - Architecture facts → `docs/technology/architecture/`
 - Stale/superseded analysis files → delete, leave a one-line note in the track work log

@@ -25,7 +25,7 @@ The docs skeleton represents the intended complete shape of the system. A filled
 | State | What it means | Documentarian action |
 |-------|---------------|---------------------|
 | **Verified** | Docs + code + tests all agree | Confirm parity; no change needed |
-| **Planned** | Docs describe intent; code/tests not yet written | Preserve; feed to plan.md if not already tracked |
+| **Planned** | Docs describe intent; code/tests not yet written | Preserve; feed to plan/ if not already tracked |
 | **Gap** | Code/tests exist; docs missing or don't match | Triage — see below |
 
 ---
@@ -47,7 +47,7 @@ Then classify:
 |----------------|---------|-------------|
 | `DOC_STALE` | Intent changed deliberately; doc didn't follow | Documentarian can update |
 | `CODE_DIVERGED` | Code moved away from documented intent without a decision | Developer must sign off |
-| `TEST_GAP` | Behavior is correct but not verified | File in plan.md |
+| `TEST_GAP` | Behavior is correct but not verified | File in plan/ |
 | `UNDECIDED` | Insufficient evidence to classify | Escalate to developer; no changes |
 
 Never change a doc, test, or code to resolve `CODE_DIVERGED` or `UNDECIDED` without developer sign-off. The doc was written for a reason.
@@ -64,9 +64,9 @@ After verifying parity, scan the skeleton for:
 - **Untested behavior** — things documented or coded but not covered by tests
 
 For each gap found:
-- If it belongs in the product (user-facing feature): propose a plan.md item or track candidate
+- If it belongs in the product (user-facing feature): propose a plan/ item or track candidate
 - If it's a technical doc gap (architecture, API reference): write it now if small; file a track if substantial
-- If it's a test gap: file in plan.md as `#correctness`
+- If it's a test gap: file in plan/ as `#correctness`
 
 The documentarian doesn't just close gaps — they map them. A gap map produced after a documentarian pass is an input to the next `/shmorch navigate` session.
 
@@ -76,7 +76,7 @@ The documentarian doesn't just close gaps — they map them. A gap map produced 
 
 - Updated docs sections (parity fixes, legacy reverse-engineering, planned-section stubs)
 - `docs/project/parity-report-<date>.md` — what was found, how it was classified, what was changed
-- `plan.md` additions — gap items filed with appropriate tags
+- `plan/` additions — gap items filed with appropriate tags
 - Confirmed or updated `docs/project/spec.md` if planned sections reveal an undocumented active intent
 
 ---

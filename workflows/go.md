@@ -98,7 +98,7 @@ Read `docs/project/session.md` to find the last session entry date. Commits sinc
 **CW-3 — Update session.md:**
 Write a session entry (or update today's if one exists) using the standard session.md format from `workflows/wrap.md` Step 5. Use git log as the source for "What was done" and "Commits". Set the focus line to "Session ended without wrap — reconstructed from git log." Demote the previous "Latest Session" heading to a date heading.
 
-**CW-4 — Update plan.md:**
+**CW-4 — Update plan/:**
 Check if any tracks or tasks visible in git commits have a status that should now be updated. Apply changes if obvious; skip if unclear.
 
 **CW-5 — Graduate closed tracks:**

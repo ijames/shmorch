@@ -19,7 +19,7 @@ Close the current session — stamp the end time, summarize what happened, and u
 
 Read these files in parallel:
 - `docs/project/session.md`
-- `docs/project/plan.md`
+- `docs/project/plan/`
 - `docs/{product,technology}/decisions/ (topic-appropriate)`
 
 `timelog.md` is append-only and grows without bound — never `Read` it whole. Pull only the current session's entries:
@@ -96,9 +96,9 @@ Demote the previous "Latest Session" heading to just a date heading (`## YYYY-MM
 
 ---
 
-## Step 6 — Update plan.md (if needed)
+## Step 6 — Update plan/ (if needed)
 
-Check if any track statuses changed. If so, update the Active Tracks table and Backlog. If nothing changed, skip.
+Check if any track statuses changed. If so, update `status:` frontmatter on the affected item file(s) in `docs/project/plan/`, and Current Task in `index.md` if the focus moved. If nothing changed, skip.
 
 ---
 
@@ -138,7 +138,7 @@ If the referenced track is closed, or if no active track exists, replace `docs/p
 ```markdown
 # Active Spec
 
-No active spec. See plan.md for next candidates.
+No active spec. See plan/ for next candidates.
 ```
 
 ---
@@ -173,7 +173,7 @@ Show the output to the user.
 Update (or add) a "Current State" section in `.shmorch/AGENTS.md` — the shared project-instructions file both Claude Code and omp load (via their respective import chains):
 - Today's date
 - Current integration branch (usually `dev`)
-- Current passing test count (from the last test run this session, or check `docs/project/plan.md` for the last recorded count)
+- Current passing test count (from the last test run this session, or check `docs/project/plan/` for the last recorded count)
 
 Three fields; do it inline without asking.
 
@@ -193,7 +193,7 @@ If `docs/` does not exist in the project, skip silently. If any files were patch
 
 ## Step 8.5 — Commit state files
 
-After updating session.md, plan.md, decisions.md, and timelog.md, commit them so the working tree is clean at next session start.
+After updating session.md, plan/, decisions.md, and timelog.md, commit them so the working tree is clean at next session start.
 
 ```bash
 bash $SHMORCH_HOME/tools/commit-session-state.sh
@@ -255,7 +255,7 @@ Read wrap prompts from two sources (both may exist):
 
 Ask all prompts together in one message. Expect a brief reply or "nothing" per item.
 
-Integrate any answers immediately into the appropriate state file (`plan.md`, `decisions.md`, or a new brainstorm file). Re-commit state files if anything changed (reuse Step 8.5 procedure).
+Integrate any answers immediately into the appropriate state file (`plan/`, `decisions.md`, or a new brainstorm file). Re-commit state files if anything changed (reuse Step 8.5 procedure).
 
 ---
 

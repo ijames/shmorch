@@ -4,7 +4,7 @@ updated: 2026-06-09
 summary: Root-level state files (session.md/plan.md/timelog.md) must not be committed on feature branches — per-track state lives in the track directory, consolidated to root only at merge time.
 ---
 
-↑ [Shmorch Plan](../../plan.md)
+↑ [Shmorch Plan](../../plan/index.md)
 → `workflows/commit.md`, `workflows/build.md`, `workflows/wrap.md` + new track state protocol
 
 # Track: State file discipline — tracks own their state

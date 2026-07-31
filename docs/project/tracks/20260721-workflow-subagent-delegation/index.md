@@ -4,7 +4,7 @@ updated: 2026-07-21
 summary: Run go/resume/wrap's rote, shmorch-specific steps as subagents returning small JSON, not inline main-thread reads. Feasible; sequence behind cheap index-discipline fix first (see findings.md).
 ---
 
-↑ [Shmorch Plan](../../plan.md)
+↑ [Shmorch Plan](../../plan/index.md)
 → `workflows/go.md`, `workflows/resume.md`, `workflows/wrap.md`, `workflows/self-improve.md`, `workflows/documentarian.md` (once shipped)
 
 # Track: Workflow subagent delegation — rote, shmorch-specific steps off the main thread
@@ -46,4 +46,4 @@ rather than project-specific judgment calls.
 
 ## Backlinks
 
-- [plan.md](../../plan.md) § Architecture
+- [plan.md](../../plan/index.md) § Architecture

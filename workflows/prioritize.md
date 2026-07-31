@@ -1,6 +1,6 @@
 # Workflow: prioritize
 
-Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/project/plan.md` only after developer confirmation.
+Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/project/plan/` only after developer confirmation.
 
 ## When to use
 - Before starting a new sprint
@@ -8,7 +8,7 @@ Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/project/pl
 - After a significant change in project goals or constraints
 
 ## Inputs
-- `docs/project/plan.md` — current backlog and track statuses
+- `docs/project/plan/` — current backlog and track statuses
 - `docs/project/sprint.md` — active sprint scope (if exists)
 - `docs/{product,technology}/decisions/ (topic-appropriate)` — architectural constraints that affect priority
 
@@ -29,7 +29,7 @@ bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "prioritize: starting"
 ### Step 2 — Read current state
 
 Read in parallel:
-- `docs/project/plan.md` — current backlog and track statuses
+- `docs/project/plan/` — current backlog and track statuses
 - `docs/project/sprint.md` — active sprint scope (if exists)
 - `docs/{product,technology}/decisions/ (topic-appropriate)` — architectural constraints that affect priority
 
@@ -43,7 +43,7 @@ Task(
     Read your role: check `.shmorch/agents/roles/prioritizer.md` first (project override); if not present, use `$SHMORCH_HOME/agents/roles/prioritizer.md` (skill default). Act according to the role definition found.
 
     ## Task
-    Analyze the backlog in docs/project/plan.md.
+    Analyze the backlog in docs/project/plan/.
     Also read docs/{product,technology}/decisions/ (topic-appropriate) for constraints that affect ordering.
     If docs/project/sprint.md exists, note what is already committed to the sprint.
 
@@ -92,11 +92,11 @@ If BLOCKER in return: surface the conflict to the developer before showing the p
 
 Show the proposed ranking to the developer. Ask:
 
-> "Want to apply this order to plan.md, adjust anything first, or keep the current order?"
+> "Want to apply this order to plan/, adjust anything first, or keep the current order?"
 
-- If apply: rewrite the backlog table in `docs/project/plan.md` to match the proposal. Update the index row in `docs/project/prioritizer/index.md` to mark status "Applied YYYY-MM-DD". Keep the proposal file as a historical record.
+- If apply: add a `priority: <rank>` frontmatter field to each affected file in `docs/project/plan/` to match the proposal (no shared file to rewrite — edit each item independently). Update the index row in `docs/project/prioritizer/index.md` to mark status "Applied YYYY-MM-DD". Keep the proposal file as a historical record.
 - If adjust: make the requested changes, re-confirm, then apply.
-- If keep: mark the index row "Superseded". No changes to plan.md.
+- If keep: mark the index row "Superseded". No changes to plan/.
 
 ### Step 6 — Update index and stamp
 

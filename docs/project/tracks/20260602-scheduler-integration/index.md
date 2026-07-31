@@ -4,7 +4,7 @@ updated: 2026-06-02
 summary: Three-tier scheduler model (in-session, cross-session, sprint-boundary); design doc written; implementation blocked on remote-agent vs CronCreate decision.
 ---
 
-↑ [Shmorch Plan](../../plan.md)
+↑ [Shmorch Plan](../../plan/index.md)
 → `docs/architecture/scheduler-integration.md` (design doc already written) + new `commands/schedule.md` + `workflows/schedule.md`
 
 # Track: Scheduler integration

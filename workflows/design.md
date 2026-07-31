@@ -154,4 +154,4 @@ This step exists because architecture decisions cluster — resolving one often 
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "design: approved — <approach>"
 ```
 
-Update `docs/project/plan.md` track status to `Design done`. Propose: "Ready to build."
+Update `docs/project/plan/` track status to `Design done`. Propose: "Ready to build."

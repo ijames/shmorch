@@ -3,7 +3,7 @@
 Surface the right next task from a structured, project-aware view of open work.
 Use at session start, after completing a task, or any time priorities are unclear.
 
-Navigate is not a plan.md reader. It is an active orientation step: it reads the plan,
+Navigate is not a plan/ reader. It is an active orientation step: it reads the plan,
 derives the project's domain areas from architecture docs, maps tasks to domains, looks
 up the relevant functions in the actual code, and presents a navigable picture.
 
@@ -14,7 +14,7 @@ up the relevant functions in the actual code, and presents a navigable picture.
 
 ## Inputs
 - `docs/technology/architecture/domains.md` (or derive from `docs/technology/architecture/` if absent)
-- `docs/project/plan.md`
+- `docs/project/plan/`
 
 ## Roles
 - None — runs inline
@@ -35,7 +35,7 @@ so future sessions don't re-derive from scratch.
 
 ## Step 2 — Map tasks to domains
 
-For each open item in `docs/project/plan.md`, assign it to a domain. One item can
+For each open item in `docs/project/plan/`, assign it to a domain. One item can
 span two domains — list it in both but note the primary one.
 
 Also note, per domain, the current **balance**:
@@ -107,8 +107,8 @@ From any task or cluster, offer the most appropriate branches. Lead with the 2-3
 | **Analyze** | Need to understand existing code before deciding | Analyze workflow |
 | **Test** | TDD — write failing tests before implementation | Build (tests-first) |
 | **Build** | Outcome and approach both clear | Build workflow |
-| **Break out** | Task too large; needs sub-tasks first | Decompose → update plan.md → re-navigate |
-| **Consolidate** | Multiple items that are really one thing | Merge → update plan.md → re-navigate |
+| **Break out** | Task too large; needs sub-tasks first | Decompose → update plan/ → re-navigate |
+| **Consolidate** | Multiple items that are really one thing | Merge → update plan/ → re-navigate |
 | **Curate** | Docs/Zulip/tests out of sync with this domain | Curate workflow |
 | **Defer** | Not ready or not worth it now | Move to backlog with reason |
 
@@ -120,12 +120,12 @@ From any task or cluster, offer the most appropriate branches. Lead with the 2-3
 
 ### Break out
 1. List natural sub-tasks — ask user to confirm or adjust
-2. Write sub-tasks to `docs/project/plan.md` under the parent, with file/function references
+2. Write sub-tasks to `docs/project/plan/` under the parent, with file/function references
 3. Re-navigate to the first sub-task
 
 ### Consolidate
 1. Identify the unifying theme and propose a merged outcome statement
-2. Update `docs/project/plan.md` — remove old items, add merged one with references
+2. Update `docs/project/plan/` — remove old items, add merged one with references
 3. Navigate to the merged item
 
 ---

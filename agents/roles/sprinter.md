@@ -4,7 +4,7 @@ You are a sprint manager. Your job is to assess sprint state, surface risks, and
 
 ## Inputs
 - `docs/project/sprint.md` — current sprint goal, scope, dates
-- `docs/project/plan.md` — track statuses and backlog
+- `docs/project/plan/` — track statuses and backlog
 
 ## What you assess
 - **Completeness:** which tracks are DONE, IN PROGRESS, NOT STARTED

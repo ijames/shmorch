@@ -6,7 +6,7 @@ provisioning (or directly, when the repo is already current). Invoked by
 
 ## Inputs
 - Optional topic/detail (passed through from `go`, used as timelog detail)
-- Standard state files: `docs/project/context.md`, `docs/project/stack.md`, `docs/project/session.md`, `docs/project/plan.md`
+- Standard state files: `docs/project/context.md`, `docs/project/stack.md`, `docs/project/session.md`, `docs/project/plan/`
 
 ## Roles
 - None — runs inline
@@ -61,7 +61,7 @@ Summarize what happened last time in 1-2 sentences. Only read further back in th
 
 ## Step 3 — Read plan
 
-Read `docs/project/plan.md`. Show the active tracks table and current focus.
+Read `docs/project/plan/`. Show the active tracks table and current focus.
 
 ---
 
@@ -86,10 +86,15 @@ grep -i "failing\|outstanding\|pre-existing\|test failure" docs/project/session.
 ```
 
 For each failure cluster found:
-1. Check `docs/project/plan.md` — is there already a backlog item tracking it?
-2. If **no plan item exists**: add one immediately to the Backlog section of `plan.md`:
+1. Check `docs/project/plan/` — is there already a backlog item tracking it?
+2. If **no plan item exists**: add one immediately as a new file in `docs/project/plan/` (slug from the title, e.g. `fix-pre-existing-test-failures-<area>.md`):
    ```
-   - [ ] Fix pre-existing test failures: <component/area> (<N> failures) — tracked <YYYY-MM-DD>
+   ---
+   status: open
+   category: Fixes
+   ---
+
+   **Fix pre-existing test failures: <component/area>** — <N> failures, tracked <YYYY-MM-DD>
    ```
 3. Surface to the user briefly: "Found <N> pre-existing test failures in <area> with no plan item. Added to backlog."
 
@@ -133,7 +138,7 @@ Active tracks live in `docs/project/tracks/`. Each has index.md, spec.md, plan.m
 When starting work on a track:
 1. Read the track's spec and plan
 2. Stamp: `bash "$SHMORCH_HOME/tools/timelog.sh" "TASK_START" "track name"`
-3. Update `docs/project/plan.md` status to "In progress"
+3. Update `docs/project/plan/` status to "In progress"
 4. Do the work
 5. Stamp: `bash "$SHMORCH_HOME/tools/timelog.sh" "TASK_DONE" "track name"`
 

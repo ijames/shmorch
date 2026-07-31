@@ -15,7 +15,7 @@ first for a pulse check before opening the whole file. Convention:
 
 | File | Purpose |
 |------|---------|
-| [plan.md](plan.md) | Backlog for the shmorch skill itself — what to build and in what order |
+| [plan/](plan/index.md) | Backlog for the shmorch skill itself — what to build and in what order |
 | [session.md](session.md) | Cross-session continuity |
 | [timelog.md](timelog.md) | Session event log |
 | [pre-planning.md](pre-planning.md) | Early scoping notes |

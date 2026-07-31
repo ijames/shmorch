@@ -10,17 +10,17 @@ Print a concise project health snapshot — sprint progress, task state, backlog
 ## Steps
 
 1. **Read state files in parallel:**
-   - `docs/project/plan.md` — current task + backlog count
+   - `docs/project/plan/` — current task + backlog count
    - `docs/project/session.md` — last session summary (first 40 lines)
    - `docs/project/context.md` — project name, stage, sprint target
 
 2. **Collect metrics from shell (run in parallel):**
    ```bash
    # Open backlog items
-   grep -c "^\- \[ \]" docs/project/plan.md 2>/dev/null
+   grep -c "^\- \[ \]" docs/project/plan/ 2>/dev/null
 
    # Closed/done items
-   grep -c "^\- \[x\]" docs/project/plan.md 2>/dev/null
+   grep -c "^\- \[x\]" docs/project/plan/ 2>/dev/null
 
    # Acceptance criteria: red (unchecked MVP items, excluding Post-MVP section)
    # Count [ ] items before the Post-MVP heading
@@ -30,7 +30,7 @@ Print a concise project health snapshot — sprint progress, task state, backlog
    awk '/^## Post-MVP/{exit} /^\- \[x\]/{count++} END{print count+0}' docs/project/acceptance.md 2>/dev/null || echo "?"
 
    # Next 5 open backlog items (active section only)
-   grep "^\- \[ \]" docs/project/plan.md 2>/dev/null | head -5 | sed 's/^- \[ \] \*\*\([^*]*\)\*\*.*/  · \1/'
+   grep "^\- \[ \]" docs/project/plan/ 2>/dev/null | head -5 | sed 's/^- \[ \] \*\*\([^*]*\)\*\*.*/  · \1/'
 
    # Recent commits
    git log --oneline -5 2>/dev/null

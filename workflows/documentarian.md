@@ -121,7 +121,7 @@ For every discrepancy between docs, code, and tests — **docs are the primary s
 Then classify:
 - `DOC_STALE` — documented intent was deliberately changed; update the doc
 - `CODE_DIVERGED` — code moved away from documented intent without a decision; flag for developer review
-- `TEST_GAP` — behavior is correct but not tested; file a plan.md item
+- `TEST_GAP` — behavior is correct but not tested; file a plan/ item
 - `UNDECIDED` — insufficient evidence; escalate to developer before changing anything
 
 **Never change a doc, test, or code to resolve a discrepancy without classifying it first.** `UNDECIDED` items must go to the developer.
@@ -170,7 +170,7 @@ Write `docs/project/documentarian/YYYYMMDD_parity-report.md` (replace YYYYMMDD w
 - `htdocs/X.php`: does Z; doc says Y; no decision found — needs developer review
 
 ### TEST_GAP
-- Behavior documented in `docs/X.md` §Y has no test coverage — filed in plan.md
+- Behavior documented in `docs/X.md` §Y has no test coverage — filed in plan/
 
 ### UNDECIDED
 - `docs/X.md` vs `htdocs/Y.php`: conflicting; insufficient history — escalate

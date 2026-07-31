@@ -73,14 +73,14 @@ Use SendMessage whenever the agent is still relevant and its context is still va
 
 ## Workflow
 
-1. Read `docs/project/plan.md`
+1. Read `docs/project/plan/`
 2. Identify what can run in parallel vs. what must be sequential
 3. For parallel work: spawn agents (check cost discipline first)
 4. Wait for all agents to complete
 5. Check return lines for BLOCKER / CRUFT / GAP flags
 6. Gate on BLOCKER — surface to user before proceeding
 7. Synthesize outputs; write integrated result to `docs/project/`
-8. Update `docs/project/plan.md` — mark steps done
+8. Update `docs/project/plan/` — mark steps done
 
 **Done when:** all outputs exist + STATUS: DONE + session.md updated.
 

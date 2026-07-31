@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 ROOT="$(git rev-parse --show-toplevel 2>/dev/null || pwd)"
-PLAN="$ROOT/docs/project/plan.md"
+PLAN="$ROOT/docs/project/plan"
 TIMELOG="$ROOT/docs/project/timelog.md"
 SHMORCH_HOME="${SHMORCH_HOME:-}"
 [ -n "$SHMORCH_HOME" ] || SHMORCH_HOME="$(cat "$ROOT/.shmorch/home" 2>/dev/null || true)"
@@ -19,7 +19,7 @@ if [ -f "$TIMELOG" ]; then
 fi
 
 # Remind about active tracks
-if [ -f "$PLAN" ] && grep -qiE '\| *in progress *\||STATUS: *IN PROGRESS' "$PLAN" 2>/dev/null; then
+if [ -d "$PLAN" ] && grep -qliE '\| *in progress *\||STATUS: *IN PROGRESS' "$PLAN"/*.md 2>/dev/null; then
   echo "Reminder: active track in progress — run /shmorch wrap before ending session."
 fi
 

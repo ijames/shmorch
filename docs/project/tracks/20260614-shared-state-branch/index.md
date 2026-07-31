@@ -5,7 +5,7 @@ summary: Evaluating an orphan `state` git branch + permanent worktree to decoupl
 ---
 
 ↑ [State File Discipline](../20260609-state-file-discipline/index.md)
-→ [Architecture: Decisions](../../../development/decisions.md), [Plan](../../plan.md)
+→ [Architecture: Decisions](../../../development/decisions.md), [Plan](../../plan/index.md)
 
 # Track: Shared State Branch — Git-Decoupled State Layer
 

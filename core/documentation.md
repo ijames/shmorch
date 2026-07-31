@@ -41,12 +41,12 @@ Every track spec has a `→ destination` header naming the specific `docs/` sect
 Track closing process:
 1. Write knowledge into the `→ destination` doc(s) — integrate it, don't dump it
 2. Set `Status: Closed` and `Closed: YYYY-MM-DD` in the track index
-3. Update `plan.md` (move to Completed)
+3. Update `plan/` (move to Completed)
 4. Track directory stays in `docs/project/tracks/` as project management history
 5. Run `/shmorch documentarian` to verify knowledge landed correctly
 
 **State diminishes as docs grow.** A project near completion has:
-- `docs/project/` — only current in-flight work (plan.md, active tracks, spec.md if active)
+- `docs/project/` — only current in-flight work (plan/, active tracks, spec.md if active)
 - `docs/` — nearly complete skeleton
 - `docs/project/tracks/` — only open track directories; closed ones have their `→` destinations updated
 
