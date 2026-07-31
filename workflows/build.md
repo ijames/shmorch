@@ -203,7 +203,7 @@ If any correction was already applied during this task (a fix to wrong logic, a 
 One correction can be a misread. Two means the semantics weren't locked in — confirm before committing more code.
 
 ### Tests
-- New or changed public methods: tests written and passing?
+- Did any new public methods get added or changed? If so, are they tested and passing?
 - Run the full test suite — no regressions?
 - (See `.shmorch/AGENTS.md` for project-specific test command and framework guidance)
 - **Framework choice:** Behat for order loop lifecycle behavior, user-facing outcomes, and integration sequences with scripted collaborators. PHPUnit for internal calculation logic, price/quantity rules, and injectable components.
@@ -216,6 +216,7 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 - Did this change countermand something previously documented? Rewrite that section — don't append.
 
 ### Track
+- Fill in the track's `↑` source and `→` destination links before writing anything else — if you can't fill in the destination, the track isn't scoped. Do this before implementation, not retroactively at this checklist.
 - Is this tied to an open track step? Mark it done.
 - No track exists and this is non-trivial? Create one using `.shmorch/docs/track-template.md`.
 - Update `docs/project/plan.md`.
@@ -225,6 +226,16 @@ One correction can be a misread. Two means the semantics weren't locked in — c
 - Does the implementation use the patterns and dependencies specified in the design? Actively verify — no deprecated API, no undeclared new dependency, no undeclared framework introduced.
 - If a subagent was used: read its `build-<module>.md` Notes section — did it flag any constraint deviations?
 - If any deviation was necessary: it must be recorded in `decisions.md` before this step passes.
+
+### Commit grouping
+If tests or docs are missing, do not commit the code alone. Either finish them now, or create a track step to complete them and note the gap explicitly — never leave an implicit gap for a later session to discover.
+
+### Checklist Summary
+Before committing, confirm all four:
+- [ ] Tests written and passing, no regressions
+- [ ] Docs updated (or explicitly not needed)
+- [ ] Track/plan status current
+- [ ] No unrecorded deviation from the design
 
 ---
 
