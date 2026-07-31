@@ -229,6 +229,8 @@ What got created:
   docs/product/ etc.       — SDLC doc scaffold (empty, ready to fill)
   docs/project/schedule/   — Closed sprint archive
   .claude/hooks/           — Claude safety hooks (blocks rm -rf, git push --force)
+  .claude/settings.json    — wires those hooks in + pre-allows common read-only commands
+                              (git, find, grep, cat, ls) so you aren't prompted for them
   .omp/hooks/              — omp safety hook (same guards, pi.on tool_call)
   .shmorch/home            — resolved skill path for this machine
   shmorch.sh               — Launcher script (selects your CLI)
