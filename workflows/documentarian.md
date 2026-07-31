@@ -85,6 +85,22 @@ Flag gaps for Step 6.
 
 ---
 
+## Step 4.5 — Tooling path check (after any docs-taxonomy restructure)
+
+If this session includes (or recently included) a docs directory rename or restructure — e.g. `docs/state/` → `docs/project/`, or splitting `docs/architecture/decisions.md` into per-topic `docs/{product,technology}/decisions/` — check that non-doc tooling which hardcodes doc paths was updated too. Restructures update the doc tree itself but routinely miss git hooks, CI configs, and scripts that reference the old paths, which can silently break enforcement later (e.g. a stale pre-commit hook path falsely blocking a legitimate commit).
+
+```bash
+# Generalize the search terms to whatever the old path segments were
+grep -rn "docs/state\|docs/architecture/decisions\|docs/development/decisions" \
+  .githooks/ .git/hooks/ .github/ scripts/ .claude/hooks/ 2>/dev/null
+```
+
+Any hit is a stale-reference bug — fix it immediately, don't defer to a later session. Also applies during `sync`/`auto-update`: before leaving a project-specific customization untouched because it "differs from the template," verify any doc paths it references still resolve in the current tree — a customization can itself be stale.
+
+Flag gaps for Step 6.
+
+---
+
 ## Step 5 — Parity triage (the critical step)
 
 For every discrepancy between docs, code, and tests — **docs are the primary source of truth.** A discrepancy does not mean the doc is stale; it may mean:
