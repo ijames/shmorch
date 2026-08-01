@@ -18,3 +18,4 @@
 [2026-07-31 01:42:23] SESSION_END | auto-closed by stop hook — main @ 87f640e chore(state): update session state
 [2026-07-31 17:44:53] PHASE | self-improve: starting
 [2026-07-31 17:45:08] AGENT_SPAWN | researcher → self-improve
+[2026-07-31 18:02:02] PHASE | self-improve: complete — 3 changes applied (PRs #86, #87)
