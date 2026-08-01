@@ -5,6 +5,7 @@ summary: The idea (subagent returns small structured JSON), what stays determini
 ---
 
 ↑ [index.md](index.md)
+**In this section:** [Findings — workflow subagent delegation](findings.md)
 
 # Spec — workflow subagent delegation
 

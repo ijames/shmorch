@@ -1,3 +1,6 @@
+
+**In this section:** [Session Log](session.md) · [timelog](timelog.md)
+
 # Pre-planning
 
 Deferred ideas and proposals not yet ready for the active backlog.

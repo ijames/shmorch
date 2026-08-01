@@ -5,6 +5,7 @@ summary: Simulation against this repo's plan.md/session.md (69% reduction free v
 ---
 
 ↑ [index.md](index.md)
+**In this section:** [Spec — workflow subagent delegation](spec.md)
 
 # Findings — workflow subagent delegation
 
