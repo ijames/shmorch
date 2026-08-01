@@ -261,14 +261,18 @@ Integrate any answers immediately into the appropriate state file (`plan/`, `dec
 
 ## Step 8.7 — Update user profile memory
 
-Review the conversation since session start and look for behavioral signal about the developer:
+**Scope check first — this step is for the developer's general working style, not this project.** Anything specific to this project or repo (decisions, facts, session events, terminology) belongs in `docs/project/` (session.md, decisions.md, plan/) — never in the CLI's cross-session memory. Only cross-project behavioral signal about how the developer works — portable to any project they bring this CLI to — belongs here.
+
+Review the conversation since session start and look for behavioral signal about the developer that would hold on a *different* project too:
 
 - **What did they dig into?** Topics they asked follow-up questions on, went deeper unprompted, or reframed entirely.
 - **What did they wave off?** Things they explicitly deferred, said "don't worry about that," or skipped past.
 - **Cognitive moves?** Reframes, mechanism questions, system-level leaps, positioning instincts.
 - **Work context signals?** Anything that reveals priorities, constraints, energy, or learning goals.
 
-Then open `~/.claude/projects/<project-slug>/memory/user_profile.md` (create it if it doesn't exist using the standard memory frontmatter format) and add or update observations. Be specific — "asked about SSE vs HTMX to verify they were different abstractions" is more useful than "curious about protocols."
+If the only signal observed this session is project-specific (e.g. "prefers regular merge commits over squash for this repo," "wants VERSION bumped a certain way here"), that goes in this project's own state files (Step 5/7), not here — skip this step without comment.
+
+Otherwise, on a CLI that supports persistent cross-session memory, follow its native mechanism for saving/updating a durable note about the developer (e.g. Claude Code's memory system uses `~/.claude/projects/<project-slug>/memory/`). Be specific — "asked about SSE vs HTMX to verify they were different abstractions" is more useful than "curious about protocols." If the current CLI has no such mechanism, skip this step without comment.
 
 If nothing new was observed this session, skip without comment.
 
