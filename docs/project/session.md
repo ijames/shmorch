@@ -41,6 +41,7 @@ summary: Massive shmorch upgrade — merged all 11 self-improve PRs (#67,#68,#75
 **Next up — plans:**
 - The build.md Step 3b fuller redesign (per-module model/effort selection, Workflow-orchestrated pipeline for large builds) is still deferred, scoped out of PR #82 per developer request — pick up as its own proposal if/when relevant.
 - `docs/project/plan/` items from the prior batch (beads integration, cross-project knowledge base, etc.) are unchanged backlog — none were touched by this merge session.
+- New plan item opened: [`watch-self-improve-and-backfill-execution.md`](plan/watch-self-improve-and-backfill-execution.md) — self-improve PRs shouldn't stack up unmerged again, and the `plan/`-directory + docs-taxonomy backfills need to be confirmed actually reaching consuming projects, not just landing on `main`.
 
 ---
 

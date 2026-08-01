@@ -15,3 +15,4 @@
 [2026-07-30 19:07:32] PHASE | self-improve: complete — 9 changes applied (PRs #75-#84, unmerged)
 [2026-07-31 01:41:02] SESSION_END | Massive shmorch upgrade: merged all self-improve PRs #67,#68,#79,#76,#83,#80,#81,#82,#77,#75,#78 + #85, closed #84 (superseded)
 [2026-07-31 01:41:11] SESSION_START | self-improve PR merge sequence (retroactive stamp)
+[2026-07-31 01:42:23] SESSION_END | auto-closed by stop hook — main @ 87f640e chore(state): update session state
