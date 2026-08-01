@@ -178,6 +178,13 @@ Present each proposal one at a time:
 **Two targets — different workflows for each:**
 
 **Skill-level changes** (`commands/`, `shmorch-core.md`, `agents/`, `tools/`, `workflows/` in the skill):
+
+**Before branching for this proposal:** check open PR count against the branch cap in
+`core/git-discipline.md` (`gh pr list --state open | wc -l`). If already at 2-3+ open
+PRs, stop the proposal loop here — surface to the developer: "N proposals reviewed, M PRs
+open (at/above cap). Merge or close existing PRs before continuing, or batch the
+remaining proposals onto a single branch instead of one-per-PR."
+
 1. `cd $SHMORCH_HOME`
 2. `git checkout -b <type>/YYYYMMDD-<concept>` — type is `feature`, `bug`, or `upgrade`
 3. Apply the changes to skill files
@@ -206,6 +213,12 @@ Present each proposal one at a time:
 ---
 
 ## Step 7 — Clear addressed inbox items and stamp
+
+Before scanning for *new* classifications, first re-sweep any inbox item left PARTIAL or
+UNADDRESSED by a prior self-improve run whose PRs have since merged (check
+`docs/project/session.md` for "PR/commit status" lines listing merges since that item's
+last-touched date) — re-classify against current (post-merge) skill files before adding
+new findings.
 
 Scan `docs/inbox/*.md` (project) or `$SHMORCH_HOME/docs/inbox/*.md` (skill, if no project inbox exists) — skip `index.md`. For each file, classify it mechanically:
 
