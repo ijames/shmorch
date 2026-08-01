@@ -4,6 +4,7 @@ updated: 2026-07-31
 summary: Massive shmorch upgrade — merged all 11 self-improve PRs (#67,#68,#75-#83,#85) to main in dependency order, resolving VERSION and file-overlap conflicts at each step; closed #84 as superseded by #75. VERSION now 20260731.01.
 ---
 
+
 **In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)
 
 # Session Log
