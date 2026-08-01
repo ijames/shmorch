@@ -33,6 +33,12 @@ Never batch-merge multiple PRs without pulling main between each one. The sequen
 merge A → pull main → rebase B → merge B → pull main → rebase C → ...
 ```
 
+**VERSION conflicts are expected, not exceptional, during a merge sequence.** Every open
+branch bumped VERSION off a now-stale main. When rebasing branch N onto a freshly-merged
+main: always resolve the VERSION conflict by taking main's current value and incrementing
+`.NN` by 1 — never keep the branch's own pre-rebase bump. Do this as part of the mandatory
+post-merge rebase, not as an ad hoc fix at each conflict.
+
 ### Before starting or resuming a branch
 
 ```bash
