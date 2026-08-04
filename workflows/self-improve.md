@@ -179,10 +179,17 @@ Present each proposal one at a time:
 
 **Skill-level changes** (`commands/`, `shmorch-core.md`, `agents/`, `tools/`, `workflows/` in the skill):
 
-**Before branching for this proposal:** check open PR count against the branch cap in
-`core/git-discipline.md` (`gh pr list --state open | wc -l`). If already at 2-3+ open
-PRs, stop the proposal loop here — surface to the developer: "N proposals reviewed, M PRs
-open (at/above cap). Merge or close existing PRs before continuing, or batch the
+**Before branching for this proposal:** check open PRs in the skill repo —
+`gh pr list --repo <skill-repo> --state open` (not `--state open | wc -l` alone; list them,
+don't just count) — since these are commonly prior self-improve PRs still awaiting developer
+merge. Surface each open PR's number, title, and age in the report before presenting new
+proposals: "Still open from a prior self-improve run: PR #N '<title>', opened <date>." This
+turns silent accumulation (a PR opened and never re-surfaced) into a visible follow-up list
+every run, instead of relying on session-note archaeology to notice it was never merged.
+
+If already at 2-3+ open PRs (the cap in `core/git-discipline.md`), stop the proposal loop
+here — surface to the developer: "N proposals reviewed, M PRs open (at/above cap). Merge or
+close existing PRs before continuing, or batch the
 remaining proposals onto a single branch instead of one-per-PR."
 
 1. `cd $SHMORCH_HOME`
