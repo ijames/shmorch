@@ -1,5 +1,5 @@
 ↑ [Inbox](index.md)
-**In this section:** [Ambient/system-triggered state changes need smooth transitions, not just user-initiated ones](ambient-system-triggered-transitions.md) · [build.md — Task agent protocol: loosen spawn decision, adopt richer DoD language](build-md-task-agent-protocol.md) · [Command → workflow → role/tools audit](command-workflow-role-audit.md) · [Product design criteria: respect system settings by default](product-design-respect-system-settings.md) · [Stub tracks on separate branches collide on shared index/plan files](stub-tracks-shared-file-collision.md)
+**In this section:** [build.md — Task agent protocol: loosen spawn decision, adopt richer DoD language](build-md-task-agent-protocol.md) · [Stub tracks on separate branches collide on shared index/plan files](stub-tracks-shared-file-collision.md)
 
 # Backlog may be better modeled as a dependency stack than a flat list
 
