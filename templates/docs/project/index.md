@@ -18,7 +18,8 @@ first for a pulse check before opening the whole file. Convention: `core/documen
 | [plan.md](plan.md) | Open work by domain — what's next |
 | [spec.md](spec.md) | Active spec — what we're building right now (empty when no active track) |
 | [session.md](session.md) | Cross-session continuity |
-| [context.md](context.md) | Project identity, stack, preferences |
+| [context.md](context.md) | Project identity, stack summary, preferences |
+| [stack.md](stack.md) | Full stack inventory — versions, constraints, upgrade opportunities |
 | [timelog.md](timelog.md) | Session event log |
 
 ## [process/](process/index.md)

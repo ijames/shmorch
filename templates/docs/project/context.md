@@ -6,7 +6,7 @@ summary: (none yet — filled in on first Shmorch session)
 
 # Project Context
 > Filled in on first Shmorch session, or edit directly.
-> For dependency versions, pinned runtimes, and external constraints — see project/stack.md.
+> For dependency versions, pinned runtimes, and external constraints — see [stack.md](stack.md).
 
 ## Project Name
 <!-- -->
@@ -16,7 +16,7 @@ summary: (none yet — filled in on first Shmorch session)
 
 ## Tech Stack (summary)
 <!-- High-level only — e.g. "Python/Pyramid backend, AngularJS frontend, PostgreSQL, Heroku"
-     Full inventory with versions and constraints lives in project/stack.md -->
+     Full inventory with versions and constraints lives in stack.md -->
 
 ## Stage
 <!-- R&D | proof-sprint | productionization | maintenance -->
