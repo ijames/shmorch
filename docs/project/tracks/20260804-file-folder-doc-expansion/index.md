@@ -1,7 +1,7 @@
 ---
 status: Active
 updated: 2026-08-04
-summary: Design phase — deterministic file→folder doc expansion (threshold-triggered split) plus time-based session folders with a current.md, sharing the same folder/front-matter/linking/sort-order machinery.
+summary: Design phase — deterministic file→folder doc expansion (threshold-triggered split, split by a two-phase deterministic+subagent architecture) plus time-based session folders; backfill-plan-dir.sh and track Work-log splitting retarget onto the same generic tool.
 ---
 
 ↑ [Shmorch Plan](../../plan/index.md)
@@ -47,6 +47,23 @@ matching how `session.md`'s "Latest Session" entry already sits above older ones
 inverted here since folder order is now sort order, not manual reverse-chronological
 editing.
 
+**Block-partitioning architecture, raised 2026-08-04:** figuring out where the split
+boundaries fall inside a given large file is not uniformly mechanical — `session.md`'s
+blocks are dated entries, `plan.md`'s are `### category` + `- [ ] **item**` list entries,
+a track's Work log is dated/versioned rounds, and an arbitrary `docs/**/*.md` page might
+only have `##` headings to go on. Splitting this into two phases: a **deterministic
+outer loop** (threshold detection, file/dir creation, front-matter stamping, git mv) that
+is genuinely file-shape-agnostic and belongs in the script — and a **model-driven inner
+step** for the part that varies per file shape (deciding where the blocks actually
+are), delegated to a subagent so the file-shape judgment doesn't have to be hardcoded
+per doc type. A second follow-up subagent pass handles cross-linking the newly split
+files (`↑`/`→`/`↔`) once boundaries are settled, since correct links depend on the final
+file set. Net shape: script drives shell mechanics + orchestration, agent 1 proposes the
+split points, script executes the split, agent 2 wires up links. Still open: how the
+script hands the file to agent 1 (whole file in context vs. chunked), and what the
+agent's output contract looks like (line ranges? heading list? confidence score per
+boundary?).
+
 ## What changes
 
 - `core/documentation.md` gains a new section: file→folder expansion — the threshold,
@@ -64,6 +81,16 @@ editing.
 - `templates/docs/project/session.md` (the scaffold shipped to new projects) either
   starts as a folder from `init` onward, or stays a flat file until it first crosses the
   threshold — open implementation question, see Work log.
+- `tools/backfill-plan-dir.sh` retrofits onto the generic splitter once it exists, rather
+  than staying a hand-rolled one-off — its Current Task / Backlog / Completed sections
+  and per-item file output are exactly the kind of "block shape" the generic tool needs
+  to support, and it's a good first real test case for the splitter's block-detection
+  contract.
+- Track `index.md` Work-log splitting (`core/documentation.md`'s 200-300 line rule,
+  currently only *detected* by `tools/track-graph-audit.sh` with no automated split step)
+  becomes a third consumer of the same generic splitter, using dated Work-log rounds as
+  its block shape — closes the gap between "flagged" and "fixed" that the audit script
+  currently leaves to a manual pass.
 
 ## Work log
 
@@ -76,3 +103,16 @@ pre-folderized or converts on first threshold breach, and how `workflows/wrap.md
 existing single-file session-entry-append logic changes shape once `session.md` is a
 folder of many files instead of one growing file. Next step: spec these open questions
 before writing the splitter script or touching `wrap.md`.
+
+Follow-up discussion (same day, raised from a DarkBadge project session hitting this gap
+live via `/shmorch auto-update` — `session.md` had grown large with no split offered):
+confirmed the generic splitter should be the thing `backfill-plan-dir.sh` and track
+Work-log splitting both retarget onto, not stay separate one-offs (see What changes).
+Also proposed a two-phase split architecture — deterministic outer script for threshold
+detection/file creation/front-matter, model-driven subagent for the per-file-shape block
+boundary judgment (since that part isn't uniformly mechanical across
+session/plan/track/arbitrary-doc shapes), plus a second follow-up subagent pass for
+cross-linking the split files once boundaries settle (see Why). Output contract for the
+boundary-detection subagent (line ranges vs. heading list vs. confidence score) still
+open. Next step unchanged: still need the threshold number and templates/ scaffold
+decision before code starts.
