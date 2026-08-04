@@ -35,8 +35,11 @@ merge A → pull main → rebase B → merge B → pull main → rebase C → ..
 
 **VERSION conflicts are expected, not exceptional, during a merge sequence.** Every open
 branch bumped VERSION off a now-stale main. When rebasing branch N onto a freshly-merged
-main: always resolve the VERSION conflict by taking main's current value and incrementing
-`.NN` by 1 — never keep the branch's own pre-rebase bump. Do this as part of the mandatory
+main: always resolve the VERSION conflict by taking main's current value and applying
+branch N's own bump tier on top of it (MAJOR/MINOR/PATCH — see `core/operations.md`'s
+VERSION bump rule), not the branch's own pre-rebase bump. If branch N's tier is lower than
+whatever main already moved to (e.g. main jumped a MAJOR that branch N's PATCH predates),
+main's higher tier wins — never move a tier backwards. Do this as part of the mandatory
 post-merge rebase, not as an ad hoc fix at each conflict.
 
 ### Before starting or resuming a branch

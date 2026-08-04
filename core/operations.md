@@ -58,10 +58,20 @@ At reflection points, and on noticing stale TODOs, dead tests, or orphaned docs:
 Current version: see `.shmorch/VERSION`. To pull skill upgrades into this repo, run
 `/shmorch sync` (alias `/shmorch update`).
 
-**VERSION bump rule:** Any edit to skill files (`shmorch-core.md`, `workflows/*.md`,
-`agents/**`, `commands/*.md`, `core/*.md`, `tools/*.sh`) must immediately bump both
-`.shmorch/VERSION` and `$SHMORCH_HOME/VERSION` to `YYYYMMDD.NN` (today's date, increment
-`.NN` if already edited today). `docs/` changes do NOT bump VERSION.
+**VERSION bump rule:** `VERSION` is semantic (`MAJOR.MINOR.PATCH`, since `1.0.0` —
+2026-08-04, see `docs/project/tracks/20260804-semver-versioning/`; before that it was
+`YYYYMMDD.NN`). Any edit to skill files (`shmorch-core.md`, `workflows/*.md`, `agents/**`,
+`commands/*.md`, `core/*.md`, `tools/*.sh`) must immediately bump both `.shmorch/VERSION`
+and `$SHMORCH_HOME/VERSION`:
+
+- **MAJOR** — a `Compat: backfill` Architecture Changelog entry (see
+  `core/documentation.md`), a template/scaffold structure change, or a change to the
+  versioning scheme itself.
+- **MINOR** — a new command, workflow, or role.
+- **PATCH** — any other skill-file tweak or fix.
+
+If a change qualifies for more than one tier, use the highest. `docs/` changes do NOT bump
+VERSION.
 
 **Skill change workflow:** Branch → PR → developer merges. Never commit directly to
 `main`.
