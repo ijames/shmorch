@@ -7,7 +7,7 @@ Each file below opens with a `status`/`updated`/`summary` front-matter block —
 first for a pulse check before opening the whole file. Convention:
 `core/documentation.md` § Front-Matter Previews.
 
-↑ [docs/index.md](../index.md) (n/a — this is the skill's own repo, no docs/index.md)
+↑ [docs/index.md](../index.md)
 
 ---
 
