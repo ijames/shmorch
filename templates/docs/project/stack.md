@@ -4,11 +4,19 @@ updated: YYYY-MM-DD
 summary: (no stack inventory yet — filled in by /shmorch discover or first build session)
 ---
 
-# Stack
+# Stack (working notes)
 
-Full inventory of dependency versions, pinned runtimes, and external constraints. High-level
-summary lives in [context.md](context.md); this file is the detailed, buildable-against
-reference — anything an implementer needs to check before adding or upgrading a dependency.
+**This is the in-flight, mutable stack file — not the permanent record.** It holds
+constraints as they're discovered mid-build, versions not yet confirmed, and ideas not
+yet actioned. A high-level summary lives in [context.md](context.md); the confirmed,
+stable version of everything here lives in
+`docs/technology/development/tech-stack.md`.
+
+**Do not let two versions of the stack drift apart.** When an entry here becomes settled
+(confirmed version, constraint verified, decision made) — move it to
+`docs/technology/development/tech-stack.md` and delete it from here. Never duplicate an
+entry into both files; each fact about the stack has exactly one home at a time. See
+`core/documentation.md`'s graduation table for this file's role in that flow.
 
 ## Runtimes & Versions
 <!-- -->
