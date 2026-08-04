@@ -1,4 +1,5 @@
 
+
 **In this section:** [Session Log](session.md) · [timelog](timelog.md)
 
 # Pre-planning
