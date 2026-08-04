@@ -1,7 +1,7 @@
 ---
 status: Active
-updated: 2026-07-31
-summary: Massive shmorch upgrade — merged all 11 self-improve PRs (#67,#68,#75-#83,#85) to main in dependency order, resolving VERSION and file-overlap conflicts at each step; closed #84 as superseded by #75. VERSION now 20260731.01.
+updated: 2026-08-04
+summary: Catch-up entry for PRs #88-#90 (README update, wrap/self-improve same-session-close + open-PR list, stack.md scaffold restore). PR #91 (file→folder splitter design) open next.
 ---
 
 
@@ -10,7 +10,24 @@ summary: Massive shmorch upgrade — merged all 11 self-improve PRs (#67,#68,#75
 
 # Session Log
 
-## Latest Session — 2026-07-31 — Merge sequence for self-improve batch
+## Latest Session — 2026-08-01 to 2026-08-04 — catch-up (logged after the fact)
+
+**Branch:** `main`
+
+**What was done (catch-up — several PRs merged without a session.md update):**
+- PR #88 (2026-08-01): README updated to match current repo state.
+- PR #89 (2026-08-04): `wrap.md` now requires same-session track-Status close (was deferring to "next session," causing missed graduations); `self-improve.md` now lists open PRs by number/title/age before opening a new one, so prior self-improve PRs don't go quietly unmerged. Both patterns surfaced from the DarkBadge project's 2026-08-04 self-improve run.
+- PR #90 (2026-08-04): restored `docs/project/stack.md` template scaffold — it had never actually existed in `init`'s output despite ~15 workflow files assuming it did; also fixed a malformed sibling link in `context.md` and added `stack.md`'s graduation path to `tech-stack.md`.
+
+**State at end:** on `main`, clean tree, no active track. PR #91 (file→folder splitter design scope + block-partitioning architecture) open, raised from a DarkBadge session hitting the split gap live.
+
+**Next up:**
+- Review and merge PR #91.
+- Resolve carryovers: semver-bump request (still deferred, unresolved) and the unconfirmed `TASK-PROTOCOL.md` multi-role-agent note offer.
+
+---
+
+## 2026-07-31 — Merge sequence for self-improve batch
 
 **Branch:** `main` (clean, fast-forwarded to `js/main`)
 
