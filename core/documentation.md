@@ -133,11 +133,15 @@ gets a `Compat` tag:
 - `Compat: additive` — new option, doesn't invalidate anything already written. No backfill offered.
 - `Compat: backfill` — existing docs written before this date no longer conform. `auto-update.md` offers a scoped backfill for this entry specifically.
 
-No separate semver scheme — the date already in `VERSION` (`YYYYMMDD.NN`) is the only
-comparison axis `auto-update.md` needs: an entry's date > the project's last-synced date
-means the project predates that rule.
+`VERSION` is semantic (`MAJOR.MINOR.PATCH`) since `1.0.0` (2026-08-04); before that it was
+`YYYYMMDD.NN` — see `docs/project/tracks/20260804-semver-versioning/`. Rows below `1.0.0`
+carry the legacy `Date` they were added on; `auto-update.md` compares those against a
+project's pre-update `VERSION` date whenever that project itself predates `1.0.0`. Rows at
+`1.0.0` or later carry a `Since` semver value instead; `auto-update.md` compares those
+numerically (MAJOR, then MINOR, then PATCH) against a project's `VERSION` once that project
+is itself on semver.
 
-| Date | Rule | Compat | Backfill scope |
+| Date / Since | Rule | Compat | Backfill scope |
 |---|---|---|---|
 | 2026-07-24 | Top-level `docs/` taxonomy replaced: `architecture/`, `development/`, `product/`, `reference/`, `state/`, `to_review/` → `product/`, `technology/` (architecture + development merged under it), `reference/` (Diataxis-scoped `instructions/` + `research/`), `project/` (was `state/`), `inbox/` (was `to_review/`). Decisions split into `product/decisions/` + `technology/decisions/` only (no unified log, no `project/decisions/`). See `tracks/20260724-docs-taxonomy-redesign` | `backfill` | Run `tools/backfill-docs-taxonomy.sh` for the mechanical `git mv`s, then a judgment pass on the files it reports (decisions/anti-decisions splits, dev notes, deployment content, and any other real-content file with no 1:1 new home) per `tracks/20260724-dev-docs-taxonomy-backfill` |
 | 2026-07-23 | Track `index.md` files whose Work log section exceeds ~200–300 lines (or spans many dated/versioned rounds) must split per § Track file growth — date/version-based into `docs/project/tracks/<name>/log/YYYYMMDD-<slug>.md`, or section-based when growth isn't a timeline | `backfill` | For each open track over the threshold, move each work-log entry into its own `log/` file, replace the Work log section in `index.md` with a one-line-per-entry index linking down. Do not touch Why/What changes/Open questions. |

@@ -195,7 +195,7 @@ remaining proposals onto a single branch instead of one-per-PR."
 1. `cd $SHMORCH_HOME`
 2. `git checkout -b <type>/YYYYMMDD-<concept>` — type is `feature`, `bug`, or `upgrade`
 3. Apply the changes to skill files
-4. Bump `VERSION` to `YYYYMMDD.NN`
+4. Bump `VERSION` per `core/operations.md`'s VERSION bump rule (MAJOR/MINOR/PATCH)
 5. Use `/smart-commit` to stage and commit
 6. `git push -u origin <branch>`
 7. Create PR:

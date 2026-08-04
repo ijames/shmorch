@@ -43,6 +43,18 @@ echo "Skill:   $SKILL_VERSION"
 
 If versions match: tell the user "Already up to date ($PROJECT_VERSION)." and stop.
 
+**Legacy-format transition notice:** if `$PROJECT_VERSION` matches the old
+`^[0-9]{8}\.[0-9]+$` date-based pattern (`YYYYMMDD.NN`) and `$SKILL_VERSION` does not (i.e.
+the skill has moved to semver), tell the user once, before continuing:
+
+> "shmorch's VERSION scheme changed from date-based (`YYYYMMDD.NN`) to semantic versioning
+> (`MAJOR.MINOR.PATCH`) as of skill version `1.0.0`. MAJOR = backfills or template/scaffold
+> structure changes, MINOR = new commands/workflows/roles, PATCH = tweaks. Your project will
+> sync to `$SKILL_VERSION` now; from here on, update checks compare semver instead of dates."
+
+This is a one-time notice — it only fires while `$PROJECT_VERSION` is still in the legacy
+format; the next sync onward, the project is on semver too and this branch never triggers again.
+
 ---
 
 ## Step 1.9 — Architecture backfill
@@ -51,14 +63,40 @@ If versions match: tell the user "Already up to date ($PROJECT_VERSION)." and st
 `$SHMORCH_HOME`, so rule text is always current automatically. What can't self-update is
 docs *content* written under an older rule. Its `## Architecture Changelog` table is the
 list of rule changes that invalidate existing content; check it against this project's
-pre-update `.shmorch/VERSION` date:
+pre-update `.shmorch/VERSION`, captured before Step 6 overwrites it:
 
 ```bash
-PROJECT_DATE="${PROJECT_VERSION%%.*}"   # YYYYMMDD portion, captured before Step 6 overwrites VERSION
+PROJECT_VERSION_PRE="$PROJECT_VERSION"   # full value, before Step 6 overwrites VERSION
 ```
 
-Read `core/documentation.md`'s Architecture Changelog table. For every row with `Compat:
-backfill` and a date **after** `$PROJECT_DATE`: this project predates that rule.
+Two comparison modes, depending on which format `$PROJECT_VERSION_PRE` is in:
+
+**Legacy format** (`^[0-9]{8}\.[0-9]+$`) — this project predates the `1.0.0` semver
+cutover. Compare against every changelog row's legacy `Date` value:
+
+```bash
+PROJECT_DATE="${PROJECT_VERSION_PRE%%.*}"   # YYYYMMDD portion
+```
+
+For every row with `Compat: backfill` and a `Date` **after** `$PROJECT_DATE`: this project
+predates that rule. (Every row currently in the table is legacy-dated, so this is the only
+path that applies until the first `Since: <semver>` row is added.)
+
+**Semver format** — compare against every changelog row's `Since` value using numeric
+MAJOR.MINOR.PATCH ordering (split each on `.`, compare left to right as integers, no new
+tooling needed):
+
+```bash
+ver_lt() {  # ver_lt A B → true if A < B
+  IFS='.' read -r a1 a2 a3 <<< "$1"; IFS='.' read -r b1 b2 b3 <<< "$2"
+  [ "$a1" -lt "$b1" ] && return 0; [ "$a1" -gt "$b1" ] && return 1
+  [ "$a2" -lt "$b2" ] && return 0; [ "$a2" -gt "$b2" ] && return 1
+  [ "$a3" -lt "$b3" ]
+}
+```
+
+For every row with `Compat: backfill` and a `Since` value where
+`ver_lt "$PROJECT_VERSION_PRE" "<row's Since>"` is true: this project predates that rule.
 
 For each such row, ask (one at a time, do not batch):
 > "Docs architecture changed since your last sync: '<rule>' (<date>). Existing docs written
