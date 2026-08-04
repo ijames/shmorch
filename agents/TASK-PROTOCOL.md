@@ -25,7 +25,11 @@ Skip subagents for: single-file edits, questions, tasks under ~2 minutes, anythi
 
 ## One role per agent — name the session after the role
 
-Each subagent gets exactly one role. Name the session after that role so it can be resumed instead of re-spawned. Use a model **tier**, never a vendor name: `default` for routine roles, `strong` for the critic.
+Each subagent gets exactly one role. Composing multiple perspectives means spawning
+multiple single-role agents (including the `cross-functional-mediator` when 2+ roles run in
+parallel), never blending roles within one agent's context — a single continuous context
+tends to self-agree, so real independence requires separate contexts. See
+`docs/reference/learning.md` § Multi-agent role composition vs. single-agent role-switching. Name the session after that role so it can be resumed instead of re-spawned. Use a model **tier**, never a vendor name: `default` for routine roles, `strong` for the critic.
 
 **Claude Code:**
 ```
