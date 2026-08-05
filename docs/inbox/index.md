@@ -13,3 +13,4 @@ Items here are not authoritative. They graduate into `workflows/`, `core/`, `age
 - [build-md-task-agent-protocol.md](build-md-task-agent-protocol.md)
 - [backlog-dependency-stack.md](backlog-dependency-stack.md)
 - [stub-tracks-shared-file-collision.md](stub-tracks-shared-file-collision.md)
+- [never-squash-merge-and-cross-repo-discipline.md](never-squash-merge-and-cross-repo-discipline.md)
