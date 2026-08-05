@@ -1,6 +1,11 @@
 ↑ [Inbox](index.md)
 **In this section:** [Stub tracks on separate branches collide on shared index/plan files](stub-tracks-shared-file-collision.md)
 
+_(partial — the cross-repo-discipline half is addressed: `core/operations.md` § Cross-repo
+discipline and `workflows/self-improve.md` Step 6 now require skill-doctrine proposals from
+outside `$SHMORCH_HOME` to land here instead of a direct branch/PR. The merge-strategy
+proposal below is still open.)_
+
 # Merge strategy default (never squash) — and a process gap in how this was almost added
 
 **Issue (2026-08-05):** On appadd/DarkBadge, the developer stated a durable preference
@@ -45,7 +50,7 @@ closed unmerged and the branch deleted; this file is the correct re-filing.
   `core/operations.md` (near the existing skill-change workflow) and/or
   `workflows/self-improve.md` (which currently only distinguishes "skill-level" vs.
   "project-level" changes, not "which repo is this session standing in").
-- Not yet resolved — both the merge-strategy change and the cross-repo-discipline rule
-  are still proposals; a `self-improve` pass (or a session native to `$SHMORCH_HOME`)
-  should evaluate, then apply via the normal branch → PR → merge flow from inside the
-  skill repo.
+- The cross-repo-discipline rule is now implemented (see partial-marker note above). The
+  merge-strategy change is still an open proposal — a `self-improve` pass (or a session
+  native to `$SHMORCH_HOME`) should evaluate it and apply via the normal branch → PR →
+  merge flow from inside the skill repo.
