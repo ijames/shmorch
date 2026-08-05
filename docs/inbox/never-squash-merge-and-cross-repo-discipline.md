@@ -1,5 +1,5 @@
 ↑ [Inbox](index.md)
-**In this section:** [Stub tracks on separate branches collide on shared index/plan files](stub-tracks-shared-file-collision.md)
+**In this section:** [Backlog may be better modeled as a dependency stack than a flat list](backlog-dependency-stack.md) · [build.md — Task agent protocol: loosen spawn decision, adopt richer DoD language](build-md-task-agent-protocol.md) · [Stub tracks on separate branches collide on shared index/plan files](stub-tracks-shared-file-collision.md)
 
 _(partial — the cross-repo-discipline half is addressed: `core/operations.md` § Cross-repo
 discipline and `workflows/self-improve.md` Step 6 now require skill-doctrine proposals from

@@ -50,6 +50,15 @@ When you `read` a skill file, substitute the resolved value (or use your CLI's
 native skill URL if it has one — e.g. `skill://shmorch/workflows/go.md` on omp).
 When you run a tool, the exported var works directly: `bash "$SHMORCH_HOME/tools/timelog.sh" …`.
 
+**Which branch `$SHMORCH_HOME` is on is not your concern.** A project session only
+ever *reads* files under `$SHMORCH_HOME` — it never checks out, switches, or depends on
+a particular branch there. The skill repo may be mid-development on a feature branch
+when you read from it; just read whatever is currently on disk and move on. If you
+spot a real gap in a skill file while working in a different project, that's a
+`self-improve` finding to file at `$SHMORCH_HOME/docs/inbox/`, never a reason to `cd`
+into `$SHMORCH_HOME` and touch its git state yourself — see `core/operations.md` §
+Cross-repo discipline.
+
 ---
 
 ## The context-file chain — loads on every CLI

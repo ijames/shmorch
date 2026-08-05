@@ -31,7 +31,16 @@ export SHMORCH_HOME
 
 Cheap probes, in order — this decides which phases run:
 
-- **SELF** — `$SHMORCH_SELF=1`, or the current directory *is* `$SHMORCH_HOME`: this is the skill's own repo. Skip provisioning entirely; go straight to Step 3.
+- **SELF** — `$SHMORCH_SELF=1`, or the current directory *is* `$SHMORCH_HOME`: this is the skill's own repo. Skip provisioning entirely; check the inbox (below), then go straight to Step 3.
+
+  **SELF inbox check:** other projects' sessions file skill-improvement proposals to
+  `docs/inbox/` instead of branching/PR'ing directly (`core/operations.md` § Cross-repo
+  discipline) — they accumulate silently between shmorch dev sessions. Check now:
+  ```bash
+  ls docs/inbox/*.md 2>/dev/null | grep -v index.md
+  ```
+  If any exist, surface them by filename before Step 3: "N inbox item(s) pending review:
+  `<file>`, ...". Don't block on them — just make sure they're seen, not just present.
 - **UNINITIALIZED** — no `.shmorch/AGENTS.md` and no `docs/project/context.md`: the repo has no Shmorch yet → provision fresh (Step 2a).
 - Otherwise read versions:
   ```bash
