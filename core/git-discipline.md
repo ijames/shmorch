@@ -14,6 +14,27 @@ The moment a PR lands on main, every open branch is potentially stale. Treat the
 
 ---
 
+## Merge Strategy — Never Squash
+
+**Regular merge (`gh pr merge --merge`) is the paved-road default for every project Shmorch
+touches.** Rebase merge is an acceptable alternative when a linear history is explicitly
+wanted. Squash merge is never used, regardless of project preference.
+
+**Why:** the code is AI-authored. The commit-by-commit history — what changed, in what
+order, why it was split that way — is the audit trail a human reviewer has for how the
+code evolved. Squashing collapses that story into one opaque diff and destroys it
+permanently, the moment the branch is deleted. This only holds because commit discipline
+is enforced upstream of the merge (small, single-concern commits with real messages,
+per `core/tdd.md`'s phase discipline) — the "merge commits are noise" complaint applies to
+undisciplined branches, not disciplined ones.
+
+A project may still override this in its own `docs/project/process/index.md` (or
+equivalent decisions doc) if it has a specific reason — document the override and the
+rationale there, per the template in `templates/docs/project/process/index.md`. Absent an
+explicit override, this is the default.
+
+---
+
 ## Rules
 
 ### After any PR merge
