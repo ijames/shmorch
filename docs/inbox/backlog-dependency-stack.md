@@ -1,5 +1,5 @@
 ↑ [Inbox](index.md)
-**In this section:** [build.md — Task agent protocol: loosen spawn decision, adopt richer DoD language](build-md-task-agent-protocol.md) · [Stub tracks on separate branches collide on shared index/plan files](stub-tracks-shared-file-collision.md)
+**In this section:** [build.md — Task agent protocol: loosen spawn decision, adopt richer DoD language](build-md-task-agent-protocol.md) · [Stub tracks on separate branches collide on shared index/plan files](stub-tracks-shared-file-collision.md) · [Merge strategy default (never squash) — and a process gap in how this was almost added](never-squash-merge-and-cross-repo-discipline.md)
 
 # Backlog may be better modeled as a dependency stack than a flat list
 
