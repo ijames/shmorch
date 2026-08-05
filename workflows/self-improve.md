@@ -1,6 +1,11 @@
 # Workflow: self-improve
 
-Retrospective self-improvement. Reads session history and timelog to surface friction patterns, then proposes targeted changes to shmorch's own workflows and commands.
+Retrospective self-improvement **for the current repo**. Reads this project's session
+history and timelog to surface friction patterns, then proposes changes to this
+project's own `.shmorch/` overrides. A pattern that actually points at a shmorch-skill
+gap (not just this project) is surfaced as a suggestion to file it to the skill's inbox
+— never applied here, and never branched/PR'd directly against the skill repo from this
+project's session (`core/operations.md` § Cross-repo discipline).
 
 ## When to use
 - Automatically at the end of every `wrap` session (lightweight mode)
@@ -179,7 +184,8 @@ Present each proposal one at a time:
 
 **Skill-level changes, proposed from a project that is NOT `$SHMORCH_HOME` itself:**
 Do not branch, commit, or push against the skill repo — see `core/operations.md` §
-Cross-repo discipline. Instead write the proposal to
+Cross-repo discipline. Present it like any other proposal ("Proposal N: <title> ... File
+to shmorch's inbox? (yes/no/modify)"); on yes, write it to
 `$SHMORCH_HOME/docs/inbox/<concept>.md` (same shape as `docs/inbox/*.md` in this
 project — issue + evidence + what to consider) and tell the developer: "Filed to
 shmorch's inbox for review in a shmorch session — not applied here." Stop; do not
