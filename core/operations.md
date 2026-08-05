@@ -84,6 +84,20 @@ VERSION.
 6. `gh pr create` — title: `<type>(shmorch): <concept>`
 7. `git checkout main` — do NOT self-merge
 
+**Cross-repo discipline — actor model, not direct manipulation.** The branch → PR →
+developer-merge flow above is for sessions running *in* `$SHMORCH_HOME` itself
+(self-hosting shmorch). A session working in a different project must never `cd
+$SHMORCH_HOME` and branch/commit/push against the skill repo directly, even if it has
+correctly diagnosed a real skill gap — that project has no standing to mutate the skill's
+innards, only to message it. Instead it writes a proposal file to
+`$SHMORCH_HOME/docs/inbox/<concept>.md` (same shape as any other inbox item — see
+`docs/inbox/index.md`) describing the gap, the evidence, and the suggested change, and
+stops there. A shmorch session later running in `$SHMORCH_HOME` picks it up like any
+other inbox item (`self-improve` or a manual pass) and only then runs the branch → PR →
+merge flow above, from inside the skill repo. This keeps every skill-repo commit
+attributable to a session that was actually in that repo, and keeps other projects'
+self-improve output from silently drafting PRs against a repo they don't own.
+
 **After the developer merges any PR** — mandatory before any other action:
 
 ```bash

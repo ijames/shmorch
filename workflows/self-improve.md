@@ -175,9 +175,18 @@ Present each proposal one at a time:
 > Change: <specific>
 > Apply? (yes / no / modify)"
 
-**Two targets — different workflows for each:**
+**Three targets — different workflows for each:**
 
-**Skill-level changes** (`commands/`, `shmorch-core.md`, `agents/`, `tools/`, `workflows/` in the skill):
+**Skill-level changes, proposed from a project that is NOT `$SHMORCH_HOME` itself:**
+Do not branch, commit, or push against the skill repo — see `core/operations.md` §
+Cross-repo discipline. Instead write the proposal to
+`$SHMORCH_HOME/docs/inbox/<concept>.md` (same shape as `docs/inbox/*.md` in this
+project — issue + evidence + what to consider) and tell the developer: "Filed to
+shmorch's inbox for review in a shmorch session — not applied here." Stop; do not
+continue to the branch/PR steps below.
+
+**Skill-level changes, proposed from a session already running in `$SHMORCH_HOME`**
+(`commands/`, `shmorch-core.md`, `agents/`, `tools/`, `workflows/` in the skill):
 
 **Before branching for this proposal:** check open PRs in the skill repo —
 `gh pr list --repo <skill-repo> --state open` (not `--state open | wc -l` alone; list them,
