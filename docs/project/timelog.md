@@ -21,3 +21,5 @@
 [2026-07-31 18:02:02] PHASE | self-improve: complete — 3 changes applied (PRs #86, #87)
 [2026-08-04 11:02:16] SESSION_START | resume: pick up shmorch work — session.md is stale, PRs #88-#90 merged since last log entry
 [2026-08-04 11:02:22] SESSION_END | auto-closed by stop hook — main @ ffb1096 Merge pull request #90 from ijames/fix/20260804-stack-md-template-gap
+[2026-08-09 15:07:57] SESSION_START | inbox fixes (PR #99) + personal-profile system built outside repo
+[2026-08-09 15:07:57] SESSION_END | PR #99 open (auto-update scaffold + prioritize reorder); personal-profile work is external
