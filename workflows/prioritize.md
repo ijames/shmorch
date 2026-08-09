@@ -88,17 +88,7 @@ Task(
 Verify `docs/project/prioritizer/YYYYMMDD_priority-proposal.md` exists.
 If BLOCKER in return: surface the conflict to the developer before showing the proposal.
 
-### Step 5 — Present and confirm
-
-Show the proposed ranking to the developer. Ask:
-
-> "Want to apply this order to plan/, adjust anything first, or keep the current order?"
-
-- If apply: add a `priority: <rank>` frontmatter field to each affected file in `docs/project/plan/` to match the proposal (no shared file to rewrite — edit each item independently). Update the index row in `docs/project/prioritizer/index.md` to mark status "Applied YYYY-MM-DD". Keep the proposal file as a historical record.
-- If adjust: make the requested changes, re-confirm, then apply.
-- If keep: mark the index row "Superseded". No changes to plan/.
-
-### Step 6 — Update index and stamp
+### Step 5 — Update index and stamp
 
 If `docs/project/prioritizer/index.md` does not exist, create it:
 ```markdown
@@ -116,6 +106,16 @@ Files are named `YYYYMMDD_priority-proposal.md`. Applied proposals are kept as h
 ```
 
 Add a row for this run.
+
+### Step 6 — Present and confirm
+
+Show the proposed ranking to the developer. Ask:
+
+> "Want to apply this order to plan/, adjust anything first, or keep the current order?"
+
+- If apply: add a `priority: <rank>` frontmatter field to each affected file in `docs/project/plan/` to match the proposal (no shared file to rewrite — edit each item independently). Update the index row in `docs/project/prioritizer/index.md` to mark status "Applied YYYY-MM-DD". Keep the proposal file as a historical record.
+- If adjust: make the requested changes, re-confirm, then apply.
+- If keep: mark the index row "Superseded". No changes to plan/.
 
 ```bash
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "prioritize: complete"
