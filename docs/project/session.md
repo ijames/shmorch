@@ -1,12 +1,71 @@
 ---
 status: Active
-updated: 2026-08-09
-summary: PR #99 open (auto-update scaffold gaps + prioritize.md index-before-update reorder). Catch-up logged for #95, #97, #98. Most of this session's effort went to a new standalone tool outside this repo (~/.shmorch/personal-profile) — not shmorch state.
+updated: 2026-08-10
+summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`.
 ---
 
 
 
 
+## Latest Session — 2026-08-10 — reorient interview + deterministic merge-chain tool
+
+**Branch:** `feature/20260810-reorient-and-merge-chain`
+
+**What was done:**
+- New `/shmorch reorient` command + `workflows/reorient.md`: a re-runnable, tree-gated
+  interview (Project Focus & Shape; Production Readiness modeled on Google's SRE PRR).
+  Each category and sub-question is opt-in/skippable — distinct from `orient.md`'s fixed
+  one-time 6-question Context Setup, which now points to it. Wired into `SKILL.md`'s
+  dispatch table and `commands/help.md`.
+- Found and fixed a real bug while wiring the write target: `docs/technology/infrastructure`
+  was added to `EXPECTED_DOCS` (in `self-improve.md` and `auto-update.md`) in PR #99 as a
+  canonical scaffold dir, but no `templates/docs/technology/infrastructure/` ever existed —
+  and it contradicts `docs/technology/architecture/index.md`'s explicit "infra is a topic
+  inside architecture/, not a sibling dir" rule. Removed it from both `EXPECTED_DOCS` lists
+  and `auto-update.md`'s directory check; reorient's readiness answers now write to the
+  existing `docs/technology/architecture/observability.md` instead.
+- New `tools/merge-chain.sh`: scripts `core/git-discipline.md`'s already-documented
+  merge → pull → rebase → repeat PR-stack sequence, which kept getting skipped in practice.
+  Merges each PR in order, pulls main, rebases the next branch, force-pushes on a clean
+  rebase, and stops with exact resume instructions on a conflict (VERSION conflicts still
+  need a judgment call, not auto-resolved). `git-discipline.md` now points to it.
+- Two new tracks: `docs/project/tracks/20260810-adaptive-reorient-interview/`,
+  `docs/project/tracks/20260810-deterministic-merge-chain-tool/`.
+- `VERSION` bumped `1.0.7` → `1.1.0` (MINOR — new command/workflow).
+
+**Files touched:** `commands/reorient.md` (new), `workflows/reorient.md` (new),
+`workflows/orient.md`, `SKILL.md`, `commands/help.md`, `workflows/self-improve.md`,
+`workflows/auto-update.md`, `tools/merge-chain.sh` (new), `core/git-discipline.md`, `VERSION`,
+2 new track dirs.
+
+**Same-session follow-up:** merged `reorient` back into `orient` before PR #102 ever
+merged — `commands/reorient.md` and `workflows/reorient.md` removed, content folded into
+`workflows/orient.md` as a "Deep interview" section gated on a `focus|readiness` argument;
+new `commands/orient.md` makes it directly user-invocable (previously only reachable via
+`go`). Added `docs/project/interview-log.md`: dated log of interview answers (Context Setup
++ deep interview), checked against prior answers and `docs/{product,technology}/decisions/`
+for contradictions before each write — surfaced inline and logged, not silently overwritten.
+This is the mechanism for keeping project scope changes intentional rather than accidental;
+cross-linked (not merged) with `docs/project/plan/prompt-goal-alignment-scope-monitor.md`.
+`VERSION` bumped `1.1.0` → `1.2.0` (MINOR — orient's command surface changed).
+
+**Second same-session follow-up:** Production Readiness flipped from opt-in
+("want to go through this? yes/skip") to default-on across all areas — assumed relevant
+unless the user explicitly says skip/skip-all. Added a 6th area, AI/LLM development &
+product integration, based on Google's ML Test Score (data/model/infra/monitoring rubric)
+and NIST's AI RMF (governance question); depth is user's choice (quick pass vs full rubric)
+and it captures an exposure level (public/internal/agentic). OWASP Top 10 for LLM
+Applications deliberately kept out of the interview — instead applied as a standing
+build-time guardrail scaled to exposure: `workflows/design.md` new Step 1c (design
+constraints before build) and `agents/roles/critic.md` new check #6 (unaddressed category
+for public/agentic exposure = BLOCKER, not RISK). `VERSION` bumped `1.2.0` → `1.2.1` (PATCH).
+
+**Third same-session follow-up:** split `workflows/orient.md` (had grown to 335 lines mixing
+shallow orientation, the deep interview tree, and the interview-log protocol) into
+`workflows/orient.md` (shallow Steps 0-7 only, 197 lines) and a new `workflows/interview.md`
+(deep Focus/Readiness/AI-LLM interview + recording protocol, 144 lines). `commands/orient.md`
+dispatch updated accordingly. `VERSION` bumped `1.2.1` → `1.3.0` (MINOR — new workflow file).
+PR #102 merged after this.
 
 **In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)
 

@@ -1,12 +1,15 @@
 # Workflow: orient
 
 The orientation phase — read state, surface gaps, propose the next move. Runs after
-provisioning (or directly, when the repo is already current). Invoked by
-`workflows/go.md`; not a user command.
+provisioning (or directly, when the repo is already current). Invoked by `workflows/go.md`,
+and directly by the user via `/shmorch orient` — always this shallow path, Steps 0-7.
+`/shmorch orient focus|readiness` instead runs `workflows/interview.md` (see
+`commands/orient.md`'s dispatch) — the deep, tree-gated interview; it does not touch this file.
 
 ## Inputs
-- Optional topic/detail (passed through from `go`, used as timelog detail)
 - Standard state files: `docs/project/context.md`, `docs/project/stack.md`, `docs/project/session.md`, `docs/project/plan/`
+- `docs/project/interview-log.md` (Context Setup only — see `workflows/interview.md` §
+  Recording answers)
 
 ## Roles
 - None — runs inline
@@ -41,9 +44,15 @@ If `context.md` is unfilled, run the Context Setup flow:
    - "PR merge strategy: merge, squash, or rebase? (merge preserves branch topology in git graph; squash = one commit per PR; rebase = linear history, no merge commits)"
    - "Enable the docs-placement reminder right after each docs file is written? (flags possible wrong skeleton location while it's fresh, not batched at session end — off by default)"
    - "Anything I should never do without asking first?"
-3. Write answers to `docs/project/context.md`, the merge strategy to `.shmorch/AGENTS.md` under Branching Discipline, and the docs-placement choice to `.shmorch/AGENTS.md` under Docs Placement Hook `**Status:**`, confirm with user.
+3. Write answers to `docs/project/context.md`, the merge strategy to `.shmorch/AGENTS.md` under Branching Discipline, and the docs-placement choice to `.shmorch/AGENTS.md` under Docs Placement Hook `**Status:**`, confirm with user. Record each answer per `workflows/interview.md` § Recording answers.
 
 If filled, summarize in 1-2 sentences.
+
+This Context Setup interview stays intentionally minimal (fast first
+contact). For deeper, re-runnable project-focus or production-readiness
+questions (Google SRE PRR-based, tree-gated by category), the user can run
+`/shmorch orient focus` or `/shmorch orient readiness` any time —
+`workflows/interview.md`, not part of this shallow flow.
 
 ---
 

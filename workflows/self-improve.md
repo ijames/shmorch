@@ -66,7 +66,7 @@ Any file flagged is a full copy that will silently diverge from skill updates. I
 
 **Scaffold reverse check** (docs/ dirs not in canonical template):
 ```bash
-EXPECTED_DOCS="docs docs/project docs/project/plan docs/project/tracks docs/project/schedule docs/project/process docs/project/prioritizer docs/project/documentarian docs/product docs/product/strategy docs/product/design docs/product/features docs/product/decisions docs/technology docs/technology/architecture docs/technology/development docs/technology/infrastructure docs/technology/decisions docs/reference docs/reference/instructions docs/reference/research docs/inbox"
+EXPECTED_DOCS="docs docs/project docs/project/plan docs/project/tracks docs/project/schedule docs/project/process docs/project/prioritizer docs/project/documentarian docs/product docs/product/strategy docs/product/design docs/product/features docs/product/decisions docs/technology docs/technology/architecture docs/technology/development docs/technology/decisions docs/reference docs/reference/instructions docs/reference/research docs/inbox"
 LOG=".shmorch/project_docs_log.md"
 LOGGED=""
 [ -f "$LOG" ] && LOGGED=$(grep -v '^#' "$LOG" 2>/dev/null)

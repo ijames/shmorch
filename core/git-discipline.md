@@ -49,6 +49,21 @@ Never batch-merge multiple PRs without pulling main between each one. The sequen
 merge A → pull main → rebase B → merge B → pull main → rebase C → ...
 ```
 
+**Use the tool, not memory, to run this sequence.** This exact sequence has been skipped
+often enough in practice (merged straight through without the intermediate pull+rebase) that
+relying on remembering it mid-session isn't reliable. `tools/merge-chain.sh` encodes it
+mechanically for a known stack of PRs:
+
+```bash
+bash "$SHMORCH_HOME/tools/merge-chain.sh" <remote> <PR#> [<PR#> ...]
+```
+
+It merges PR N, pulls main, rebases the next PR's branch onto main, force-pushes on a clean
+rebase, and stops with explicit resume instructions on a conflict (which — per the VERSION
+rule above — needs a human/agent judgment call, not something a script should silently
+resolve). Re-run the same command with the remaining PR numbers to continue after resolving a
+conflict.
+
 **VERSION conflicts are expected, not exceptional, during a merge sequence.** Every open
 branch bumped VERSION off a now-stale main. When rebasing branch N onto a freshly-merged
 main: always resolve the VERSION conflict by taking main's current value and applying

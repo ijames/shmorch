@@ -17,6 +17,12 @@ SESSION
                              Runs auto-update check and environment check automatically.
   /shmorch resume           Fast re-entry mid-session: latest session.md + plan/ only, no
                              version check, no interview, no gap scanning. Use after `go` already ran.
+  /shmorch orient [focus|readiness]
+                             No argument: shallow re-orientation (same path `go` runs automatically).
+                             focus|readiness: deep, tree-gated interview — project focus/shape or
+                             SRE-style production readiness (monitoring, security, backups, cost,
+                             on-call). Re-runnable any time; logs answers + contradictions to
+                             docs/project/interview-log.md.
   /shmorch wrap             Close session. Updates session.md, plan/, decisions.md, closes
                              timelog. Self-improve runs automatically — no need to run it separately.
   /shmorch checkpoint       Save shmorch state to git (safe restore point).

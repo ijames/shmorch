@@ -55,6 +55,29 @@ If Step 1b finds a blocking incompatibility (a requirement that cannot be met by
 
 ---
 
+## Step 1c — AI/LLM guardrail (run only if this feature develops or integrates an AI/LLM component)
+
+Skip silently if the feature has no model/LLM involvement.
+
+Check `docs/technology/architecture/observability.md`'s `## Production Readiness` → AI/LLM
+sub-heading for the exposure level captured during orient (`public`, `internal`, or
+`agentic`). If not yet recorded, ask once: "What's the exposure here — public/user-facing
+input reaches the model, internal-only, or agentic (model can call tools/take actions)?" and
+record it there.
+
+Apply the OWASP Top 10 for LLM Applications categories relevant to that exposure as design
+constraints — this is a standing baseline (no AI/LLM-integrated system ships with a known
+category unaddressed), not a question for the user:
+- **public**: prompt injection, insecure output handling, sensitive info disclosure, model DoS all apply — the design must state how untrusted input is isolated from system prompts/instructions and how model output is treated as untrusted before use (rendering, execution, or feeding to another system).
+- **agentic** (in addition to the above): excessive agency and insecure plugin/tool design apply — the design must state what actions/tools the model can invoke, and what confirms or bounds each one (least privilege, human-in-the-loop for destructive actions).
+- **internal**: lighter bar, but training-data poisoning and supply-chain (model/plugin provenance) still apply if the project trains or fine-tunes anything.
+
+Record which categories were addressed and how in the design doc. If a category can't be
+addressed given the current stack/timeline, that's a blocking gap — surface it, don't ship
+around it silently.
+
+---
+
 ## Step 2 — Call Task (architect)
 
 ```
