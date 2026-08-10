@@ -28,3 +28,4 @@
 [2026-08-09 22:27:44] PHASE | self-improve: starting
 [2026-08-09 22:30:23] AGENT_DONE | researcher → ~/.claude/self-improve-20260809b-shmorch.md
 [2026-08-09 22:34:07] PHASE | self-improve: complete — 3 changes applied (PR #101)
+[2026-08-09 22:34:18] SESSION_END | auto-closed by stop hook — main @ 3bd936b chore(state): log self-improve batch2 completion (PR #101)
