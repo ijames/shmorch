@@ -23,3 +23,5 @@
 [2026-08-04 11:02:22] SESSION_END | auto-closed by stop hook — main @ ffb1096 Merge pull request #90 from ijames/fix/20260804-stack-md-template-gap
 [2026-08-09 15:07:57] SESSION_START | inbox fixes (PR #99) + personal-profile system built outside repo
 [2026-08-09 15:07:57] SESSION_END | PR #99 open (auto-update scaffold + prioritize reorder); personal-profile work is external
+[2026-08-09 22:27:26] SESSION_START | resume: merge PR #99/#100
+[2026-08-09 22:26:00] PHASE | PR #99 merged, PR #100 rebased (VERSION 1.0.4->1.0.6) and merged
