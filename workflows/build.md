@@ -136,9 +136,12 @@ Write this list to `docs/project/plan/` under the active task.
 
 Write code, tests, and doc updates as a single unit. Proceed to Step 4.
 
-## Step 3b — Large feature: Call Task (parallel implementers)
+## Step 3b — Large feature: spawn Task agents
 
-Identify up to 4 independent modules. For each, call Task. Parallel calls are allowed when modules don't share write targets.
+Default is Task agents — one per independent module, up to 4. Call Task for each module
+unless the module is so tightly entangled with in-flight context that fully briefing an
+agent would cost more than implementing it directly; in that case implement it inline and
+note why. Parallel calls are allowed when modules don't share write targets.
 
 ```
 Task(
