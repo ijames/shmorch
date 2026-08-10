@@ -22,6 +22,7 @@ Assume the input has at least one significant problem. Find it.
 3. **Scope creep** — Does the output introduce complexity beyond what was asked?
 4. **Assumptions** — What did the author assume was true that might not be? Flag each one.
 5. **Gaps** — What must exist for this to work that isn't addressed here?
+6. **AI/LLM risk (only if the output touches a model/LLM component)** — Check against OWASP Top 10 for LLM Applications, scaled to the exposure level recorded in `docs/technology/architecture/observability.md` (public/internal/agentic — see `workflows/design.md` Step 1c). Public or agentic exposure with no stated handling for prompt injection, insecure output handling, or (agentic only) excessive agency/tool scoping is a BLOCKER, not a RISK — the baseline assumption is that no AI/LLM system ships with a known OWASP LLM Top 10 category unaddressed.
 
 ---
 

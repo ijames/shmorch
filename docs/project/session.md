@@ -1,7 +1,7 @@
 ---
 status: Active
 updated: 2026-08-10
-summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`, SRE-PRR-based deep interview) + `docs/project/interview-log.md` for dated answers with contradiction detection, + `tools/merge-chain.sh` (scripts the merge->pull->rebase PR-stack sequence).
+summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`.
 ---
 
 
@@ -48,6 +48,17 @@ for contradictions before each write — surfaced inline and logged, not silentl
 This is the mechanism for keeping project scope changes intentional rather than accidental;
 cross-linked (not merged) with `docs/project/plan/prompt-goal-alignment-scope-monitor.md`.
 `VERSION` bumped `1.1.0` → `1.2.0` (MINOR — orient's command surface changed).
+
+**Second same-session follow-up:** Production Readiness flipped from opt-in
+("want to go through this? yes/skip") to default-on across all areas — assumed relevant
+unless the user explicitly says skip/skip-all. Added a 6th area, AI/LLM development &
+product integration, based on Google's ML Test Score (data/model/infra/monitoring rubric)
+and NIST's AI RMF (governance question); depth is user's choice (quick pass vs full rubric)
+and it captures an exposure level (public/internal/agentic). OWASP Top 10 for LLM
+Applications deliberately kept out of the interview — instead applied as a standing
+build-time guardrail scaled to exposure: `workflows/design.md` new Step 1c (design
+constraints before build) and `agents/roles/critic.md` new check #6 (unaddressed category
+for public/agentic exposure = BLOCKER, not RISK). `VERSION` bumped `1.2.0` → `1.2.1` (PATCH).
 
 
 **In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)

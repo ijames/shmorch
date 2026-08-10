@@ -88,6 +88,31 @@ contradictions instead of silently overwriting answers.
   interview-triggered contradiction check on stated answers). Cross-link the
   two rather than merge them — different trigger, same mission.
 
+## Follow-up — AI/LLM production readiness + default-on posture (2026-08-10)
+
+Two more changes to the same Deep interview, same session:
+
+- **Production Readiness gate flipped from opt-in to default-on** across all six areas
+  (existing five + new AI/LLM). The old "want to go through this? yes/skip" top-level gate is
+  gone — orient now assumes production readiness matters unless the user explicitly opts out
+  ("skip"/"skip all"), consistent with `docs/{product,technology}/decisions/`-driven
+  intentionality being the point of this whole track.
+- **New AI/LLM area**, based on Google's ML Test Score (data/model/infra/monitoring rubric —
+  same production-readiness lineage as SRE PRR) and NIST's AI RMF (Govern/Map/Measure/Manage)
+  for the governance question. Depth is explicitly the user's choice (quick pass vs full
+  rubric) since AI/LLM involvement varies far more project-to-project than the other five
+  areas. Captures an **exposure level** (public / internal / agentic) as its key output.
+- **OWASP Top 10 for LLM Applications deliberately excluded from the interview** — per
+  developer direction, attack-vector-specific questions don't belong in a user interview; the
+  assumption is that no AI/LLM system ships with a known vulnerability regardless of what the
+  user says. Instead OWASP LLM Top 10 became a standing build-time guardrail, scaled to the
+  exposure level captured above:
+  - `workflows/design.md` — new Step 1c: applies exposure-relevant OWASP LLM Top 10
+    categories as design constraints before build starts (skips silently if no AI/LLM
+    component).
+  - `agents/roles/critic.md` — new check #6: adversarial pass now flags an unaddressed
+    OWASP LLM Top 10 category (for public/agentic exposure) as a BLOCKER, not a RISK.
+
 ## Not in scope
 
 - No new template directory for infrastructure docs — resolved by writing into the existing

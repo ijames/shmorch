@@ -172,11 +172,11 @@ bullet that's unchanged. Record each answer per "Recording answers" below.
 Modeled on Google's SRE Production Readiness Review, scoped down to the categories that
 matter for a small/solo project — not the full enterprise checklist.
 
-Ask: "Want to go through production-readiness questions — monitoring, security, backups,
-cost, on-call? (yes / skip / name specific areas: monitoring, security, backup, cost, oncall)"
-
-For each selected area (all five if "yes" with no specifics), ask its gate question first.
-Only ask the follow-up if the gate answer signals it's relevant.
+Assumed relevant for every project unless the user explicitly opts out — say once: "Walking
+through production-readiness questions now — monitoring, security, backups, cost, on-call,
+and AI/LLM if this project touches one. Say 'skip' on any area or question, or 'skip all' to
+opt out entirely." No blanket yes/no gate; go straight into each area's own gate question, and
+only ask the follow-up if the gate answer signals it's relevant.
 
 **Monitoring & alerting** — Gate: "Does anything here need alerting when it breaks — errors,
 traffic spikes, unpaid bills?" If yes: "Where should alerts go — Zulip, email, nowhere set up yet?"
@@ -192,6 +192,38 @@ reproducible from source/config?" If irreplaceable: "Is it backed up anywhere to
 
 **On-call / escalation** — Gate: "If this breaks at 2am, does it need to wake someone up, or
 can it wait till morning?" If wake-someone-up: "Who, and how — Zulip, phone, other?"
+
+**AI/LLM development & product integration** — based on Google's ML Test Score (data/model/
+infra/monitoring rubric for ML production readiness) and NIST's AI Risk Management Framework
+(Govern/Map/Measure/Manage), scoped to how deep the user wants to go — this area is broader
+and more variable than the other four, so depth is explicitly the user's call, not fixed.
+
+Gate: "Does this project develop or integrate an AI/LLM component — either in the product
+itself, or as part of how it's built? (no / yes, quick pass / yes, full rubric)"
+
+If no: skip the rest of this area.
+
+If yes, first ask the exposure question — this scopes both this interview and the standing
+build-time guardrail described below, so don't skip it even on a quick pass: "What's the
+exposure — public/user-facing input reaches the model, internal-only/trusted input, or
+agentic (the model can take actions/call tools)?"
+
+Quick pass — one question: "Anything already in place for eval/quality checks, cost or usage
+telemetry, or a rollback plan if a model update regresses behavior? (or 'nothing yet')"
+
+Full rubric — ask each, one at a time, "skip" allowed:
+- **Data** (ML Test Score) — "Is training/eval/fine-tuning data versioned and its provenance known, or is this using a stock model with no custom data?"
+- **Model** (ML Test Score) — "Is there an eval/benchmark run before a new model version ships, and a rollback plan if it regresses?"
+- **Infra** (ML Test Score) — "What's the fallback if the model provider has an outage or rate-limits you — degrade, queue, or hard-fail?"
+- **Monitoring** (ML Test Score) — "Is anything tracking drift, output-quality regression, or token/cost usage over time?"
+- **Governance** (NIST AI RMF) — "Who owns the call if the model does something wrong in production — is that decided, or TBD?"
+
+Do not ask about specific attack vectors (prompt injection, jailbreaks, etc.) here — that's
+OWASP Top 10 for LLM Applications territory, and it's applied as a standing build-time
+guardrail scaled to the exposure level just captured (`workflows/design.md`,
+`agents/roles/critic.md`), not an interview topic. The working assumption is that no
+AI/LLM-integrated system ships with a known OWASP LLM Top 10 vulnerability, regardless of
+whether the user brings it up here.
 
 Write answers to `docs/technology/architecture/observability.md` under a `## Production
 Readiness` heading, one sub-heading per area answered (same update-in-place rule) — this file
