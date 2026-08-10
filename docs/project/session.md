@@ -1,11 +1,42 @@
 ---
 status: Active
-updated: 2026-08-09
-summary: PR #99 open (auto-update scaffold gaps + prioritize.md index-before-update reorder). Catch-up logged for #95, #97, #98. Most of this session's effort went to a new standalone tool outside this repo (~/.shmorch/personal-profile) — not shmorch state.
+updated: 2026-08-10
+summary: New `/shmorch reorient` command (SRE-PRR-based, tree-gated interview) + `tools/merge-chain.sh` (scripts the merge->pull->rebase PR-stack sequence). Fixed a doctrine contradiction found along the way (docs/technology/infrastructure never templated, conflicted with architecture/index.md).
 ---
 
 
 
+
+## Latest Session — 2026-08-10 — reorient interview + deterministic merge-chain tool
+
+**Branch:** `feature/20260810-reorient-and-merge-chain`
+
+**What was done:**
+- New `/shmorch reorient` command + `workflows/reorient.md`: a re-runnable, tree-gated
+  interview (Project Focus & Shape; Production Readiness modeled on Google's SRE PRR).
+  Each category and sub-question is opt-in/skippable — distinct from `orient.md`'s fixed
+  one-time 6-question Context Setup, which now points to it. Wired into `SKILL.md`'s
+  dispatch table and `commands/help.md`.
+- Found and fixed a real bug while wiring the write target: `docs/technology/infrastructure`
+  was added to `EXPECTED_DOCS` (in `self-improve.md` and `auto-update.md`) in PR #99 as a
+  canonical scaffold dir, but no `templates/docs/technology/infrastructure/` ever existed —
+  and it contradicts `docs/technology/architecture/index.md`'s explicit "infra is a topic
+  inside architecture/, not a sibling dir" rule. Removed it from both `EXPECTED_DOCS` lists
+  and `auto-update.md`'s directory check; reorient's readiness answers now write to the
+  existing `docs/technology/architecture/observability.md` instead.
+- New `tools/merge-chain.sh`: scripts `core/git-discipline.md`'s already-documented
+  merge → pull → rebase → repeat PR-stack sequence, which kept getting skipped in practice.
+  Merges each PR in order, pulls main, rebases the next branch, force-pushes on a clean
+  rebase, and stops with exact resume instructions on a conflict (VERSION conflicts still
+  need a judgment call, not auto-resolved). `git-discipline.md` now points to it.
+- Two new tracks: `docs/project/tracks/20260810-adaptive-reorient-interview/`,
+  `docs/project/tracks/20260810-deterministic-merge-chain-tool/`.
+- `VERSION` bumped `1.0.7` → `1.1.0` (MINOR — new command/workflow).
+
+**Files touched:** `commands/reorient.md` (new), `workflows/reorient.md` (new),
+`workflows/orient.md`, `SKILL.md`, `commands/help.md`, `workflows/self-improve.md`,
+`workflows/auto-update.md`, `tools/merge-chain.sh` (new), `core/git-discipline.md`, `VERSION`,
+2 new track dirs.
 
 
 **In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)

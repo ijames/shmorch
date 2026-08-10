@@ -45,6 +45,11 @@ If `context.md` is unfilled, run the Context Setup flow:
 
 If filled, summarize in 1-2 sentences.
 
+This Context Setup interview stays intentionally minimal (fast first
+contact). For deeper, re-runnable project-focus or production-readiness
+questions (Google SRE PRR-based, tree-gated by category), the user can run
+`/shmorch reorient` any time — not part of this flow.
+
 ---
 
 ## Step 2 — Read last session
