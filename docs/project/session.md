@@ -67,6 +67,18 @@ shallow orientation, the deep interview tree, and the interview-log protocol) in
 dispatch updated accordingly. `VERSION` bumped `1.2.1` → `1.3.0` (MINOR — new workflow file).
 PR #102 merged after this.
 
+**Fourth same-session follow-up:** during the post-merge sync, a stray `chore(state)` timelog
+commit ended up committed directly to local `main` mid-session instead of on the feature
+branch — caused a real (non-force) divergence between local and remote `main` after PR #102
+merged. Root-caused (not a `merge-chain.sh` bug — that commit predated the script's use and
+was a plain manual-commit slip), then fixed properly: reset local `main` back to `js/main`,
+moved the stray commit to its own branch, opened and merged PR #103, then hard-reset local
+`main` to match (a true fast-forward, not a force-push, since nothing else was ahead). Branch
+deleted after merge. Follow-up hardening: added a "Before pushing a branch or merging its PR"
+rule to `core/git-discipline.md` requiring `docs/project/session.md` be current before the
+final push/merge of a branch, referenced from `tools/merge-chain.sh`'s header. `VERSION`
+bumped `1.3.0` → `1.3.1` (PATCH).
+
 **In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)
 
 # Session Log
