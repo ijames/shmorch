@@ -34,3 +34,4 @@
 [2026-08-10 10:10:48] PHASE | merge orient+reorient, add interview-log contradiction tracking — implemented, committing
 [2026-08-10 10:11:08] PHASE | merge orient+reorient, add interview-log — complete, committing
 [2026-08-10 10:42:56] PHASE | AI/LLM readiness area + default-on posture + OWASP build guardrail — complete, committing
+[2026-08-10 11:01:02] PHASE | split orient.md into orient.md + interview.md — complete, committing

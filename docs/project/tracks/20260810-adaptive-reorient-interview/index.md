@@ -113,6 +113,21 @@ Two more changes to the same Deep interview, same session:
   - `agents/roles/critic.md` — new check #6: adversarial pass now flags an unaddressed
     OWASP LLM Top 10 category (for public/agentic exposure) as a BLOCKER, not a RISK.
 
+## Follow-up — split into workflows/orient.md + workflows/interview.md (2026-08-10)
+
+`workflows/orient.md` had grown to 335 lines mixing three concerns (shallow orientation
+Steps 0-7, the deep Focus/Readiness/AI-LLM interview tree, and the interview-log recording
+protocol) — flagged during a size check of the pending branch. Split:
+
+- `workflows/orient.md` — back to the shallow path only (Steps 0-7), 197 lines.
+- `workflows/interview.md` — new file: the deep interview (Focus & Shape, Production
+  Readiness incl. AI/LLM) plus the interview-log recording protocol, 144 lines.
+- `commands/orient.md` — dispatch updated: no argument → `workflows/orient.md`,
+  `focus`/`readiness` → `workflows/interview.md`.
+
+Restores the one-command-one-concern pattern the rest of the skill follows (thin command →
+single-purpose workflow) instead of one file branching internally on its argument.
+
 ## Not in scope
 
 - No new template directory for infrastructure docs — resolved by writing into the existing

@@ -20,4 +20,5 @@ contradictions against prior answers or standing decisions.
   posture changes, or the first time production-readiness starts to matter.
 
 ## Dispatches to
-`workflows/orient.md`
+- No argument → `workflows/orient.md`
+- `focus` or `readiness` → `workflows/interview.md`

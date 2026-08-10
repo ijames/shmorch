@@ -60,6 +60,12 @@ build-time guardrail scaled to exposure: `workflows/design.md` new Step 1c (desi
 constraints before build) and `agents/roles/critic.md` new check #6 (unaddressed category
 for public/agentic exposure = BLOCKER, not RISK). `VERSION` bumped `1.2.0` → `1.2.1` (PATCH).
 
+**Third same-session follow-up:** split `workflows/orient.md` (had grown to 335 lines mixing
+shallow orientation, the deep interview tree, and the interview-log protocol) into
+`workflows/orient.md` (shallow Steps 0-7 only, 197 lines) and a new `workflows/interview.md`
+(deep Focus/Readiness/AI-LLM interview + recording protocol, 144 lines). `commands/orient.md`
+dispatch updated accordingly. `VERSION` bumped `1.2.1` → `1.3.0` (MINOR — new workflow file).
+PR #102 merged after this.
 
 **In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)
 

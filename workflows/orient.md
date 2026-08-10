@@ -1,16 +1,15 @@
 # Workflow: orient
 
 The orientation phase — read state, surface gaps, propose the next move. Runs after
-provisioning (or directly, when the repo is already current). Invoked by `workflows/go.md`
-with no argument (shallow path, Steps 0-7), and directly by the user via `/shmorch orient`
-(same shallow path) or `/shmorch orient focus|readiness` (skips straight to the deep,
-tree-gated interview in "Deep interview" below — no Steps 0-7).
+provisioning (or directly, when the repo is already current). Invoked by `workflows/go.md`,
+and directly by the user via `/shmorch orient` — always this shallow path, Steps 0-7.
+`/shmorch orient focus|readiness` instead runs `workflows/interview.md` (see
+`commands/orient.md`'s dispatch) — the deep, tree-gated interview; it does not touch this file.
 
 ## Inputs
-- Optional argument: none (shallow, default) | `focus` | `readiness` — selects deep-interview
-  category when run directly; ignored (always shallow) when invoked by `go`
 - Standard state files: `docs/project/context.md`, `docs/project/stack.md`, `docs/project/session.md`, `docs/project/plan/`
-- `docs/project/interview-log.md` (deep interview and Context Setup only — see "Recording answers")
+- `docs/project/interview-log.md` (Context Setup only — see `workflows/interview.md` §
+  Recording answers)
 
 ## Roles
 - None — runs inline
@@ -45,15 +44,15 @@ If `context.md` is unfilled, run the Context Setup flow:
    - "PR merge strategy: merge, squash, or rebase? (merge preserves branch topology in git graph; squash = one commit per PR; rebase = linear history, no merge commits)"
    - "Enable the docs-placement reminder right after each docs file is written? (flags possible wrong skeleton location while it's fresh, not batched at session end — off by default)"
    - "Anything I should never do without asking first?"
-3. Write answers to `docs/project/context.md`, the merge strategy to `.shmorch/AGENTS.md` under Branching Discipline, and the docs-placement choice to `.shmorch/AGENTS.md` under Docs Placement Hook `**Status:**`, confirm with user. Record each answer per "Recording answers" below.
+3. Write answers to `docs/project/context.md`, the merge strategy to `.shmorch/AGENTS.md` under Branching Discipline, and the docs-placement choice to `.shmorch/AGENTS.md` under Docs Placement Hook `**Status:**`, confirm with user. Record each answer per `workflows/interview.md` § Recording answers.
 
 If filled, summarize in 1-2 sentences.
 
 This Context Setup interview stays intentionally minimal (fast first
 contact). For deeper, re-runnable project-focus or production-readiness
 questions (Google SRE PRR-based, tree-gated by category), the user can run
-`/shmorch orient focus` or `/shmorch orient readiness` any time — see "Deep
-interview" below, not part of this shallow flow.
+`/shmorch orient focus` or `/shmorch orient readiness` any time —
+`workflows/interview.md`, not part of this shallow flow.
 
 ---
 
@@ -138,143 +137,6 @@ If the session.md has a "Pick up immediately" note, lead with that — do it or 
 Then propose 2-3 concrete options for what to do next, based on the plan and any gaps found. Don't just ask "what do you want to work on?" cold — give the user something to react to.
 
 If the user declines all options or says "not yet", ask what's holding them back, or offer something smaller (a quick scan, filling in state, answering a codebase question). Never just go quiet.
-
----
-
-## Deep interview — Focus & Readiness (on-demand, `/shmorch orient focus|readiness`)
-
-Adaptive, tree-structured: two categories, each gated by one high-level question before any
-sub-questions are asked. Unlike Context Setup above (one-time, fills-if-empty), this is meant
-to be re-run — it updates existing answers rather than requiring a blank `context.md`. Skips
-Steps 0-7 entirely when entered this way.
-
-If `docs/project/context.md` has a "Last reoriented" line, show it: "Last reoriented: <date>.
-Answers below update what's already there — say 'skip' on any question to leave it as-is."
-
-If no argument (`focus` or `readiness`) was given, run both, Focus first then Readiness.
-
-### Project Focus & Shape
-
-Ask: "Want to revisit what this project is trying to become — scope, audience, shape? (yes / skip)"
-
-If yes, ask ONE at a time, allowing "skip" on any individual question:
-- "What does success look like for this project, in one sentence?"
-- "Who is this for — just you, a team, the public?"
-- "What's explicitly out of scope right now — the anti-decisions?"
-- "Any hard constraints — deadline, budget, must-integrate-with-X?"
-
-Write answers to `docs/project/context.md` under a `## Project Focus & Shape` heading —
-create it if missing, update the existing bullets in place if present. Do not duplicate a
-bullet that's unchanged. Record each answer per "Recording answers" below.
-
-### Production Readiness
-
-Modeled on Google's SRE Production Readiness Review, scoped down to the categories that
-matter for a small/solo project — not the full enterprise checklist.
-
-Assumed relevant for every project unless the user explicitly opts out — say once: "Walking
-through production-readiness questions now — monitoring, security, backups, cost, on-call,
-and AI/LLM if this project touches one. Say 'skip' on any area or question, or 'skip all' to
-opt out entirely." No blanket yes/no gate; go straight into each area's own gate question, and
-only ask the follow-up if the gate answer signals it's relevant.
-
-**Monitoring & alerting** — Gate: "Does anything here need alerting when it breaks — errors,
-traffic spikes, unpaid bills?" If yes: "Where should alerts go — Zulip, email, nowhere set up yet?"
-
-**Security** — Gate: "Any auth, PII, or compliance requirements right now?" If yes: "What's
-the sensitive surface — user data, payments, internal only?"
-
-**Backup / disaster recovery** — Gate: "Is any data here irreplaceable, or is everything
-reproducible from source/config?" If irreplaceable: "Is it backed up anywhere today?"
-
-**Cost / capacity** — Gate: "Any cost ceiling or scaling concern worth flagging now?" If yes:
-"What's the ceiling, and what happens if it's hit?"
-
-**On-call / escalation** — Gate: "If this breaks at 2am, does it need to wake someone up, or
-can it wait till morning?" If wake-someone-up: "Who, and how — Zulip, phone, other?"
-
-**AI/LLM development & product integration** — based on Google's ML Test Score (data/model/
-infra/monitoring rubric for ML production readiness) and NIST's AI Risk Management Framework
-(Govern/Map/Measure/Manage), scoped to how deep the user wants to go — this area is broader
-and more variable than the other four, so depth is explicitly the user's call, not fixed.
-
-Gate: "Does this project develop or integrate an AI/LLM component — either in the product
-itself, or as part of how it's built? (no / yes, quick pass / yes, full rubric)"
-
-If no: skip the rest of this area.
-
-If yes, first ask the exposure question — this scopes both this interview and the standing
-build-time guardrail described below, so don't skip it even on a quick pass: "What's the
-exposure — public/user-facing input reaches the model, internal-only/trusted input, or
-agentic (the model can take actions/call tools)?"
-
-Quick pass — one question: "Anything already in place for eval/quality checks, cost or usage
-telemetry, or a rollback plan if a model update regresses behavior? (or 'nothing yet')"
-
-Full rubric — ask each, one at a time, "skip" allowed:
-- **Data** (ML Test Score) — "Is training/eval/fine-tuning data versioned and its provenance known, or is this using a stock model with no custom data?"
-- **Model** (ML Test Score) — "Is there an eval/benchmark run before a new model version ships, and a rollback plan if it regresses?"
-- **Infra** (ML Test Score) — "What's the fallback if the model provider has an outage or rate-limits you — degrade, queue, or hard-fail?"
-- **Monitoring** (ML Test Score) — "Is anything tracking drift, output-quality regression, or token/cost usage over time?"
-- **Governance** (NIST AI RMF) — "Who owns the call if the model does something wrong in production — is that decided, or TBD?"
-
-Do not ask about specific attack vectors (prompt injection, jailbreaks, etc.) here — that's
-OWASP Top 10 for LLM Applications territory, and it's applied as a standing build-time
-guardrail scaled to the exposure level just captured (`workflows/design.md`,
-`agents/roles/critic.md`), not an interview topic. The working assumption is that no
-AI/LLM-integrated system ships with a known OWASP LLM Top 10 vulnerability, regardless of
-whether the user brings it up here.
-
-Write answers to `docs/technology/architecture/observability.md` under a `## Production
-Readiness` heading, one sub-heading per area answered (same update-in-place rule) — this file
-already exists for exactly this purpose ("fill before going to prod"); infrastructure is a
-topic inside `architecture/`, not a separate sibling directory (see
-`docs/technology/architecture/index.md`). Skip writing anything for an area the user skipped
-entirely. Record each answer per "Recording answers" below.
-
-### Stamp and hand back
-
-Update (or add) the "Last reoriented: YYYY-MM-DD" line in `docs/project/context.md`.
-Summarize what changed in 2-3 sentences.
-
----
-
-## Recording answers to `docs/project/interview-log.md`
-
-Applies to Context Setup and the Deep interview (Focus & Readiness) above — not to every
-routine orientation. One small append-only file; do not let it grow into a database.
-
-Before writing a new answer:
-1. `grep` the log's tail for the same question text. If a prior answer exists and differs
-   from the new one, that's a **contradiction (old vs new)**.
-2. Grep `docs/{product,technology}/decisions/` (topic-appropriate) for a standing decision the
-   new answer conflicts with (e.g. answer says "no auth needed" but a decision entry records
-   OAuth was added). That's a **contradiction (answer vs built system)**.
-
-On either hit: surface it to the user inline before finalizing — "This contradicts what you
-said on <date>" or "...contradicts decision <date>/<title> — intentional change, or should I
-leave the prior answer?" — then record their resolution.
-
-Append one entry per answered question to `docs/project/interview-log.md` (create with a
-one-line header if missing):
-
-```
-## YYYY-MM-DD — <Context Setup | Focus & Shape | Production Readiness: <area>>
-**Q:** <question>
-**A:** <answer>
-**Discrepancies:** none
-```
-
-Or, when a contradiction was found:
-
-```
-**Discrepancies:** contradicts YYYY-MM-DD answer "<old answer>" — <user's resolution>
-```
-
-This is what lets Shmorch keep a project's goals and scope intentional rather than
-accidental — changes get surfaced and chosen, not silently drifted into. Related but
-distinct from `docs/project/plan/prompt-goal-alignment-scope-monitor.md` (a per-prompt
-live-work scope-drift check, not an interview-answer check) — cross-link, don't conflate.
 
 ---
 
