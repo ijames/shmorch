@@ -32,6 +32,22 @@ A project may override this default with its own reasoning, recorded in that pro
 
 ## Rules
 
+### Before pushing a branch or merging its PR
+
+`docs/project/session.md` must reflect the work on that branch before the final push/merge —
+not "will update after." A merge that lands without it means the next session (or the next
+agent) reads stale state.
+
+```bash
+git log --oneline -- docs/project/session.md | head -1   # last session.md commit
+git log --oneline -5                                       # recent branch commits
+```
+
+If the branch has commits since session.md was last touched, run `/shmorch wrap` (Step 5
+specifically) or at minimum update and commit session.md now — before the push/merge, not
+after. This applies to `tools/merge-chain.sh` runs too: confirm session.md is current for
+each branch before merging its PR.
+
 ### After any PR merge
 
 Immediately, before touching anything else:

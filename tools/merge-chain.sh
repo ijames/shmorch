@@ -6,6 +6,10 @@
 # relying on the agent remembering to run it by hand for every PR in a stack. Never squashes
 # (uses `gh pr merge --merge`, per git-discipline.md's "never squash" default).
 #
+# Before running this for a given PR, confirm docs/project/session.md is current for that
+# PR's branch (see git-discipline.md § Before pushing a branch or merging its PR) — this
+# script does not check that for you.
+#
 # For each PR #N in order:
 #   1. gh pr merge N --merge
 #   2. git checkout main && git pull <remote> main
