@@ -14,6 +14,22 @@ The moment a PR lands on main, every open branch is potentially stale. Treat the
 
 ---
 
+### Merge strategy: never squash
+
+Default merge strategy for all shmorch-touched projects: `gh pr merge --merge` (regular
+merge, preserving commit history). Rebase merge is acceptable when a linear history is
+wanted. Squash merge is never used by default — squashing destroys the commit-by-commit
+story of how AI-authored code evolved, which is the audit trail a human reviewer relies on.
+
+This assumes commit discipline is already being followed (small, single-concern commits,
+real messages) — an undisciplined branch's merge-commit noise is a separate problem to fix
+at the commit level, not by squashing it away.
+
+A project may override this default with its own reasoning, recorded in that project's
+`docs/project/process/index.md` or a decisions doc.
+
+---
+
 ## Rules
 
 ### After any PR merge
