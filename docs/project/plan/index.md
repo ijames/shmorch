@@ -16,26 +16,15 @@ summary: Docs taxonomy redesign closed and implemented (templates/docs/** restru
 
 ## Current Task
 
-**Next up: Shmorch docs cleanup** — bring `docs/state/` (root files + all 14 track
-folders) to clean, navigable, human-readable chunks with minimal context explosion:
-frontmatter + backlinks per `tracks/20260717-state-store-shape/index.md`'s rebuild
-candidate, index/spec/findings splits per `tracks/20260525-graph-first-docs/` (first
-instance: `tracks/20260721-workflow-subagent-delegation/`, 2026-07-21). Ongoing rigor
-(don't let a file drift while you're touching it) is a `core/documentation.md` rule to
-write; the backfill across existing tracks is a bounded one-time job, likely one agent per
-track per the state-store-shape candidate — not started yet.
-
-**2026-07-21 — tooling landed for the backfill:** `tools/track-graph-audit.sh` (deterministic
-chunk-size + front-matter + closed-graduation scan, wired into `documentarian.md` Step 2)
-and `templates/.shmorch/docs/track-template.md` now stamps the front-matter block on every
-new track — closes the gap where new tracks would immediately re-violate the rule this
-backfill exists to fix. The 13-track backfill itself is still not started.
-
-**Two other processes were active on this repo 2026-07-21 — keep separate, do not merge
-into one track or commit:**
-
-1. **Messaging provider design** — → [track](../tracks/20260721-messaging-provider/index.md). Interactive design work, not yet built.
-2. **Self-improve** (separate automated process — see prior commit `cc2997a` "upgrade(shmorch): wrap-friction fixes from self-improve") — periodically proposes and PRs its own findings directly. If its output lands mid-session, log it under its own commit/PR.
+None active. The docs cleanup this section used to describe (bringing every track under
+`docs/project/tracks/` to clean, frontmatter+backlinks shape) is done: `tools/track-graph-audit.sh`
+and `templates/.shmorch/docs/track-template.md` landed 2026-07-21, and the backfill mechanism
+track ([`tracks/20260724-dev-docs-taxonomy-backfill`](../tracks/20260724-dev-docs-taxonomy-backfill/index.md))
+closed 2026-07-30 — 19 of 20 track `index.md` files now carry frontmatter. The two
+"other processes" once tracked here also resolved: messaging-provider design is its own
+still-open track ([`tracks/20260721-messaging-provider`](../tracks/20260721-messaging-provider/index.md),
+check there for status), and self-improve continues as its own automated process,
+logging under its own commits/PRs as before — neither needs tracking here.
 
 ---
 
@@ -45,7 +34,7 @@ into one track or commit:**
 
 <!-- Items closed here when the skill change is merged to main. -->
 
-- [x] **Docs taxonomy redesign** — new top-level `docs/` skeleton (`product/`, `technology/`, `reference/`, `project/`, `inbox/`) replacing `architecture/development/product/reference/state/to_review`; resolved the architecture-vs-reference content-type conflict (technology/architecture/ = narrative, reference/ = lookup-only), split decisions into `product/decisions/` + `technology/decisions/` only, scoped Diataxis narrowly inside `reference/instructions/`. Implemented in `templates/docs/**`, `core/documentation.md`, `shmorch-core.md`, `templates/.shmorch/docs/track-template.md`. Backfill for already-provisioned projects split to its own track (see Backlog). `docs/state/tracks/20260724-docs-taxonomy-redesign/index.md`. Closed 2026-07-24.
+- [x] **Docs taxonomy redesign** — new top-level `docs/` skeleton (`product/`, `technology/`, `reference/`, `project/`, `inbox/`) replacing `architecture/development/product/reference/state/to_review`; resolved the architecture-vs-reference content-type conflict (technology/architecture/ = narrative, reference/ = lookup-only), split decisions into `product/decisions/` + `technology/decisions/` only, scoped Diataxis narrowly inside `reference/instructions/`. Implemented in `templates/docs/**`, `core/documentation.md`, `shmorch-core.md`, `templates/.shmorch/docs/track-template.md`. Backfill for already-provisioned projects split to its own track (see Backlog). [`docs/project/tracks/20260724-docs-taxonomy-redesign`](../tracks/20260724-docs-taxonomy-redesign/index.md). Closed 2026-07-24.
 
 - [x] **Wrap-friction fixes (self-improve)** — `go.md` escalates when 3+ sessions in a row end without a real wrap; `build.md` syncs track `index.md` Status before opening the PR; `self-improve.md` cross-checks `decisions.md`/`AGENTS.md` before re-proposing an already-resolved pattern; `vacuum.md` gained an untracked-file scan escalating to a backlog item after 2+ passes. PR #58 merged 2026-07-18.
 

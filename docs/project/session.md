@@ -1,8 +1,9 @@
 ---
 status: Active
-updated: 2026-08-04
-summary: Resolved all carried-over session state — PR #91 merged, VERSION migrated to semver (PR #92), TASK-PROTOCOL.md role-composition clarified (PR #93). Clean tree, no open PRs, no active track.
+updated: 2026-08-09
+summary: PR #99 open (auto-update scaffold gaps + prioritize.md index-before-update reorder). Catch-up logged for #95, #97, #98. Most of this session's effort went to a new standalone tool outside this repo (~/.shmorch/personal-profile) — not shmorch state.
 ---
+
 
 
 
@@ -11,7 +12,60 @@ summary: Resolved all carried-over session state — PR #91 merged, VERSION migr
 
 # Session Log
 
-## Latest Session — 2026-08-04 — session-state resolution: PR #91 + semver migration + role-composition clarify
+## Latest Session — 2026-08-09 — inbox fixes: auto-update scaffold gaps + prioritize reorder (PR #99, open)
+
+**Branch:** `docs/20260808-auto-update-scaffold-gaps`
+
+**What was done:**
+- Collected two inbox items and fixed both: `auto-update.md`'s scaffold check didn't
+  recognize `docs/technology/infrastructure` as canonical, and the same gap existed for
+  `docs/project/prioritizer/` and `docs/project/documentarian/` — added all three to
+  `workflows/auto-update.md`'s directory list and `EXPECTED_DOCS`.
+- `workflows/prioritize.md`: reordered so index-creation (old Step 6) now runs before the
+  present/confirm step (old Step 5) — fixes a real gap where a past `prioritize` run skipped
+  creating `docs/project/prioritizer/index.md` because nothing guaranteed it existed before
+  a row-update was attempted.
+- Removed the two now-addressed inbox files; `docs/inbox/index.md` reverted to its prior
+  committed state.
+- `VERSION` bumped `1.0.3` → `1.0.4` (PATCH).
+- The bulk of this session was a separate, deliberately non-shmorch effort: built a
+  standalone "personal profile" pipeline at `~/.shmorch/personal-profile/` (own local-only
+  git repo, not this one) that scans Claude Code session transcripts and builds an
+  evidence-backed persona document. Not shmorch state — noted here only as a pointer since
+  it came out of a shmorch session.
+
+**Files touched:** `workflows/auto-update.md`, `workflows/prioritize.md`, `VERSION`,
+`docs/inbox/index.md`, plus 2 deleted inbox files.
+
+**Commits:** `ab654df` fix(workflows): close auto-update scaffold gaps + prioritize index ordering
+
+**PR/commit:** [#99](https://github.com/ijames/shmorch/pull/99) — open, not yet merged.
+
+**State at end of session:** on `docs/20260808-auto-update-scaffold-gaps`, PR #99 open
+awaiting merge decision. `VERSION` = `1.0.4`.
+
+**Next up — blockers:**
+- Decide whether to merge PR #99.
+
+**Next up — plans:**
+- None from this session; personal-profile work continues independently outside this repo.
+
+---
+
+## 2026-08-04 to 2026-08-05 — catch-up (logged after the fact)
+
+**Branch:** `main`
+
+**What was done (catch-up — several PRs merged without a session.md update):**
+- PR #95 (2026-08-04): scaffolded `docs/index.md` and `docs/technology/index.md`.
+- PR #97 (2026-08-05): cross-repo skill changes now route through the inbox instead of
+  direct PRs — filed alongside a never-squash merge policy and an edit-discipline gap note.
+- PR #98 (2026-08-05): scoped self-improve to the local repo only, and made `$SHMORCH_HOME`
+  reads branch-agnostic.
+
+---
+
+## 2026-08-04 — session-state resolution: PR #91 + semver migration + role-composition clarify
 
 **Branch:** `main`
 
