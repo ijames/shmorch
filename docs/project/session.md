@@ -1,7 +1,7 @@
 ---
 status: Active
 updated: 2026-08-10
-summary: New `/shmorch reorient` command (SRE-PRR-based, tree-gated interview) + `tools/merge-chain.sh` (scripts the merge->pull->rebase PR-stack sequence). Fixed a doctrine contradiction found along the way (docs/technology/infrastructure never templated, conflicted with architecture/index.md).
+summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`, SRE-PRR-based deep interview) + `docs/project/interview-log.md` for dated answers with contradiction detection, + `tools/merge-chain.sh` (scripts the merge->pull->rebase PR-stack sequence).
 ---
 
 
@@ -37,6 +37,17 @@ summary: New `/shmorch reorient` command (SRE-PRR-based, tree-gated interview) +
 `workflows/orient.md`, `SKILL.md`, `commands/help.md`, `workflows/self-improve.md`,
 `workflows/auto-update.md`, `tools/merge-chain.sh` (new), `core/git-discipline.md`, `VERSION`,
 2 new track dirs.
+
+**Same-session follow-up:** merged `reorient` back into `orient` before PR #102 ever
+merged — `commands/reorient.md` and `workflows/reorient.md` removed, content folded into
+`workflows/orient.md` as a "Deep interview" section gated on a `focus|readiness` argument;
+new `commands/orient.md` makes it directly user-invocable (previously only reachable via
+`go`). Added `docs/project/interview-log.md`: dated log of interview answers (Context Setup
++ deep interview), checked against prior answers and `docs/{product,technology}/decisions/`
+for contradictions before each write — surfaced inline and logged, not silently overwritten.
+This is the mechanism for keeping project scope changes intentional rather than accidental;
+cross-linked (not merged) with `docs/project/plan/prompt-goal-alignment-scope-monitor.md`.
+`VERSION` bumped `1.1.0` → `1.2.0` (MINOR — orient's command surface changed).
 
 
 **In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)

@@ -53,6 +53,41 @@ each category and sub-question is gated behind an explicit opt-in, skippable at 
   (`observability.md`), not a separate sibling directory. Removed the entry from both
   `EXPECTED_DOCS` lists and from `auto-update.md`'s Step 2 directory-check list.
 
+## Follow-up — orient/reorient merge + interview-answer history (2026-08-10)
+
+Decided to fold `reorient` into `orient` (one command, no "which one do I run"
+split) and add a small history file so repeated interviews can catch
+contradictions instead of silently overwriting answers.
+
+- **Command merge:** `commands/reorient.md` and `workflows/reorient.md` are
+  removed; their content becomes part of `workflows/orient.md` as new
+  tree-gated steps, run on request (`/shmorch orient` becomes directly
+  user-invocable, not just an internal step of `go`). `SKILL.md` dispatch
+  table and `commands/help.md` updated to point `orient` at a real command
+  file instead of `reorient`.
+- **Interview-answer history — `docs/project/interview-log.md`:** one small
+  append-only file, not a database. Each entry: date, which
+  question(s) were (re)answered, the answer, and any discrepancy found.
+  Two contradiction checks, run whenever an answer is being (re)recorded:
+  1. **Old answer vs new answer** — same question answered differently across
+     sessions (e.g. "just you" → "a team").
+  2. **Answer vs built system** — cross-check the new answer against
+     `docs/{product,technology}/decisions/` (and, where checkable, actual repo
+     state) for a standing decision it now contradicts (e.g. answer says "no
+     auth needed" but a decisions entry records OAuth was added).
+  On a hit, both: surface it to the user inline ("this contradicts what you
+  said on <date> / decision <D>— intentional change, or should I leave the
+  old answer?") and log it under the entry's `**Discrepancies:**` line so it
+  isn't lost if the user brushes past it. No contradiction found → log the
+  answer with `**Discrepancies:** none`.
+- **Framing:** this is the mechanism that lets Shmorch keep project goals/scope
+  intentional rather than accidental — changes get surfaced and chosen, not
+  silently drifted into. Related but distinct from
+  `docs/project/plan/prompt-goal-alignment-scope-monitor.md` (that one is a
+  per-prompt/intake scope-drift check on live work; this is a periodic,
+  interview-triggered contradiction check on stated answers). Cross-link the
+  two rather than merge them — different trigger, same mission.
+
 ## Not in scope
 
 - No new template directory for infrastructure docs — resolved by writing into the existing
