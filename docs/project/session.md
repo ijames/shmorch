@@ -1,11 +1,27 @@
 ---
 status: Active
 updated: 2026-08-10
-summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`.
+summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+## Same-session follow-up — 2026-08-10 — Progressive Disclosure doctrine + knowledge-graph note
 
+**Branch:** `docs/20260810-progressive-disclosure-doctrine`
 
+**What was done:** while building out `~/.shmorch/personal-profile` (a separate, non-public
+repo) and adding a top-level "at a glance" summary + per-section preview to its
+`profile/index.md`, generalized the pattern into a new `core/documentation.md` § Progressive
+Disclosure: any AI-managed, human-consumable index needs a top-level summary and a
+one-phrase-per-section preview before the full read, not just `docs/project/index.md`/
+`docs/product/index.md`. Logged as an `additive` changelog row (no backfill). Also parked a
+speculative note in `docs/project/pre-planning.md` on knowledge graphs as an aggregator over
+multiple evidence sources (personal-profile, Treeclusion, Paths, shmorch's own `docs/`) —
+structural/provenance links stay hand-authored, interpretive/interstitial relationships are
+better generated on demand by a context-aware LLM than pre-authored exhaustively. Not scoped
+as a project, just a lens parked for later.
+
+**Files touched:** `core/documentation.md`, `docs/project/pre-planning.md`, `VERSION`
+(`1.3.1` → `1.3.2`, PATCH — doctrine/doc addition, no behavior change).
 
 ## Latest Session — 2026-08-10 — reorient interview + deterministic merge-chain tool
 

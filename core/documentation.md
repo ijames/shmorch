@@ -88,6 +88,32 @@ This doesn't change the graduation model — a track's *knowledge* still only le
 
 ---
 
+## Progressive Disclosure
+
+**Any information an AI manages but a human consumes must support progressive
+disclosure — a summary layer that lets the reader (human or agent) decide whether to go
+deeper, before paying the cost of the full read.** This applies beyond `docs/` structure:
+any index-shaped artifact an AI builds up over time (a knowledge base, a persona/profile,
+a catalog, a changelog) needs the same three layers:
+
+1. **Top-level summary** — a few sentences synthesizing the whole, not a table of contents.
+   A reader who stops here should already have a working answer.
+2. **One phrase per section** — what's actually in that section right now (not what the
+   section is *for* in the abstract), so the reader can skip sections with nothing relevant
+   to them instead of opening all of them to find out.
+3. **The full content** — only opened once 1 or 2 justified the cost.
+
+An index that only lists filenames or restates the taxonomy ("Section 3: Work Activities")
+without saying what's actually *in* section 3 right now fails this — it forces a full read
+to answer a question the index should have answered. `docs/project/index.md` and
+`docs/product/index.md` (see Front-Matter Previews below) are shmorch's own instance of this
+inside the skeleton; `~/.shmorch/personal-profile/profile/index.md`'s "At a glance" +
+per-section phrase (added 2026-08-10) is a second, outside `docs/` entirely — same principle,
+different artifact shape. When building any new index-shaped file, ask "does layer 1 or 2
+already answer the reader's likely question?" before assuming the full file needs opening.
+
+---
+
 ## Front-Matter Previews
 
 Every file directly under `docs/project/` (not `tracks/`, not `schedule/`) or
@@ -143,6 +169,7 @@ is itself on semver.
 
 | Date / Since | Rule | Compat | Backfill scope |
 |---|---|---|---|
+| 2026-08-10 | Any index-shaped artifact an AI manages for human consumption (not just `docs/project/index.md`/`docs/product/index.md`) should carry a top-level summary plus a one-phrase-per-section preview — see § Progressive Disclosure | `additive` | No backfill offered — existing indexes remain valid; apply going forward and opportunistically when an index is next touched |
 | 2026-07-24 | Top-level `docs/` taxonomy replaced: `architecture/`, `development/`, `product/`, `reference/`, `state/`, `to_review/` → `product/`, `technology/` (architecture + development merged under it), `reference/` (Diataxis-scoped `instructions/` + `research/`), `project/` (was `state/`), `inbox/` (was `to_review/`). Decisions split into `product/decisions/` + `technology/decisions/` only (no unified log, no `project/decisions/`). See `tracks/20260724-docs-taxonomy-redesign` | `backfill` | Run `tools/backfill-docs-taxonomy.sh` for the mechanical `git mv`s, then a judgment pass on the files it reports (decisions/anti-decisions splits, dev notes, deployment content, and any other real-content file with no 1:1 new home) per `tracks/20260724-dev-docs-taxonomy-backfill` |
 | 2026-07-23 | Track `index.md` files whose Work log section exceeds ~200–300 lines (or spans many dated/versioned rounds) must split per § Track file growth — date/version-based into `docs/project/tracks/<name>/log/YYYYMMDD-<slug>.md`, or section-based when growth isn't a timeline | `backfill` | For each open track over the threshold, move each work-log entry into its own `log/` file, replace the Work log section in `index.md` with a one-line-per-entry index linking down. Do not touch Why/What changes/Open questions. |
 | 2026-07-21 | `docs/state/tracks/**/*.md` require the same front-matter block as `docs/state/*.md`, and closed tracks (`Status: Closed`) whose `→ destination` doc doesn't reference them back are graduation candidates (see `tracks/20260525-graph-first-docs`) | `backfill` | Run `bash $SHMORCH_HOME/tools/track-graph-audit.sh`. Add front-matter to every `MISSING_FRONTMATTER` file (derive from content, don't guess). For every `CLOSED_UNGRADUATED` line, read the track and its destination doc, confirm whether knowledge actually landed, and integrate what's missing — the script only finds candidates, it doesn't conclude. |
