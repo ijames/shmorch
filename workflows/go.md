@@ -1,3 +1,8 @@
+---
+loads_when: session start, or re-orienting mid-session — the one entry dispatcher
+size: 147 lines
+---
+
 # Workflow: go — entry dispatcher
 
 The single entry point for a Shmorch session. Resolve the skill, detect the repo's
@@ -61,12 +66,12 @@ Cheap probes, in order — this decides which phases run:
 
 ## Step 2 — Provision (only UNINITIALIZED or BEHIND)
 
-**2a. UNINITIALIZED → provision fresh (= init).** Read `$SHMORCH_HOME/workflows/init.md` and execute it against the current directory. init detects existing code and runs `discover` itself. Ignore init's closing "run /shmorch go" hand-off — you *are* go; continue to Step 3.
+**2a. UNINITIALIZED → provision fresh (= init).** State is already known (UNINITIALIZED), so this is an unconditional hand-off, not a gating decision — read `$SHMORCH_HOME/workflows/init.md`'s frontmatter to confirm `loads_when` matches ("fresh provisioning"), then open the body and execute it against the current directory. init detects existing code and runs `discover` itself. Ignore init's closing "run /shmorch go" hand-off — you *are* go; continue to Step 3.
 
 **2b. BEHIND → provision delta (= auto-update / sync).** Say exactly:
 > "Shmorch update available ($PROJECT_VERSION → $SKILL_VERSION). Run now before we start? (yes/no)"
 
-- yes → read `$SHMORCH_HOME/workflows/auto-update.md` and execute it, then continue.
+- yes → read `$SHMORCH_HOME/workflows/auto-update.md`'s frontmatter to confirm `loads_when` matches ("provision delta"), open the body, execute it, then continue.
 - no → continue; remind again at wrap.
 
 SELF and CURRENT skip this step.
@@ -144,4 +149,14 @@ If this count is 3 or more, sessions are habitually ending without a real `/shmo
 
 ## Step 4 — Orient
 
-Read `$SHMORCH_HOME/workflows/orient.md` and execute it: read context/stack (interview if unfilled), last session, plan, check for leftover work, surface gaps, and propose 2-3 concrete next moves. That file also carries the working-session references (tracks, phases, stack awareness, decisions).
+Read `$SHMORCH_HOME/workflows/orient.md`'s frontmatter first — if `loads_when` matches
+("after provisioning ... read state, surface gaps, propose next move"), open the body
+and execute it: read context/stack (interview if unfilled), last session, plan, check
+for leftover work, surface gaps, and propose 2-3 concrete next moves. That file also
+carries the working-session references (tracks, phases, stack awareness, decisions).
+
+For any dispatch decision less clear-cut than this one — e.g. deciding which of several
+`core/*.md` doctrine files a step actually needs — don't narrate the tree by hand; run
+`bash "$SHMORCH_HOME/tools/frontmatter-traverse.sh" <dir> "<query>"` and act on the
+returned file list. See `core/index.md` and
+`docs/project/tracks/20260721-workflow-subagent-delegation/approach-a-frontmatter-gating.md`.

@@ -1,3 +1,8 @@
+---
+loads_when: committing a change — smart-commit base procedure plus Shmorch DoD layer
+size: 132 lines
+---
+
 # Workflow: commit
 
 > **Composability note:** This workflow wraps the **smart-commit** base procedure with a Shmorch DoD layer.

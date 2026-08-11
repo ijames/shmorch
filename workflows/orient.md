@@ -1,3 +1,8 @@
+---
+loads_when: after provisioning (or directly when current) — read state, surface gaps, propose next move
+size: 197 lines
+---
+
 # Workflow: orient
 
 The orientation phase — read state, surface gaps, propose the next move. Runs after

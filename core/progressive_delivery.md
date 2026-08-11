@@ -1,3 +1,8 @@
+---
+loads_when: intake or design for a project with a deploy pipeline — deploy-vs-release, toggle taxonomy, flag lifecycle
+size: 99 lines
+---
+
 # Progressive Delivery — First-Class Dimension
 
 ## Principle

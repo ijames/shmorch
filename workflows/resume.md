@@ -1,3 +1,8 @@
+---
+loads_when: user chose the resume fast lane, or an INTERRUPTED session needs the fast lane offer — session.md + plan/ only, no full bootstrap
+size: 52 lines
+---
+
 # Workflow: resume
 
 Fast re-entry: latest session knowledge and current focus — plus a cheap staleness check, since `resume`'s whole premise (just cleared, mid-session) means real time may have passed and `session.md`/`plan/` may not reflect it. Use when `go`'s full bootstrap (version check, context interview, gap scanning, memory staleness check) isn't needed — you're already oriented, you just need the thread picked back up *correctly*.

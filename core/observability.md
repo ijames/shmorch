@@ -1,3 +1,8 @@
+---
+loads_when: intake or design for any project — logs/metrics/traces stage expectations, build track rule
+size: 30 lines
+---
+
 # Observability
 
 Three pillars — every project needs a strategy for all three from day one:

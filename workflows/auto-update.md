@@ -1,3 +1,8 @@
+---
+loads_when: project's .shmorch/VERSION is behind the skill's VERSION — provisioning delta
+size: 421 lines
+---
+
 # Workflow: auto-update
 
 Bring this project's shmorch installation up to date with the current skill version (skill → project direction).

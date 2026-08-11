@@ -1,3 +1,8 @@
+---
+loads_when: before touching any skill file, cutting a PR, or logging a timing event — timing events, comms notifications, vacuum protocol, checkpoints, VERSION bump rule, branch/PR workflow
+size: 116 lines
+---
+
 # Operations
 
 Reference material for routine mechanics — timing, notifications, checkpoints, and the

@@ -1,3 +1,8 @@
+---
+loads_when: after build, or on demand — find and report waste before deleting
+size: 97 lines
+---
+
 # Workflow: Vacuum
 
 Find waste. Report before deleting. Run after build, or on demand.

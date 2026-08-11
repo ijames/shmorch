@@ -1,3 +1,8 @@
+---
+loads_when: intake or design for a user-facing product — event model, privacy posture, funnel coverage
+size: 38 lines
+---
+
 # Analytics — User-Facing Products
 
 Distinct from observability. Observability answers "is the system healthy?" Analytics answers "what are users doing, and is the product delivering value?"

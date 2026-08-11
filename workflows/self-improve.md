@@ -1,3 +1,8 @@
+---
+loads_when: retrospective self-improvement pass for the current repo
+size: 269 lines
+---
+
 # Workflow: self-improve
 
 Retrospective self-improvement **for the current repo**. Reads this project's session

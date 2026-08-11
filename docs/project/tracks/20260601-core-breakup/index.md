@@ -1,7 +1,7 @@
 ---
-status: Open
-updated: 2026-06-01
-summary: Break the shmorch-core.md god doc into focused core/*.md sub-documents loaded JIT; prerequisite for boundary-cleanup.
+status: Absorbed
+updated: 2026-08-10
+summary: Absorbed into tracks/20260721-workflow-subagent-delegation/ (Approach C) 2026-08-10. shmorch-core.md's breakup is done (205 lines, pointer-table shape); remaining scope moved to the umbrella track and broadened to workflows/*.md. See approach-c-core-doc-breakup.md there.
 ---
 
 ↑ [Shmorch Plan](../../plan/index.md)

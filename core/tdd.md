@@ -1,3 +1,8 @@
+---
+loads_when: any code change (fix, migration, config, feature) — the No Test No Code prime directive, temporal propagation, always-red rule, branch roles, AC sync
+size: 149 lines
+---
+
 # TDD Doctrine
 
 ## Prime Directive — Intent → Spec → Test → Code

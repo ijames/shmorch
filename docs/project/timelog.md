@@ -36,3 +36,5 @@
 [2026-08-10 10:11:08] PHASE | merge orient+reorient, add interview-log — complete, committing
 [2026-08-10 10:42:56] PHASE | AI/LLM readiness area + default-on posture + OWASP build guardrail — complete, committing
 [2026-08-10 11:01:02] PHASE | split orient.md into orient.md + interview.md — complete, committing
+[2026-08-10 21:40:35] SESSION_START | context bloat in go/wrap — md tree size or context-loading choices need dividing/conquering better
+[2026-08-10 21:41:03] SESSION_END | auto-closed by stop hook — main @ fbd281a Merge pull request #105 from ijames/docs/20260810-progressive-disclosure-doctrine

@@ -1,3 +1,8 @@
+---
+loads_when: resolving $SHMORCH_HOME, touching any skill file that assumes a specific CLI, or deciding whether a new dependency (e.g. python3) is in scope — environment baseline vs agent-capability axes, context-file chain, capability adapter matrix
+size: 258 lines
+---
+
 # Cross-CLI Portability
 
 Shmorch is authored as a Claude Code skill but is designed to run under any agent
@@ -5,12 +10,59 @@ CLI that can read a context file and run a shell — omp (Oh My Pi), Pi, Codex,
 Gemini CLI, opencode, Cursor, Antigravity, and Claude Code. The user must be able
 to switch CLIs freely inside the same project without re-initializing.
 
-Two rules make this work:
+**Revised 2026-08-11.** The original version of this doctrine treated "portability"
+as one problem with one fix (a shell-only floor). It's actually two independent
+problems that happen to share the word "portability," with different costs and
+different fixes. Conflating them either overpays (rejecting a cheap dependency out
+of a rule meant for a different risk) or underpays (hand-waving a hard capability
+gap as "add a fallback"). Keep them separate:
+
+## Axis 1 — Environment baseline (machine-level, agent-independent)
+
+What has to be *installed on the machine* for shmorch's tooling to run. This has
+nothing to do with which agent CLI is driving — a shell command runs identically
+regardless of whether Claude Code, Pi, omp, Codex, Antigravity, Devin, or opencode
+is the one invoking it. The relevant question is "does this developer's machine
+have it," not "does this agent support it."
+
+**Assumed present, no fallback needed** — every CLI in scope already requires a
+real local dev environment to run at all (they're themselves substantial installed
+programs), so these are baseline, not a burden:
+- A POSIX shell (bash/zsh)
+- `git`
+- `python3` (added 2026-08-11 — see below)
+
+**Available if present, never required:** `node`, `jq`. Tooling may use them
+opportunistically but must have a bash-only path when absent.
+
+**Why `python3` moved into the assumed baseline, not left optional:** it's the
+same category as `git` — a near-universal baseline tool on any machine capable of
+running these CLIs in the first place, not a vendor-specific or agent-specific
+affordance. Requiring it costs a `pip install` for the handful of tools that use
+it (currently: the sub-call request/response handler, see
+[Subagent abstraction](#subagent-abstraction) below), not a rethink of what kind of
+project this is. Tools that use it still degrade to a plain inline check if
+`python3` or a specific package (e.g. `pydantic`) isn't found on a given machine —
+same "degrade gracefully" spirit as Axis 2, just for a much cheaper reason to miss
+(an uninstalled package, not a missing agent primitive).
+
+## Axis 2 — Agent-capability matrix (per-CLI, structurally different)
+
+What the *orchestrating agent itself* can do — native subagent/coagent spawning,
+hooks, checkpoints, structured tool-call schemas. This is the axis that's actually
+hard, because there's nothing to install: some CLIs simply have no equivalent
+primitive, full stop. A script can't paper over "this harness has no subagent
+concept" the way it can paper over "python3 isn't installed" — there is no package
+to add. This axis needs a real per-capability fallback (below, and the existing
+[Capability adapter matrix](#capability-adapter-matrix)), not an install step.
+
+**Two rules make Axis 2 work:**
 
 1. **Never hardcode the skill's install path.** Use `$SHMORCH_HOME` (below).
 2. **Degrade gracefully.** Every Claude-only affordance has a fallback that works
-   with nothing but a context file, a file-read tool, and a shell. When a CLI lacks
-   a feature (subagents, hooks, checkpoints), the workflow still completes — the
+   with nothing but a context file, a file-read tool, and a shell (plus, as of
+   2026-08-11, `python3` where a tool specifically needs it). When a CLI lacks a
+   feature (subagents, hooks, checkpoints), the workflow still completes — the
    orchestrator just does that step inline.
 
 ---
@@ -164,6 +216,31 @@ Read your role: check .shmorch/agents/roles/<name>.md first (project override);
 if not present, read $SHMORCH_HOME/agents/roles/<name>.md (skill default).
 ```
 
+**Sub-call request/response handling (added 2026-08-11, `tools/subcall.py`):** a
+single Python handler, shared by every workflow that makes a rote sub-call
+(`go`/`resume`/`wrap`/`self-improve`/`documentarian`), rather than one bespoke
+validation path per workflow. Its job is deliberately narrow and sits *around*
+the tool call above, never replacing it:
+
+- `prepare_request(workflow, args)` — validate the outgoing task parameters
+  against that workflow's Pydantic model before they're embedded in the prompt
+  handed to `Agent`/`task`/inline execution.
+- `validate_response(workflow, raw_text)` — extract and validate the sub-call's
+  returned JSON against the matching response model; on parse/validation failure,
+  return the raw text as an error string (never silently drop it).
+- `capability(cli_name)` — look up which primitive (Axis 2, above) this session's
+  CLI has, so the orchestrating model knows whether to spawn or run inline. A
+  lookup, not a decision — the actual choice to spawn and the spawn call itself
+  stay the orchestrating agent's, because **no script can invoke another CLI's
+  native subagent tool** — that tool call only exists inside the agent's own
+  reasoning loop. The handler validates the data on both sides of a call it does
+  not and cannot make itself.
+
+Falls back to a plain inline structural check (required keys present, roughly
+right types) when `python3`/`pydantic` isn't on the machine — Axis 1's fallback,
+distinct from and much cheaper than Axis 2's per-CLI fallback above. Full design:
+`tracks/20260721-workflow-subagent-delegation/approach-b-subagent-delegation.md`.
+
 ---
 
 ## Launcher
@@ -181,4 +258,6 @@ also works when started directly in the project — the context chain loads rega
 - Chain generation + `.shmorch/home` + bootstrap: `workflows/init.md`.
 - Propagation to existing repos + old-layout migration: `workflows/auto-update.md`.
 - Subagent mapping: `agents/TASK-PROTOCOL.md`.
+- Sub-call request/response validation (Axis 1, `python3`-dependent, all CLIs
+  share it): `tools/subcall.py`, models in `agents/schemas/`.
 - Hook adapters: `templates/.claude/` (Claude), `templates/.omp/hooks/` (omp).
