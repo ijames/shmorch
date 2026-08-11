@@ -1,3 +1,8 @@
+---
+loads_when: spec or design work touching a UI component — animation as cognitive load management, entry/state/exit definition at spec time
+size: 45 lines
+---
+
 # UX Philosophy — All Components Are Dynamic
 
 UX is cognitive load management, not aesthetics. Animation and motion are not decorative — they are the primary mechanism by which state changes are communicated without forcing the user to reconstruct what happened.

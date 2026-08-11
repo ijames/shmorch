@@ -1,3 +1,8 @@
+---
+loads_when: managing the active sprint, reading/updating sprint.md
+size: 158 lines
+---
+
 # Workflow: sprinter
 
 Manage the active sprint. Reads and updates `docs/project/sprint.md`.

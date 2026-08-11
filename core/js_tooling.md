@@ -1,3 +1,8 @@
+---
+loads_when: intake or setup for a JS/TS project — pnpm as default, worktree/node_modules sharing, uv as the Python analogue
+size: 27 lines
+---
+
 # JS/TS Tooling
 
 pnpm is the default package manager for JS/TS projects: new projects, and existing projects

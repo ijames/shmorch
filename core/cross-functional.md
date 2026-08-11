@@ -1,3 +1,8 @@
+---
+loads_when: producing an artifact a non-engineer will read — intimacy gradient, naming-as-contract, discipline boundary signals
+size: 63 lines
+---
+
 # Cross-Functional Artifact Usability
 
 Any artifact touched by more than one discipline must be legible to all of them. The right abstraction level is determined by the *cognitive distance* between the disciplines that share it — not by what's convenient for the author.

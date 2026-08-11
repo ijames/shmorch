@@ -1,3 +1,8 @@
+---
+loads_when: any git operation beyond a single commit — branch hygiene, pull-after-merge, rebase-before-work, never batch-merge
+size: 139 lines
+---
+
 # Git Discipline
 
 Branch hygiene rules that apply to every project Shmorch touches — skill repo and client projects alike. The goal is zero surprise conflicts at merge time and no stale branches accumulating silent divergence.

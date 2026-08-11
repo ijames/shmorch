@@ -5,7 +5,11 @@ summary: Simulation against this repo's plan.md/session.md (69% reduction free v
 ---
 
 ↑ [index.md](index.md)
-**In this section:** [Spec — workflow subagent delegation](spec.md)
+**In this section:** [Spec](spec.md) · [Comparison — A/B/C](comparison.md) · [Approach A — frontmatter gating](approach-a-frontmatter-gating.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Approach C — core doc JIT breakup](approach-c-core-doc-breakup.md)
+
+The "bounded reads + index-only `plan.md` bullets" measurement below (69% reduction, no
+downside) is the direct evidence behind [Approach A](approach-a-frontmatter-gating.md) —
+frontmatter gating generalizes that exact lever from `plan.md` to every loadable file.
 
 # Findings — workflow subagent delegation
 

@@ -1,3 +1,8 @@
+---
+loads_when: surfacing the right next task from open work
+size: 138 lines
+---
+
 # Workflow: Navigate
 
 Surface the right next task from a structured, project-aware view of open work.

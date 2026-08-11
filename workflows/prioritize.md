@@ -1,3 +1,8 @@
+---
+loads_when: re-ranking the backlog, surfacing effort/value tradeoffs
+size: 122 lines
+---
+
 # Workflow: prioritize
 
 Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/project/plan/` only after developer confirmation.

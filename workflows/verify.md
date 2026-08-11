@@ -1,3 +1,8 @@
+---
+loads_when: confirming docs/code/tests are in sync — parity check
+size: 139 lines
+---
+
 # Workflow: Verify (Parity Check)
 
 Confirm that documentation, code, and tests are in sync. Documentation describing realized features is the source of truth — if a feature is documented as existing, tests and code must exist and work. Humans should not be responsible for finding gaps; agents run this check.

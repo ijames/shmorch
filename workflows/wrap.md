@@ -1,3 +1,8 @@
+---
+loads_when: closing the current session — stamp end time, summarize, update all state files
+size: 297 lines
+---
+
 # Workflow: wrap
 
 Close the current session — stamp the end time, summarize what happened, and update all state files.

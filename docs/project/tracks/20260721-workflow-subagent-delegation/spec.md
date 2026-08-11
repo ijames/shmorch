@@ -5,7 +5,9 @@ summary: The idea (subagent returns small structured JSON), what stays determini
 ---
 
 ↑ [index.md](index.md)
-**In this section:** [Findings — workflow subagent delegation](findings.md)
+**In this section:** [Findings](findings.md) · [Comparison — A/B/C](comparison.md) · [Approach A — frontmatter gating](approach-a-frontmatter-gating.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Approach C — core doc JIT breakup](approach-c-core-doc-breakup.md)
+
+This file is Branch B's detailed design — see [approach-b-subagent-delegation.md](approach-b-subagent-delegation.md) for how B compares to A and C.
 
 # Spec — workflow subagent delegation
 

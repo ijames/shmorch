@@ -1,3 +1,8 @@
+---
+loads_when: a project wants to extend or supersede a workflow/role file — override pattern, graduation rule, fat-copy anti-pattern
+size: 58 lines
+---
+
 # Workflow and Agent Override Pattern
 
 Default workflows and agent roles live in the **skill** — they are not copied into projects. Projects contain only overrides and additions.

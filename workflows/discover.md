@@ -1,3 +1,8 @@
+---
+loads_when: deep audit of an existing codebase to fill in context.md/stack.md from reality
+size: 154 lines
+---
+
 # Workflow: discover
 
 Deep audit of an existing codebase. Fills in `docs/project/context.md` and `docs/project/stack.md` from what's actually in the project — not from guesses.

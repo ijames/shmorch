@@ -1,3 +1,8 @@
+---
+loads_when: intake or design for a web-facing project — SEO ranking + GEO/LLM-citation rendering strategy, structured data
+size: 43 lines
+---
+
 # SEO / GEO — Web-Facing Projects
 
 Two distinct layers for any project with a public URL. Both are functional requirements, not post-launch bolt-ons.

@@ -1,3 +1,8 @@
+---
+loads_when: time to code an approved spec and design
+size: 285 lines
+---
+
 # Workflow: Build
 
 Implement an approved spec and design. Produces committed, tested, documented code.

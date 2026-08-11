@@ -1,3 +1,8 @@
+---
+loads_when: after any dependency change, before committing — deployment manifest sync, dev env vs bundle, cross-platform wheel constraints
+size: 36 lines
+---
+
 # Deployment Manifest Sync
 
 ↑ [core/](index.md) · referenced from: `shmorch-core.md` Safety Rules

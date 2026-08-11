@@ -1,3 +1,8 @@
+---
+loads_when: repo has no .shmorch/AGENTS.md and no docs/project/context.md — fresh provisioning
+size: 263 lines
+---
+
 # Workflow: init
 
 Initialize a Shmorch workspace at the given path (or current directory if no argument).

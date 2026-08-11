@@ -1,3 +1,8 @@
+---
+loads_when: context is getting diffuse or tangled mid-session — when to compress, split focus, or reset
+size: 157 lines
+---
+
 # Workflow: Context Management
 
 Context has two failure modes: **too diffuse** (multiple unrelated concerns muddled

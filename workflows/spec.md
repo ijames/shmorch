@@ -1,3 +1,8 @@
+---
+loads_when: defining what to build before building it
+size: 125 lines
+---
+
 # Workflow: Spec
 
 Define what to build before building it. Produces a spec in `docs/project/spec.md` (or a track-level spec).

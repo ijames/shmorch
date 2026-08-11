@@ -1,3 +1,8 @@
+---
+loads_when: architecture needed before implementation, after spec is approved
+size: 180 lines
+---
+
 # Workflow: Design
 
 Produce an architectural design before implementation. Reads the spec, proposes structure, records decisions.

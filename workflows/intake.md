@@ -1,3 +1,8 @@
+---
+loads_when: new conversation with an unclear goal — route to the right workflow
+size: 50 lines
+---
+
 # Workflow: Intake
 
 Clarify the goal before routing to the right workflow.

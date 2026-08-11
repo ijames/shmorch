@@ -1,3 +1,8 @@
+---
+loads_when: always — entry pointer for the core/ subtree, read before falling back to frontmatter-traverse.sh
+size: 20 lines
+---
+
 # Core Doctrine
 
 Doctrine files loaded on demand by `shmorch-core.md`, workflows, and roles. These capture the *why* and *what* — the principles that govern how Shmorch works. Procedures (step-by-step) live in `workflows/`.

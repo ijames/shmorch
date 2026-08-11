@@ -1,3 +1,8 @@
+---
+loads_when: session end (part of wrap) or on demand — keep docs/code/tests and comms in parity
+size: 58 lines
+---
+
 # Workflow: Curate
 
 Keep docs/code/tests and Zulip in parity. Run at session end (part of wrap) and on demand.

@@ -1,3 +1,8 @@
+---
+loads_when: user wants to understand existing code before speccing or designing it
+size: 175 lines
+---
+
 # Workflow: Analyze
 
 Deep examination of a specific area of the codebase. Use when the user wants to understand something before speccing or designing it.

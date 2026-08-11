@@ -1,3 +1,8 @@
+---
+loads_when: proactive external research on AI-assisted development practices
+size: 170 lines
+---
+
 # Workflow: research
 
 Proactive external research. Finds advances in AI-assisted development and LLM orchestration practices, then proposes specific improvements to shmorch.

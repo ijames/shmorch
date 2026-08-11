@@ -1,3 +1,8 @@
+---
+loads_when: pre-build 95%-confidence gate — deep tree-gated interview before any code change
+size: 144 lines
+---
+
 # Workflow: interview
 
 Deep, tree-gated interview: Project Focus & Shape, and Production Readiness (including

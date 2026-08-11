@@ -1,3 +1,8 @@
+---
+loads_when: track closes, or docs suspected out of sync with code/tests
+size: 221 lines
+---
+
 # Workflow: Documentarian
 
 Audit and repair the relationship between documentation, code, and tests. Docs are the primary source of truth — discrepancies do not automatically mean the doc is wrong. Each divergence requires triage.
