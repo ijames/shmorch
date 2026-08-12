@@ -1,6 +1,6 @@
 ---
 name: shmorch
-description: Shmorch is an autonomous development orchestrator that manages persistent project state across sessions. Use this skill whenever the user wants to start a dev session, plan features, track in-progress work, clean up code, manage a sprint, prioritize work, or improve the shmorch workflow itself. Trigger on /shmorch go, resume, init, discover, wrap, commit, vacuum, documentarian, checkpoint, sprinter, prioritize, self-improve, research, status, orient, or auto-update — or when they say things like "let's start a session", "what were we working on", "clean up the code", "check the sprint", "reprioritize the backlog", "what's the status", or "look for better practices".
+description: Shmorch is an autonomous development orchestrator that manages persistent project state across sessions. Use this skill whenever the user wants to start a dev session, plan features, track in-progress work, clean up code, manage a sprint, prioritize work, or improve the shmorch workflow itself. Trigger on /shmorch go, resume, init, discover, wrap, commit, vacuum, documentarian, checkpoint, sprinter, prioritize, self-improve, research, status, orient, auto-update, personal-eval, or pe — or when they say things like "let's start a session", "what were we working on", "clean up the code", "check the sprint", "reprioritize the backlog", "what's the status", or "look for better practices".
 user-invocable: true
 allowed-tools: Bash, Read, Edit, Write, Grep, Glob, Agent, WebSearch
 ---
@@ -22,6 +22,7 @@ Dispatch on the first word of the invocation arguments — `$ARGUMENTS` on Claud
 | `sprinter` | `commands/sprinter.md` |
 | `prioritize` | `commands/prioritize.md` |
 | `self-improve` | `commands/self-improve.md` |
+| `personal-eval` or `pe` | `commands/personal-eval.md` |
 | `research` | `commands/research.md` |
 | `orient` | `commands/orient.md` |
 | `status` | `commands/status.md` |

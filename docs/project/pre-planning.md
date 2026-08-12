@@ -82,3 +82,24 @@ currently informing the design of:
 
 No action here — parking the framing so it doesn't need re-deriving next time knowledge-
 graph aggregation comes up in any of these projects.
+
+---
+
+## `pe` multi-source ingestion — other agents' logs, other reflection tools (deferred)
+
+Prompted by building `workflows/personal-eval.md` (2026-08-11): `pe` currently reads
+Claude Code session transcripts only (`~/.claude/projects/**/*.jsonl`). The user's
+stated end goal is broader — fold in other orchestration agents' logs (omp, opencode,
+whatever else) and other personal-reflection tools/logs, not just Claude Code.
+
+**Why deferred, not built now:** each source has its own log format and transcript
+shape — this isn't a flag on `scan.py`, it's a separate extraction path per source,
+same category of work as building the first one. Doing it now, un-asked, risks
+guessing at formats for tools not yet named. Build the second source when a specific
+one is named and its log shape is known.
+
+**Not scoped as a project — a pointer for whenever a specific second source comes up.**
+When it does: the `pe-summarizer`/`pe-synthesizer` roles and the `profile/` taxonomy
+in `$PERSONAL_PROFILE_HOME` don't need to change — only the "get clean turn text from
+a transcript" step (`session_turns.py`, Claude-JSONL-specific today) needs a sibling
+per source format, dispatched by `scan.py` based on where a given log came from.
