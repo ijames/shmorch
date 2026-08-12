@@ -103,3 +103,82 @@ When it does: the `pe-summarizer`/`pe-synthesizer` roles and the `profile/` taxo
 in `$PERSONAL_PROFILE_HOME` don't need to change — only the "get clean turn text from
 a transcript" step (`session_turns.py`, Claude-JSONL-specific today) needs a sibling
 per source format, dispatched by `scan.py` based on where a given log came from.
+
+### Second source, now named: ChatGPT export (`conversations.json`)
+
+Prompted by (2026-08-11): the user has a much larger volume of history sitting in
+ChatGPT's web client than in Claude Code — more conversations, more detail, plus
+ChatGPT's own cross-conversation memory feature. Still deferred (no export in hand,
+nothing built), but the user asked for the format prepped in advance so it's ready to
+scope for real once they have the export file.
+
+**Format** — Settings → Data Controls → Export Data produces a zip; the conversation
+history lives in `conversations.json`, a JSON array of conversation objects, each
+roughly:
+
+```json
+{
+  "id": "conv-abc123",
+  "title": "Deploy pipeline debugging",
+  "create_time": 1752000000.0,
+  "update_time": 1752003600.0,
+  "current_node": "node-9f2e",
+  "mapping": {
+    "node-root": { "id": "node-root", "message": null, "parent": null, "children": ["node-1"] },
+    "node-1": {
+      "id": "node-1",
+      "message": {
+        "id": "msg-1", "author": { "role": "user" },
+        "create_time": 1752000000.0,
+        "content": { "content_type": "text", "parts": ["how do I..."] }
+      },
+      "parent": "node-root", "children": ["node-2"]
+    },
+    "node-2": { "...": "assistant reply node, same shape, author.role = assistant" }
+  }
+}
+```
+
+The load-bearing difference from Claude Code's `.jsonl`: this is a **tree**, not a
+linear log. `mapping` holds every node ever created, including abandoned branches
+from regenerated or edited replies; `current_node` marks the leaf of the branch
+actually shown to the user. Getting the conversation as the user actually experienced
+it means walking parent-links from `current_node` back to the root, not just reading
+`mapping` in file order.
+
+The export bundle may also carry `chat.html`, `message_feedback.json`,
+`shared_conversations.json`, `user.json`, and possibly a memory-feature file —
+unconfirmed without an actual export in hand; verify the real bundle's contents
+before assuming a schema for anything beyond `conversations.json`.
+
+**Basic strategy, matching the "one sibling per source" shape above:**
+
+1. `chatgpt_turns.py` (sibling to `session_turns.py`): for each conversation, walk
+   `mapping` from `current_node` to root via `parent` links, reverse to
+   chronological order, filter to `author.role in {user, assistant}` (skip `system`/
+   `tool` nodes), join `content.parts`. Output the same clean request/response shape
+   `session_turns.py` already produces, so `pe-summarizer` needs zero changes.
+   Abandoned branches are discardable for now — only the shown conversation matters
+   for persona evidence; revisit only if edit/regeneration patterns turn out to be
+   evidence in their own right (e.g. a growth-edges signal).
+2. Session boundary = one `conversations.json` entry = one `pe` session, same as one
+   Claude Code transcript file today. `create_time`/`update_time` on the conversation
+   object give the timing-section data `stats.md` already tracks.
+3. Reuse `pe-summarizer`, `pe-synthesizer`, `pe-analyzer`, and the existing
+   `profile/0N-*.md` taxonomy as-is — the whole point of the multi-source pointer
+   above. No new roles needed for this source.
+4. Open question to resolve when actually built, not now: one shared
+   `personal-profile` repo with a source tag per session (keeps one unified profile,
+   which matches the actual goal — one picture of the person, not two), vs. a
+   separate `.openai/personal-profile` tree merged later. ChatGPT conversations
+   mostly won't have a "project" the way Claude Code sessions do (git repo per
+   project), so whatever `profile/0N-*.md` field currently assumes a project name
+   needs a fallback (topic/title-derived, or just "chatgpt" with the conversation
+   title as detail) rather than a hard requirement.
+5. Given the user's stated volume ("much more" than the Claude Code backlog), reuse
+   the same batch-cap/cheap-tier-first design as `pe scan` rather than a one-shot
+   bulk import — same cost-awareness reasoning, bigger backlog.
+
+**Still not scoped as an active project.** Pick this up for real once the user has
+the actual export file in hand — this entry exists so the format doesn't need
+re-deriving from scratch when that happens.
