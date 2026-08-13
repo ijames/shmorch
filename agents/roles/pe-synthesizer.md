@@ -88,6 +88,9 @@ too; otherwise leave it.
 ## Output
 - Updated `profile/0N-*.md` file(s) for whichever sections were touched, plus
   `profile/index.md` if its preview text is now stale.
+- `git add` the session summary file itself (`sessions/<slug>.md`) along with
+  everything else in the same commit — it's an input you read, not something
+  already tracked, and leaving it untracked breaks the profile's provenance trail.
 - `git commit` inside `$PERSONAL_PROFILE_HOME` (local-only repo, no remote) with a
   message naming the session id and a one-line summary of what changed — this is the
   profile's version history. If nothing changed, still commit a no-op-noting commit or

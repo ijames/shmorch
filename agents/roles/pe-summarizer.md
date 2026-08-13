@@ -59,3 +59,8 @@ Tag each fact-bearing paragraph you expect the synthesizer to cite with a headin
 anchor (`## <Section Name> {#<anchor>}`) matching one of the 9 taxonomy sections it
 actually touches — the synthesizer links profile bullets to the specific anchor, not
 just the file.
+
+**Never touch `processed.log`.** Marking a session processed is the synthesizer's
+job, done only after evidence is actually folded into the profile — the summary
+file existing is not the same as the profile reflecting it. Writing to the ledger
+here would let a session get silently skipped forever.
