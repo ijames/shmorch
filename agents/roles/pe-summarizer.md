@@ -22,7 +22,10 @@ below) capturing, per the taxonomy in `$PERSONAL_PROFILE_HOME/profile/index.md`:
 - **Timing** — the input's leading `# Duration: <start> - <end> (~<span>)` line gives
   you the exact start/end/length; use it verbatim rather than estimating, plus
   anything about pacing (fast iteration vs. deliberate, long single-topic runs vs.
-  scattered).
+  scattered). Don't describe the full first-to-last span as "continuous" or
+  "uninterrupted" work unless the turns are actually dense across it — a session left
+  open for hours with all the real activity in a short burst is session-open time, not
+  work time.
 
 Every line should be something a stranger reading only this file could verify against
 the transcript — no inference dressed up as fact. Quote critical or unique user

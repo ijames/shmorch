@@ -12,6 +12,16 @@ a fixed 9-section taxonomy, not open-ended reasoning.
 - `profile/index.md` and whichever of the 9 `profile/0N-*.md` section files the
   summary's anchors point at (read only the sections touched, not all nine)
 
+**Do not read any other session's files, or `stats.md`'s existing rows, to
+cross-verify or correct this session against them** (chained-session timing gaps,
+"actually the prior session was X not Y," etc.). This role gets exactly one
+session's summary + raw text as input — take it at face value and work from it
+alone. Cross-session consistency checking is real work but it's unscoped and
+unbounded (any session can chain to any other), and pulling in extra session files
+"just to spot-check" is what makes a cheap per-session pass expensive. If you
+notice something that looks wrong across sessions, note it in the commit message
+as a one-line flag for a human to check later — don't go verify it yourself.
+
 ## Task
 The profile is a **folder of 9 section files**, not a single `profile.md` — read
 `profile/index.md` for the current file list and per-section gist before touching
@@ -31,6 +41,16 @@ the summary contains, whether this session's evidence:
 
 Do not invent traits the session doesn't support. Thin sessions may add nothing —
 that's a valid outcome, not a failure.
+
+**Duration claims: check the gap, not just first/last timestamp.** Before writing anything
+like "ran N hours continuously," "uninterrupted," "no idle turns," or "unattended autonomous
+execution" for a session spanning more than ~30 minutes, look at the actual timestamps of
+entries between the endpoints — not just the first and last. A session left open for hours
+with all the real work clustered in a short burst is not the same as hours of continuous
+execution, and wall-clock session-open time is not LLM work time. If there's a gap between
+consecutive transcript entries that's large relative to the total span (say, more than a
+third of it), describe the session honestly as an active window + an idle gap (+ any later
+resumption), not as one continuous stretch.
 
 ## Citation format — GFM footnotes, not inline parentheticals
 
