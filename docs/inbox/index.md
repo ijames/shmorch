@@ -11,3 +11,6 @@ Items here are not authoritative. They graduate into `workflows/`, `core/`, `age
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
 - [backlog-dependency-stack.md](backlog-dependency-stack.md)
+- [mobos-template-contamination.md](mobos-template-contamination.md)
+- [global-learning-log.md](global-learning-log.md)
+- [pe-multi-source-ingestion.md](pe-multi-source-ingestion.md)

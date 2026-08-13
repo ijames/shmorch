@@ -7,8 +7,8 @@ size: 258 lines
 
 Shmorch is authored as a Claude Code skill but is designed to run under any agent
 CLI that can read a context file and run a shell — omp (Oh My Pi), Pi, Codex,
-Gemini CLI, opencode, Cursor, Antigravity, and Claude Code. The user must be able
-to switch CLIs freely inside the same project without re-initializing.
+Gemini CLI, opencode, Cursor, Antigravity, Devin, and Claude Code. The user must be
+able to switch CLIs freely inside the same project without re-initializing.
 
 **Revised 2026-08-11.** The original version of this doctrine treated "portability"
 as one problem with one fix (a shell-only floor). It's actually two independent
@@ -90,6 +90,23 @@ export SHMORCH_HOME
 3. Else the conventional Claude path `~/.claude/skills/shmorch` — readable by every
    CLI that supports Claude discovery, so zero-config still works when the skill is
    installed there.
+
+**Cloud/ephemeral-sandbox CLIs (Devin, and any future CLI in this shape) are a
+fourth case, not covered by the three branches above.** These don't run on the
+developer's own machine at all — each session (or cached snapshot) starts a fresh
+VM with no `~/.claude/skills/shmorch` on disk and no persisted `$SHMORCH_HOME` env
+var from a prior session. Branch 2 above (`.shmorch/home`) still resolves *inside*
+the project repo once it's populated, but something has to populate it first, since
+there's no local machine where the skill was ever installed to begin with.
+
+The fix is a setup-script step (Devin: the per-session/per-snapshot setup script,
+run before Devin starts work) that does what a human runs once via `init` on a real
+machine, just automated: `git clone <shmorch skill repo URL>` to a fixed path in
+the VM, then write that path into `.shmorch/home` (or export `$SHMORCH_HOME`
+directly) so branch 1 or 2 resolves normally from then on. If the platform caches
+the VM/snapshot across sessions on the same repo, the clone only needs to happen
+once; if every session is fully fresh, it re-clones each time — cheap, since it's
+only the skill directory, not project data.
 
 **Two literal exceptions** (do NOT rewrite these to `$SHMORCH_HOME`):
 
@@ -177,7 +194,7 @@ pointer can be added; it is not required because Cursor also reads `AGENTS.md`.
 Each capability shmorch uses, and how it maps per CLI. "Fallback" is what to do when
 the CLI has no equivalent — it always keeps the workflow correct.
 
-| Capability | Claude Code | omp / Pi | Others (Codex/Gemini/opencode/Cursor/Antigravity) | Fallback |
+| Capability | Claude Code | omp / Pi | Others (Codex/Gemini/opencode/Cursor/Antigravity/Devin) | Fallback |
 |---|---|---|---|---|
 | Skill body | `~/.claude/skills/shmorch` skill | `skill://shmorch` / claude-discovered | context-file chain only (no skill concept) | read `$SHMORCH_HOME/shmorch-core.md` + workflow files directly |
 | Invocation | `/shmorch <cmd>` (SKILL.md, `$ARGUMENTS`) | `/skill:shmorch <cmd>` (`User:` arg) | type `shmorch <cmd>` as text | dispatch on the first word of whatever args arrive; read `commands/<word>.md` |
@@ -188,6 +205,18 @@ the CLI has no equivalent — it always keeps the workflow correct.
 | Scheduler | `CronCreate/List/Delete` | none in-REPL | none | system cron / external scheduler; document, don't rely |
 | External memory | `~/.claude/projects/**/memory` | `memory://`, retain/recall | none | `docs/project/` + `docs/` in the repo (already the source of truth) |
 | MCP tools | `mcp__<server>__<tool>` | `mcp://<uri>` | varies | "your CLI's MCP tools for <server>" |
+
+**Devin's invocation shape differs from the rest of the "Others" column, worth
+naming explicitly:** every other CLI here is a live REPL where a person types a
+command each turn. Devin is assigned a task up front (via its web UI, Slack, the
+API, or a GitHub mention) and then runs largely unattended — there's no turn-by-turn
+typing of `shmorch <cmd>`. This actually degrades cleanly through the dispatch
+table's existing catch-all: if the assigned task text literally contains a known
+command word, it dispatches normally; otherwise it falls to the "anything else"
+row — the full task description is treated as a directive addressed to Shmorch,
+which is exactly the shape a Devin task already arrives in. No new dispatch logic
+needed, just the observation that the catch-all row is the common case for Devin,
+not the exception.
 
 **Model tiers, CLI-neutral:** where a role names a model, read it as a *tier* —
 `cheap/default` for routine roles, `strong` for the adversarial critic. Map to the

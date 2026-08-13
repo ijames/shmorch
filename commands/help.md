@@ -66,6 +66,9 @@ SELF-IMPROVEMENT
   /shmorch research         External: search for latest AI dev practices and Claude Code releases,
                              propose specific applicable changes to shmorch. Best run at sprint
                              start or after a major Anthropic release.
+  /shmorch pe               personal-eval: burn down ~/.shmorch/personal-profile's session
+                             backlog, capped batch (default 5, max 10), cheap model tier.
+                             Manual only, not shmorch project state — see workflows/personal-eval.md.
 
 ANYTHING ELSE
   /shmorch <question or directive>
