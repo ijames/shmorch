@@ -95,4 +95,7 @@ too; otherwise leave it.
 - Append a row to `stats.md` (session, date, project, start–end, duration, categories
   touched) and update its tally counts, per `README.md` § Structure.
 - Run `python3 $PERSONAL_PROFILE_HOME/scan.py --mark <path>` to close out the session
-  in the ledger.
+  in the ledger, where `<path>` is the original transcript `.jsonl` path (not the
+  slug, not the summary filename) — `scan.py` derives the ledger's session id from
+  that path's basename itself. Never append to `processed.log` by hand; if you don't
+  have the original transcript path, ask for it rather than writing the slug in.
