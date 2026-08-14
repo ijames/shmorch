@@ -30,6 +30,6 @@ already-provisioned consuming projects, not just exist on `main`:
    `plan/` directory backfill and the docs-taxonomy backfill are actually offered and
    applied — don't assume the tooling landing on `main` means it reaches existing
    projects automatically.
-3. Revisit `docs/project/plan/index.md`'s "Self-improve" note under Current Task (already
+3. Revisit `docs/project/plan/index.md`'s "Self-improve" note under Current Activities (already
    flags that self-improve proposes+PRs independently) — this item extends that with the
    concrete backfill-verification piece.

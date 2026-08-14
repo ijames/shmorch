@@ -103,9 +103,9 @@ Demote the previous "Latest Session" heading to just a date heading (`## YYYY-MM
 
 ## Step 6 — Update plan/ (if needed)
 
-Check if any track statuses changed. If so, update `status:` frontmatter on the affected item file(s) in `docs/project/plan/`, and Current Task in `index.md` if the focus moved. If nothing changed, skip.
+Check if any track statuses changed. If so, update `status:` frontmatter on the affected item file(s) in `docs/project/plan/`, and Current Activities in `index.md` — add a line for anything newly started, remove or update the line for anything that closed. Current Activities is a list, not a single slot: don't overwrite one line when a second concurrent thing (self-improve running unattended, an unrelated branch mid-review) is also still true. If nothing changed, skip.
 
-**Staleness check (not just "did focus move"):** also grep Current Task's prose for path tokens (e.g. `docs/state/`, other since-renamed paths) against the actual current tree. A referenced path that no longer exists means Current Task is stale even if focus itself didn't move — fix it now rather than leaving a description that points at a deleted directory.
+**Staleness check (not just "did anything close"):** also grep Current Activities's prose for path tokens (e.g. `docs/state/`, other since-renamed paths) against the actual current tree. A referenced path that no longer exists means an entry is stale even if nothing formally closed — fix it now rather than leaving a description that points at a deleted directory.
 
 **Same-session close rule:** if the active track's PR merged this session and no blocking follow-up work remains on it, set `Status: Closed`/`Shipped` in its `index.md` now — do not defer to "next session" unless there is a named, undone task blocking closure (state the task explicitly in the track file). A track left `Open` after its PR merges breaks Step 6.5's graduation scan, which only fires on tracks already marked Closed/Done/Complete.
 

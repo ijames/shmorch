@@ -82,7 +82,7 @@ boundary?).
   starts as a folder from `init` onward, or stays a flat file until it first crosses the
   threshold — open implementation question, see Work log.
 - `tools/backfill-plan-dir.sh` retrofits onto the generic splitter once it exists, rather
-  than staying a hand-rolled one-off — its Current Task / Backlog / Completed sections
+  than staying a hand-rolled one-off — its Current Activities / Backlog / Completed sections
   and per-item file output are exactly the kind of "block shape" the generic tool needs
   to support, and it's a good first real test case for the splitter's block-detection
   contract.

@@ -41,6 +41,12 @@ If something drifted, apply the minimum edit that makes the docs true again:
 - Append one line to `session.md`'s latest entry noting what happened since it was last
   written (commits, merged PRs) — don't rewrite the entry, extend it
 - Flip a track's status if the log confirms it closed
+- Reconcile `plan/index.md`'s **Current Activities** section — this is the drift `touch`
+  exists to catch early, since `wrap`'s equivalent step (Step 6) only runs on a full
+  close-out and gets skipped when sessions end without one. It's a list, not a single slot:
+  add a line for anything newly started, remove or update the line for anything that closed,
+  and don't clobber an unrelated concurrent entry (e.g. self-improve running unattended)
+  while updating another.
 
 Don't touch `context.md`, `stack.md`, acceptance criteria, or anything outside
 `session.md`/`plan/` — that's `wrap`'s job, not this one.
