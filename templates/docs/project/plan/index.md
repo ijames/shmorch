@@ -17,7 +17,10 @@ summary: (none yet — no active task or backlog)
 
 <!-- One line per concurrently-live thing — an active track, self-improve running
      unattended, a branch mid-review. Most projects have exactly one; don't force
-     a list where there's only one entry. -->
+     a list where there's only one entry. Stamp each entry with a last-modified date
+     (`git log -1 --format=%ad --date=short -- <path>` on the linked file) rather than
+     hand-typing one — cheap to check, and won't drift the way a manually-maintained
+     date does. -->
 
 None active.
 
