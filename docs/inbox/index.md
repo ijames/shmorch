@@ -14,3 +14,4 @@ Items here are not authoritative. They graduate into `workflows/`, `core/`, `age
 - [mobos-template-contamination.md](mobos-template-contamination.md)
 - [global-learning-log.md](global-learning-log.md)
 - [pe-multi-source-ingestion.md](pe-multi-source-ingestion.md)
+- [go-resume-wrap-determinism.md](go-resume-wrap-determinism.md)
