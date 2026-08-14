@@ -1,7 +1,7 @@
 ---
 status: Active
-updated: 2026-07-24
-summary: Docs taxonomy redesign closed and implemented (templates/docs/** restructured); backfill for already-provisioned projects split to its own not-yet-started track. Two other concurrent processes remain — see Current Task.
+updated: 2026-08-14
+summary: Workflow context-budget umbrella (tracks/20260721-workflow-subagent-delegation) — Approach A (frontmatter-gated loading) shipped via PR #106; Approaches B (subagent delegation) and C (core doc JIT breakup) remain open. See Current Activities.
 ---
 
 # Shmorch Plan
@@ -9,22 +9,18 @@ summary: Docs taxonomy redesign closed and implemented (templates/docs/** restru
 > **What belongs here:** What to build and in what order.
 > Backlog items live as individual files in this directory (one per item, `category`/`status`
 > frontmatter) so concurrent work never collides on a shared edit — add a new file, don't
-> edit this index. `index.md` only changes for Current Task or Completed updates.
+> edit this index. `index.md` only changes for Current Activities or Completed updates.
 > Changes here do NOT bump VERSION (docs are internal; only skill file changes affect VERSION).
 
 ---
 
-## Current Task
+## Current Activities
 
-None active. The docs cleanup this section used to describe (bringing every track under
-`docs/project/tracks/` to clean, frontmatter+backlinks shape) is done: `tools/track-graph-audit.sh`
-and `templates/.shmorch/docs/track-template.md` landed 2026-07-21, and the backfill mechanism
-track ([`tracks/20260724-dev-docs-taxonomy-backfill`](../tracks/20260724-dev-docs-taxonomy-backfill/index.md))
-closed 2026-07-30 — 19 of 20 track `index.md` files now carry frontmatter. The two
-"other processes" once tracked here also resolved: messaging-provider design is its own
-still-open track ([`tracks/20260721-messaging-provider`](../tracks/20260721-messaging-provider/index.md),
-check there for status), and self-improve continues as its own automated process,
-logging under its own commits/PRs as before — neither needs tracking here.
+<!-- One line per concurrently-live thing. Don't clobber one entry while updating another. -->
+
+- **Workflow context-budget umbrella** (last touched 2026-08-11) — [`tracks/20260721-workflow-subagent-delegation`](../tracks/20260721-workflow-subagent-delegation/index.md). Approach A (frontmatter-gated loading) shipped, PR #106. Approach B (subagent delegation) and Approach C (core/workflow doc JIT breakup) remain open, no work started on either yet.
+- **Messaging-provider design** (last touched 2026-07-30) — [`tracks/20260721-messaging-provider`](../tracks/20260721-messaging-provider/index.md), check there for status.
+- Self-improve continues as its own automated process, logging under its own commits/PRs — not tracked as a line item here.
 
 ---
 

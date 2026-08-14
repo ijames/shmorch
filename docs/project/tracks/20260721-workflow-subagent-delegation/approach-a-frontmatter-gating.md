@@ -1,7 +1,7 @@
 ---
-status: Open
-updated: 2026-08-10
-summary: Branch A — every loadable .md gets YAML frontmatter (purpose, load-when, size); the orchestrator reads only frontmatter across a directory before deciding which bodies to open. Cheapest lever, ships first, composes with B and C.
+status: Done
+updated: 2026-08-14
+summary: Branch A — every loadable .md gets YAML frontmatter (purpose, load-when, size); the orchestrator reads only frontmatter across a directory before deciding which bodies to open. Cheapest lever, ships first, composes with B and C. Merged via PR #106.
 ---
 
 ↑ [index.md](index.md)

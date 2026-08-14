@@ -1,6 +1,6 @@
 ---
 loads_when: user chose the resume fast lane, or an INTERRUPTED session needs the fast lane offer — session.md + plan/ only, no full bootstrap
-size: 52 lines
+size: 53 lines
 ---
 
 # Workflow: resume
@@ -36,17 +36,13 @@ if [[ "$LAST" != *"SESSION_START"* ]]; then
 fi
 ```
 
-## Step 2 — Cross-check, don't trust blindly
+## Step 2 — Cross-check via touch, don't trust blindly
 
-`session.md` and `plan/` are only as fresh as the last `/shmorch wrap` or in-the-moment edit. A `/clear` is invisible to shmorch — nothing runs automatically after it — so the gap between "what these docs say" and "what main actually looks like" can be hours or days, even mid-sprint. Run this cross-check every time, not just when something feels off:
+`session.md` and `plan/` are only as fresh as the last `/shmorch wrap` or in-the-moment edit. A `/clear` is invisible to shmorch — nothing runs automatically after it — so the gap between "what these docs say" and "what main actually looks like" can be hours or days, even mid-sprint. Run `workflows/touch.md` Steps 1-2 inline every time, not just when something feels off — it's cheap enough not to gate on asking, and reconciling now (not just flagging) means Step 3 below proposes next steps from true state, not stale state.
 
-1. `git branch --show-current` + `git log --oneline -10` — does the branch match what session.md says is "in progress"? Are there merge commits or PRs referenced in the log that session.md's latest entry doesn't mention?
-2. `gh pr list --state merged --limit 5` (best-effort; skip silently if `gh` fails or isn't authenticated) — any merged PR not named in session.md's last entry is a sign docs are behind reality.
-3. Most-recently-touched files (e.g. `git log -1 --name-only`, or `find docs/project -newer docs/project/session.md`) — a cheap clue toward work that happened but was never logged, especially uncommitted or just-committed changes the session log doesn't know about.
+If touch found nothing drifted: proceed to Step 3 normally, no need to mention the check.
 
-If branch/log/PRs line up with session.md's account: proceed to Step 3 normally, no need to mention the check.
-
-If they don't line up: say so plainly before proposing next steps — name what's newer than the docs (commits, merged PRs, branch state), not just "docs may be stale." Offer to write a quick catch-up entry, but don't block on it — the user can say "skip it, just tell me what's next."
+If touch found and fixed drift: say so plainly before proposing next steps — name what was newer than the docs (commits, merged PRs, branch state, track status) and what got fixed. Don't just offer to write a catch-up entry — it's already written.
 
 ## Step 3 — Surface and propose
 

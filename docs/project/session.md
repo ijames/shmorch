@@ -4,6 +4,15 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+## Since last entry — merged, undocumented — 2026-08-14 (via `/shmorch touch`)
+
+PRs merged after 2026-08-10 that this log never caught up to: #106 frontmatter-gated loading
+(Approach A of the workflow context-budget umbrella — now `Done`, see
+`docs/project/tracks/20260721-workflow-subagent-delegation/approach-a-frontmatter-gating.md`),
+#107 personal-eval (pe) workflow + pipeline fixes, #108 VERSION bump to 1.4.0, #109 new
+`/shmorch touch` command (light session/plan sync, VERSION 1.5.0). Approaches B and C of the
+context-budget umbrella remain open.
+
 ## Same-session follow-up — 2026-08-10 — Progressive Disclosure doctrine + knowledge-graph note
 
 **Branch:** `docs/20260810-progressive-disclosure-doctrine`

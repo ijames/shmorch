@@ -1,6 +1,6 @@
 ---
 loads_when: closing the current session — stamp end time, summarize, update all state files
-size: 297 lines
+size: 311 lines
 ---
 
 # Workflow: wrap
@@ -63,7 +63,11 @@ bash $SHMORCH_HOME/tools/timelog.sh "SESSION_END" "summary"
 
 ---
 
-## Step 5 — Update session.md
+## Step 5 — Reconcile via touch, then layer the session entry
+
+Run `workflows/touch.md` Steps 1-2 inline (git-fact reconciliation across `session.md`,
+`plan/`, and the track-status listing — see that file for what it does). Then layer wrap's own
+unique work on top:
 
 First, check if `## Latest Session — YYYY-MM-DD` for today's date already exists in session.md.
 
@@ -76,7 +80,7 @@ First, check if `## Latest Session — YYYY-MM-DD` for today's date already exis
 **Branch:** `current-branch`
 
 **What was done:**
-- bullet points from git log + user context
+- bullet points from git log + user context (Step 3's answer)
 
 **Files touched:**
 - paths only, no diff — from `git diff --stat` against the last session's ending commit
@@ -101,11 +105,16 @@ Demote the previous "Latest Session" heading to just a date heading (`## YYYY-MM
 
 ---
 
-## Step 6 — Update plan/ (if needed)
+## Step 6 — Wrap-specific plan/ rules
 
-Check if any track statuses changed. If so, update `status:` frontmatter on the affected item file(s) in `docs/project/plan/`, and Current Task in `index.md` if the focus moved. If nothing changed, skip.
+`touch` (Step 5, above) already reconciled `plan/` item statuses, `plan/index.md`'s Current
+Activities, and the track-status listing against git reality. This step covers what's specific
+to a full close-out and not part of touch's scope:
 
-**Staleness check (not just "did focus move"):** also grep Current Task's prose for path tokens (e.g. `docs/state/`, other since-renamed paths) against the actual current tree. A referenced path that no longer exists means Current Task is stale even if focus itself didn't move — fix it now rather than leaving a description that points at a deleted directory.
+**Staleness check (not just "did anything close"):** grep Current Activities's prose for path
+tokens (e.g. `docs/state/`, other since-renamed paths) against the actual current tree. A
+referenced path that no longer exists means an entry is stale even if nothing formally closed —
+fix it now rather than leaving a description that points at a deleted directory.
 
 **Same-session close rule:** if the active track's PR merged this session and no blocking follow-up work remains on it, set `Status: Closed`/`Shipped` in its `index.md` now — do not defer to "next session" unless there is a named, undone task blocking closure (state the task explicitly in the track file). A track left `Open` after its PR merges breaks Step 6.5's graduation scan, which only fires on tracks already marked Closed/Done/Complete.
 
