@@ -40,3 +40,4 @@
 [2026-08-10 21:41:03] SESSION_END | auto-closed by stop hook — main @ fbd281a Merge pull request #105 from ijames/docs/20260810-progressive-disclosure-doctrine
 [2026-08-17 16:28:53] PHASE | self-improve: starting
 [2026-08-17 16:31:38] AGENT_DONE | researcher → ~/.claude/self-improve-20260817-shmorch.md
+[2026-08-17 16:37:19] PHASE | self-improve: complete — 2 changes applied
