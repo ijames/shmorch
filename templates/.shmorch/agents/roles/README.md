@@ -28,11 +28,11 @@ on top of the standard role — without duplicating the base behavior.
 > Then apply the additions below. These supplement — not replace — the base role
 > unless a section heading matches one in the skill default.
 
-## Domain knowledge — MoBoS
+## Domain knowledge — <your-project>
 
-When analyzing PHP code in this project:
-- The service layer is at `htdocs/service/` — Biz, Order, Market, Trader, Account
-- Tests use PHPUnit at `htdocs/tests/`
+When analyzing code in this project:
+- The service layer is at `<path/to/service-layer>` — list the key modules
+- Tests use `<test framework>` at `<path/to/tests>`
 - Flag any service method without a corresponding test as [GAP]
 ```
 
