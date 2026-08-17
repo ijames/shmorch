@@ -1,6 +1,6 @@
 ---
 loads_when: retrospective self-improvement pass for the current repo
-size: 269 lines
+size: 258 lines
 ---
 
 # Workflow: self-improve
@@ -241,30 +241,14 @@ remaining proposals onto a single branch instead of one-per-PR."
 
 ## Step 7 — Clear addressed inbox items and stamp
 
-Before scanning for *new* classifications, first re-sweep any inbox item left PARTIAL or
-UNADDRESSED by a prior self-improve run whose PRs have since merged (check
-`docs/project/session.md` for "PR/commit status" lines listing merges since that item's
-last-touched date) — re-classify against current (post-merge) skill files before adding
-new findings.
-
-Scan `docs/inbox/*.md` (project) or `$SHMORCH_HOME/docs/inbox/*.md` (skill, if no project inbox exists) — skip `index.md`. For each file, classify it mechanically:
-
-```bash
-# For each inbox file, grep for its core concern in skill files
-grep -r "<keyword from the inbox item>" $SHMORCH_HOME/shmorch-core.md \
-  $SHMORCH_HOME/workflows/*.md 2>/dev/null | head -3
-```
-
-Classification:
-- **ADDRESSED** — the concern is reflected verbatim or substantively in a skill file → delete the file now; do not leave it as archive (git history carries it)
-- **PARTIAL** — the concept exists but the specific proposal isn't implemented → prepend `_(partial — <what's missing>)_` to the file and keep it in place
-- **UNADDRESSED** — not found in any skill file → keep the file as-is; include in no-action observations in the proposals output
-
-Record the cleanup in the proposals file:
+Run `$SHMORCH_HOME/workflows/check-inbox.md` against `docs/inbox/` (project) or
+`$SHMORCH_HOME/docs/inbox/` (skill, if no project inbox exists) — it owns the
+classify/act-now/defer logic; don't duplicate it here. Record its outcome in the
+proposals file:
 
 ```
 ### Inbox cleanup — <date>
-Removed: <N files> (addressed). Kept: <M files> (partial/unaddressed).
+<check-inbox's own summary line: N acted, M deferred, K already-covered>
 ```
 
 - Append to `docs/project/session.md`: `Self-improve <date>: N proposals, M applied.`
