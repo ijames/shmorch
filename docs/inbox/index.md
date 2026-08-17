@@ -13,4 +13,3 @@ Items here are not authoritative. They graduate into `workflows/`, `core/`, `age
 - [backlog-dependency-stack.md](backlog-dependency-stack.md)
 - [global-learning-log.md](global-learning-log.md)
 - [pe-multi-source-ingestion.md](pe-multi-source-ingestion.md)
-- [go-resume-wrap-determinism.md](go-resume-wrap-determinism.md)
