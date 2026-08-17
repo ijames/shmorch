@@ -46,6 +46,17 @@ Cheap probes, in order — this decides which phases run:
   ```
   If any exist, surface them by filename before Step 3: "N inbox item(s) pending review:
   `<file>`, ...". Don't block on them — just make sure they're seen, not just present.
+
+  **SELF session.md drift check:** merged PRs can land on `main` without a matching
+  `docs/project/session.md` entry, accumulating into a multi-PR retroactive catch-up
+  later. Check now:
+  ```bash
+  LAST_ENTRY=$(grep -oE '^\#\# .*— [0-9]{4}-[0-9]{2}-[0-9]{2}' docs/project/session.md | head -1 | grep -oE '[0-9]{4}-[0-9]{2}-[0-9]{2}')
+  [ -n "$LAST_ENTRY" ] && git log --since="$LAST_ENTRY" --oneline --merges main 2>/dev/null
+  ```
+  If any merges are listed, surface: "session.md's last entry is `$LAST_ENTRY` but N PR(s)
+  merged since — run `/shmorch touch` before continuing?" Don't block on it — same
+  non-blocking style as the inbox check above.
 - **UNINITIALIZED** — no `.shmorch/AGENTS.md` and no `docs/project/context.md`: the repo has no Shmorch yet → provision fresh (Step 2a).
 - Otherwise read versions:
   ```bash
