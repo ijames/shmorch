@@ -182,3 +182,63 @@ before assuming a schema for anything beyond `conversations.json`.
 **Still not scoped as an active project.** Pick this up for real once the user has
 the actual export file in hand — this entry exists so the format doesn't need
 re-deriving from scratch when that happens.
+
+### Non-session sources: blogs, Google Docs, social posts (deferred)
+
+Folded in from a 2026-08-13 inbox note: beyond other agents' transcripts, sources
+outside any coding context (blog posts, Google Docs, Facebook posts) would surface
+evidence structurally absent from session transcripts — values, interests, and
+communication style expressed when the user isn't talking to an AI at all. Same
+"one extraction path per source format" shape as the ChatGPT case above, but with an
+added wrinkle transcripts don't have: each of these needs its own
+auth/access-and-consent story (opt-in, source by source) rather than just reading a
+local file.
+
+**Also floated, further out:** if the extract → summarize → synthesize → analyze
+pipeline stays source-agnostic as more sources are added, it may be general enough to
+pull out of shmorch as its own tool, independent of Claude Code. Not a near-term
+commitment — revisit once the single-source (Claude Code) pipeline is solid and the
+profile has enough volume to know what's actually missing from it.
+
+---
+
+## Backlog as a dependency stack, not just a flat list (deferred)
+
+Prompted by (2026-05-07): when backlog items block each other (e.g. one item can't
+start until another lands), a flat domain list doesn't surface that push/pop
+relationship — the developer has to track "do this first" mentally, with no
+structural support from the docs.
+
+**The thought:** `plan/index.md` could gain a formal "Active Stack" section above the
+flat domain inventory, where blocked chains are pushed and popped in dependency
+order — LIFO for the hot path: top of stack = do next, bottom = not yet unblocked.
+Relates to the Beads/Conductor evaluation already in `plan/beads-integration-investigation.md`
+— a proper dependency-graph tool would make this structural instead of prose.
+
+**Not scoped.** Loose — worth revisiting only if dependency chains between backlog
+items become common enough that the flat list is routinely misleading about order.
+
+---
+
+## Global learning log, not per-project (deferred)
+
+Prompted by (2026-08-13), raised while merging DarkBadge PR #196: `shmorch-core.md`
+already directs "when a concept surfaces that the developer clearly didn't have
+context for, add it to `docs/reference/learning.md` without being asked" — but that
+log lives per-project, and most captured concepts (pnpm, uv, SSR hydration, GEO, etc.)
+aren't project-specific. They're true on any project the developer touches next, so a
+per-project log means the same concept gets re-captured (or missed) project to project.
+
+**The thought:** since the capture behavior is already a shmorch directive rather than
+a separate tool, the fix belongs in shmorch's own state — likely
+`~/.shmorch/learning/` (or similar global, user-owned location), parallel to how
+Claude Code's own memory system already does global + per-project linkback. Project
+docs would keep a link back to the global entry rather than owning the content
+directly; global entries could carry a "seen in: <project>" list for provenance.
+
+**Open questions to resolve if this gets scoped:** exact location (ships-with-skill vs
+user-owned dir), dedup behavior when the same concept resurfaces in two projects, and
+updating the `shmorch-core.md` capture directive to point at the new location.
+
+**Not scoped.** Thinking-out-loud stage only — revisit if per-project learning-log
+duplication actually becomes a recurring annoyance.

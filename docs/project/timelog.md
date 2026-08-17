@@ -41,3 +41,6 @@
 [2026-08-17 16:28:53] PHASE | self-improve: starting
 [2026-08-17 16:31:38] AGENT_DONE | researcher → ~/.claude/self-improve-20260817-shmorch.md
 [2026-08-17 16:37:19] PHASE | self-improve: complete — 2 changes applied
+[2026-08-17 16:41:08] PHASE | self-improve: starting
+[2026-08-17 16:41:14] PHASE | self-improve: skipped — ran-recently-no-new-sessions
+[2026-08-17 16:47:53] PHASE | inbox triage: 3 items graduated to pre-planning.md, inbox emptied
