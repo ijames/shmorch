@@ -5,24 +5,19 @@
 ## Naming Conventions
 
 - **Files/Folders:** `kebab-case` for URLs/paths, `PascalCase` for classes
-- **Variables/Functions:** `snake_case` (PHP), `camelCase` (JavaScript)
+- **Variables/Functions:** language-idiomatic case (see the per-stack guide for this project's convention)
 - **Classes/Types:** `PascalCase`
 - **Constants:** `UPPER_SNAKE_CASE`
 
-## Special Cases
-
-- **Spelling:** The order status for an order stopped is `canceled` not `cancelled`. Flag divergence from this in the code.
-
 ## Formatting
 
-- **Indentation:** 4 spaces (PHP), 2 spaces (JS/HTML/Twig)
+- **Indentation:** language-idiomatic (see the per-stack guide)
 - **Line Length:** Max 120 characters (overrides the 100 in the JS guide)
 - **Braces:** K&R style
 
 ## Comments
 
 - Explain *why*, not *what*
-- Use `trigger_error()` for runtime logging in PHP (not comments)
 - `// TODO:` and `// FIXME:` for deferred work
 
 ## Principles

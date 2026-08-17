@@ -2,7 +2,7 @@
 
 # Code Style Guides
 
-Coding standards for all languages used in MoBoS.
+Coding standards for all languages used in this project.
 
 ---
 
