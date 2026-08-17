@@ -1,6 +1,6 @@
 ---
 loads_when: session start, or re-orienting mid-session — the one entry dispatcher
-size: 147 lines
+size: 175 lines
 ---
 
 # Workflow: go — entry dispatcher
@@ -38,15 +38,6 @@ Cheap probes, in order — this decides which phases run:
 
 - **SELF** — `$SHMORCH_SELF=1`, or the current directory *is* `$SHMORCH_HOME`: this is the skill's own repo. Skip provisioning entirely; check the inbox (below), then go straight to Step 3.
 
-  **SELF inbox check:** other projects' sessions file skill-improvement proposals to
-  `docs/inbox/` instead of branching/PR'ing directly (`core/operations.md` § Cross-repo
-  discipline) — they accumulate silently between shmorch dev sessions. Check now:
-  ```bash
-  ls docs/inbox/*.md 2>/dev/null | grep -v index.md
-  ```
-  If any exist, surface them by filename before Step 3: "N inbox item(s) pending review:
-  `<file>`, ...". Don't block on them — just make sure they're seen, not just present.
-
   **SELF session.md drift check:** merged PRs can land on `main` without a matching
   `docs/project/session.md` entry, accumulating into a multi-PR retroactive catch-up
   later. Check now:
@@ -72,6 +63,17 @@ Cheap probes, in order — this decides which phases run:
 
 - resume → run `$SHMORCH_HOME/workflows/resume.md` and stop.
 - go → continue below.
+
+**Inbox check** (SELF, CURRENT, or BEHIND — skip for UNINITIALIZED, there's nothing to
+have accumulated yet): items sit in `docs/inbox/` (project) or, for SELF with no
+project-level inbox, `$SHMORCH_HOME/docs/inbox/` until someone decides where they
+actually belong.
+```bash
+ls docs/inbox/*.md 2>/dev/null | grep -v index.md
+```
+If any exist, surface by filename and offer the choice, non-blocking: "N inbox
+item(s) pending: `<file>`, ... — run `/shmorch check-inbox` now, or continue and
+revisit later?" Either answer is fine; don't stall Step 2/3 waiting on it.
 
 ---
 

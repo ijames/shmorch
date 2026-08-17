@@ -60,6 +60,9 @@ PLANNING
   /shmorch prioritize sprint Re-rank within current sprint scope only.
 
 SELF-IMPROVEMENT
+  /shmorch check-inbox      Triage docs/inbox/: act now (graduate into a reference doc, plan
+                             item, or track) or defer (leave it, marked reviewed), item by item.
+                             Offered automatically at session start (go) when the inbox has items.
   /shmorch self-improve     Retrospective: surface friction from session history, propose targeted
                              changes to shmorch workflows and commands. Runs automatically at wrap.
                              Run manually after a frustrating session or when docs/inbox/ has items.
