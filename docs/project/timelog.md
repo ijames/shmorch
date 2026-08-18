@@ -44,3 +44,4 @@
 [2026-08-17 16:41:08] PHASE | self-improve: starting
 [2026-08-17 16:41:14] PHASE | self-improve: skipped — ran-recently-no-new-sessions
 [2026-08-17 16:47:53] PHASE | inbox triage: 3 items graduated to pre-planning.md, inbox emptied
+[2026-08-18 08:35:50] PHASE | check-inbox: 2 acted, 0 deferred, 0 already-covered

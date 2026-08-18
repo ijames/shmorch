@@ -220,25 +220,10 @@ items become common enough that the flat list is routinely misleading about orde
 
 ---
 
-## Global learning log, not per-project (deferred)
+## Global learning log, not per-project — resolved 2026-08-18
 
-Prompted by (2026-08-13), raised while merging DarkBadge PR #196: `shmorch-core.md`
-already directs "when a concept surfaces that the developer clearly didn't have
-context for, add it to `docs/reference/learning.md` without being asked" — but that
-log lives per-project, and most captured concepts (pnpm, uv, SSR hydration, GEO, etc.)
-aren't project-specific. They're true on any project the developer touches next, so a
-per-project log means the same concept gets re-captured (or missed) project to project.
-
-**The thought:** since the capture behavior is already a shmorch directive rather than
-a separate tool, the fix belongs in shmorch's own state — likely
-`~/.shmorch/learning/` (or similar global, user-owned location), parallel to how
-Claude Code's own memory system already does global + per-project linkback. Project
-docs would keep a link back to the global entry rather than owning the content
-directly; global entries could carry a "seen in: <project>" list for provenance.
-
-**Open questions to resolve if this gets scoped:** exact location (ships-with-skill vs
-user-owned dir), dedup behavior when the same concept resurfaces in two projects, and
-updating the `shmorch-core.md` capture directive to point at the new location.
-
-**Not scoped.** Thinking-out-loud stage only — revisit if per-project learning-log
-duplication actually becomes a recurring annoyance.
+Prompted by (2026-08-13), raised while merging DarkBadge PR #196. Resolved: general-purpose
+captures now dual-write — locally to `docs/reference/learning/<slug>.md` (project context
+intact) and, in a polished project-agnostic form, to `~/.shmorch/learning/<domain>/<slug>.md`
+(global knowledge graph). The two copies are decoupled, no backreference required. See
+`shmorch-core.md` § Learning log and `workflows/learn.md`.
