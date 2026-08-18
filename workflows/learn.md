@@ -10,13 +10,21 @@ size: 55 lines
 ```yaml
 ---
 title: <Concept Name>
-tags: [tag1, tag2]
+domain: <one of: infra | frontend | data | testing | security | product-growth | tooling | agents | docs | process>
+stack: [<specific tool/tech proper nouns, e.g. git, vercel, react — empty [] if none>]
+kind: <one of: pattern | gotcha | terminology | tool-usage | decision>
 created: YYYY-MM-DD
 ---
 ```
 
 Location IS the scope — no redundant `scope:` field. General-purpose knowledge:
 `~/.shmorch/learning/<slug>.md`. Genuinely project-specific: `docs/reference/learning/<slug>.md`.
+
+Faceted, not a flat `tags:` list — `domain`/`stack`/`kind` are independent dimensions so
+entries can be filtered by any combination (e.g. `domain:infra AND kind:gotcha`) without a
+folder hierarchy. `domain` and `kind` are closed vocabularies (add a new value only when an
+entry genuinely doesn't fit any existing one, and note the addition here); `stack` is
+free-form.
 
 ---
 
