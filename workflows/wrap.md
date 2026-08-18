@@ -103,6 +103,12 @@ First, check if `## Latest Session — YYYY-MM-DD` for today's date already exis
 
 Demote the previous "Latest Session" heading to just a date heading (`## YYYY-MM-DD`).
 
+**Growth check:** if `docs/project/session.md` now exceeds ~200–300 lines (or a handful
+of dated entries beyond the current one), split per `core/documentation.md` §
+session.md growth — move entries older than `## Latest Session` into
+`docs/project/session/YYYYMMDD-<slug>.md` files, replace them in `session.md` with a
+`## History` index line each.
+
 ---
 
 ## Step 6 — Wrap-specific plan/ rules
