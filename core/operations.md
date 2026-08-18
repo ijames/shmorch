@@ -70,7 +70,7 @@ Current version: see `.shmorch/VERSION`. To pull skill upgrades into this repo, 
 and `$SHMORCH_HOME/VERSION`:
 
 - **MAJOR** — a `Compat: backfill` Architecture Changelog entry (see
-  `core/documentation.md`), a template/scaffold structure change, or a change to the
+  `core/changelog.md`), a template/scaffold structure change, or a change to the
   versioning scheme itself.
 - **MINOR** — a new command, workflow, or role.
 - **PATCH** — any other skill-file tweak or fix.

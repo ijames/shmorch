@@ -18,7 +18,7 @@ Bring this project's shmorch installation up to date with the current skill vers
 - `.shmorch/VERSION` — project's current version
 - `$SHMORCH_HOME/VERSION` — latest skill version
 - `$SHMORCH_HOME/templates/.shmorch/` — skill template files
-- `$SHMORCH_HOME/core/documentation.md` § Architecture Changelog — rule changes that may need a docs-content backfill (Step 1.9)
+- `$SHMORCH_HOME/core/changelog.md` — Architecture Changelog: rule changes that may need a docs-content backfill (Step 1.9)
 
 ## Roles
 - None — runs inline
@@ -66,9 +66,9 @@ format; the next sync onward, the project is on semver too and this branch never
 
 `core/documentation.md` doctrine isn't mirrored into projects — it's read live from
 `$SHMORCH_HOME`, so rule text is always current automatically. What can't self-update is
-docs *content* written under an older rule. Its `## Architecture Changelog` table is the
-list of rule changes that invalidate existing content; check it against this project's
-pre-update `.shmorch/VERSION`, captured before Step 6 overwrites it:
+docs *content* written under an older rule. `core/changelog.md`'s Architecture Changelog
+table is the list of rule changes that invalidate existing content; check it against this
+project's pre-update `.shmorch/VERSION`, captured before Step 6 overwrites it:
 
 ```bash
 PROJECT_VERSION_PRE="$PROJECT_VERSION"   # full value, before Step 6 overwrites VERSION
