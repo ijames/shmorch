@@ -63,27 +63,23 @@ Full doctrine (temporal propagation, always-red rule, branch roles, AC sync): `$
 - Plans before code. Specs before plans.
 - Ruthless about cruft: dead code, stale docs, duplicate tests
 
-**UX:** All components are dynamic. Animation is cognitive load management, not decoration. Every component defines entry, state transitions, and exit at spec time. "We'll add animation later" means the spec is incomplete.
-Full UX doctrine: `$SHMORCH_HOME/core/ux.md`
+**UX:** every component is dynamic — animation is cognitive load management, not decoration, defined at spec time. Full doctrine: `$SHMORCH_HOME/core/ux.md`
 
 **Graph thinking:** Every input has broader implications. Trace lateral implications proactively. Update bidirectional links. File implications as backlog items immediately — nothing lives only in conversation.
 
-**Learning log:** When a concept surfaces that the developer clearly didn't have context for, capture it without being asked, one file per concept. Judge scope at capture time: genuinely project-specific knowledge goes only to `docs/reference/learning/<slug>.md`. General-purpose knowledge (true on any project) is captured in *both* places — locally in `docs/reference/learning/<slug>.md` as it actually came up here, and in a polished, project-agnostic form in `~/.shmorch/learning/<domain>/<slug>.md` for the global knowledge graph. The two copies are decoupled — the local one stays specific to this repo's context, the global one doesn't need to track it — so no backreference or sync step is required. Each file opens with frontmatter (`title`, `tags`, `created`) — see `workflows/learn.md` for the schema. The developer can also direct a capture on the spot with `/shmorch learn <thing>`.
+**Learning log:** Capture unprompted when a concept surfaces the developer clearly lacked context for, one file per concept. Scope rule and dual-write schema: `$SHMORCH_HOME/workflows/learn.md`. Developer can also direct a capture on the spot with `/shmorch learn <thing>`.
 
-**95% confidence — hard gate:** Before any code change — including fixes, migrations, config, or "obvious" patches — interview (one question at a time) until 95% confident, write a plan, say "Proceed?" and wait. No exceptions. "It's obviously broken" is not a bypass. The user saying "yes" to a commit plan is not retroactive permission for unreviewed code. Full pre-build interview in `$SHMORCH_HOME/workflows/build.md`.
+**95% confidence — hard gate:** Before any code change, interview (one question at a time) until 95% confident, write a plan, say "Proceed?" and wait. No exceptions — "obviously broken" is not a bypass, nor is prior "yes" to an unrelated commit plan. Full pre-build interview: `$SHMORCH_HOME/workflows/build.md`.
 
-**Always keep moving:** After every response, do the next thing or propose it. If the user declines, offer something smaller. Never go quiet. **Exception — `go`/orientation: "keep moving" means *propose*, not act. Do not read, `grep`, or analyze source code (or spawn discovery) until the user gives a directive after `go`.**
+**Always keep moving:** After every response, do the next thing or propose it. Never go quiet. **Exception — `go`/orientation: propose, don't act, until the user gives a directive.**
 
-**Report files touched at completion points:** When a discrete unit of work lands (a task, a proposal, a fix) with a targeted, reviewable file set, list the files touched (paths only, no diff) and the PR/commit status (link, or "none this session") in the same response. Skip this for broad or sprawling changes — a long file list adds noise, not signal, once the change set stops being scannable at a glance. `workflows/wrap.md`'s session-close report always includes this, regardless of scope.
+**Report files touched at completion points:** List files touched (paths only) and PR/commit status alongside any discrete unit of work with a targeted, reviewable file set. Skip for broad/sprawling changes. `workflows/wrap.md`'s session-close report always includes this.
 
-**Continuous state updates:** Update `plan/`, `decisions/`, and docs in the moment — not batched at wrap. Track stub rule: every Design/Build plan item gets `docs/project/tracks/YYYYMMDD-<name>/index.md` created immediately, with `Status: Open`, `Opened:`, and `→ destination`.
+**Continuous state updates, deferred intent:** Update `plan/`, `decisions/`, and docs in the moment, not batched at wrap. A discussion that ends without implementation gets a stub track immediately (`Status: Blocked — pending [the specific decision]`), never just a `session.md` note. Track/graduation rules: `$SHMORCH_HOME/core/documentation.md`.
 
-**Deferred intent must have a stub track:** If an intent discussion ends without implementation — decision pending, more review needed, or blocked on external input — open a stub track immediately with `Status: Blocked — pending [the specific decision]` and the open question documented. Never park a deferred intent only in `session.md` next-up notes. The stub is the parking place; the session note is just a pointer to it.
+**Context management:** Compress proactively, separate concerns, one focus at a time. Full protocol: `$SHMORCH_HOME/workflows/context.md`
 
-**Context management:** When topic shifts, note where interrupted thinking stands in one line, then start new focus clean. Compress proactively when threads get long or tangled. Separate concerns: one focus at a time.
-Full protocol: `$SHMORCH_HOME/workflows/context.md`
-
-**Documents stay clean:** Rewrite docs to reflect current reality — don't layer amendments or leave stale content. History lives in the timelog and git — `decisions/` states current decisions only, not how they were revised.
+**Documents stay clean:** Rewrite docs to reflect current reality — don't layer amendments or leave stale content. History lives in the timelog and git.
 
 ---
 
@@ -119,7 +115,7 @@ Raise these at intent stage for every applicable project. Templates scaffolded b
 | Dimension | Applies to | Detail |
 |---|---|---|
 | Observability | All projects | `$SHMORCH_HOME/core/observability.md` |
-| SEO / GEO | Web-facing projects | `$SHMORCH_HOME/core/seo_geo.md` |
+| Web Spec Compliance (SEO, Agent Readiness, GEO/AEO, accessibility, security, performance, privacy, resilience, i18n) | Web-facing projects — scoped per surface/audience | `$SHMORCH_HOME/core/web_spec_compliance.md` |
 | Analytics | User-facing products | `$SHMORCH_HOME/core/analytics.md` |
 | Progressive Delivery | Projects with a deploy pipeline | `$SHMORCH_HOME/core/progressive_delivery.md` |
 

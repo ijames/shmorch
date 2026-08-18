@@ -24,6 +24,13 @@ summary: (none yet — filled in on first Shmorch session)
 ## Existing Codebase?
 <!-- Yes / No / Partial -->
 
+## Dimension Applicability
+<!-- Conditional First-Class Dimensions (shmorch-core.md § First-Class Dimensions) that
+     don't apply get recorded explicitly here — never left silent/absent. E.g.:
+     Web Spec Compliance: N/A — no web-facing component (decided YYYY-MM-DD)
+     Analytics: N/A — internal tool, no user-facing product (decided YYYY-MM-DD)
+     Applicable dimensions don't need an entry here — their own scaffolded doc is the record. -->
+
 ## Preferences
 - Code style: <!-- -->
 - Test framework: <!-- -->

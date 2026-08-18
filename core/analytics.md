@@ -28,7 +28,7 @@ Default: no PII, no persistent cross-session identifiers, aggregated by default.
 
 ## Init Questionnaire Trigger
 
-"Is this a user-facing product?" → yes → scaffold `docs/product/analytics.md` with core questions, event model stub, privacy posture, and stack decision.
+"Is this a user-facing product?" → yes → scaffold `docs/product/analytics.md` with core questions, event model stub, privacy posture, and stack decision. → no → don't scaffold; record it explicitly in `docs/project/context.md`'s Dimension Applicability section instead of leaving it silent.
 
 ## Template
 
@@ -40,4 +40,4 @@ Analytics and Observability are complementary but separate: share no tooling; an
 
 Analytics and Progressive Delivery intersect at experiment toggles: A/B tests and % rollouts are analytics instruments. The experiment toggle owns the split; analytics owns the measurement. Define the metric and success condition before shipping the experiment toggle — otherwise codification has no trigger.
 
-Analytics and SEO/GEO interact at the discovery layer: organic traffic attribution reveals whether SEO/GEO investment is working.
+Analytics and Web Spec Compliance interact at the discovery layer: organic traffic attribution reveals whether SEO/Agent-Readiness investment is working.

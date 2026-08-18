@@ -45,3 +45,5 @@
 [2026-08-17 16:41:14] PHASE | self-improve: skipped — ran-recently-no-new-sessions
 [2026-08-17 16:47:53] PHASE | inbox triage: 3 items graduated to pre-planning.md, inbox emptied
 [2026-08-18 08:35:50] PHASE | check-inbox: 2 acted, 0 deferred, 0 already-covered
+[2026-08-18 09:36:09] SKILL | core triage-trim: shmorch-core.md Identity trimmed to pointers; seo_geo.md replaced by web_spec_compliance.md (specification.website MCP, user-scope); VERSION 2.0.0
+[2026-08-18 10:16:29] SKILL | web_spec_compliance.md: surface/audience tiers, stage ladder, GEO/AEO vs Agent Readiness terminology fix, explicit no-web-component annotation
