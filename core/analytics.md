@@ -40,4 +40,4 @@ Analytics and Observability are complementary but separate: share no tooling; an
 
 Analytics and Progressive Delivery intersect at experiment toggles: A/B tests and % rollouts are analytics instruments. The experiment toggle owns the split; analytics owns the measurement. Define the metric and success condition before shipping the experiment toggle — otherwise codification has no trigger.
 
-Analytics and SEO/GEO interact at the discovery layer: organic traffic attribution reveals whether SEO/GEO investment is working.
+Analytics and Web Spec Compliance interact at the discovery layer: organic traffic attribution reveals whether SEO/Agent-Readiness investment is working.
