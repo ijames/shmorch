@@ -1,7 +1,7 @@
 # Learning index
 
 Concepts the developer didn't have prior context for, logged as they surface.
+No project-specific entries yet — general-purpose knowledge lives in the global
+catalog: `~/.shmorch/learning/index.md`.
 
 ↑ parent: [reference/](../index.md)
-
-- [Multi-agent role composition vs. single-agent role-switching](multi-agent-role-composition.md) — separate-context agents beat one agent role-switching in-context, because self-critique doesn't anchor.

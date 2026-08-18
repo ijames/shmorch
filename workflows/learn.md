@@ -24,6 +24,11 @@ Location IS the scope — no redundant `scope:` field. General-purpose knowledge
 
 1. Ask, if not obvious from what the developer said: general-purpose (global) or specific
    to this project? Default to global — most captured concepts are.
+   **Bulk/backfill migrations (multiple files, multiple repos) are not exempt from this
+   question** — classify scope per file and confirm with the developer before writing
+   anything, even under time or parallelism pressure. A prior narrowing of scope for one
+   part of a request (e.g. the command's own automatic behavior) never silently overrides
+   the destination for a separately-requested action.
 2. Write `<slug>.md` (kebab-case title) to the right location with the frontmatter above,
    body: what it is, why it exists, where it came up.
 3. Global captures only — append a one-line entry to `~/.shmorch/learning/index.md`
