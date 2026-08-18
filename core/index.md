@@ -14,7 +14,7 @@ Doctrine files loaded on demand by `shmorch-core.md`, workflows, and roles. Thes
 | `ux.md` | UX Philosophy — all components dynamic, animation as cognitive load management |
 | `override.md` | Workflow/role override pattern (extend vs supersede), graduation rule, fat-copy anti-pattern |
 | `observability.md` | Logs, metrics, traces — stage expectations, build track rule |
-| `web_spec_compliance.md` | Web spec compliance — SEO, GEO/agent-readiness, accessibility, security, performance, privacy, resilience, i18n; audited live via the `specification.website` MCP |
+| `web_spec_compliance.md` | Web spec compliance — SEO, Agent Readiness, GEO/AEO, accessibility, security, performance, privacy, resilience, i18n; per-surface/audience scoping, stage ladder; audited live via the `specification.website` MCP |
 | `analytics.md` | User behavior analytics — event model, privacy posture, funnel coverage |
 | `progressive_delivery.md` | Deploy ≠ Release — toggle taxonomy, flag lifecycle, codify phase |
 | `deployment.md` | Deployment manifest sync — dev env ≠ bundle, cross-platform wheel constraints |

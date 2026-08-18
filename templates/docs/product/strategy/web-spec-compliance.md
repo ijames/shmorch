@@ -4,25 +4,44 @@ updated: YYYY-MM-DD
 summary: <one line — what this file currently says>
 ---
 
-# Web Spec Compliance Strategy
+# Web Spec Compliance Strategy — <surface name>
 
 ↑ [strategy/](index.md)
 
-> Fill this in at intent stage for any public-facing web product. These requirements drive
-> URL structure, rendering strategy, and content shape — plan before building, not after.
+> One of these per distinct web-facing surface (public site, public app, internal/admin
+> panel) — see `core/web_spec_compliance.md` § Surfaces and Audience Tiers. A project with
+> a single surface (or one multitenant surface, single audience) keeps this filename as-is;
+> additional surfaces get `web-spec-compliance-<surface-slug>.md` siblings. A project with
+> **no** web-facing surface at all doesn't scaffold this file — the decision is recorded
+> instead in `docs/project/context.md`'s Dimension Applicability section.
 >
-> **SEO** = ranked by traditional search (Google, Bing). **GEO** (Agent Readiness) = cited
-> by AI-powered search and discoverable by agents (ChatGPT, Perplexity, Google AI
-> Overviews, Claude). SEO gets you ranked; GEO gets you cited.
+> **SEO** = ranked by traditional search (Google, Bing). **GEO** (Generative Engine
+> Optimization) / **AEO** (Answer Engine Optimization) = cited by AI-powered search
+> (ChatGPT, Perplexity, Google AI Overviews, Claude) — both terms are in real industry use
+> for the same practice. Distinct from **Agent Readiness**, the technical substrate
+> (llms.txt, MCP/A2A discovery) GEO/AEO strategy builds on — see
+> `core/web_spec_compliance.md` § Terminology.
 >
-> Technical compliance (markup, headers, protocol-level SEO/GEO/accessibility/security/
-> performance/privacy/resilience/i18n) is audited live against `specification.website` via
-> its MCP, not hand-tracked here — see `core/web_spec_compliance.md`. Only the
-> product-specific strategy — content and positioning, not markup — lives in this file.
+> Technical compliance (markup, headers, protocol-level SEO/Agent-Readiness/accessibility/
+> security/performance/privacy/resilience/i18n) is audited live against
+> `specification.website` via its MCP, not hand-tracked here — see
+> `core/web_spec_compliance.md`. Only the product-specific strategy — content and
+> positioning, not markup — lives in this file.
+
+## Surface & Audience
+
+- **Surface:** (e.g. "public marketing site", "customer-facing app", "internal admin panel")
+- **Audience:** Public / Internal (authenticated-only) / Mixed-multitenant (single audience)
+- **Applicable categories:** (default to the full 10 for Public; for Internal, SEO and Agent
+  Readiness are usually N/A — see the table in `core/web_spec_compliance.md`)
 
 ---
 
 ## Target Queries
+
+Public surfaces only — an internal/authenticated-only surface isn't meant to be found via
+search or cited by AI, so this section is N/A there (leave it noting that instead of
+filling it in).
 
 What are users and AI assistants searching for that should lead to this product?
 

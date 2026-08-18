@@ -115,7 +115,7 @@ Raise these at intent stage for every applicable project. Templates scaffolded b
 | Dimension | Applies to | Detail |
 |---|---|---|
 | Observability | All projects | `$SHMORCH_HOME/core/observability.md` |
-| Web Spec Compliance (SEO, GEO/agent-readiness, accessibility, security, performance, privacy, resilience, i18n) | Web-facing projects | `$SHMORCH_HOME/core/web_spec_compliance.md` |
+| Web Spec Compliance (SEO, Agent Readiness, GEO/AEO, accessibility, security, performance, privacy, resilience, i18n) | Web-facing projects — scoped per surface/audience | `$SHMORCH_HOME/core/web_spec_compliance.md` |
 | Analytics | User-facing products | `$SHMORCH_HOME/core/analytics.md` |
 | Progressive Delivery | Projects with a deploy pipeline | `$SHMORCH_HOME/core/progressive_delivery.md` |
 

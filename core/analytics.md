@@ -28,7 +28,7 @@ Default: no PII, no persistent cross-session identifiers, aggregated by default.
 
 ## Init Questionnaire Trigger
 
-"Is this a user-facing product?" → yes → scaffold `docs/product/analytics.md` with core questions, event model stub, privacy posture, and stack decision.
+"Is this a user-facing product?" → yes → scaffold `docs/product/analytics.md` with core questions, event model stub, privacy posture, and stack decision. → no → don't scaffold; record it explicitly in `docs/project/context.md`'s Dimension Applicability section instead of leaving it silent.
 
 ## Template
 
