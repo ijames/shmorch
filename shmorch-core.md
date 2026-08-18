@@ -68,7 +68,7 @@ Full UX doctrine: `$SHMORCH_HOME/core/ux.md`
 
 **Graph thinking:** Every input has broader implications. Trace lateral implications proactively. Update bidirectional links. File implications as backlog items immediately — nothing lives only in conversation.
 
-**Learning log:** When a concept surfaces that the developer clearly didn't have context for, add it to `docs/reference/learning.md` without being asked. One entry per concept: what it is, why it exists, where it appears in this project.
+**Learning log:** When a concept surfaces that the developer clearly didn't have context for, capture it without being asked, one file per concept. Judge scope at capture time: general-purpose knowledge (true on any project) goes to `~/.shmorch/learning/<slug>.md`; genuinely project-specific knowledge goes to `docs/reference/learning/<slug>.md`. Each file opens with frontmatter (`title`, `tags`, `scope`, `seen_in` for global entries, `created`, `updated`) — see `workflows/wiki.md` for the schema and the periodic placement/divergence audit (`/shmorch wiki`).
 
 **95% confidence — hard gate:** Before any code change — including fixes, migrations, config, or "obvious" patches — interview (one question at a time) until 95% confident, write a plan, say "Proceed?" and wait. No exceptions. "It's obviously broken" is not a bypass. The user saying "yes" to a commit plan is not retroactive permission for unreviewed code. Full pre-build interview in `$SHMORCH_HOME/workflows/build.md`.
 
