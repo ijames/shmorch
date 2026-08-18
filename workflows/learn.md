@@ -10,7 +10,7 @@ size: 55 lines
 ```yaml
 ---
 title: <Concept Name>
-domain: <one of: infra | frontend | data | testing | security | product-growth | tooling | agents | docs | process>
+domain: <one of: infra | frontend | backend | data | testing | security | product-growth | tooling | agents | docs | process>
 stack: [<specific tool/tech proper nouns, e.g. git, vercel, react — empty [] if none>]
 kind: <one of: pattern | gotcha | terminology | tool-usage | decision>
 created: YYYY-MM-DD
@@ -18,7 +18,9 @@ created: YYYY-MM-DD
 ```
 
 Location IS the scope — no redundant `scope:` field. General-purpose knowledge:
-`~/.shmorch/learning/<slug>.md`. Genuinely project-specific: `docs/reference/learning/<slug>.md`.
+`~/.shmorch/learning/<domain>/<slug>.md` (domain subfolder matches the frontmatter's
+`domain` value). Genuinely project-specific: `docs/reference/learning/<slug>.md` (flat,
+no subfolders — too small a corpus per project to need them).
 
 Faceted, not a flat `tags:` list — `domain`/`stack`/`kind` are independent dimensions so
 entries can be filtered by any combination (e.g. `domain:infra AND kind:gotcha`) without a
@@ -38,25 +40,28 @@ free-form.
    part of a request (e.g. the command's own automatic behavior) never silently overrides
    the destination for a separately-requested action.
 2. Write `<slug>.md` (kebab-case title) to the right location with the frontmatter above,
-   body: what it is, why it exists, where it came up.
+   body: what it is, why it exists, where it came up. Global: create `<domain>/` under
+   `~/.shmorch/learning/` if it doesn't exist yet.
 3. Global captures only — append a one-line entry to `~/.shmorch/learning/index.md`
-   (create it, one line per file, if it doesn't exist yet):
+   (create it, with a `## Facets` section documenting the schema above, if it doesn't
+   exist yet):
    ```
-   - [<title>](<slug>.md) — <one-line summary>
+   - [<title>](<domain>/<slug>.md) — `<domain>` / `<kind>`
    ```
 
 ---
 
 ## No args, in `$SHMORCH_HOME` — audit
 
-For each learning file (`~/.shmorch/learning/*.md`, `docs/reference/learning/*.md` or
+For each learning file (`~/.shmorch/learning/**/*.md`, `docs/reference/learning/*.md` or
 legacy `docs/reference/learning.md`), read only what's needed to judge — frontmatter plus
 a skim, not a full careful read of every entry:
 
 - **Size:** file (or, for a multi-entry legacy file, any single entry) over ~150 lines —
   flag as a split candidate.
-- **Shape:** frontmatter present and matches the schema above; global `index.md` has a
-  line for every global file (no orphans).
+- **Shape:** frontmatter present and matches the schema above; file sits under the
+  subfolder matching its own `domain` value; global `index.md` has a line for every
+  global file (no orphans).
 - **Meaning:** titles/tags that look like near-duplicates of each other — surface for the
   developer to merge or distinguish, don't merge automatically.
 
