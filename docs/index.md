@@ -28,7 +28,7 @@ rather than a dedicated product section. ⚠️ _TBD_
 How it's built — architecture and internal design decisions for shmorch itself.
 
 ### Reference
-No `docs/reference/index.md` yet (single file so far): [learning.md](reference/learning.md) — concepts logged as the developer encounters them, one entry per concept.
+[learning/](reference/learning/index.md) — concepts logged as the developer encounters them, one file per concept.
 
 ---
 
@@ -63,4 +63,4 @@ project has never had the full `init`/`auto-update` scaffold applied to itself.
 
 ---
 
-↓ children: [technology/](technology/index.md), [reference/learning.md](reference/learning.md), [project/](project/index.md), [inbox/](inbox/index.md)
+↓ children: [technology/](technology/index.md), [reference/learning/](reference/learning/index.md), [project/](project/index.md), [inbox/](inbox/index.md)

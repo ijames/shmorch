@@ -1,12 +1,10 @@
 ---
-status: Active
-updated: 2026-08-04
-summary: Concepts the developer didn't have prior context for, logged as they surface — what it is, why it exists, where it shows up in this project.
+title: Multi-agent role composition vs. single-agent role-switching
+tags: [agents, architecture]
+created: 2026-08-04
 ---
 
-# Learning Log
-
-## Multi-agent role composition vs. single-agent role-switching
+# Multi-agent role composition vs. single-agent role-switching
 
 **What it is:** Two different strategies for giving an agentic system more than one
 perspective on a task. *Single-agent, multi-tool*: one agent, one continuous context,
