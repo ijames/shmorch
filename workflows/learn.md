@@ -17,10 +17,15 @@ created: YYYY-MM-DD
 ---
 ```
 
-Location IS the scope — no redundant `scope:` field. General-purpose knowledge:
-`~/.shmorch/learning/<domain>/<slug>.md` (domain subfolder matches the frontmatter's
-`domain` value). Genuinely project-specific: `docs/reference/learning/<slug>.md` (flat,
-no subfolders — too small a corpus per project to need them).
+Genuinely project-specific knowledge: `docs/reference/learning/<slug>.md` only (flat, no
+subfolders — too small a corpus per project to need them). General-purpose knowledge (true
+on any project) is captured in *both* places:
+- `docs/reference/learning/<slug>.md` — as it actually came up here, project context intact
+- `~/.shmorch/learning/<domain>/<slug>.md` — a polished, project-agnostic rewrite for the
+  global knowledge graph (domain subfolder matches the frontmatter's `domain` value)
+
+The two copies are independent, not a sync pair — the local one can stay specific to this
+repo's story, the global one doesn't reference back to it. No backreference field needed.
 
 Faceted, not a flat `tags:` list — `domain`/`stack`/`kind` are independent dimensions so
 entries can be filtered by any combination (e.g. `domain:infra AND kind:gotcha`) without a
@@ -32,17 +37,22 @@ free-form.
 
 ## With args — capture
 
-1. Ask, if not obvious from what the developer said: general-purpose (global) or specific
-   to this project? Default to global — most captured concepts are.
+1. Ask, if not obvious from what the developer said: general-purpose (local + global) or
+   specific to this project (local only)? Default to general-purpose — most captured
+   concepts are.
    **Bulk/backfill migrations (multiple files, multiple repos) are not exempt from this
    question** — classify scope per file and confirm with the developer before writing
    anything, even under time or parallelism pressure. A prior narrowing of scope for one
    part of a request (e.g. the command's own automatic behavior) never silently overrides
    the destination for a separately-requested action.
-2. Write `<slug>.md` (kebab-case title) to the right location with the frontmatter above,
-   body: what it is, why it exists, where it came up. Global: create `<domain>/` under
-   `~/.shmorch/learning/` if it doesn't exist yet.
-3. Global captures only — append a one-line entry to `~/.shmorch/learning/index.md`
+2. Write `docs/reference/learning/<slug>.md` (kebab-case title) with the frontmatter
+   above, body: what it is, why it exists, where it came up here.
+3. General-purpose only — also write a polished, project-agnostic version of the same
+   concept to `~/.shmorch/learning/<domain>/<slug>.md` (create `<domain>/` if it doesn't
+   exist yet). Strip the project-specific "where it came up" detail; keep the concept
+   itself. This copy is independent of the local one — no backreference field, no
+   requirement to keep them in sync after the fact.
+4. Global captures only — append a one-line entry to `~/.shmorch/learning/index.md`
    (create it, with a `## Facets` section documenting the schema above, if it doesn't
    exist yet):
    ```

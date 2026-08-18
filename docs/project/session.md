@@ -388,3 +388,4 @@ awaiting merge decision. `VERSION` = `1.0.4`.
 **Next up — plans:**
 - Squash-merge policy: document in decisions.md or CONTRIBUTING guide — branches should be squash-merged to avoid noisy history
 - Cross-functional UX: shmorch needs to understand participants (dev, stakeholder, reviewer) and surface relevant context per role — candidate for a new backlog item
+check-inbox 2026-08-18: 2 acted, 0 deferred.
