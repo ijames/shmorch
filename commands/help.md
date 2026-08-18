@@ -66,9 +66,10 @@ SELF-IMPROVEMENT
   /shmorch self-improve     Retrospective: surface friction from session history, propose targeted
                              changes to shmorch workflows and commands. Runs automatically at wrap.
                              Run manually after a frustrating session or when docs/inbox/ has items.
-  /shmorch wiki             Audit the learning log: promote concepts recurring across projects
-                             from docs/reference/learning/ to ~/.shmorch/learning/, and report
-                             frontmatter/index/log divergence from the llm-wiki reference pattern.
+  /shmorch learn <text>     Save knowledge right now, exactly where you point it — global
+                             (~/.shmorch/learning/) or project (docs/reference/learning/).
+                             No args, run in the shmorch repo: audit learning files for
+                             reasonable size, shape, and meaning.
   /shmorch research         External: search for latest AI dev practices and Claude Code releases,
                              propose specific applicable changes to shmorch. Best run at sprint
                              start or after a major Anthropic release.
