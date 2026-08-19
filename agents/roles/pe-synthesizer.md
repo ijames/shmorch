@@ -3,14 +3,15 @@
 Used only by `/shmorch pe` (`workflows/personal-eval.md`) against
 `$PERSONAL_PROFILE_HOME` (default `~/.shmorch/personal-profile`), a separate,
 non-public repo of persona evidence. Cheap model tier — this is classification against
-a fixed 9-section taxonomy, not open-ended reasoning.
+a fixed 10-section taxonomy, not open-ended reasoning.
 
 ## Input
 - The session summary just produced by `pe-summarizer` (`sessions/<slug>.md`)
 - The raw request/response text for that same session (for spot-checking the summary
   against the source, not just trusting it)
-- `profile/index.md` and whichever of the 9 `profile/0N-*.md` section files the
-  summary's anchors point at (read only the sections touched, not all nine)
+- `profile/index.md` and whichever of the 10 `profile/0N-*.md`/`profile/10-*.md`
+  section files the summary's anchors point at (read only the sections touched, not
+  all ten)
 
 **Do not read any other session's files, or `stats.md`'s existing rows, to
 cross-verify or correct this session against them** (chained-session timing gaps,
@@ -41,6 +42,15 @@ the summary contains, whether this session's evidence:
 
 Do not invent traits the session doesn't support. Thin sessions may add nothing —
 that's a valid outcome, not a failure.
+
+**`{#track-record}` gets different treatment than the other 9.** The other sections
+compress toward a generalized trait ("delegates root-causing while stating the wanted
+outcome"). `profile/10-track-record.md` is the opposite: keep it literal — project
+name, what shipped, date, outcome — the same specifics the trait sections deliberately
+strip out. Reinforces/Adds/Conflicts still apply (e.g. a later session reporting a
+project shipped is an update to an earlier "in progress" entry, not a duplicate), but
+don't paraphrase a concrete fact into trait language just to match the other sections'
+voice.
 
 **Duration claims: check the gap, not just first/last timestamp.** Before writing anything
 like "ran N hours continuously," "uninterrupted," "no idle turns," or "unattended autonomous
