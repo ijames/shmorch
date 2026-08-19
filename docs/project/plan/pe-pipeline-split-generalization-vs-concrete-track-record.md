@@ -27,4 +27,47 @@ Raised 2026-08-18.
   — same underlying complaint (verb/adjective-heavy output, thin on measurable
   specifics), applied to project observability instead of the personal-eval pipeline.
 
+**Status:** v1 shipped via PR #120 — `pe-summarizer`'s Concrete section always anchors
+`{#track-record}`; `pe-synthesizer` gained `profile/10-track-record.md` as a 10th
+section, populated with the same Reinforces/Adds/Conflicts discipline but kept literal
+instead of trait-compressed; `pe-analyzer` gained a non-interpretive Track Record output
+section. Bootstrapped in the (separate, non-public) `$PERSONAL_PROFILE_HOME` repo.
+
+**Open follow-ups, deliberately not built yet — the file is empty, build these once it
+shows real strain, not preemptively (researched 2026-08-18):**
+
+- **Unbounded growth, same wall `session.md` already hit.** The 9 trait sections
+  converge (new evidence mostly reinforces existing bullets); track-record entries never
+  converge — every session with a deliverable adds a new one. At real scale this needs
+  the same split `core/documentation.md` § session.md growth already prescribes:
+  `profile/track-record/<project>.md` or `profile/track-record/YYYY.md` + an index,
+  instead of one ever-growing file read in full every analyze pass.
+- **Entity resolution isn't handled.** Same project gets named inconsistently across
+  sessions (confirmed live: "DarkBadge" vs. "darkbadge" in `03-work-activities-process.md`
+  bullets). For prose this doesn't matter; for a ledger meant to be grouped by project,
+  it silently fragments one project's history across multiple headings. Needs a canonical
+  project-name registry `pe-synthesizer` checks before creating a new grouping — the
+  single biggest risk to the ledger staying scannable rather than just less lossy.
+- **Status transitions aren't a case the Reinforces/Adds/Conflicts model covers.** That
+  taxonomy is built for trait evidence. A concrete deliverable evolving idea → building →
+  shipped → issue-found is none of the three cleanly: not a Conflict (nothing
+  contradicts), not a clean Add (duplicates the project), and "Reinforces" doesn't fit
+  since the fact itself changed, not just its evidence. Needs an explicit fourth verb —
+  "Updates" — keyed on project+feature: append a dated status-change line to the existing
+  entry rather than footnoting or duplicating.
+- **`pe-analyzer`'s "read it whole" instruction won't survive the split in point 1.**
+  Once track-record needs per-project/per-year files, the analyzer needs the same
+  index-then-drill escape hatch it already has for `sessions/*.md` ("do not read all of
+  these by default... drill into a specific one to verify a claim") — read the ledger's
+  index/tallies, open a specific project file only when writing that project's ledger
+  line.
+- **No cross-linking between the two tracks yet.** A trait bullet citing a project and
+  a track-record entry for the same project don't reference each other. Low cost when
+  added: when `pe-synthesizer` touches both a trait section and track-record in the same
+  pass, add a one-line cross-reference between them.
+- Confirmed *not* a problem: the 9 trait sections already carry rich in-line specifics
+  (project names, concrete incidents) in their example bullets — track-record is additive
+  to that, not a replacement, and those bullets shouldn't be pruned toward pure
+  abstraction just because track-record now exists.
+
 ---
