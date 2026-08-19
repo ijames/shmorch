@@ -5,7 +5,7 @@ summary: Branch A — every loadable .md gets YAML frontmatter (purpose, load-wh
 ---
 
 ↑ [index.md](index.md)
-**In this section:** [Spec — subagent delegation](spec.md) · [Findings](findings.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Approach C — core doc JIT breakup](approach-c-core-doc-breakup.md) · [Comparison](comparison.md)
+**In this section:** [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Approach C — core/workflow doc JIT breakup](approach-c-core-doc-breakup.md) · [Comparison — which branch first](comparison.md) · [Findings — workflow subagent delegation](findings.md) · [Spec — workflow subagent delegation](spec.md)
 
 # Approach A — frontmatter-gated loading
 

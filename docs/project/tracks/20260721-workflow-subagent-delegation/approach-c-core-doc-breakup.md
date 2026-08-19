@@ -5,7 +5,7 @@ summary: Branch C — absorbs tracks/20260601-core-breakup/ into this umbrella. 
 ---
 
 ↑ [index.md](index.md)
-**In this section:** [Spec — subagent delegation](spec.md) · [Findings](findings.md) · [Approach A — frontmatter gating](approach-a-frontmatter-gating.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Comparison](comparison.md)
+**In this section:** [Approach A — frontmatter-gated loading](approach-a-frontmatter-gating.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Comparison — which branch first](comparison.md) · [Findings — workflow subagent delegation](findings.md) · [Spec — workflow subagent delegation](spec.md)
 
 # Approach C — core/workflow doc JIT breakup
 

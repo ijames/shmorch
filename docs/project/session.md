@@ -109,6 +109,7 @@ rule to `core/git-discipline.md` requiring `docs/project/session.md` be current 
 final push/merge of a branch, referenced from `tools/merge-chain.sh`'s header. `VERSION`
 bumped `1.3.0` → `1.3.1` (PATCH).
 
+
 **In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)
 
 # Session Log

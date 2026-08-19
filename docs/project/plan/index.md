@@ -20,6 +20,7 @@ summary: Workflow context-budget umbrella (tracks/20260721-workflow-subagent-del
 
 - **Workflow context-budget umbrella** (last touched 2026-08-11) — [`tracks/20260721-workflow-subagent-delegation`](../tracks/20260721-workflow-subagent-delegation/index.md). Approach A (frontmatter-gated loading) shipped, PR #106. Approach B (subagent delegation) and Approach C (core/workflow doc JIT breakup) remain open, no work started on either yet.
 - **Messaging-provider design** (last touched 2026-07-30) — [`tracks/20260721-messaging-provider`](../tracks/20260721-messaging-provider/index.md), check there for status.
+- **pe pipeline: split generalization from concrete track record** (started 2026-08-18) — [`plan/pe-pipeline-split-generalization-vs-concrete-track-record.md`](pe-pipeline-split-generalization-vs-concrete-track-record.md). In progress.
 - Self-improve continues as its own automated process, logging under its own commits/PRs — not tracked as a line item here.
 
 ---

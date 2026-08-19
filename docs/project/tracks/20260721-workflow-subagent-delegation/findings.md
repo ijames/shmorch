@@ -5,7 +5,7 @@ summary: Simulation against this repo's plan.md/session.md (69% reduction free v
 ---
 
 ↑ [index.md](index.md)
-**In this section:** [Spec](spec.md) · [Comparison — A/B/C](comparison.md) · [Approach A — frontmatter gating](approach-a-frontmatter-gating.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Approach C — core doc JIT breakup](approach-c-core-doc-breakup.md)
+**In this section:** [Approach A — frontmatter-gated loading](approach-a-frontmatter-gating.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Approach C — core/workflow doc JIT breakup](approach-c-core-doc-breakup.md) · [Comparison — which branch first](comparison.md) · [Spec — workflow subagent delegation](spec.md)
 
 The "bounded reads + index-only `plan.md` bullets" measurement below (69% reduction, no
 downside) is the direct evidence behind [Approach A](approach-a-frontmatter-gating.md) —

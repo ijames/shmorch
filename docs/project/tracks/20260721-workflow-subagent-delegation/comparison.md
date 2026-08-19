@@ -5,7 +5,7 @@ summary: Decision doc — three branches (A frontmatter gating, B subagent deleg
 ---
 
 ↑ [index.md](index.md)
-**In this section:** [Spec — subagent delegation](spec.md) · [Findings](findings.md) · [Approach A — frontmatter gating](approach-a-frontmatter-gating.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Approach C — core doc JIT breakup](approach-c-core-doc-breakup.md)
+**In this section:** [Approach A — frontmatter-gated loading](approach-a-frontmatter-gating.md) · [Approach B — subagent delegation](approach-b-subagent-delegation.md) · [Approach C — core/workflow doc JIT breakup](approach-c-core-doc-breakup.md) · [Findings — workflow subagent delegation](findings.md) · [Spec — workflow subagent delegation](spec.md)
 
 # Comparison — which branch first
 
