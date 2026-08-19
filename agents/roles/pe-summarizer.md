@@ -56,9 +56,14 @@ Duration: <first timestamp to last timestamp, if present>
 ```
 
 Tag each fact-bearing paragraph you expect the synthesizer to cite with a heading
-anchor (`## <Section Name> {#<anchor>}`) matching one of the 9 taxonomy sections it
+anchor (`## <Section Name> {#<anchor>}`) matching one of the 10 taxonomy sections it
 actually touches — the synthesizer links profile bullets to the specific anchor, not
-just the file.
+just the file. The **Concrete** section above is always anchored `{#track-record}`
+regardless of what else the session touches — it's what feeds `profile/10-track-record.md`,
+and it's the one place proper nouns and specifics (project names, what shipped, dates,
+outcomes) survive verbatim rather than getting folded into generalized trait language.
+Keep it literal: "shipped the Stripe webhook retry fix on darkbadge" not "resolved a
+payment-processing issue."
 
 **Never touch `processed.log`.** Marking a session processed is the synthesizer's
 job, done only after evidence is actually folded into the profile — the summary

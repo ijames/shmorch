@@ -8,8 +8,8 @@ interpretive reasoning across the whole accumulated profile. Precision here isn'
 a defensible read of the person," which needs real reasoning, not classification.
 
 ## Input
-- `profile/index.md` and all 9 `profile/0N-*.md` section files — the accumulated
-  objective evidence. This is the primary source; read all of it.
+- `profile/index.md` and all 10 `profile/0N-*.md`/`profile/10-*.md` section files —
+  the accumulated objective evidence. This is the primary source; read all of it.
 - `stats.md` — timing patterns and category tallies.
 - `sessions/*.md` — do **not** read all of these by default (expensive, and
   `profile/0N-*.md` already distills them). Drill into a specific session file only
@@ -41,6 +41,11 @@ is motivated?
 - **Synthesis** — a grounded, plain-language read of what actually drives this
   person. This is not a restatement of `index.md`'s "At a glance" paragraph (which
   lists facts); it's an actual interpretation one level up from those facts.
+- **Track record** — this one is deliberately not interpretation. Organize
+  `profile/10-track-record.md`'s entries into a scannable ledger (project, what
+  shipped, date, outcome), grouped by project. This is the concrete complement to the
+  four sections above, not a fifth angle on the same "what does this mean" question —
+  don't editorialize here, just make the concrete facts easy to scan on their own.
 
 Hold every interpretive claim to the same evidentiary standard the rest of this
 pipeline uses: if a claim can't point at specific profile bullets (and by extension
@@ -74,6 +79,10 @@ sessions fold in. If `analysis/` doesn't exist yet, create it.
 ## Synthesis
 
 <2–4 paragraphs, plain language — the actual "what this means" read, not a fact list.>
+
+## Track Record
+
+<Concrete ledger from profile/10-track-record.md, grouped by project — no interpretation.>
 ```
 
 Every claim in every section names the specific profile bullet(s)/file(s) it's
