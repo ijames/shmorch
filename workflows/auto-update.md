@@ -18,7 +18,7 @@ Bring this project's shmorch installation up to date with the current skill vers
 - `.shmorch/VERSION` — project's current version
 - `$SHMORCH_HOME/VERSION` — latest skill version
 - `$SHMORCH_HOME/templates/.shmorch/` — skill template files
-- `$SHMORCH_HOME/core/documentation.md` § Architecture Changelog — rule changes that may need a docs-content backfill (Step 1.9)
+- `$SHMORCH_HOME/core/changelog.md` — Architecture Changelog: rule changes that may need a docs-content backfill (Step 1.9)
 
 ## Roles
 - None — runs inline
@@ -66,9 +66,9 @@ format; the next sync onward, the project is on semver too and this branch never
 
 `core/documentation.md` doctrine isn't mirrored into projects — it's read live from
 `$SHMORCH_HOME`, so rule text is always current automatically. What can't self-update is
-docs *content* written under an older rule. Its `## Architecture Changelog` table is the
-list of rule changes that invalidate existing content; check it against this project's
-pre-update `.shmorch/VERSION`, captured before Step 6 overwrites it:
+docs *content* written under an older rule. `core/changelog.md`'s Architecture Changelog
+table is the list of rule changes that invalidate existing content; check it against this
+project's pre-update `.shmorch/VERSION`, captured before Step 6 overwrites it:
 
 ```bash
 PROJECT_VERSION_PRE="$PROJECT_VERSION"   # full value, before Step 6 overwrites VERSION
@@ -83,11 +83,11 @@ cutover. Compare against every changelog row's legacy `Date` value:
 PROJECT_DATE="${PROJECT_VERSION_PRE%%.*}"   # YYYYMMDD portion
 ```
 
-For every row with `Compat: backfill` and a `Date` **after** `$PROJECT_DATE`: this project
-predates that rule. (Every row currently in the table is legacy-dated, so this is the only
-path that applies until the first `Since: <semver>` row is added.)
+For every row with `Compat: backfill`, no `Version`, and a `Date` **after** `$PROJECT_DATE`:
+this project predates that rule. (Rows without a `Version` predate the semver cutover, so
+this is the only path that applies until the first versioned row exists to compare against.)
 
-**Semver format** — compare against every changelog row's `Since` value using numeric
+**Semver format** — compare against every changelog row's `Version` value using numeric
 MAJOR.MINOR.PATCH ordering (split each on `.`, compare left to right as integers, no new
 tooling needed):
 
@@ -100,8 +100,8 @@ ver_lt() {  # ver_lt A B → true if A < B
 }
 ```
 
-For every row with `Compat: backfill` and a `Since` value where
-`ver_lt "$PROJECT_VERSION_PRE" "<row's Since>"` is true: this project predates that rule.
+For every row with `Compat: backfill` and a `Version` value where
+`ver_lt "$PROJECT_VERSION_PRE" "<row's Version>"` is true: this project predates that rule.
 
 For each such row, ask (one at a time, do not batch):
 > "Docs architecture changed since your last sync: '<rule>' (<date>). Existing docs written

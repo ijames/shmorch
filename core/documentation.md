@@ -1,6 +1,6 @@
 ---
 loads_when: starting or restructuring any docs/ work — Skeleton Principle, Two-Tier Knowledge System, graduation rules
-size: 180 lines
+size: 155 lines
 ---
 
 # Documentation Doctrine
@@ -87,6 +87,8 @@ Track closing process:
 - **Section-based** (when growth instead comes from distinct sub-concerns living under one track, not a timeline): split by concern into named files under the track directory instead, same index-links-down pattern. Don't force date-based splitting onto content that isn't actually a sequence.
 This doesn't change the graduation model — a track's *knowledge* still only leaves `docs/project/tracks/` for `docs/<category>/` when the track closes (see Graduation rule above). This split keeps an *open, still-growing* track's own footprint from becoming a token liability while it's being read for orientation, nothing more.
 
+**session.md growth:** `docs/project/session.md` is an append-only running log, one dated entry per session — same shape as the two logs above, same trigger discipline. Once it exceeds roughly 200–300 lines (or a handful of dated entries beyond the current one), split every entry *older than* the current `## Latest Session` block into `docs/project/session/YYYYMMDD-<slug>.md`, each with a `↑ [../session.md](../session.md)` back-link header. Replace the archived sections in `session.md` with a `## History` index — one line per entry, newest first, linking down. Keep only the current `## Latest Session` block inline — `workflows/orient.md` only ever reads that block, so the split doesn't change orientation behavior, it just keeps the file small for any other read path.
+
 **External memory (e.g. `~/.claude/projects/...`):** User preferences and feedback belong there. Project state — plans, specs, architecture, decisions — belongs in `docs/project/` or `docs/`, version-controlled with the code.
 
 **Memory placement rule:** Universal Shmorch process guidance belongs in the skill — `shmorch-core.md` or the relevant workflow. Project memory is for project-specific signal only. If a feedback memory would apply equally to any Shmorch project, migrate it to the skill instead.
@@ -150,36 +152,5 @@ tree.
 
 ## Architecture Changelog
 
-This doctrine is not mirrored into projects (unlike `templates/.shmorch/`, which
-`auto-update.md` diffs and syncs file-by-file) — every project reads this file live from
-`$SHMORCH_HOME/core/documentation.md`, so the *rules* are always current automatically.
-What can't update itself is a project's *existing docs content* written under an older
-version of these rules. This changelog is how `auto-update.md` knows when that content
-needs a backfill pass, and how big a pass.
-
-**Only log an entry here when a rule changes what existing docs *should already contain*
-or *where they should already live* — not for wording or clarification edits.** Every entry
-gets a `Compat` tag:
-
-- `Compat: additive` — new option, doesn't invalidate anything already written. No backfill offered.
-- `Compat: backfill` — existing docs written before this date no longer conform. `auto-update.md` offers a scoped backfill for this entry specifically.
-
-`VERSION` is semantic (`MAJOR.MINOR.PATCH`) since `1.0.0` (2026-08-04); before that it was
-`YYYYMMDD.NN` — see `docs/project/tracks/20260804-semver-versioning/`. Rows below `1.0.0`
-carry the legacy `Date` they were added on; `auto-update.md` compares those against a
-project's pre-update `VERSION` date whenever that project itself predates `1.0.0`. Rows at
-`1.0.0` or later carry a `Since` semver value instead; `auto-update.md` compares those
-numerically (MAJOR, then MINOR, then PATCH) against a project's `VERSION` once that project
-is itself on semver.
-
-| Date / Since | Rule | Compat | Backfill scope |
-|---|---|---|---|
-| 2026-08-10 | Any index-shaped artifact an AI manages for human consumption (not just `docs/project/index.md`/`docs/product/index.md`) should carry a top-level summary plus a one-phrase-per-section preview — see § Progressive Disclosure | `additive` | No backfill offered — existing indexes remain valid; apply going forward and opportunistically when an index is next touched |
-| 2026-07-24 | Top-level `docs/` taxonomy replaced: `architecture/`, `development/`, `product/`, `reference/`, `state/`, `to_review/` → `product/`, `technology/` (architecture + development merged under it), `reference/` (Diataxis-scoped `instructions/` + `research/`), `project/` (was `state/`), `inbox/` (was `to_review/`). Decisions split into `product/decisions/` + `technology/decisions/` only (no unified log, no `project/decisions/`). See `tracks/20260724-docs-taxonomy-redesign` | `backfill` | Run `tools/backfill-docs-taxonomy.sh` for the mechanical `git mv`s, then a judgment pass on the files it reports (decisions/anti-decisions splits, dev notes, deployment content, and any other real-content file with no 1:1 new home) per `tracks/20260724-dev-docs-taxonomy-backfill` |
-| 2026-07-23 | Track `index.md` files whose Work log section exceeds ~200–300 lines (or spans many dated/versioned rounds) must split per § Track file growth — date/version-based into `docs/project/tracks/<name>/log/YYYYMMDD-<slug>.md`, or section-based when growth isn't a timeline | `backfill` | For each open track over the threshold, move each work-log entry into its own `log/` file, replace the Work log section in `index.md` with a one-line-per-entry index linking down. Do not touch Why/What changes/Open questions. |
-| 2026-07-21 | `docs/state/tracks/**/*.md` require the same front-matter block as `docs/state/*.md`, and closed tracks (`Status: Closed`) whose `→ destination` doc doesn't reference them back are graduation candidates (see `tracks/20260525-graph-first-docs`) | `backfill` | Run `bash $SHMORCH_HOME/tools/track-graph-audit.sh`. Add front-matter to every `MISSING_FRONTMATTER` file (derive from content, don't guess). For every `CLOSED_UNGRADUATED` line, read the track and its destination doc, confirm whether knowledge actually landed, and integrate what's missing — the script only finds candidates, it doesn't conclude. |
-| 2026-07-17 | `docs/state/*.md` (not `tracks/`, not `schedule/`) require the `status`/`updated`/`summary` front-matter block (see § Front-Matter Previews) | `backfill` | Add the block to any `docs/state/*.md` file that lacks one. Derive `status`/`summary` from the file's current content — don't guess, read it. |
-| 2026-07-22 | `docs/product/*.md` (not `index.md`) require the same `status`/`updated`/`summary` front-matter block as `docs/state/*.md` (see § Front-Matter Previews) | `backfill` | Add the block to any `docs/product/*.md` file (excluding `index.md`) that lacks one. Derive `status`/`summary` from the file's current content — don't guess, read it. |
-
-Add new rows here, newest first, whenever a change in this doctrine falls into the
-`backfill` category.
+Moved to `$SHMORCH_HOME/core/changelog.md` — a migration ledger `auto-update.md` reads
+mechanically, not doctrine. Log new `Compat: backfill` rows there, not here.

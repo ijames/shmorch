@@ -47,3 +47,7 @@
 [2026-08-18 08:35:50] PHASE | check-inbox: 2 acted, 0 deferred, 0 already-covered
 [2026-08-18 09:36:09] SKILL | core triage-trim: shmorch-core.md Identity trimmed to pointers; seo_geo.md replaced by web_spec_compliance.md (specification.website MCP, user-scope); VERSION 2.0.0
 [2026-08-18 10:16:29] SKILL | web_spec_compliance.md: surface/audience tiers, stage ladder, GEO/AEO vs Agent Readiness terminology fix, explicit no-web-component annotation
+[2026-08-18 12:56:43] PHASE | check-inbox: 1 acted, 0 deferred, 0 already-covered
+[2026-08-18 13:16:47] PHASE | core/documentation.md fix: correct VERSION bump (MAJOR not PATCH), split Architecture Changelog to core/changelog.md, fix row ordering
+[2026-08-18 14:09:22] PHASE | operations.md: split MAJOR/MINOR criteria for Compat: backfill entries by structural-vs-optional; downgrade session.md growth rule to 2.1.0 (MINOR)
+[2026-08-18 14:15:00] PHASE | changelog.md: split Date/Version into separate columns; auto-update.md Since -> Version rename to match

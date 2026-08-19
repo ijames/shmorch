@@ -69,10 +69,14 @@ Current version: see `.shmorch/VERSION`. To pull skill upgrades into this repo, 
 `commands/*.md`, `core/*.md`, `tools/*.sh`) must immediately bump both `.shmorch/VERSION`
 and `$SHMORCH_HOME/VERSION`:
 
-- **MAJOR** — a `Compat: backfill` Architecture Changelog entry (see
-  `core/documentation.md`), a template/scaffold structure change, or a change to the
-  versioning scheme itself.
-- **MINOR** — a new command, workflow, or role.
+- **MAJOR** — a `Compat: backfill` Architecture Changelog entry (see `core/changelog.md`)
+  that is itself a template/scaffold structure change (e.g. the `docs/` taxonomy
+  redesign) — existing projects are non-conforming in a structural way, not just
+  missing an optional pattern — or a change to the versioning scheme itself.
+- **MINOR** — a new command, workflow, or role; or a `Compat: backfill`/`additive`
+  Architecture Changelog entry that adds an optional pattern/capability without
+  restructuring anything already in place (existing projects still work as-is, they
+  just don't yet have the new pattern applied).
 - **PATCH** — any other skill-file tweak or fix.
 
 If a change qualifies for more than one tier, use the highest. `docs/` changes do NOT bump
