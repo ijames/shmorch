@@ -126,16 +126,19 @@ Task(
     - Why this pattern indicates a gap
 
     ## Output
-    Write proposals to: ~/.claude/self-improve-<YYYYMMDD>-<project-slug>.md
+    Write proposals to: $SHMORCH_HOME/docs/project/self-improve/<YYYYMMDD>-<project-slug>.md
 
     Where <project-slug> is the basename of the working directory (e.g. "mobos", "myapp").
     One file per project per date — multiple projects may write notes on the same date
     without conflict because filenames include the project slug.
 
-    **IMPORTANT: NEVER write self-improve output to the project's `docs/project/` directory.**
-    The `~/.claude/` location is deliberate — self-improve output is a shmorch tool artifact,
-    not a project document. Writing to the project mixes tool output with project state and
-    creates cruft that must be manually cleaned up.
+    **IMPORTANT: NEVER write self-improve output to the calling project's `docs/project/`
+    directory.** Self-improve output is a shmorch tool artifact, not a document of the
+    project that triggered the run — it always concerns the skill itself, so it lives in
+    the skill's own `docs/project/self-improve/`, not scattered in `~/.claude/` or mixed
+    into the calling project's state. This write does not require branch/PR/cross-repo
+    permission — see `core/operations.md` § Cross-repo discipline's inbox-file exception;
+    this is the same kind of write-only drop, just to a different subdirectory.
 
     Structure:
     ### Self-Improve Proposals — <date> | Project: <project-slug>
@@ -154,7 +157,7 @@ Task(
     <patterns seen once — keep for next run>
 
     ## Return
-    DONE: ~/.claude/self-improve-<YYYYMMDD>-<project-slug>.md | <N proposals> [| BLOCKER if evidence files missing]
+    DONE: $SHMORCH_HOME/docs/project/self-improve/<YYYYMMDD>-<project-slug>.md | <N proposals> [| BLOCKER if evidence files missing]
 )
 ```
 
@@ -167,9 +170,9 @@ bash $SHMORCH_HOME/tools/timelog.sh "AGENT_SPAWN" "researcher → self-improve"
 
 ## Step 5 — Gate
 
-Verify `~/.claude/self-improve-<date>-<project-slug>.md` exists.
+Verify `$SHMORCH_HOME/docs/project/self-improve/<date>-<project-slug>.md` exists.
 ```bash
-bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "researcher → ~/.claude/self-improve-<date>-<project-slug>.md"
+bash $SHMORCH_HOME/tools/timelog.sh "AGENT_DONE" "researcher → $SHMORCH_HOME/docs/project/self-improve/<date>-<project-slug>.md"
 ```
 
 If no proposals: tell the user "No patterns found — sessions look clean." Stamp and exit.
