@@ -3,7 +3,8 @@
 
 
 
-**In this section:** [Session Log](session.md) · [timelog](timelog.md)
+
+**In this section:** [session](session.md) · [timelog](timelog.md)
 
 # Pre-planning
 

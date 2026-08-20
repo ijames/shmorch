@@ -13,6 +13,7 @@ General-purpose standards that apply across every project Shmorch touches - cont
 
 - Never use an em dash. Use a plain dash instead.
 - Never manually modify a file marked auto-generated (e.g. a CHANGELOG.md produced by a release tool). Edit the generator or its source, not the output.
+- Never hard-wrap authored markdown prose. See `core/documentation.md` § No Hard Wrapping.
 
 ---
 

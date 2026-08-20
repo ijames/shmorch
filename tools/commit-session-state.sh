@@ -17,6 +17,7 @@ fi
 STATE_FILES=(
   docs/project/session.md
   docs/project/timelog.md
+  .shmorch/AGENTS.md
 )
 
 for f in "${STATE_FILES[@]}"; do

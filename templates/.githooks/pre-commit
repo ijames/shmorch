@@ -1,18 +1,21 @@
 #!/bin/sh
 # Prevent accidental commits directly to integration or release branches.
 # Code changes belong on a feature branch — use: git checkout -b <type>/YYYYMMDD-<description>
-# State-only commits (docs/project/, docs/technology/decisions/, docs/product/decisions/) are exempt.
+# State-only commits (docs/project/, docs/technology/decisions/, docs/product/decisions/,
+# .shmorch/ session bookkeeping) are exempt.
 
 BRANCH=$(git branch --show-current)
 
 case "$BRANCH" in
   main|dev)
-    # Allow if every staged file is under docs/project/, docs/technology/decisions/, or docs/product/decisions/
+    # Allow if every staged file is under docs/project/, docs/technology/decisions/,
+    # docs/product/decisions/, or .shmorch/ (session-state bookkeeping, not code)
     STAGED=$(git diff --cached --name-only)
     CODE_FILES=$(echo "$STAGED" | grep -v \
       -e '^docs/project/' \
       -e '^docs/technology/decisions/' \
       -e '^docs/product/decisions/' \
+      -e '^\.shmorch/' \
       -e '^\.gitattributes$')
 
     if [ -n "$CODE_FILES" ]; then
@@ -28,7 +31,7 @@ case "$BRANCH" in
       echo "  Staged files that triggered this block:"
       echo "$CODE_FILES" | sed 's/^/    /'
       echo ""
-      echo "  (State files — docs/project/, decisions/ — may commit directly.)"
+      echo "  (State files — docs/project/, decisions/, .shmorch/ — may commit directly.)"
       echo ""
       exit 1
     fi
