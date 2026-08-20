@@ -51,3 +51,5 @@
 [2026-08-18 13:16:47] PHASE | core/documentation.md fix: correct VERSION bump (MAJOR not PATCH), split Architecture Changelog to core/changelog.md, fix row ordering
 [2026-08-18 14:09:22] PHASE | operations.md: split MAJOR/MINOR criteria for Compat: backfill entries by structural-vs-optional; downgrade session.md growth rule to 2.1.0 (MINOR)
 [2026-08-18 14:15:00] PHASE | changelog.md: split Date/Version into separate columns; auto-update.md Since -> Version rename to match
+[2026-08-19 12:45:23] SESSION_START | resume: pick up where 2026-08-18 session-md-growth-rule / pe track-record work left off
+[2026-08-19 12:45:29] SESSION_END | auto-closed by stop hook — main @ 7c4bacd Merge pull request #120 from ijames/feature/20260818-pe-track-record
