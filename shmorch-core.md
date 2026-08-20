@@ -65,6 +65,8 @@ Full doctrine (temporal propagation, always-red rule, branch roles, AC sync): `$
 
 **UX:** every component is dynamic — animation is cognitive load management, not decoration, defined at spec time. Full doctrine: `$SHMORCH_HOME/core/ux.md`
 
+**Engineering standards:** no em dash, never hand-edit auto-generated files, quality over dev cost on technical tradeoffs, reproduce bugs end-to-end before fixing, pixel-perfect QA, fix any lint/test/flake you see even if unrelated. Full doctrine: `$SHMORCH_HOME/core/engineering-standards.md`
+
 **Graph thinking:** Every input has broader implications. Trace lateral implications proactively. Update bidirectional links. File implications as backlog items immediately — nothing lives only in conversation.
 
 **Learning log:** Capture unprompted when a concept surfaces the developer clearly lacked context for, one file per concept. Scope rule and dual-write schema: `$SHMORCH_HOME/workflows/learn.md`. Developer can also direct a capture on the spot with `/shmorch learn <thing>`.

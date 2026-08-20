@@ -13,6 +13,7 @@ Doctrine files loaded on demand by `shmorch-core.md`, workflows, and roles. Thes
 | `documentation.md` | Skeleton Principle, Two-Tier Knowledge System, graduation rules |
 | `changelog.md` | Architecture Changelog — migration ledger `auto-update.md` reads mechanically to backfill projects on old rules; not doctrine, not loaded by default |
 | `ux.md` | UX Philosophy — all components dynamic, animation as cognitive load management |
+| `engineering-standards.md` | Writing conventions, cost-vs-quality tradeoffs, E2E bug reproduction, pixel-perfect QA, fix any lint/test issue you see |
 | `override.md` | Workflow/role override pattern (extend vs supersede), graduation rule, fat-copy anti-pattern |
 | `observability.md` | Logs, metrics, traces — stage expectations, build track rule |
 | `web_spec_compliance.md` | Web spec compliance — SEO, Agent Readiness, GEO/AEO, accessibility, security, performance, privacy, resilience, i18n; per-surface/audience scoping, stage ladder; audited live via the `specification.website` MCP |
