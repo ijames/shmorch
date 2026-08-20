@@ -56,3 +56,4 @@
 [2026-08-20 13:40:42] PHASE | check-inbox: 3 acted, 0 deferred, 0 already-covered
 [2026-08-20 13:40:52] SESSION_START | go: inbox triage (3 items resolved)
 [2026-08-20 13:41:02] SESSION_END | auto-closed by stop hook — docs/20260820-inbox-three-items @ 07a697f docs(inbox): file three doctrine gaps found in treeclusion
+[2026-08-20 13:45:42] PHASE | dead-link-scan-after-folder-moves: built, leveraged docs-audit.sh (no new tool)
