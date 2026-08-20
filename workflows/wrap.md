@@ -109,6 +109,13 @@ session.md growth — move entries older than `## Latest Session` into
 `docs/project/session/YYYYMMDD-<slug>.md` files, replace them in `session.md` with a
 `## History` index line each.
 
+**Track growth check:** for each track touched this session, `wc -l` its `index.md`. If
+it exceeds ~200–300 lines, split per `core/documentation.md` § Track file growth —
+date/version-based if it's an accumulating log of rounds, section-based if the size
+comes from distinct sub-concerns (a feature inventory, research, a spec) instead of a
+timeline. This applies even when the track has no "Work log" section at all — the
+trigger is the file's total size, not its shape.
+
 ---
 
 ## Step 6 — Wrap-specific plan/ rules
