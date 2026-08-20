@@ -37,9 +37,9 @@ DUP_THRESHOLD="${DUP_THRESHOLD:-40}"
 # template placeholder (<...>).
 while IFS= read -r -d '' f; do
   dir="$(dirname "$f")"
-  # Strip backtick-delimited spans first — a link shown as example syntax inside
-  # inline code (`[text](path.md#anchor)`) is prose, not a real reference.
-  sed -E 's/`[^`]*`//g' "$f" 2>/dev/null | grep -oE '\]\(([^)]+)\)' | sed -E 's/^\]\((.*)\)$/\1/' | while IFS= read -r target; do
+  # Strip backtick-delimited spans and HTML comment blocks first — example syntax shown
+  # inside inline code or a template's `<!-- ... -->` row is prose, not a real reference.
+  sed -E 's/`[^`]*`//g' "$f" 2>/dev/null | sed -E '/<!--/,/-->/d' | grep -oE '\]\(([^)]+)\)' | sed -E 's/^\]\((.*)\)$/\1/' | while IFS= read -r target; do
     [ -z "$target" ] && continue
     case "$target" in
       http://*|https://*|mailto:*|\#*|*"<"*) continue ;;

@@ -90,5 +90,19 @@ for j in "${JUDGMENT[@]}"; do
   path="${j%% —*}"
   [ -e "$path" ] && echo "- $j"
 done
+
+# A git mv changes a file's directory depth, which can strand its own relative links
+# (or a sibling's) that were never updated for the new location — surface it now
+# instead of relying on a human noticing later. Detection only, no auto-fix: the
+# target directory for a stale link isn't always mechanically inferable.
+if [ "${#MOVED[@]}" -gt 0 ] && [ -f "$(dirname "$0")/docs-audit.sh" ]; then
+  DEAD_LINKS="$(bash "$(dirname "$0")/docs-audit.sh" 2>/dev/null | grep '^DEAD_LINK ' || true)"
+  if [ -n "$DEAD_LINKS" ]; then
+    echo ""
+    echo "## Dead links surfaced by this move (docs-audit.sh)"
+    echo "$DEAD_LINKS" | sed 's/^DEAD_LINK /- /'
+  fi
+fi
+
 echo ""
-echo "Review the judgment list above, then commit."
+echo "Review the judgment list (and any dead links) above, then commit."

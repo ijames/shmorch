@@ -1,5 +1,5 @@
 ---
-status: open
+status: done
 category: process
 ---
 
@@ -22,18 +22,20 @@ Two smaller fixes bundled in, found by the same audit run:
   `<!-- ... -->` (e.g. `sprints/index.md`, `tracks/index.md` template rows) gets flagged as a
   false positive.
 
-**Scope:**
-1. `tools/docs-audit.sh` — strip `<!-- ... -->` blocks alongside the existing backtick-span
+**Done, 2026-08-20:** leveraged `docs-audit.sh`'s existing DEAD_LINK check rather than building
+anything new.
+1. `tools/docs-audit.sh` — now strips `<!-- ... -->` blocks alongside the existing backtick-span
    strip, before the DEAD_LINK grep.
-2. `tools/backfill-docs-taxonomy.sh` — after the mechanical `git mv` loop, run (or call
-   directly) `docs-audit.sh`'s DEAD_LINK check and print any findings in the script's own
-   report output, alongside the existing JUDGMENT array. No auto-fix needed (target directory
-   for a stale link isn't always mechanically inferable) — just surface it instead of relying
-   on a human noticing later.
-3. Same wiring point (or `workflows/vacuum.md`) should probably also cover any manual
-   `git mv`/rename of a docs file, not just the taxonomy backfill script — `docs-nav.sh` regen
-   + `docs-audit.sh` DEAD_LINK as a standard post-move pair. Left as a judgment call for
-   whoever picks this up on where that's best documented.
+2. `tools/backfill-docs-taxonomy.sh` — after the mechanical `git mv` loop, calls
+   `docs-audit.sh` and prints any `DEAD_LINK` findings under a new report section, alongside
+   the existing JUDGMENT list. No auto-fix (target directory for a stale link isn't always
+   mechanically inferable). Verified against a synthetic repo reproducing the exact
+   `treeclusion` scenario (a moved file's own same-directory link stranded by the move).
+
+**Not done — left as a future judgment call:** extending the same DEAD_LINK-after-move check
+to `workflows/vacuum.md` (or another hook) for manual `git mv`/rename of a docs file outside
+the taxonomy backfill script specifically. Not scoped here; revisit if manual doc moves keep
+producing the same class of drift.
 
 Filed from `treeclusion` 2026-08-19; actual dead links in that repo were fixed directly there,
 not part of this item.
