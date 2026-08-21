@@ -53,3 +53,7 @@
 [2026-08-18 14:15:00] PHASE | changelog.md: split Date/Version into separate columns; auto-update.md Since -> Version rename to match
 [2026-08-19 12:45:23] SESSION_START | resume: pick up where 2026-08-18 session-md-growth-rule / pe track-record work left off
 [2026-08-19 12:45:29] SESSION_END | auto-closed by stop hook — main @ 7c4bacd Merge pull request #120 from ijames/feature/20260818-pe-track-record
+[2026-08-20 13:40:42] PHASE | check-inbox: 3 acted, 0 deferred, 0 already-covered
+[2026-08-20 13:40:52] SESSION_START | go: inbox triage (3 items resolved)
+[2026-08-20 13:41:02] SESSION_END | auto-closed by stop hook — docs/20260820-inbox-three-items @ 07a697f docs(inbox): file three doctrine gaps found in treeclusion
+[2026-08-20 13:45:42] PHASE | dead-link-scan-after-folder-moves: built, leveraged docs-audit.sh (no new tool)

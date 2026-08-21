@@ -9,6 +9,17 @@ PR #112 MoBoS template contamination cleanup). Inbox cleanup: PR #113 cleared
 go-resume-wrap-determinism (already tracked in the context-budget umbrella track). 3 open
 PRs awaiting merge — at the self-improve cap, hold further proposals until these land.
 
+## Since last entry — merged, undocumented — 2026-08-20 (via `/shmorch touch`)
+
+PRs merged after 2026-08-19 that this log never caught up to: #121 self-improve output moves
+into the skill repo (`~/.claude/` was wrong write target), #122 `session.md` split per
+`core/documentation.md`'s growth rule (older entries moved to `docs/project/session/*.md`,
+this file trimmed), #123 new `core/engineering-standards.md` doctrine, #124 track-index growth
+trigger generalized + enforced at `wrap` (checked during `build` too as of the same-day
+follow-up commit). Current branch (`docs/20260820-inbox-three-items`) has filed three inbox
+items (dead-link scan after folder moves, markdown-no-hard-wrapping doctrine gap,
+wrap-step84-blocked-by-own-precommit-hook) — not yet triaged.
+
 ## Since last entry — merged, undocumented — 2026-08-19 (via `/shmorch touch`)
 
 PRs merged after 2026-08-17 that this log never caught up to: #114 self-improve session-log
@@ -130,7 +141,6 @@ final push/merge of a branch, referenced from `tools/merge-chain.sh`'s header. `
 bumped `1.3.0` → `1.3.1` (PATCH).
 
 
-**In this section:** [Pre-planning](pre-planning.md) · [timelog](timelog.md)
 
 ## History
 

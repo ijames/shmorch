@@ -150,6 +150,32 @@ tree.
 
 ---
 
+## No Hard Wrapping
+
+Authored markdown is source for a renderer, not a reading surface. Write continuous prose as
+continuous lines - no manual line breaks inserted to hit a column width.
+
+A hard wrap is a style decision smuggled into content: a line-length opinion baked in by
+whoever last edited the file, in whatever terminal width they happened to have. It can't adapt
+to the reader's window, font, or column preference - that's what stylesheets and renderers are
+for. It also manufactures bugs: a bullet whose text wraps onto a continuation line, or sits on
+the line after a bare `*`, is a common markdown-parser lazy-continuation defect class that only
+exists because the source was hard-wrapped in the first place.
+
+- Applies to authoring, not reading. Any tooling that consumes third-party markdown must still
+  handle hard-wrapped input correctly - don't assume none exists, just don't write it.
+- Applies to continuous prose only. Code blocks, tables, YAML front matter, and list structure
+  keep their line breaks.
+- Migration is opportunistic: adopt going forward, reflow a file when it's being edited anyway
+  for other reasons. No big-bang reflow sweep across a docs tree - the diff would bury real
+  history for no behavior change.
+- `templates/` needs to move too, or scaffolded projects keep inheriting the old convention by
+  imitation.
+- Semantic line breaks (one sentence per line) were considered and rejected: they still insert
+  linefeeds into continuous prose, which is exactly what this rule is against.
+
+---
+
 ## Architecture Changelog
 
 Moved to `$SHMORCH_HOME/core/changelog.md` — a migration ledger `auto-update.md` reads
