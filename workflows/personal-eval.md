@@ -65,7 +65,7 @@ Everything else — bare `pe`, `pe scan <N>`, `pe <N>`, natural-language session
 
 ```bash
 PERSONAL_PROFILE_HOME="${PERSONAL_PROFILE_HOME:-$HOME/.shmorch/personal-profile}"
-python3 "$PERSONAL_PROFILE_HOME/scan.py"
+python3 "$PERSONAL_PROFILE_HOME/tools/scan.py"
 ```
 
 Prints unprocessed sessions, oldest first. If empty, say so and stop — nothing to do.
@@ -110,7 +110,7 @@ For each of the N sessions, **in sequence, not parallel** — the synthesizer st
 writes to shared `profile/0N-*.md` files and commits after each session; concurrent
 writes would race:
 
-1. `python3 "$PERSONAL_PROFILE_HOME/session_turns.py" <path>` — clean request/response
+1. `python3 "$PERSONAL_PROFILE_HOME/tools/session_turns.py" <path>` — clean request/response
    text for that session.
 2. Spawn (or run inline on CLIs without subagents — `core/portability.md` Axis 2) a
    **pe-summarizer** agent, cheap tier, role `$SHMORCH_HOME/agents/roles/pe-summarizer.md`,
@@ -118,7 +118,7 @@ writes would race:
 3. Spawn (or run inline) a **pe-synthesizer** agent, cheap tier, role
    `$SHMORCH_HOME/agents/roles/pe-synthesizer.md`, input the new `sessions/<slug>.md`
    plus the raw text from 3.1. Updates the matching `profile/0N-*.md` file(s) and
-   `profile/index.md` if stale, commits, and runs `scan.py --mark <path>`.
+   `profile/index.md` if stale, commits, and runs `tools/scan.py --mark <path>`.
 4. Append a row to `stats.md` (session, date, project, start–end, duration, categories
    touched) and update its tally counts — same pass as `processed.log`, per the README.
 
@@ -127,7 +127,7 @@ writes would race:
 ## Step 4 — Report
 
 After the batch, report to the user: sessions processed, categories touched, backlog
-remaining (`python3 scan.py` count). Do not start another batch automatically — the
+remaining (`python3 tools/scan.py` count). Do not start another batch automatically — the
 user re-runs `/shmorch pe` when ready for the next one.
 
 ---
