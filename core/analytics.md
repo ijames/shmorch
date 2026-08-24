@@ -1,6 +1,6 @@
 ---
 loads_when: intake or design for a user-facing product — event model, privacy posture, funnel coverage
-size: 38 lines
+size: 43 lines
 ---
 
 # Analytics — User-Facing Products

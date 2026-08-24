@@ -1,6 +1,6 @@
 ---
 loads_when: producing an artifact a non-engineer will read — intimacy gradient, naming-as-contract, discipline boundary signals
-size: 63 lines
+size: 68 lines
 ---
 
 # Cross-Functional Artifact Usability

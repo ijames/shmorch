@@ -1,6 +1,6 @@
 ---
 loads_when: intake or design for any project — logs/metrics/traces stage expectations, build track rule
-size: 30 lines
+size: 35 lines
 ---
 
 # Observability

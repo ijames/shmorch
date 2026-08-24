@@ -1,6 +1,6 @@
 ---
 loads_when: intake or setup for a JS/TS project — pnpm as default, worktree/node_modules sharing, uv as the Python analogue
-size: 27 lines
+size: 32 lines
 ---
 
 # JS/TS Tooling

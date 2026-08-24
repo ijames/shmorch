@@ -1,6 +1,6 @@
 ---
 loads_when: before touching any skill file, cutting a PR, or logging a timing event — timing events, comms notifications, vacuum protocol, checkpoints, VERSION bump rule, branch/PR workflow
-size: 116 lines
+size: 125 lines
 ---
 
 # Operations

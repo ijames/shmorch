@@ -1,6 +1,6 @@
 ---
 loads_when: starting or restructuring any docs/ work — Skeleton Principle, Two-Tier Knowledge System, graduation rules
-size: 155 lines
+size: 182 lines
 ---
 
 # Documentation Doctrine

@@ -1,6 +1,6 @@
 ---
 loads_when: writing prose or commits, making a technical trade-off call, reproducing a bug, or running an end-to-end/QA pass
-size: 34 lines
+size: 35 lines
 ---
 
 # Engineering Standards
@@ -11,7 +11,7 @@ General-purpose standards that apply across every project Shmorch touches - cont
 
 ## Writing conventions
 
-- Never use an em dash. Use a plain dash instead.
+- Never use an em dash — or other AI-slop tells — in anything a person outside the authoring session will read: web/product content, docs, PR titles and descriptions, commit messages meant for human review. Use a plain dash instead. This does not extend to shmorch's own internal doctrine (`core/*.md`, `workflows/*.md`, etc.) — the em dash is the established house style there, and reflowing it would be pure churn for no reader who needs it.
 - Never manually modify a file marked auto-generated (e.g. a CHANGELOG.md produced by a release tool). Edit the generator or its source, not the output.
 - Never hard-wrap authored markdown prose. See `core/documentation.md` § No Hard Wrapping.
 

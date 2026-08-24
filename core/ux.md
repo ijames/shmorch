@@ -1,6 +1,6 @@
 ---
 loads_when: spec or design work touching a UI component — animation as cognitive load management, entry/state/exit definition at spec time
-size: 45 lines
+size: 50 lines
 ---
 
 # UX Philosophy — All Components Are Dynamic
