@@ -1,6 +1,6 @@
 ---
 loads_when: any git operation beyond a single commit — branch hygiene, pull-after-merge, rebase-before-work, never batch-merge
-size: 139 lines
+size: 144 lines
 ---
 
 # Git Discipline

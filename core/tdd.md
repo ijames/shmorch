@@ -1,6 +1,6 @@
 ---
 loads_when: any code change (fix, migration, config, feature) — the No Test No Code prime directive, testing depth ladder (stage + form), temporal propagation, always-red rule, branch roles, AC sync
-size: 149 lines
+size: 228 lines
 ---
 
 # TDD Doctrine

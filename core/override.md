@@ -1,6 +1,6 @@
 ---
 loads_when: a project wants to extend or supersede a workflow/role file — override pattern, graduation rule, fat-copy anti-pattern
-size: 58 lines
+size: 63 lines
 ---
 
 # Workflow and Agent Override Pattern

@@ -1,6 +1,6 @@
 ---
 loads_when: always — entry pointer for the core/ subtree, read before falling back to frontmatter-traverse.sh
-size: 20 lines
+size: 27 lines
 ---
 
 # Core Doctrine

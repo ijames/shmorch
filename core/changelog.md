@@ -1,6 +1,6 @@
 ---
 loads_when: never loaded as doctrine — read mechanically by workflows/auto-update.md Step 1.9
-size: 30 lines
+size: 44 lines
 ---
 
 # Architecture Changelog

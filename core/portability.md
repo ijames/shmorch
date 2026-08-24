@@ -1,6 +1,6 @@
 ---
 loads_when: resolving $SHMORCH_HOME, touching any skill file that assumes a specific CLI, or deciding whether a new dependency (e.g. python3) is in scope — environment baseline vs agent-capability axes, context-file chain, capability adapter matrix
-size: 258 lines
+size: 292 lines
 ---
 
 # Cross-CLI Portability
