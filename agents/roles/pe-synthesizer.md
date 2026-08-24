@@ -90,8 +90,17 @@ When adding a footnote to a bullet that already has one or more, append the new
 merge two sessions' evidence under one footnote label.
 
 After updating the section file(s), regenerate `profile/index.md`'s per-section
-one-phrase preview line and bullet count for any section you touched (see the file's
-own "Sections" list format) — the index must stay a truthful preview, not go stale.
+preview line and bullet count for any section you touched (see the file's own
+"Sections" list format) — the index must stay a truthful preview, not go stale.
+
+**Replace the preview, don't append to it.** This is a hard cap: one sentence,
+~150 characters, describing the section's overall character right now — not a
+running list of every distinctive bullet ever added. If the existing preview is
+already a comma-spliced list from past sessions accreting onto it, that's the bug
+this rule exists to stop — collapse it back to one sentence rather than adding a
+53rd clause. A reader opens the linked file for specifics; the preview's only job
+is "should I open this file," not "here is everything in it."
+
 If your changes materially shift the "At a glance" paragraph's claims, update that
 too; otherwise leave it.
 
