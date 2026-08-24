@@ -1,5 +1,5 @@
 ---
-loads_when: any code change (fix, migration, config, feature) — the No Test No Code prime directive, temporal propagation, always-red rule, branch roles, AC sync
+loads_when: any code change (fix, migration, config, feature) — the No Test No Code prime directive, testing depth ladder (stage + form), temporal propagation, always-red rule, branch roles, AC sync
 size: 149 lines
 ---
 
@@ -7,7 +7,7 @@ size: 149 lines
 
 ## Prime Directive — Intent → Spec → Test → Code
 
-**This rule overrides everything else. It applies to every task, every session, every change — no exceptions.**
+**This rule overrides everything else. It applies to every task, every session, every change — no exceptions to *whether* there's a test, only to *how much* one costs. See "Testing Depth Ladder" below for what "test" scales to at each project stage.**
 
 ```
 No scenario  → no feature
@@ -30,6 +30,80 @@ The sequence is always:
 - If asked to add a feature: write the scenario/test first, then implement
 
 When caught violating this (by the user or self-review): stop, acknowledge, write the missing tests, then continue. Do not argue that the change was too simple to need tests.
+
+---
+
+## Testing Depth Ladder
+
+"Test" is not one thing. It scales along two independent axes — **project stage** (how
+formal does this need to be) and **form** (what kind of check fits the layer being
+touched). Pick the rung that fits; don't default to the heaviest form out of habit, and
+don't skip testing entirely just because the heaviest form feels like overkill.
+
+### Stage axis — how much a project's testing formality earns
+
+Reuses the project's `stage` field verbatim (`shmorch-core.md` § Project Stage,
+`context.md`) — the same stage `web_spec_compliance.md` and `observability.md` key off
+of. That table already sets the Test gate per stage; the row below just says what *form*
+of test satisfies each gate:
+
+| Stage | Test gate (from § Project Stage) | Form this satisfies it with |
+|---|---|---|
+| `R&D` | None required | Checklist, if anything — the point is to learn fast. Don't build a harness for code that may be thrown away tomorrow. |
+| `proof-sprint` | Functional/integration RED before unit RED before code | High-level assertions covering the core paths; checklist for the rest. |
+| `productionization` | Full coverage | Full TDD/BDD per the Prime Directive above — RED before code, AC-synced, always-red rule applies. |
+| `maintenance` | Regression suite passes | Full TDD/BDD, plus the deployment/AC rigor in "Always-Red Rule" and "Acceptance Criteria Document" below — nothing is optional at this stage. |
+
+A project's testing posture follows `stage` as it changes, not ahead of it. Don't
+pre-build `maintenance`-grade test rigor for an `R&D` spike that hasn't earned
+`proof-sprint` yet — that's the inverse failure of skipping tests, and just as costly.
+When `stage` advances, retrofit tests for what's already there rather than leaving it
+permanently under-tested for its current stage.
+
+### Form axis — what kind of check fits
+
+Lightest to heaviest; each is a valid "test" at the right stage, not a lesser substitute
+for the one above it:
+
+1. **Checklist** — a manual or semi-automated list of "does X work," checked off by hand.
+   Right for `R&D`, or for UX/manual-verification items even in mature projects (see "UX
+   criteria" in Acceptance Criteria below).
+2. **High-level assertions** — a small block of code asserting the core behavior end to
+   end, no framework ceremony. Right for `proof-sprint` and for scripts/tools too small to
+   warrant a full suite.
+3. **TDD / BDD** — full RED→GREEN cycle, scenario-first for behavior-facing work. Right
+   for `productionization`/`maintenance`, per the Prime Directive.
+
+Which of TDD vs. BDD (or both) applies depends on layer, not stage: BDD scenarios for
+user-facing behavior (frontend, API contracts, anything a spec can describe from outside),
+unit/integration TDD for backend logic, algorithms, and anything with no meaningful
+outside-in behavior to script.
+
+**"Frontend → BDD" is not a blanket rule — Gherkin has real overhead.** TDD-with-mocks
+(unit tests, stubbed API responses, component-level assertions) is cheap and straightforward
+on every surface, frontend included. Gherkin/Cucumber is a different cost: it needs a
+step-definition framework wired to a real or headless browser, and that harness is itself
+nontrivial code to write and maintain — not free the way a plain assertion block is. Before
+reaching for it, split what's actually being tested:
+
+- **User action / behavior** ("clicking X navigates to Y," "submitting the form shows an
+  error") — the right fit for Gherkin, because the scenario describes intent that survives
+  a redesign. Low thrash.
+- **Visual positioning / layout** ("the button is 12px from the edge," "the card grid is
+  3-wide above 1024px") — a poor fit for Gherkin scenarios. This is closer to a snapshot/
+  visual-regression check than a behavior spec, and during rapid design iteration these
+  assertions **will** thrash — the scenario file itself becomes churn, not signal. Prefer
+  a lighter visual-diff or manual-checklist item here until layout has actually stabilized.
+
+Treating these as the same kind of test is what makes the BDD-for-UI decision feel harder
+than it is. They're not the same test, and only one of them wants Gherkin. Adopt Gherkin
+per-surface once user-action behavior is stable enough to be worth scripting — not as a
+day-one default just because the layer is "frontend."
+
+**A Makefile (or equivalent task runner) always exists**, regardless of stage or form —
+`make test`, `make check`, whatever the project's language convention is — so the testing
+posture that does exist is one command away, not tribal knowledge. This is the one thing
+that doesn't scale down with stage.
 
 ---
 
@@ -71,7 +145,7 @@ In practice — especially with AI-assisted development — code frequently exis
 
 ## Always-Red Rule
 
-**An active project MUST always have red items. All green = done. If everything is green mid-sprint, the tests are behind the work — that is a failure state, not a success.**
+**An active project at `productionization`/`maintenance` stage (see Testing Depth Ladder above) MUST always have red items. All green = done. If everything is green mid-sprint, the tests are behind the work — that is a failure state, not a success.** `R&D`-stage projects are exempt — they may have no tests at all, which isn't a red/green state, it's off the ladder entirely.
 
 "Tests" in this context means the full stack:
 
@@ -123,7 +197,7 @@ The always-red rule and a passing CI gate are not in conflict — they refer to 
 
 ## Acceptance Criteria Document
 
-Every project must have `docs/project/acceptance.md`. Create it as part of the spec phase (before code), not after.
+Every project at `proof-sprint` stage or above (see Testing Depth Ladder above) must have `docs/project/acceptance.md`. Create it as part of the spec phase (before code), not after. `R&D`-stage projects may skip it — a checklist in the session notes is enough until the project earns `proof-sprint`.
 
 **Structure:**
 ```

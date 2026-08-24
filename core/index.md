@@ -9,7 +9,7 @@ Doctrine files loaded on demand by `shmorch-core.md`, workflows, and roles. Thes
 
 | File | Contents |
 |---|---|
-| `tdd.md` | Prime Directive, Temporal Propagation, Always-Red Rule, branch roles, AC sync |
+| `tdd.md` | Prime Directive, Testing Depth Ladder (stage + form), Temporal Propagation, Always-Red Rule, branch roles, AC sync |
 | `documentation.md` | Skeleton Principle, Two-Tier Knowledge System, graduation rules |
 | `changelog.md` | Architecture Changelog — migration ledger `auto-update.md` reads mechanically to backfill projects on old rules; not doctrine, not loaded by default |
 | `ux.md` | UX Philosophy — all components dynamic, animation as cognitive load management |
