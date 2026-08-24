@@ -48,6 +48,14 @@ shows real strain, not preemptively (researched 2026-08-18):**
   it silently fragments one project's history across multiple headings. Needs a canonical
   project-name registry `pe-synthesizer` checks before creating a new grouping — the
   single biggest risk to the ledger staying scannable rather than just less lossy.
+  Confirmed a second, sharper case 2026-08-22: `appadd`/`AppAdd` was renamed to
+  `darkbadge`/`DarkBadge` (same product — the transcript `cwd` folder name changed, not
+  just casing), and `profile/10-track-record.md` already carries both labels for what is
+  one continuous project history. A true rename needs the registry entry to carry an
+  aliases list (`darkbadge` ← `appadd`), not just a canonical-casing fix — and ideally
+  supports retroactive re-grouping of already-written entries under the current name, not
+  just going forward. Same "not built yet, no real strain at this scale" status as the
+  rest of this list.
 - **Status transitions aren't a case the Reinforces/Adds/Conflicts model covers.** That
   taxonomy is built for trait evidence. A concrete deliverable evolving idea → building →
   shipped → issue-found is none of the three cleanly: not a Conflict (nothing
@@ -69,5 +77,39 @@ shows real strain, not preemptively (researched 2026-08-18):**
   (project names, concrete incidents) in their example bullets — track-record is additive
   to that, not a replacement, and those bullets shouldn't be pruned toward pure
   abstraction just because track-record now exists.
+- **`pe-synthesizer` isn't following its own "literal, not trait-compressed" instruction
+  for track-record.** Confirmed 2026-08-22: `profile/10-track-record.md` is 48KB / 15
+  bullets, but each "bullet" is a single run-on prose paragraph (one AppAdd entry is
+  ~800 words as one sentence-chain) instead of a scannable ledger row (project | what
+  shipped | date | outcome). This is the "unbounded growth" item above showing up as
+  *unreadable per-entry* growth, live now rather than hypothetical. Needs a format cap
+  in `pe-synthesizer.md`'s track-record instructions, not just the eventual per-project
+  file split.
+- **Spiked a dual abstract/tangible summary format 2026-08-22**, on branch
+  `test/dual-summary-format` in `$PERSONAL_PROFILE_HOME` (not merged): `pe-summarizer`
+  produces two independently-compressed bullet lists per session instead of prose
+  paragraphs — Tangible (facts/decisions/names) and Abstract (trait reads) — each cited
+  to line numbers in the raw turns file rather than session-level anchors. Tested against
+  one small session only (`748c88a3`) as a comparison baseline against the production
+  summary. Not decided whether this replaces `pe-summarizer`'s output format or the
+  question is still open; needs testing against a large/messy multi-day session before
+  any pipeline change.
 
 ---
+
+**Future project, deliberately not started (raised 2026-08-22):** a "comprehensive
+professional engine" that goes beyond this pipeline's current scope — pulling in sources
+beyond Claude Code transcripts (blog.shming.com, LinkedIn, email) to cover the parts of a
+person a coding-session corpus structurally can't (see analysis 2026-08-21 §4 Interests:
+"nothing in 76 sessions evidences an interest outside software... the input is a Claude
+Code transcript corpus"). Also flags a real open question about the pipeline's own
+synthesis depth: `pe-analyzer` reading trait sections that are themselves a compression of
+per-session summaries is two-layer synthesis-of-synthesis — whether that's acceptable
+depends on whether the eventual use (job-fit, gap-spotting) needs human-readable prose at
+every layer or only at the final output, and if it does need fixing, whether the fix is
+flattening a layer out, more reasoning budget/model tier on the interpretive pass, more
+harness (structured intermediate formats, verification passes), or just more/varied
+source material diluting the coding-only skew. Not scoped further than this — a separate
+project's problem once the pipeline in this doc has real strain, not a redesign to chase
+now. See `README.md`'s own "Vision" section, which already names the aggregator/knowledge-graph
+version of this as a deliberately separate future project.
