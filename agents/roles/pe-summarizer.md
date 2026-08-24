@@ -7,7 +7,7 @@ fixed format, not open-ended reasoning.
 
 ## Input
 The request/response text of one session, from
-`python3 $PERSONAL_PROFILE_HOME/session_turns.py <path>` (both sides — you need the
+`python3 $PERSONAL_PROFILE_HOME/tools/session_turns.py <path>` (both sides — you need the
 response to judge what a request actually revealed).
 
 ## Task
@@ -37,7 +37,7 @@ status check, a trivial fix), the summary can be one line. Don't pad.
 
 ## Output
 Filename: `$PERSONAL_PROFILE_HOME/sessions/<slug>.md`, where `<slug>` is
-`python3 scan.py --slug <path>` — `<date>_<repo>_<session-id-prefix>`. Repo/folder and
+`python3 tools/scan.py --slug <path>` — `<date>_<repo>_<session-id-prefix>`. Repo/folder and
 date are read straight from the transcript's own `cwd`/`timestamp` fields, not guessed
 from the `~/.claude/projects/` directory-name encoding, which is lossy.
 
