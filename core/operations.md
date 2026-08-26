@@ -82,6 +82,12 @@ and `$SHMORCH_HOME/VERSION`:
 If a change qualifies for more than one tier, use the highest. `docs/` changes do NOT bump
 VERSION.
 
+**Rule liveness:** a written rule binds only once merged to the branch the project treats
+as canonical. A rule sitting on an open PR is not in effect — do not rely on it, and do not
+assume work done against `main` in the meantime respects it. Before treating any
+`.shmorch/AGENTS.md` or `core/*.md` change as active, confirm it's merged, not just
+committed.
+
 **Skill change workflow:** Branch → PR → developer merges. Never commit directly to
 `main`.
 
