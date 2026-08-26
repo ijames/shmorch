@@ -4,6 +4,13 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+Self-improve 2026-08-26: 0 proposals — 3 candidate patterns all already addressed (PR-cap
+gate in self-improve.md Step 6, stop-hook escalation CW-8 in go.md, and the em-dash inbox
+item, resolved concurrently). See `docs/project/self-improve/20260826-shmorch.md`.
+
+check-inbox 2026-08-26: 1 acted, 0 deferred — em-dash rule scope-narrowing loophole closed
+(`core/engineering-standards.md`) + rule-liveness paragraph added (`core/operations.md`).
+
 Self-improve 2026-08-17: 2 proposals, 2 applied (PR #111 session.md drift check in go.md;
 PR #112 MoBoS template contamination cleanup). Inbox cleanup: PR #113 cleared
 go-resume-wrap-determinism (already tracked in the context-budget umbrella track). 3 open

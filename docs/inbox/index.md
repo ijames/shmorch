@@ -12,12 +12,12 @@ Items here are not authoritative. They graduate into `workflows/`, `core/`, `age
 
 **Open:**
 
-- `em-dash-rule-scope-and-liveness-gap.md`, filed from `shming.com` 2026-08-25 —
-  no-em-dash rule (`core/engineering-standards.md:14`) leaked through: a project
-  override narrowed its scope and it sat unmerged for a day. Proposes tightening
-  the doctrine scope wording and a new rule-liveness check.
+(none)
 
-(previously resolved: `learning-log-external-reference-reconsider.md` and
+(previously resolved: `em-dash-rule-scope-and-liveness-gap.md`, filed from `shming.com`
+2026-08-25 — scope-narrowing loophole closed in `core/engineering-standards.md:14`,
+new rule-liveness paragraph added to `core/operations.md`, 2026-08-26.
+`learning-log-external-reference-reconsider.md` and
 `pre-commit-template-stale-taxonomy.md`, both filed from `treeclusion` 2026-08-18 —
 learning-log dual-write adopted in `shmorch-core.md`/`workflows/learn.md`;
 `templates/.githooks/pre-commit` updated to the current docs taxonomy, 2026-08-18.

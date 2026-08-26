@@ -57,3 +57,8 @@
 [2026-08-20 13:40:52] SESSION_START | go: inbox triage (3 items resolved)
 [2026-08-20 13:41:02] SESSION_END | auto-closed by stop hook — docs/20260820-inbox-three-items @ 07a697f docs(inbox): file three doctrine gaps found in treeclusion
 [2026-08-20 13:45:42] PHASE | dead-link-scan-after-folder-moves: built, leveraged docs-audit.sh (no new tool)
+[2026-08-26 15:30:45] PHASE | self-improve: starting
+[2026-08-26 15:31:07] AGENT_SPAWN | researcher → self-improve
+[2026-08-26 15:32:54] PHASE | check-inbox: 1 acted, 0 deferred, 0 already-covered
+[2026-08-26 15:33:20] AGENT_DONE | researcher → docs/project/self-improve/20260826-shmorch.md
+[2026-08-26 15:33:39] PHASE | self-improve: complete — 0 changes applied (0 proposals, all already addressed)
