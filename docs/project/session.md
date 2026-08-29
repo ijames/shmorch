@@ -4,6 +4,14 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+check-inbox 2026-08-28: 5 acted, 0 deferred — PreToolUse memory-guard hook
+(`templates/.claude/hooks/pre-tool-memory-guard.sh`) blocks Write/Edit into `.claude` project
+memory in Shmorch-managed repos; migration backlog item filed
+(`docs/project/plan/backfill-migrate-claude-project-memory.md`); new `/shmorch aside` command +
+workflow (`commands/aside.md`, `workflows/aside.md`) for mid-session capture; `go.md` CW-9
+nudges on stale Blocked tracks; `prioritize.md` Step 6 gate + timelog stamp-readback added.
+VERSION 2.1.6 -> 2.2.0.
+
 Self-improve 2026-08-26: 0 proposals — 3 candidate patterns all already addressed (PR-cap
 gate in self-improve.md Step 6, stop-hook escalation CW-8 in go.md, and the em-dash inbox
 item, resolved concurrently). See `docs/project/self-improve/20260826-shmorch.md`.
