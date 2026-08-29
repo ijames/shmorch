@@ -14,6 +14,8 @@ Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/project/pl
 
 ## Inputs
 - `docs/project/plan/` — current backlog and track statuses
+- `docs/project/tracks/*/index.md` — actual track status (source of truth, may have drifted from plan/ frontmatter)
+- `git branch -a` — in-flight work (a branch with no matching plan/track entry, or a track marked Open with no branch and no recent commits, is a reconciliation finding)
 - `docs/project/sprint.md` — active sprint scope (if exists)
 - `docs/{product,technology}/decisions/ (topic-appropriate)` — architectural constraints that affect priority
 
@@ -38,8 +40,15 @@ the `timelog.sh` call. If it's missing, the stamp didn't land; re-run before con
 
 Read in parallel:
 - `docs/project/plan/` — current backlog and track statuses
+- `docs/project/tracks/*/index.md` — actual status per track (`status:` frontmatter)
 - `docs/project/sprint.md` — active sprint scope (if exists)
 - `docs/{product,technology}/decisions/ (topic-appropriate)` — architectural constraints that affect priority
+
+```bash
+git branch -a
+```
+Pass this list to the Task below so it can spot branches with no matching plan/track entry
+(untracked work) and tracks marked Open with no matching branch (stalled).
 
 ### Step 3 — Call Task
 
@@ -54,6 +63,17 @@ Task(
     Analyze the backlog in docs/project/plan/.
     Also read docs/{product,technology}/decisions/ (topic-appropriate) for constraints that affect ordering.
     If docs/project/sprint.md exists, note what is already committed to the sprint.
+
+    Reconcile plan/ against reality before scoring:
+    - Read `docs/project/tracks/*/index.md` `status:` frontmatter. Where a plan item links to a
+      track, the track's status is the source of truth — a plan item still marked open whose
+      track is Closed is DROPPED (already done), not ranked.
+    - Cross-check against the `git branch -a` list provided above. A branch with no matching
+      plan/track entry is untracked in-flight work — surface it, don't score it (someone needs
+      to file it before it can be ranked). A track marked Open with no matching branch is
+      stalled — flag it, don't just rank it as if work were progressing.
+    - A track that already has an active branch with commits needs less remaining effort than
+      the plan item's original estimate suggests — adjust Effort down accordingly and say why.
 
     Produce a re-ranked backlog with scoring rationale for each item.
 
@@ -82,6 +102,10 @@ Task(
 
     ### Defers
     <tracks to defer, with condition for re-evaluation>
+
+    ### Reconciliation
+    <mismatches found while cross-checking plan/ vs tracks/ vs git branches: plan status
+    contradicted by track status, tracks with no branch, branches with no plan/track entry>
 
     ### Notes
     <anything the developer should know before deciding>

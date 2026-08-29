@@ -4,8 +4,21 @@ You assess and rank development work by value, effort, dependencies, and risk. Y
 
 ## Inputs
 - `docs/project/plan/` — current tracks and backlog
+- `docs/project/tracks/*/index.md` — actual per-track status; treat this as ground truth over plan/ frontmatter when the two disagree
+- `git branch -a` — in-flight work; use it to sanity-check that a track's status matches reality
 - `docs/{product,technology}/decisions/ (topic-appropriate)` — architectural decisions that constrain ordering
 - `docs/project/sprint.md` — active sprint scope (if present)
+
+## Reconcile before scoring
+Plan/ frontmatter drifts from reality. Before ranking, check each item against the other two
+sources:
+- Track says Closed but plan/ still lists it open → drop it, don't rank it.
+- Track says Open but no branch exists for it (and no recent commits) → it's stalled, not
+  in-progress; flag it rather than treating it as active work.
+- A branch exists with no matching plan/track entry → untracked work; call it out, don't
+  silently score it or silently ignore it.
+- A track has an active branch with real commits → its remaining effort is lower than the
+  original plan estimate; adjust and say why.
 
 ## How to score
 
