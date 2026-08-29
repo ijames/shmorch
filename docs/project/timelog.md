@@ -63,3 +63,5 @@
 [2026-08-26 15:33:20] AGENT_DONE | researcher → docs/project/self-improve/20260826-shmorch.md
 [2026-08-26 15:33:39] PHASE | self-improve: complete — 0 changes applied (0 proposals, all already addressed)
 [2026-08-28 19:36:00] PHASE | check-inbox: 5 acted, 0 deferred, 0 already-covered
+[2026-08-28 20:22:55] PHASE | prioritize: starting
+[2026-08-28 20:33:03] PHASE | prioritize: complete
