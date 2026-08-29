@@ -1,6 +1,6 @@
 ---
 loads_when: re-ranking the backlog, surfacing effort/value tradeoffs
-size: 122 lines
+size: 138 lines
 ---
 
 # Workflow: prioritize
@@ -29,7 +29,10 @@ Re-rank the backlog and surface effort/value tradeoffs. Updates `docs/project/pl
 ### Step 1 — Stamp
 ```bash
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "prioritize: starting"
+tail -1 docs/project/timelog.md
 ```
+Confirm the tail line actually shows `PHASE | prioritize: starting` — don't fire-and-forget
+the `timelog.sh` call. If it's missing, the stamp didn't land; re-run before continuing.
 
 ### Step 2 — Read current state
 
@@ -122,6 +125,14 @@ Show the proposed ranking to the developer. Ask:
 - If adjust: make the requested changes, re-confirm, then apply.
 - If keep: mark the index row "Superseded". No changes to plan/.
 
+**Gate — do not end this workflow until the index row for this run shows one of
+`Applied YYYY-MM-DD` / adjusted-then-applied / `Superseded`.** A run that produces a
+proposal file but leaves the index row at "Pending decision" has not completed Step 6 —
+go back and get the developer's apply/adjust/keep answer before stamping complete.
+
 ```bash
 bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "prioritize: complete"
+tail -1 docs/project/timelog.md
 ```
+Confirm the tail line shows `PHASE | prioritize: complete` before ending the workflow —
+this stamp has gone missing in practice despite being scripted.

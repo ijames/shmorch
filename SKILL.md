@@ -1,6 +1,6 @@
 ---
 name: shmorch
-description: Shmorch is an autonomous development orchestrator that manages persistent project state across sessions. Use this skill whenever the user wants to start a dev session, plan features, track in-progress work, clean up code, manage a sprint, prioritize work, or improve the shmorch workflow itself. Trigger on /shmorch go, resume, touch, init, discover, wrap, commit, vacuum, documentarian, checkpoint, sprinter, prioritize, self-improve, research, status, orient, auto-update, personal-eval, pe, check-inbox, or learn — or when they say things like "let's start a session", "what were we working on", "clean up the code", "check the sprint", "reprioritize the backlog", "what's the status", "look for better practices", "clear the inbox", or "remember this".
+description: Shmorch is an autonomous development orchestrator that manages persistent project state across sessions. Use this skill whenever the user wants to start a dev session, plan features, track in-progress work, clean up code, manage a sprint, prioritize work, or improve the shmorch workflow itself. Trigger on /shmorch go, resume, touch, init, discover, wrap, commit, vacuum, documentarian, checkpoint, sprinter, prioritize, self-improve, research, status, orient, auto-update, personal-eval, pe, check-inbox, aside, or learn — or when they say things like "let's start a session", "what were we working on", "clean up the code", "check the sprint", "reprioritize the backlog", "what's the status", "look for better practices", "clear the inbox", "remember this", or "note that for later".
 user-invocable: true
 allowed-tools: Bash, Read, Edit, Write, Grep, Glob, Agent, WebSearch
 ---
@@ -28,6 +28,7 @@ Dispatch on the first word of the invocation arguments — `$ARGUMENTS` on Claud
 | `orient` | `commands/orient.md` |
 | `status` | `commands/status.md` |
 | `check-inbox` | `commands/check-inbox.md` |
+| `aside` | `commands/aside.md` |
 | `learn` | `commands/learn.md` |
 | `help` or empty | `commands/help.md` |
 | anything else | **Shmorch prompt** — treat the full args as a question or directive addressed to Shmorch in the current project context. Read `docs/project/context.md`, `docs/project/session.md`, and `docs/project/plan/` to orient, then respond as Shmorch: actively, concisely, and with a next-step proposal. Do not read any command file. |

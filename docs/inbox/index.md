@@ -10,11 +10,19 @@ will pick them up to evaluate and either apply, defer, or discard.
 Items here are not authoritative. They graduate into `workflows/`, `core/`, `agents/`,
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
-**Open:**
+**Open:** (none)
 
-(none)
-
-(previously resolved: `em-dash-rule-scope-and-liveness-gap.md`, filed from `shming.com`
+(previously resolved: `capture-aside-command.md`, filed from `darkbadge` 2026-08-27 — built
+as `commands/aside.md` + `workflows/aside.md`, 2026-08-28.
+`block-claude-project-memory-writes.md`, filed from `shming.com` 2026-08-26 — PreToolUse
+hook added as `templates/.claude/hooks/pre-tool-memory-guard.sh`, wired into
+`templates/.claude/settings.json`, 2026-08-28.
+`backfill-migrate-claude-project-memory.md`, filed from `shming.com` 2026-08-26 — scoped to
+`docs/project/plan/backfill-migrate-claude-project-memory.md` (not yet executed), 2026-08-28.
+`no-staleness-nudge-for-blocked-tracks.md`, filed from `treeclusion` 2026-08-28 — CW-9 added
+to `workflows/go.md`, 2026-08-28.
+`prioritize-instrumentation-not-followed.md`, filed from `treeclusion` 2026-08-28 — Step 6
+gate + stamp readback added to `workflows/prioritize.md`, 2026-08-28. `em-dash-rule-scope-and-liveness-gap.md`, filed from `shming.com`
 2026-08-25 — scope-narrowing loophole closed in `core/engineering-standards.md:14`,
 new rule-liveness paragraph added to `core/operations.md`, 2026-08-26.
 `learning-log-external-reference-reconsider.md` and

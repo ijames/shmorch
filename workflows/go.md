@@ -1,6 +1,6 @@
 ---
 loads_when: session start, or re-orienting mid-session — the one entry dispatcher
-size: 175 lines
+size: 185 lines
 ---
 
 # Workflow: go — entry dispatcher
@@ -157,6 +157,16 @@ grep -A1 "BLOCKER\|Pick up immediately" docs/project/session.md | head -4
 grep -cE "auto-closed by stop hook|auto-wrapped \(guard: consecutive SESSION_START\)" docs/project/timelog.md 2>/dev/null || echo 0
 ```
 If this count is 3 or more, sessions are habitually ending without a real `/shmorch wrap` (context exhaustion or abrupt stop, not deliberate close). Surface this once during orientation as a named observation — not a blocker, just visibility — e.g.: "Note: N sessions in a row ended without wrap; catch-up reconstruction is covering it, but consider whether the wrap trigger itself needs attention." Do not repeat this nudge every session once said — say it, then let it drop unless the count keeps climbing.
+
+**CW-9 — Escalate stale Blocked tracks:**
+```bash
+awk -F'|' '$3 ~ /Blocked/ {gsub(/^ +| +$/,"",$2); print $2}' docs/project/tracks/index.md 2>/dev/null
+```
+For each track name matched, use its `Updated` column date if set, else the `YYYYMMDD` prefix
+of its own directory name, as the last-touched date. Count how many are 21+ days stale. If
+that count is 3 or more, surface once during orientation: "N tracks have sat Blocked for 3+
+weeks — worth a `/shmorch prioritize` pass?" Do not repeat this nudge every session once said
+— say it, then let it drop unless the count keeps climbing, mirroring CW-8.
 
 ---
 
