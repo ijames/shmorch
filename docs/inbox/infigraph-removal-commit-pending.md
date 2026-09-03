@@ -1,4 +1,14 @@
+**In this section:** [Templates carry non-generic, leftover content from other projects](template-content-not-generic.md)
+
 # `~/.claude/settings.json` needs a scoped commit after Infigraph removal
+
+**Status:** Deferred 2026-09-03 — premise is stale. Re-checked via `git -C ~/.claude diff
+settings.json`: the Infigraph-hook-removal diff described below is gone, superseded by
+unrelated Supacode hook rewrites and a new `herdr-agent-state.sh` SessionStart hook added
+sometime after 2026-08-31. There is nothing Infigraph-related left in the diff to commit.
+`~/.claude` needs a fresh look at what it currently carries uncommitted — not the specific
+commit this item originally proposed. Point 4 below (whether
+`~/.claude/skills/shmorch/.infigraph/` needs cleanup) is still open and untouched.
 
 **Filed from:** shming.com, 2026-08-31
 
