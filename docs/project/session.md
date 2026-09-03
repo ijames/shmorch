@@ -4,6 +4,19 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+## Since last entry — merged, undocumented — 2026-09-03 (via `/shmorch touch`)
+
+PRs merged after 2026-08-28 that this log never caught up to: #126 pe pipeline tools/ move
+(personal-profile's `scan.py`/`session_turns.py` relocated into `tools/`) + index-preview-cap
+fix (regenerate, don't append, ~150 char cap — was accreting into 3-4KB comma-spliced lists),
+#127 `core/tdd.md` Testing Depth Ladder (test rigor scaled to project `stage` + a form axis;
+Gherkin/BDD vs. visual-regression distinction added), #130 `prioritize` reconciles `plan/`
+against `tracks/`/git branches before ranking (full-backlog re-rank; filed
+`tracks/20260824-determinism-ladder` — stranded on an unmerged research branch with no
+plan/track entry until this run caught it), #131 `core/js_tooling.md` split into a new
+`technologies/` tier (per-technology JIT context alongside Command/Workflow/Role/Core;
+`technologies/javascript.md` + new `technologies/python.md`; VERSION 2.2.0 -> 2.3.0).
+
 check-inbox 2026-08-28: 5 acted, 0 deferred — PreToolUse memory-guard hook
 (`templates/.claude/hooks/pre-tool-memory-guard.sh`) blocks Write/Edit into `.claude` project
 memory in Shmorch-managed repos; migration backlog item filed
