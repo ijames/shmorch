@@ -25,6 +25,7 @@ This table is generated from each track's own `status:`/`updated:` frontmatter �
 | [20260804-semver-versioning](20260804-semver-versioning/index.md) | Active | — |
 | [20260810-adaptive-reorient-interview](20260810-adaptive-reorient-interview/index.md) | Active | — |
 | [20260810-deterministic-merge-chain-tool](20260810-deterministic-merge-chain-tool/index.md) | Active | — |
+| [20260824-determinism-ladder](20260824-determinism-ladder/index.md) | Open | 2026-08-24 |
 
 ## Closed
 
