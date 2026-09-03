@@ -10,7 +10,9 @@ will pick them up to evaluate and either apply, defer, or discard.
 Items here are not authoritative. They graduate into `workflows/`, `core/`, `agents/`,
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
-**Open:** (none)
+**Open:** `template-content-not-generic.md`, filed from `Paths` 2026-08-29;
+`infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31;
+`decisions-vs-directives.md`, filed from `shmorch` (self) 2026-09-01
 
 (previously resolved: `capture-aside-command.md`, filed from `darkbadge` 2026-08-27 — built
 as `commands/aside.md` + `workflows/aside.md`, 2026-08-28.
