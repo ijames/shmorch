@@ -65,3 +65,5 @@
 [2026-08-28 19:36:00] PHASE | check-inbox: 5 acted, 0 deferred, 0 already-covered
 [2026-08-28 20:22:55] PHASE | prioritize: starting
 [2026-08-28 20:33:03] PHASE | prioritize: complete
+[2026-09-03 14:05:14] SESSION_START | new session
+[2026-09-03 14:09:04] SESSION_END | auto-closed by stop hook — main @ 96a83c2 Merge pull request #130 from ijames/feat/20260829-prioritize-reconciliation

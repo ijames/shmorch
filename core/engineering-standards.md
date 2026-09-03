@@ -17,6 +17,20 @@ General-purpose standards that apply across every project Shmorch touches - cont
 
 ---
 
+## Code organization
+
+Order methods/functions in a module or class step-down style: public (no `_` prefix)
+first, in the order a reader would need them, then private/protected (`_`-prefixed)
+helpers below the public method(s) that call them. A reader should be able to understand
+the public interface top-to-bottom before ever hitting an implementation detail.
+
+Enforce this with a linter where the project's stack has one — see
+`$SHMORCH_HOME/technologies/index.md` for the per-technology tool (e.g. Python:
+`flake8-class-attributes-order`, run alongside Ruff since Ruff has no native rule for it
+yet — see `technologies/python.md` for the trigger to retire it).
+
+---
+
 ## Technical decision-making
 
 Do not weight development cost heavily when choosing between technical approaches. Prefer quality, simplicity, robustness, scalability, and long-term maintainability. A cheaper-to-build option that is worse on those axes is not the tie-breaker.
