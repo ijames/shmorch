@@ -1,6 +1,6 @@
 ---
 loads_when: always — entry pointer for the core/ subtree, read before falling back to frontmatter-traverse.sh
-size: 27 lines
+size: 31 lines
 ---
 
 # Core Doctrine
@@ -24,4 +24,8 @@ Doctrine files loaded on demand by `shmorch-core.md`, workflows, and roles. Thes
 | `cross-functional.md` | Cross-functional artifact usability — intimacy gradient, naming-as-contract, discipline boundary signals |
 | `portability.md` | Cross-CLI portability — `$SHMORCH_HOME` indirection, context-file chain, capability adapter matrix, graceful degradation |
 | `operations.md` | Timing events, comms notifications, vacuum protocol, checkpoints, VERSION bump rule, skill-change branch/PR workflow |
-| `js_tooling.md` | pnpm as default for JS/TS projects — worktree/`node_modules` sharing, `uv` as the Python analogue |
+
+Stack-specific tooling notes (only load when the project's stack includes that
+technology) live outside `core/` in `$SHMORCH_HOME/technologies/` — see
+`technologies/index.md`. `core/` is universal doctrine; `technologies/` is optional,
+per-technology context.

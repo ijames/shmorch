@@ -3,7 +3,7 @@ loads_when: intake or setup for a JS/TS project — pnpm as default, worktree/no
 size: 32 lines
 ---
 
-# JS/TS Tooling
+# JavaScript / TypeScript
 
 pnpm is the default package manager for JS/TS projects: new projects, and existing projects
 with no committed lockfile (`package-lock.json` / `yarn.lock`) yet. Existing npm/yarn projects

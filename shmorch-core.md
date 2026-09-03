@@ -151,7 +151,8 @@ Full documentation model (skeleton principle, two-tier knowledge, graduation rul
 | **Command** | `commands/<name>.md` | Entry point — dispatches to workflow |
 | **Workflow** | `workflows/<name>.md` | Procedural steps — what to do and in what order |
 | **Role** | `agents/roles/<name>.md` | Agent framing — who does it, worldview, rules |
-| **Core** | `core/<name>.md` | Doctrine — principles that workflows and roles reference |
+| **Core** | `core/<name>.md` | Doctrine — principles that workflows and roles reference, universal across every stack |
+| **Technology** | `technologies/<name>.md` | Optional — per-technology tooling notes, loaded only when the project's stack includes that technology. See `technologies/index.md` |
 | **Tools** | `tools/<name>.sh` | Shell scripts for operations outside an agent session |
 
 Both workflows and roles may reference `core/` files as needed for a specific task.
