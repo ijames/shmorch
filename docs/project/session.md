@@ -17,6 +17,12 @@ plan/track entry until this run caught it), #131 `core/js_tooling.md` split into
 `technologies/` tier (per-technology JIT context alongside Command/Workflow/Role/Core;
 `technologies/javascript.md` + new `technologies/python.md`; VERSION 2.2.0 -> 2.3.0).
 
+check-inbox 2026-09-03: 3 acted, 1 re-deferred with updated note — folded
+`decisions-vs-directives.md` into `core/documentation.md`; re-scoped
+`template-content-not-generic.md` as `docs/project/plan/template-content-genericity-detection.md`
+after a template audit found the current templates clean; `infigraph-removal-commit-pending.md`
+found stale on re-check and deferred with an updated note instead of blindly committing.
+
 check-inbox 2026-08-28: 5 acted, 0 deferred — PreToolUse memory-guard hook
 (`templates/.claude/hooks/pre-tool-memory-guard.sh`) blocks Write/Edit into `.claude` project
 memory in Shmorch-managed repos; migration backlog item filed

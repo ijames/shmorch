@@ -6,6 +6,7 @@
 
 
 
+
 **In this section:** [session](session.md) · [timelog](timelog.md)
 
 # Pre-planning

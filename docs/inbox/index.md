@@ -10,11 +10,15 @@ will pick them up to evaluate and either apply, defer, or discard.
 Items here are not authoritative. They graduate into `workflows/`, `core/`, `agents/`,
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
-**Open:** `template-content-not-generic.md`, filed from `Paths` 2026-08-29;
-`infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31;
-`decisions-vs-directives.md`, filed from `shmorch` (self) 2026-09-01
+**Open:** `infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31 —
+Deferred 2026-09-03, premise went stale (see file for re-check instructions).
 
-(previously resolved: `capture-aside-command.md`, filed from `darkbadge` 2026-08-27 — built
+(previously resolved: `template-content-not-generic.md`, filed from `Paths` 2026-08-29 —
+re-scoped as `docs/project/plan/template-content-genericity-detection.md` after a template
+audit found the current template set clean, 2026-09-03.
+`decisions-vs-directives.md`, filed from `shmorch` (self) 2026-09-01 — folded into
+`core/documentation.md`'s "Decisions vs. directives" bullet, 2026-09-03.
+`capture-aside-command.md`, filed from `darkbadge` 2026-08-27 — built
 as `commands/aside.md` + `workflows/aside.md`, 2026-08-28.
 `block-claude-project-memory-writes.md`, filed from `shming.com` 2026-08-26 — PreToolUse
 hook added as `templates/.claude/hooks/pre-tool-memory-guard.sh`, wired into
