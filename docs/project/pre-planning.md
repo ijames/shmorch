@@ -169,17 +169,21 @@ before assuming a schema for anything beyond `conversations.json`.
 2. Session boundary = one `conversations.json` entry = one `pe` session, same as one
    Claude Code transcript file today. `create_time`/`update_time` on the conversation
    object give the timing-section data `stats.md` already tracks.
-3. Reuse `pe-summarizer`, `pe-synthesizer`, `pe-analyzer`, and the existing
-   `profile/0N-*.md` taxonomy as-is — the whole point of the multi-source pointer
-   above. No new roles needed for this source.
+3. Reuse `pe-summarizer`, `pe-synthesizer`, `pe-analyzer`, and the existing section-file
+   taxonomy (11 files, numeric prefixes dropped 2026-09-04 — see
+   `docs/project/plan/pe-pipeline-split-generalization-vs-concrete-track-record.md`) as-is
+   — the whole point of the multi-source pointer above. No new roles needed for this
+   source. The `[James]`/`[Agent]` attribution split and the parallel
+   `<slug>_agent_behavior.md` stream also carry over unchanged — a ChatGPT session still
+   has a human side and an assistant side to tag the same way.
 4. Open question to resolve when actually built, not now: one shared
    `personal-profile` repo with a source tag per session (keeps one unified profile,
    which matches the actual goal — one picture of the person, not two), vs. a
    separate `.openai/personal-profile` tree merged later. ChatGPT conversations
    mostly won't have a "project" the way Claude Code sessions do (git repo per
-   project), so whatever `profile/0N-*.md` field currently assumes a project name
-   needs a fallback (topic/title-derived, or just "chatgpt" with the conversation
-   title as detail) rather than a hard requirement.
+   project), so whatever section-file field currently assumes a project name needs a
+   fallback (topic/title-derived, or just "chatgpt" with the conversation title as
+   detail) rather than a hard requirement.
 5. Given the user's stated volume ("much more" than the Claude Code backlog), reuse
    the same batch-cap/cheap-tier-first design as `pe scan` rather than a one-shot
    bulk import — same cost-awareness reasoning, bigger backlog.

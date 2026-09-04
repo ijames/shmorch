@@ -107,7 +107,7 @@ since there's no subagent call to pin it for you there."
 ## Step 3 — Per-session extraction (one subagent per session, not one agent for the batch)
 
 For each of the N sessions, **in sequence, not parallel** — the synthesizer step
-writes to shared `profile/0N-*.md` files and commits after each session; concurrent
+writes to shared section files and commits after each session; concurrent
 writes would race:
 
 1. `python3 "$PERSONAL_PROFILE_HOME/tools/session_turns.py" <path>` — clean request/response
@@ -117,7 +117,7 @@ writes would race:
    input the Step 3.1 output. Writes `$PERSONAL_PROFILE_HOME/sessions/<slug>.md`.
 3. Spawn (or run inline) a **pe-synthesizer** agent, cheap tier, role
    `$SHMORCH_HOME/agents/roles/pe-synthesizer.md`, input the new `sessions/<slug>.md`
-   plus the raw text from 3.1. Updates the matching `profile/0N-*.md` file(s) and
+   plus the raw text from 3.1. Updates the matching section file(s) and
    `profile/index.md` if stale, commits, and runs `tools/scan.py --mark <path>`.
 4. Append a row to `stats.md` (session, date, project, start–end, duration, categories
    touched) and update its tally counts — same pass as `processed.log`, per the README.
@@ -127,15 +127,17 @@ writes would race:
 ## Step 4 — Report
 
 After the batch, report to the user: sessions processed, categories touched, backlog
-remaining (`python3 tools/scan.py` count). Do not start another batch automatically — the
-user re-runs `/shmorch pe` when ready for the next one.
+remaining (`python3 tools/scan.py` count), and any `AMBIGUOUS:` lines emitted by this
+batch's synthesizer runs (see `pe-synthesizer.md`'s MECE overflow rule) — surface the
+count and file, don't let it go unnoticed in a routine commit. Do not start another
+batch automatically — the user re-runs `/shmorch pe` when ready for the next one.
 
 ---
 
 ## Step A — `pe analyze`: strong-tier interpretive pass
 
 A separate mode from Steps 1–4: reads the whole accumulated profile and writes one
-dated analysis document. Does not touch `profile/0N-*.md`, `sessions/`, `stats.md`,
+dated analysis document. Does not touch the section files, `sessions/`, `stats.md`,
 or `processed.log` — read-only against all of them.
 
 1. Resolve `$PERSONAL_PROFILE_HOME` (same as Step 1). Confirm
