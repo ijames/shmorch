@@ -33,6 +33,24 @@ section, populated with the same Reinforces/Adds/Conflicts discipline but kept l
 instead of trait-compressed; `pe-analyzer` gained a non-interpretive Track Record output
 section. Bootstrapped in the (separate, non-public) `$PERSONAL_PROFILE_HOME` repo.
 
+**v2 shipped via PR #134 (2026-09-04)** — actor attribution + MECE overflow, prompted by
+a `personal-profile` restart after AI-executed work got written into trait-section
+bullets as if James had done it himself:
+- `pe-summarizer` tags every Concrete bullet `[James]`/`[Agent]` (mixed bullets tag each
+  clause separately) and now writes a second, parallel `<slug>_agent_behavior.md` file
+  per session — the assistant's own conduct as its own evidence stream, never folded
+  into the human-subject profile.
+- `pe-synthesizer` only admits `[James]`-tagged material into the 9 trait sections
+  (replacing the stale "compress toward a generalized trait" framing that predated the
+  tag check); `{#track-record}` is unaffected by the tag rule since it was already
+  literal, not trait-compressed.
+- Taxonomy is now explicit MECE: an 11th file, `profile/ambiguous-uncategorized.md`,
+  catches evidence that doesn't cleanly resolve to any of the 10 sections, flagged in
+  the synthesizer's output/commit message and surfaced in `workflows/personal-eval.md`
+  Step 4's batch report.
+- Numeric filename prefixes (`profile/0N-*.md`) dropped everywhere — `profile/index.md`
+  is now the single place display order lives.
+
 **Open follow-ups, deliberately not built yet — the file is empty, build these once it
 shows real strain, not preemptively (researched 2026-08-18):**
 
