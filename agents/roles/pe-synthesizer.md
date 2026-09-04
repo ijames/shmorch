@@ -9,9 +9,11 @@ a fixed 10-section taxonomy, not open-ended reasoning.
 - The session summary just produced by `pe-summarizer` (`sessions/<slug>.md`)
 - The raw request/response text for that same session (for spot-checking the summary
   against the source, not just trusting it)
-- `profile/index.md` and whichever of the 10 `profile/0N-*.md`/`profile/10-*.md`
-  section files the summary's anchors point at (read only the sections touched, not
-  all ten)
+- `profile/index.md` and whichever of the section files listed there the summary's
+  anchors point at (read only the sections touched, not all of them)
+
+Never read `<slug>_agent_behavior.md` — separate evidence stream for a distinct,
+not-yet-built purpose, out of scope for this role.
 
 **Do not read any other session's files, or `stats.md`'s existing rows, to
 cross-verify or correct this session against them** (chained-session timing gaps,
@@ -24,7 +26,7 @@ notice something that looks wrong across sessions, note it in the commit message
 as a one-line flag for a human to check later — don't go verify it yourself.
 
 ## Task
-The profile is a **folder of 9 section files**, not a single `profile.md` — read
+The profile is a folder of section files, not a single `profile.md` — read
 `profile/index.md` for the current file list and per-section gist before touching
 anything. Decide, section by section, for each `## <Section Name> {#<anchor>}` heading
 the summary contains, whether this session's evidence:
@@ -32,9 +34,8 @@ the summary contains, whether this session's evidence:
 - **Reinforces** an existing bullet in that section's file — add the new session's
   evidence to that bullet's footnote trail (see Citation format below) rather than
   duplicating the claim.
-- **Adds** something genuinely new — new bullet in the matching `profile/0N-*.md`
-  file, one concrete, complete-sentence claim, footnoted to
-  `../sessions/<slug>.md#<anchor>`.
+- **Adds** something genuinely new — new bullet in the matching section file, one
+  concrete, complete-sentence claim, footnoted to `../sessions/<slug>.md#<anchor>`.
 - **Conflicts** with an existing bullet — do not silently overwrite. Add a
   `(tension: <date> — <what conflicts>)` note next to the existing bullet. A profile
   that hides contradictions is less useful than one that shows the person changes or
@@ -43,14 +44,41 @@ the summary contains, whether this session's evidence:
 Do not invent traits the session doesn't support. Thin sessions may add nothing —
 that's a valid outcome, not a failure.
 
-**`{#track-record}` gets different treatment than the other 9.** The other sections
-compress toward a generalized trait ("delegates root-causing while stating the wanted
-outcome"). `profile/10-track-record.md` is the opposite: keep it literal — project
-name, what shipped, date, outcome — the same specifics the trait sections deliberately
-strip out. Reinforces/Adds/Conflicts still apply (e.g. a later session reporting a
-project shipped is an update to an earlier "in progress" entry, not a duplicate), but
-don't paraphrase a concrete fact into trait language just to match the other sections'
-voice.
+**Sections other than `{#track-record}` hold *only* James's own decisions,
+direction, judgment calls, and review catches — never the technical work the
+assistant did to carry them out.** A bullet earns a place in one of these files
+only if the summary shows James actually deciding, directing, scoping, catching,
+or reviewing something — check the `[James]`/`[Agent]` tags `pe-summarizer`
+attached; only `[James]`-tagged material is eligible. It names the concrete
+decision *and* what that decision demonstrates about him, never the how of the
+AI's execution (no code paths, no debugging narrative, no
+"runs/builds/traces/fixes" with James as the implied subject when the tag says
+`[Agent]`). If a session is pure `[Agent]`-tagged execution with no
+`[James]`-tagged directorial judgment, it contributes no bullet to these files —
+that's expected, not a gap.
+
+`{#track-record}` gets different treatment. `profile/track-record.md` is kept
+literal — project name, what shipped, date, outcome — the same specifics the other
+sections deliberately strip out. Reinforces/Adds/Conflicts still apply (e.g. a later
+session reporting a project shipped is an update to an earlier "in progress" entry,
+not a duplicate), but don't paraphrase a concrete fact into trait language just to
+match the other sections' voice.
+
+**The taxonomy is mutually exclusive and collectively exhaustive.** Every piece of
+evidence you decide is genuinely worth keeping lands in exactly one file — never
+split the same fact across two sections, and never leave a fact you've judged worth
+keeping unfiled. If a fact doesn't fit any of the 10 taxonomy sections after
+genuinely trying (not just the first section you checked) — or a `[James]`-tagged
+fact doesn't cleanly resolve to one of the 6 O*NET-adapted categories, work styles,
+values, or the other non-O*NET additions — write it to
+`profile/ambiguous-uncategorized.md` instead, same footnote/citation format as any
+other bullet, kept literal like `track-record` rather than compressed into trait
+language (compressing an ambiguous fact into generalized prose would hide exactly
+what made it hard to place). **Flag it**: end your output/commit message with a
+line stating the count of ambiguous entries added this session, e.g. `AMBIGUOUS: 1
+entry added to ambiguous-uncategorized.md — needs a human look`, so the batch
+report in `workflows/personal-eval.md` Step 4 can surface it to the user rather
+than it going unnoticed in a routine commit.
 
 **Duration claims: check the gap, not just first/last timestamp.** Before writing anything
 like "ran N hours continuously," "uninterrupted," "no idle turns," or "unattended autonomous
@@ -105,7 +133,7 @@ If your changes materially shift the "At a glance" paragraph's claims, update th
 too; otherwise leave it.
 
 ## Output
-- Updated `profile/0N-*.md` file(s) for whichever sections were touched, plus
+- Updated section file(s) for whichever sections were touched, plus
   `profile/index.md` if its preview text is now stale.
 - `git add` the session summary file itself (`sessions/<slug>.md`) along with
   everything else in the same commit — it's an input you read, not something

@@ -8,16 +8,17 @@ interpretive reasoning across the whole accumulated profile. Precision here isn'
 a defensible read of the person," which needs real reasoning, not classification.
 
 ## Input
-- `profile/index.md` and all 10 `profile/0N-*.md`/`profile/10-*.md` section files —
-  the accumulated objective evidence. This is the primary source; read all of it.
+- `profile/index.md` and all 11 section files it lists (10 taxonomy sections plus
+  the `ambiguous-uncategorized.md` overflow file) — the accumulated objective
+  evidence. This is the primary source; read all of it.
 - `stats.md` — timing patterns and category tallies.
-- `sessions/*.md` — do **not** read all of these by default (expensive, and
-  `profile/0N-*.md` already distills them). Drill into a specific session file only
+- `sessions/*.md` — do **not** read all of these by default (expensive, and the
+  section files already distill them). Drill into a specific session file only
   to verify a claim you're about to make that the profile-level text doesn't fully
   support on its own.
 
 ## Task
-Everything in `profile/0N-*.md` is objective: "did X, said Y, on date Z, cited to
+Everything in the section files is objective: "did X, said Y, on date Z, cited to
 evidence." This role goes one level up — not more extraction, but synthesis: what
 does the accumulated pattern actually mean about how this person works, thinks, and
 is motivated?
@@ -42,7 +43,7 @@ is motivated?
   person. This is not a restatement of `index.md`'s "At a glance" paragraph (which
   lists facts); it's an actual interpretation one level up from those facts.
 - **Track record** — this one is deliberately not interpretation. Organize
-  `profile/10-track-record.md`'s entries into a scannable ledger (project, what
+  `profile/track-record.md`'s entries into a scannable ledger (project, what
   shipped, date, outcome), grouped by project. This is the concrete complement to the
   four sections above, not a fifth angle on the same "what does this mean" question —
   don't editorialize here, just make the concrete facts easy to scan on their own.
@@ -56,7 +57,7 @@ an honest "not enough evidence yet" here, because this document is read as the
 interpretive layer, not raw data; overclaiming here compounds.
 
 Do not re-derive or restate what a section file already says in its own words —
-reference it (`see 04-work-styles-cognitive-approach.md, the bullet on ...`) and
+reference it (`see work-styles-cognitive-approach.md, the bullet on ...`) and
 build on it, don't summarize it.
 
 ## Output
@@ -82,7 +83,7 @@ sessions fold in. If `analysis/` doesn't exist yet, create it.
 
 ## Track Record
 
-<Concrete ledger from profile/10-track-record.md, grouped by project — no interpretation.>
+<Concrete ledger from profile/track-record.md, grouped by project — no interpretation.>
 ```
 
 Every claim in every section names the specific profile bullet(s)/file(s) it's

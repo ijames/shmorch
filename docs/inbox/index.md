@@ -11,9 +11,27 @@ Items here are not authoritative. They graduate into `workflows/`, `core/`, `age
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
 **Open:** `infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31 —
-Deferred 2026-09-03, premise went stale (see file for re-check instructions).
+Deferred 2026-09-03, premise went stale (see file for re-check instructions); point 4
+(`.infigraph/` cleanup) still open, re-confirmed stale 2026-09-04.
+`version-control-default-merge-strategy.md`, filed from `darkbadge` 2026-09-03 —
+Deferred 2026-09-04, no default merge/rebase-before-merge doctrine for projects without
+their own strategy; needs a real decision, not just drafting.
+`observability-driven-development-watcher-gate.md`, filed from
+`darkbadge` 2026-08-26 — Deferred 2026-09-04, candidate "no watcher, no error log"
+PR-gate addition to `core/observability.md`/`workflows/build.md`; already applied
+project-locally in DarkBadge, not yet validated as more than a one-project pattern.
+`progressive-delivery-flag-dependency-chains.md`, filed from `darkbadge`
+2026-08-04 — Deferred 2026-09-04, candidate "Dependency Chains" section for
+`core/progressive_delivery.md`; DarkBadge's own case resolved via PostHog's native
+support, no urgent driver.
 
-(previously resolved: `template-content-not-generic.md`, filed from `Paths` 2026-08-29 —
+(previously resolved: `pe-attribution-and-mece.md`, filed from `shming.com` 2026-09-04 —
+applied 2026-09-04: `pe-synthesizer.md`'s stale generalized-trait wording replaced with
+the `[James]`/`[Agent]` tag check, `pe-summarizer.md` gained attribution tagging plus a
+parallel `<slug>_agent_behavior.md` output, MECE + `ambiguous-uncategorized.md` overflow
+added to the synthesizer, numeric filename prefixes dropped across all 5 role/workflow/
+command files.
+`template-content-not-generic.md`, filed from `Paths` 2026-08-29 —
 re-scoped as `docs/project/plan/template-content-genericity-detection.md` after a template
 audit found the current template set clean, 2026-09-03.
 `decisions-vs-directives.md`, filed from `shmorch` (self) 2026-09-01 — folded into

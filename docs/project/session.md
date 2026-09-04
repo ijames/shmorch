@@ -4,6 +4,16 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+check-inbox 2026-09-04: 1 acted, 3 deferred (with updated notes) — `pe-attribution-and-mece.md`
+applied: `pe-synthesizer.md`'s stale pre-incident generalized-trait wording replaced with the
+`[James]`/`[Agent]` tag check, `pe-summarizer.md` gained attribution tagging plus a parallel
+`<slug>_agent_behavior.md` output, MECE + `ambiguous-uncategorized.md` overflow added, numeric
+filename prefixes dropped across all 5 role/workflow/command files. Deferred:
+`infigraph-removal-commit-pending.md` (re-confirmed stale), `version-control-default-merge-strategy.md`
+(needs a real default-strategy decision), `progressive-delivery-flag-dependency-chains.md`
+(DarkBadge's own case resolved, no urgent driver), `observability-driven-development-watcher-gate.md`
+(not yet validated beyond one project).
+
 ## Since last entry — merged, undocumented — 2026-09-03 (via `/shmorch touch`)
 
 PRs merged after 2026-08-28 that this log never caught up to: #126 pe pipeline tools/ move
