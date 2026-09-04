@@ -34,10 +34,15 @@ temptation, without losing the batch convenience.
 - `$PERSONAL_PROFILE_HOME/processed.log` — backlog ledger
 
 ## Roles
-- `agents/roles/pe-summarizer.md`, `agents/roles/pe-synthesizer.md`
-- Model tier: **cheap** (Claude `haiku`, omp `smol`), not `default`/`strong`. This is
-  extraction-and-classification against a fixed taxonomy, not open-ended reasoning —
-  the tier that costs less is also the right fit for the task, not just the cheap one.
+- `agents/roles/pe-summarizer.md` — Model tier: **default/strong** (Claude `sonnet`,
+  omp `default`), not cheap. A 2026-09-04 live test found `haiku` inverting
+  `[James]`/`[Agent]` speaker attribution on most bullets of a real session; a
+  `sonnet`-tier re-run of the same session got every bullet right. Speaker
+  attribution across a mixed assistant/user transcript isn't the fixed-format
+  extraction this tier split originally assumed — treat it as reasoning, not lookup.
+- `agents/roles/pe-synthesizer.md` — Model tier: **cheap** (Claude `haiku`, omp
+  `smol`), unaffected by the above — folding an already-tagged summary into section
+  files is the fixed-format part.
 - `agents/roles/pe-analyzer.md` — used only by the `pe analyze` path (Step A below),
   not the scan pipeline. Model tier: **strong** (Claude `opus`/strong `sonnet`, omp
   `slow`) — deliberately the opposite tier from the scan roles above, since this is
@@ -93,14 +98,15 @@ syntax, since natural phrasing ("scan two sessions") is a valid invocation too:
 
 ---
 
-## Step 2.5 — Cheap-model reminder
+## Step 2.5 — Mixed-tier reminder
 
-Before running anything, state plainly: "Running N sessions on the cheap tier
-(`haiku` / `smol` — never `sonnet`/`default`/`slow` for this). If your current CLI
-session is on a stronger model, the subagent calls below still pin to cheap
-regardless — but if you're about to do the summarizing/synthesizing inline on a
-no-subagent CLI (Axis 2 fallback), switch your own session to the cheap tier first,
-since there's no subagent call to pin it for you there."
+Before running anything, state plainly: "Running N sessions — summarizer on
+default/strong tier (`sonnet`, not `haiku`/`smol`; attribution needs it), synthesizer
+on cheap tier (`haiku`/`smol`). If your current CLI session is on a different model,
+the subagent calls below still pin to their own tier regardless — but if you're about
+to run either role inline on a no-subagent CLI (Axis 2 fallback), switch your own
+session to match that role's tier first, since there's no subagent call to pin it for
+you there."
 
 ---
 
@@ -113,8 +119,9 @@ writes would race:
 1. `python3 "$PERSONAL_PROFILE_HOME/tools/session_turns.py" <path>` — clean request/response
    text for that session.
 2. Spawn (or run inline on CLIs without subagents — `core/portability.md` Axis 2) a
-   **pe-summarizer** agent, cheap tier, role `$SHMORCH_HOME/agents/roles/pe-summarizer.md`,
-   input the Step 3.1 output. Writes `$PERSONAL_PROFILE_HOME/sessions/<slug>.md`.
+   **pe-summarizer** agent, default/strong tier, role
+   `$SHMORCH_HOME/agents/roles/pe-summarizer.md`, input the Step 3.1 output. Writes
+   `$PERSONAL_PROFILE_HOME/sessions/<slug>.md`.
 3. Spawn (or run inline) a **pe-synthesizer** agent, cheap tier, role
    `$SHMORCH_HOME/agents/roles/pe-synthesizer.md`, input the new `sessions/<slug>.md`
    plus the raw text from 3.1. Updates the matching section file(s) and

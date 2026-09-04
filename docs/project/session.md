@@ -4,6 +4,18 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+check-inbox 2026-09-04 (second pass, same day): 1 acted, 4 deferred (unchanged) —
+`pe-summarizer-attribution-cheap-tier-unreliable.md` resolved: re-ran `pe-summarizer`
+against session `d07dcb07` on default/strong tier (was haiku) and got every
+`[James]`/`[Agent]` bullet right (vs. haiku's ~5 inversions in the original filing);
+promoted `pe-summarizer` off cheap tier in `workflows/personal-eval.md` and
+`agents/roles/pe-summarizer.md`, wrote the corrected `sessions/2026-07-09_claude_shmorch_d07dcb07.md`
++ `_agent_behavior.md` pair (session still unmarked in `processed.log` — synthesizer
+pass not run yet). Re-confirmed and left deferred as-is (developer declined to
+re-litigate after the first): `infigraph-removal-commit-pending.md` (diff grew to
+77 insertions, still not scoped-clean), `version-control-default-merge-strategy.md`,
+`progressive-delivery-flag-dependency-chains.md`, `observability-driven-development-watcher-gate.md`.
+
 check-inbox 2026-09-04: 1 acted, 3 deferred (with updated notes) — `pe-attribution-and-mece.md`
 applied: `pe-synthesizer.md`'s stale pre-incident generalized-trait wording replaced with the
 `[James]`/`[Agent]` tag check, `pe-summarizer.md` gained attribution tagging plus a parallel

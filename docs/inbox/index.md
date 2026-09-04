@@ -25,7 +25,12 @@ project-locally in DarkBadge, not yet validated as more than a one-project patte
 `core/progressive_delivery.md`; DarkBadge's own case resolved via PostHog's native
 support, no urgent driver.
 
-(previously resolved: `pe-attribution-and-mece.md`, filed from `shming.com` 2026-09-04 —
+(previously resolved: `pe-summarizer-attribution-cheap-tier-unreliable.md`, filed from
+`shming.com` 2026-09-04 — sonnet-tier re-test of session `d07dcb07` got every
+`[James]`/`[Agent]` bullet right (vs. haiku's ~5 inversions); `pe-summarizer` promoted
+to default/strong tier in `workflows/personal-eval.md` and
+`agents/roles/pe-summarizer.md`, 2026-09-04.
+`pe-attribution-and-mece.md`, filed from `shming.com` 2026-09-04 —
 applied 2026-09-04: `pe-synthesizer.md`'s stale generalized-trait wording replaced with
 the `[James]`/`[Agent]` tag check, `pe-summarizer.md` gained attribution tagging plus a
 parallel `<slug>_agent_behavior.md` output, MECE + `ambiguous-uncategorized.md` overflow

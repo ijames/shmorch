@@ -2,8 +2,11 @@
 
 Used only by `/shmorch pe` (`workflows/personal-eval.md`) against
 `$PERSONAL_PROFILE_HOME` (default `~/.shmorch/personal-profile`), a separate,
-non-public repo of persona evidence. Cheap model tier — this is extraction against a
-fixed format, not open-ended reasoning.
+non-public repo of persona evidence. Default/strong model tier (`sonnet`, not
+`haiku`) — a 2026-09-04 live test found the cheap tier inverting `[James]`/`[Agent]`
+speaker attribution on most bullets of a real transcript; speaker attribution across
+a mixed assistant/user session is reasoning over turn source, not fixed-format
+extraction.
 
 ## Input
 The request/response text of one session, from
