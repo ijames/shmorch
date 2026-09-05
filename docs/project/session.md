@@ -4,6 +4,14 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+pe-track-record-out-of-order-dates 2026-09-05: acted on the previously-deferred inbox
+item — `agents/roles/pe-synthesizer.md`'s `{#track-record}` paragraph replaced the
+implicit "later session supersedes" phrasing (read as processing order) with an
+explicit session-date comparison, so a status can't get reverted backwards if
+sessions are ever processed out of chronological order. Inbox file removed,
+`docs/inbox/index.md` updated. `VERSION` bumped `2.3.2` → `2.3.3` (PATCH — doc-only
+role instruction fix).
+
 check-inbox 2026-09-04 (new-only pass): 0 acted, 2 deferred — the two fresh pe-pipeline
 gaps from PR #136 (`pe-project-rename-mapping.md`, `pe-track-record-out-of-order-dates.md`)
 both deferred rather than acted: the rename item ties to the existing "Entity resolution

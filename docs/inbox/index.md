@@ -29,12 +29,11 @@ project-locally in DarkBadge, not yet validated as more than a one-project patte
 2026-08-04 — Deferred 2026-09-04, candidate "Dependency Chains" section for
 `core/progressive_delivery.md`; DarkBadge's own case resolved via PostHog's native
 support, no urgent driver.
-`pe-track-record-out-of-order-dates.md`, filed from `shming.com` 2026-09-05 —
-`pe-synthesizer.md`'s track-record "later session supersedes" wording assumes
-oldest-first processing order rather than comparing session dates; a user pulling
-sessions out of chronological order could get a status reverted backwards.
-
-(previously resolved: `pe-summarizer-attribution-cheap-tier-unreliable.md`, filed from
+(previously resolved: `pe-track-record-out-of-order-dates.md`, filed from
+`shming.com` 2026-09-05 — `agents/roles/pe-synthesizer.md`'s `{#track-record}`
+paragraph now compares the new session's own date against the existing entry's
+cited date(s) instead of processing order before updating a status, 2026-09-05.
+`pe-summarizer-attribution-cheap-tier-unreliable.md`, filed from
 `shming.com` 2026-09-04 — sonnet-tier re-test of session `d07dcb07` got every
 `[James]`/`[Agent]` bullet right (vs. haiku's ~5 inversions); `pe-summarizer` promoted
 to default/strong tier in `workflows/personal-eval.md` and

@@ -59,10 +59,16 @@ that's expected, not a gap.
 
 `{#track-record}` gets different treatment. `profile/track-record.md` is kept
 literal — project name, what shipped, date, outcome — the same specifics the other
-sections deliberately strip out. Reinforces/Adds/Conflicts still apply (e.g. a later
-session reporting a project shipped is an update to an earlier "in progress" entry,
-not a duplicate), but don't paraphrase a concrete fact into trait language just to
-match the other sections' voice.
+sections deliberately strip out. Reinforces/Adds/Conflicts still apply, but sessions
+aren't guaranteed to arrive oldest-first — before treating new evidence as
+superseding an existing entry's status, compare the *new session's own date* (from
+its summary header) against the *existing entry's* cited session date(s), not which
+one you're processing first. Only update an entry's status/outcome when the new
+evidence's session date is actually later. If the new evidence's date is earlier
+than an entry already reflecting a more advanced status, add it as historical
+context on that entry (or its own dated note) rather than reverting the status.
+Don't paraphrase a concrete fact into trait language just to match the other
+sections' voice.
 
 **The taxonomy is mutually exclusive and collectively exhaustive.** Every piece of
 evidence you decide is genuinely worth keeping lands in exactly one file — never

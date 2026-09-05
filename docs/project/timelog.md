@@ -73,3 +73,4 @@
 [2026-09-04 19:36:02] SESSION_START | resume: check-inbox triage
 [2026-09-04 21:50:52] PHASE | check-inbox: 0 acted, 2 deferred, 0 already-covered
 [2026-09-04 21:51:01] SESSION_END | auto-closed by stop hook — main @ d702c28 Merge pull request #136 from ijames/docs/20260905-inbox-filings
+[2026-09-04 21:55:39] PHASE | pe-track-record-out-of-order-dates: acted, date-comparison rule added to pe-synthesizer.md
