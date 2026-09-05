@@ -10,7 +10,13 @@ will pick them up to evaluate and either apply, defer, or discard.
 Items here are not authoritative. They graduate into `workflows/`, `core/`, `agents/`,
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
-**Open:** `pe-project-rename-mapping.md`, filed from `shming.com` 2026-09-04 —
+**Open:** `git-discipline-self-repo-direct-to-main-drift.md`, filed from `shmorch`
+(self) 2026-09-05 — `core/git-discipline.md` says branch hygiene applies to the
+skill repo with no exception, but check-inbox/session-bookkeeping commits (and one
+real doctrine fix) have repeatedly landed direct to `main` instead; needs a
+decision on whether to codify a scoped exception or actually enforce branching for
+this class of change.
+`pe-project-rename-mapping.md`, filed from `shming.com` 2026-09-04 —
 fix already applied directly in `~/.shmorch/personal-profile` (separate repo, no PR
 needed there: `project-aliases.yaml` + `read_meta()` alias resolution, commit
 `466ecbf`); open item is just documenting the mechanism in
