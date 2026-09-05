@@ -4,6 +4,26 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+check-inbox 2026-09-04 (new-only pass): 0 acted, 2 deferred — the two fresh pe-pipeline
+gaps from PR #136 (`pe-project-rename-mapping.md`, `pe-track-record-out-of-order-dates.md`)
+both deferred rather than acted: the rename item ties to the existing "Entity resolution
+isn't handled" follow-up in `pe-pipeline-split-generalization-vs-concrete-track-record.md`
+(revisit alongside it), the out-of-order-dates item deferred until sessions are actually
+processed non-chronologically in practice. 4 previously-deferred items left untouched per
+scope choice (new-only, not all).
+
+## Since last entry — merged, undocumented — 2026-09-04 (via `/shmorch touch`)
+
+PR #136 merged after the second check-inbox pass: `chore(inbox): file two pe-pipeline gaps
+from a concurrent shming.com session` — working-tree cleanup, not triage. Two items filed
+uncommitted directly on `main` by a session running in `~/.shmorch/personal-profile` in
+parallel: `pe-project-rename-mapping.md` (project-aliases.yaml already applied directly in
+personal-profile, this item is just about documenting the mechanism in
+`personal-eval.md`/`pe-summarizer.md`) and `pe-track-record-out-of-order-dates.md`
+(`pe-synthesizer.md`'s "later session supersedes" wording assumes oldest-first processing
+order; flags a real backwards-status-revert risk if sessions process out of chronological
+order). Neither triaged yet.
+
 check-inbox 2026-09-04 (second pass, same day): 1 acted, 4 deferred (unchanged) —
 `pe-summarizer-attribution-cheap-tier-unreliable.md` resolved: re-ran `pe-summarizer`
 against session `d07dcb07` on default/strong tier (was haiku) and got every

@@ -1,3 +1,7 @@
+**Status:** Deferred 2026-09-04 — revisit alongside the "Entity resolution isn't handled"
+follow-up in `docs/project/plan/pe-pipeline-split-generalization-vs-concrete-track-record.md`,
+when that pipeline work is next picked up.
+
 # pe pipeline: document the project-rename-alias mechanism
 
 Filed from `shming.com`, 2026-09-04.

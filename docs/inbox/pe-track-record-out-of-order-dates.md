@@ -1,3 +1,6 @@
+**Status:** Deferred 2026-09-05 — revisit when sessions actually get processed out of
+chronological order in practice, or alongside the next pe-synthesizer.md track-record edit.
+
 # pe-synthesizer: track-record "later session" instruction assumes arrival order, not session date
 
 Filed from `shming.com`, 2026-09-05.
