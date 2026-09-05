@@ -10,7 +10,12 @@ will pick them up to evaluate and either apply, defer, or discard.
 Items here are not authoritative. They graduate into `workflows/`, `core/`, `agents/`,
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
-**Open:** `infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31 —
+**Open:** `pe-project-rename-mapping.md`, filed from `shming.com` 2026-09-04 —
+fix already applied directly in `~/.shmorch/personal-profile` (separate repo, no PR
+needed there: `project-aliases.yaml` + `read_meta()` alias resolution, commit
+`466ecbf`); open item is just documenting the mechanism in
+`workflows/personal-eval.md`/`agents/roles/pe-summarizer.md`.
+`infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31 —
 Deferred 2026-09-03, premise went stale (see file for re-check instructions); point 4
 (`.infigraph/` cleanup) still open, re-confirmed stale 2026-09-04.
 `version-control-default-merge-strategy.md`, filed from `darkbadge` 2026-09-03 —
@@ -24,6 +29,10 @@ project-locally in DarkBadge, not yet validated as more than a one-project patte
 2026-08-04 — Deferred 2026-09-04, candidate "Dependency Chains" section for
 `core/progressive_delivery.md`; DarkBadge's own case resolved via PostHog's native
 support, no urgent driver.
+`pe-track-record-out-of-order-dates.md`, filed from `shming.com` 2026-09-05 —
+`pe-synthesizer.md`'s track-record "later session supersedes" wording assumes
+oldest-first processing order rather than comparing session dates; a user pulling
+sessions out of chronological order could get a status reverted backwards.
 
 (previously resolved: `pe-summarizer-attribution-cheap-tier-unreliable.md`, filed from
 `shming.com` 2026-09-04 — sonnet-tier re-test of session `d07dcb07` got every
