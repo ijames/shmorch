@@ -9,6 +9,28 @@ Branch hygiene rules that apply to every project Shmorch touches — skill repo 
 
 ---
 
+## No exceptions, enforced by hook
+
+Direct commits to `main`/`dev` are never acceptable — not for a doc, not for
+an inbox filing, not for one-line session bookkeeping. There is no scoped
+carve-out; a prior version of this rule allowed one for "state-only" files
+and that carve-out was itself the reason direct-to-main commits kept
+recurring (see `docs/inbox/git-discipline-self-repo-direct-to-main-drift.md`,
+resolved 2026-09-08).
+
+This is enforced mechanically, not left to memory: every shmorch project —
+**including the skill repo itself** — must have `.githooks/pre-commit`
+present and `core.hooksPath` actually pointed at it:
+
+```bash
+git config core.hooksPath .githooks
+```
+
+`workflows/init.md` and `workflows/auto-update.md` Step 2.9 install/sync this
+for client projects; confirm it has also actually been run against `shmorch`'s
+own working copy, not assumed. A hook that only exists as a template and was
+never wired up (`git config core.hooksPath` never set) enforces nothing.
+
 ## The Two Invariants
 
 **1. Main is the source of truth. Always.**

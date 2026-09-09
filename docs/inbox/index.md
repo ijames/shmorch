@@ -10,12 +10,10 @@ will pick them up to evaluate and either apply, defer, or discard.
 Items here are not authoritative. They graduate into `workflows/`, `core/`, `agents/`,
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
-**Open:** `git-discipline-self-repo-direct-to-main-drift.md`, filed from `shmorch`
-(self) 2026-09-05 — `core/git-discipline.md` says branch hygiene applies to the
-skill repo with no exception, but check-inbox/session-bookkeeping commits (and one
-real doctrine fix) have repeatedly landed direct to `main` instead; needs a
-decision on whether to codify a scoped exception or actually enforce branching for
-this class of change.
+**Open:** `hooks-self-install-gap-and-readme-drift.md`, filed from `shmorch`
+(self) 2026-09-08 — `shmorch-ln` never self-installed `.githooks/`/`.claude/hooks/`
+(client-only via `init`); README's Safety section also overstates what
+`pre-tool.sh` actually blocks (no direct-push-to-main check exists in it).
 `pe-project-rename-mapping.md`, filed from `shming.com` 2026-09-04 —
 fix already applied directly in `~/.shmorch/personal-profile` (separate repo, no PR
 needed there: `project-aliases.yaml` + `read_meta()` alias resolution, commit
@@ -35,7 +33,12 @@ project-locally in DarkBadge, not yet validated as more than a one-project patte
 2026-08-04 — Deferred 2026-09-04, candidate "Dependency Chains" section for
 `core/progressive_delivery.md`; DarkBadge's own case resolved via PostHog's native
 support, no urgent driver.
-(previously resolved: `pe-track-record-out-of-order-dates.md`, filed from
+(previously resolved: `git-discipline-self-repo-direct-to-main-drift.md`, filed
+from `shmorch` (self) 2026-09-05 — resolved 2026-09-08: enforce, no carve-out;
+`.githooks/pre-commit` installed in this repo (was a template, never wired up),
+exemption logic removed, `core/git-discipline.md` and `workflows/check-inbox.md`
+updated to state it explicitly.
+`pe-track-record-out-of-order-dates.md`, filed from
 `shming.com` 2026-09-05 — `agents/roles/pe-synthesizer.md`'s `{#track-record}`
 paragraph now compares the new session's own date against the existing entry's
 cited date(s) instead of processing order before updating a status, 2026-09-05.
