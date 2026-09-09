@@ -75,3 +75,125 @@
 [2026-09-04 21:51:01] SESSION_END | auto-closed by stop hook — main @ d702c28 Merge pull request #136 from ijames/docs/20260905-inbox-filings
 [2026-09-04 21:55:39] PHASE | pe-track-record-out-of-order-dates: acted, date-comparison rule added to pe-synthesizer.md
 [2026-09-04 22:03:52] PHASE | inbox: filed git-discipline-self-repo-direct-to-main-drift
+[2026-09-04 23:14:29] AGENT_SPAWN | pe-summarizer → 2026-07-18_claude_darkbadge_087c98cf
+[2026-09-04 23:15:38] AGENT_DONE | pe-summarizer → sessions/2026-07-18_claude_darkbadge_087c98cf.md
+[2026-09-04 23:15:38] AGENT_SPAWN | pe-synthesizer → 2026-07-18_claude_darkbadge_087c98cf
+[2026-09-04 23:18:31] AGENT_DONE | pe-synthesizer → session 1/5 (087c98cf) processed
+[2026-09-04 23:18:35] AGENT_SPAWN | pe-summarizer → 2026-07-18_claude_darkbadge_0dd6b650
+[2026-09-04 23:20:03] AGENT_DONE | pe-summarizer → sessions/2026-07-18_claude_darkbadge_0dd6b650.md
+[2026-09-04 23:20:03] AGENT_SPAWN | pe-synthesizer → 2026-07-18_claude_darkbadge_0dd6b650
+[2026-09-04 23:22:56] AGENT_DONE | pe-synthesizer → session 2/5 (0dd6b650) processed
+[2026-09-04 23:22:59] AGENT_SPAWN | pe-summarizer → 2026-07-18_claude_darkbadge_08b7653a
+[2026-09-04 23:24:15] AGENT_DONE | pe-summarizer → sessions/2026-07-18_claude_darkbadge_08b7653a.md
+[2026-09-04 23:24:15] AGENT_SPAWN | pe-synthesizer → 2026-07-18_claude_darkbadge_08b7653a
+[2026-09-04 23:27:04] AGENT_DONE | pe-synthesizer → session 3/5 (08b7653a) processed
+[2026-09-04 23:27:16] AGENT_SPAWN | pe-summarizer → 2026-07-18_claude_darkbadge_dce17b20
+[2026-09-04 23:28:41] AGENT_DONE | pe-summarizer → sessions/2026-07-18_claude_darkbadge_dce17b20.md
+[2026-09-04 23:28:44] AGENT_SPAWN | pe-synthesizer → 2026-07-18_claude_darkbadge_dce17b20
+[2026-09-04 23:31:58] AGENT_DONE | pe-synthesizer → session 4/5 (dce17b20) processed
+[2026-09-04 23:32:01] AGENT_SPAWN | pe-summarizer → 2026-07-18_claude_darkbadge_8098b702
+[2026-09-04 23:33:23] AGENT_DONE | pe-summarizer → sessions/2026-07-18_claude_darkbadge_8098b702.md
+[2026-09-04 23:33:23] AGENT_SPAWN | pe-synthesizer → 2026-07-18_claude_darkbadge_8098b702
+[2026-09-04 23:36:38] AGENT_DONE | pe-synthesizer → session 5/5 (8098b702) processed
+[2026-09-05 15:51:03] PHASE | pe batch start: 10 sessions
+[2026-09-05 15:51:03] AGENT_SPAWN | pe-summarizer → 2026-07-18_claude_mobos_ed3beccd
+[2026-09-05 15:52:03] AGENT_DONE | pe-summarizer → sessions/2026-07-18_claude_mobos_ed3beccd.md
+[2026-09-05 15:52:03] AGENT_SPAWN | pe-synthesizer → 2026-07-18_claude_mobos_ed3beccd
+[2026-09-05 15:54:57] AGENT_DONE | pe-synthesizer → session 1/10 (ed3beccd) processed
+[2026-09-05 15:55:00] AGENT_SPAWN | pe-summarizer → 2026-07-18_claude_mobos_c2951f97
+[2026-09-05 15:56:10] AGENT_DONE | pe-summarizer → sessions/2026-07-18_claude_mobos_c2951f97.md
+[2026-09-05 15:56:10] AGENT_SPAWN | pe-synthesizer → 2026-07-18_claude_mobos_c2951f97
+[2026-09-05 15:59:20] AGENT_DONE | pe-synthesizer → session 2/10 (c2951f97) processed
+[2026-09-05 15:59:23] AGENT_SPAWN | pe-summarizer → 2026-07-19_claude_darkbadge_138fd0e2
+[2026-09-05 16:00:49] AGENT_DONE | pe-summarizer → sessions/2026-07-19_claude_darkbadge_138fd0e2.md
+[2026-09-05 16:00:49] AGENT_SPAWN | pe-synthesizer → 2026-07-19_claude_darkbadge_138fd0e2
+[2026-09-05 16:04:00] AGENT_DONE | pe-synthesizer → session 3/10 (138fd0e2) processed
+[2026-09-05 16:04:04] AGENT_SPAWN | pe-summarizer → 2026-07-19_claude_darkbadge_b46222fc
+[2026-09-05 16:05:22] AGENT_DONE | pe-summarizer → sessions/2026-07-19_claude_darkbadge_b46222fc.md
+[2026-09-05 16:05:22] AGENT_SPAWN | pe-synthesizer → 2026-07-19_claude_darkbadge_b46222fc
+[2026-09-05 16:08:39] AGENT_DONE | pe-synthesizer → session 4/10 (b46222fc) processed
+[2026-09-05 16:08:42] AGENT_SPAWN | pe-summarizer → 2026-07-19_claude_darkbadge_8fd825d5
+[2026-09-05 16:09:52] AGENT_DONE | pe-summarizer → sessions/2026-07-19_claude_darkbadge_8fd825d5.md
+[2026-09-05 16:09:52] AGENT_SPAWN | pe-synthesizer → 2026-07-19_claude_darkbadge_8fd825d5
+[2026-09-05 16:14:12] AGENT_DONE | pe-synthesizer → session 5/10 (8fd825d5) processed
+[2026-09-05 16:14:15] AGENT_SPAWN | pe-summarizer → 2026-07-19_claude_shming.com_518acf44
+[2026-09-05 16:15:50] AGENT_DONE | pe-summarizer → sessions/2026-07-19_claude_shming.com_518acf44.md
+[2026-09-05 16:15:50] AGENT_SPAWN | pe-synthesizer → 2026-07-19_claude_shming.com_518acf44
+[2026-09-05 16:19:30] AGENT_DONE | pe-synthesizer → session 6/10 (518acf44) processed
+[2026-09-05 16:19:32] AGENT_SPAWN | pe-summarizer → 2026-07-18_claude_shming.com_396d8d61
+[2026-09-05 16:20:47] AGENT_DONE | pe-summarizer → sessions/2026-07-18_claude_shming.com_396d8d61.md
+[2026-09-05 16:20:47] AGENT_SPAWN | pe-synthesizer → 2026-07-18_claude_shming.com_396d8d61
+[2026-09-05 16:25:50] AGENT_DONE | pe-synthesizer → session 7/10 (396d8d61) processed
+[2026-09-05 16:25:53] AGENT_SPAWN | pe-summarizer → 2026-07-20_claude_shming.com_09155eee
+[2026-09-05 16:26:45] AGENT_DONE | pe-summarizer → sessions/2026-07-20_claude_shming.com_09155eee.md
+[2026-09-05 16:26:45] AGENT_SPAWN | pe-synthesizer → 2026-07-20_claude_shming.com_09155eee
+[2026-09-05 16:29:18] AGENT_DONE | pe-synthesizer → session 8/10 (09155eee) processed
+[2026-09-05 16:29:21] AGENT_SPAWN | pe-summarizer → 2026-05-28_claude_shming.com_01780829
+[2026-09-05 16:30:53] AGENT_DONE | pe-summarizer → sessions/2026-05-28_claude_shming.com_01780829.md
+[2026-09-05 16:30:53] AGENT_SPAWN | pe-synthesizer → 2026-05-28_claude_shming.com_01780829
+[2026-09-05 16:35:52] AGENT_DONE | pe-synthesizer → session 9/10 (01780829) processed
+[2026-09-05 16:35:55] AGENT_SPAWN | pe-summarizer → 2026-07-04_claude_Paths_45372137
+[2026-09-05 16:36:57] AGENT_DONE | pe-summarizer → sessions/2026-07-04_claude_Paths_45372137.md
+[2026-09-05 16:36:57] AGENT_SPAWN | pe-synthesizer → 2026-07-04_claude_Paths_45372137
+[2026-09-05 16:40:13] AGENT_DONE | pe-synthesizer → session 10/10 (45372137) processed
+[2026-09-05 23:17:41] PHASE | pe batch start: 10 sessions
+[2026-09-05 23:17:41] AGENT_SPAWN | pe-summarizer → 2026-07-07_claude_PholderShare_28f686c6
+[2026-09-05 23:18:38] AGENT_DONE | pe-summarizer → sessions/2026-07-07_claude_PholderShare_28f686c6.md
+[2026-09-05 23:18:38] AGENT_SPAWN | pe-synthesizer → 2026-07-07_claude_PholderShare_28f686c6
+[2026-09-05 23:21:35] AGENT_DONE | pe-synthesizer → session 1/10 (28f686c6) processed
+[2026-09-05 23:21:35] PHASE | pe batch paused after session 1/10 per user request to review source-data retention
+[2026-09-07 18:16:17] PHASE | pe 1: session Paths 9c774a29
+[2026-09-07 18:16:19] AGENT_SPAWN | pe-summarizer for Paths 9c774a29
+[2026-09-07 18:17:42] AGENT_DONE | pe-summarizer for Paths 9c774a29
+[2026-09-07 18:17:45] AGENT_SPAWN | pe-synthesizer for Paths 9c774a29
+[2026-09-07 18:20:36] AGENT_DONE | pe-synthesizer for Paths 9c774a29
+[2026-09-07 18:22:30] PHASE | pe 10: session 1/10 darkbadge 0c5fc0b0
+[2026-09-07 18:22:30] AGENT_SPAWN | pe-summarizer for darkbadge 0c5fc0b0
+[2026-09-07 18:24:13] AGENT_DONE | pe-summarizer for darkbadge 0c5fc0b0
+[2026-09-07 18:24:13] AGENT_SPAWN | pe-synthesizer for darkbadge 0c5fc0b0
+[2026-09-07 18:27:03] AGENT_DONE | pe-synthesizer for darkbadge 0c5fc0b0
+[2026-09-07 18:27:10] PHASE | pe 10: session 2/10 shmorch 5024bdc3
+[2026-09-07 18:27:10] AGENT_SPAWN | pe-summarizer for shmorch 5024bdc3
+[2026-09-07 18:28:33] AGENT_DONE | pe-summarizer for shmorch 5024bdc3
+[2026-09-07 18:28:33] AGENT_SPAWN | pe-synthesizer for shmorch 5024bdc3
+[2026-09-07 18:32:02] AGENT_DONE | pe-synthesizer for shmorch 5024bdc3
+[2026-09-07 18:32:08] PHASE | pe 10: session 3/10 darkbadge 693ea639
+[2026-09-07 18:32:08] AGENT_SPAWN | pe-summarizer for darkbadge 693ea639
+[2026-09-07 18:33:13] AGENT_DONE | pe-summarizer for darkbadge 693ea639
+[2026-09-07 18:33:13] AGENT_SPAWN | pe-synthesizer for darkbadge 693ea639
+[2026-09-07 18:36:45] AGENT_DONE | pe-synthesizer for darkbadge 693ea639
+[2026-09-07 18:36:51] PHASE | pe 10: session 4/10 darkbadge 7dc1b7e6
+[2026-09-07 18:36:51] AGENT_SPAWN | pe-summarizer for darkbadge 7dc1b7e6
+[2026-09-07 18:38:15] AGENT_DONE | pe-summarizer for darkbadge 7dc1b7e6
+[2026-09-07 18:38:15] AGENT_SPAWN | pe-synthesizer for darkbadge 7dc1b7e6
+[2026-09-07 18:41:50] AGENT_DONE | pe-synthesizer for darkbadge 7dc1b7e6
+[2026-09-07 18:42:15] PHASE | pe 10: session 5/10 darkbadge 185d588e
+[2026-09-07 18:42:15] AGENT_SPAWN | pe-summarizer for darkbadge 185d588e
+[2026-09-07 18:43:57] AGENT_DONE | pe-summarizer for darkbadge 185d588e
+[2026-09-07 18:43:57] AGENT_SPAWN | pe-synthesizer for darkbadge 185d588e
+[2026-09-07 18:47:10] AGENT_DONE | pe-synthesizer for darkbadge 185d588e
+[2026-09-07 18:47:16] PHASE | pe 10: session 6/10 mobos 17d89a6b
+[2026-09-07 18:47:16] AGENT_SPAWN | pe-summarizer for mobos 17d89a6b
+[2026-09-07 18:48:44] AGENT_DONE | pe-summarizer for mobos 17d89a6b
+[2026-09-07 18:48:44] AGENT_SPAWN | pe-synthesizer for mobos 17d89a6b
+[2026-09-07 18:51:28] AGENT_DONE | pe-synthesizer for mobos 17d89a6b
+[2026-09-07 18:51:34] PHASE | pe 10: session 7/10 ftex 89331953
+[2026-09-07 18:51:34] AGENT_SPAWN | pe-summarizer for ftex 89331953
+[2026-09-07 18:52:41] AGENT_DONE | pe-summarizer for ftex 89331953
+[2026-09-07 18:52:41] AGENT_SPAWN | pe-synthesizer for ftex 89331953
+[2026-09-07 18:55:50] AGENT_DONE | pe-synthesizer for ftex 89331953
+[2026-09-07 18:55:58] PHASE | pe 10: session 8/10 shming.com 7eae3f05
+[2026-09-07 18:55:58] AGENT_SPAWN | pe-summarizer for shming.com 7eae3f05
+[2026-09-07 18:56:47] AGENT_DONE | pe-summarizer for shming.com 7eae3f05
+[2026-09-07 18:56:47] AGENT_SPAWN | pe-synthesizer for shming.com 7eae3f05
+[2026-09-07 18:57:40] AGENT_DONE | pe-synthesizer for shming.com 7eae3f05
+[2026-09-07 18:57:46] PHASE | pe 10: session 9/10 darkbadge 003862c0
+[2026-09-07 18:57:47] AGENT_SPAWN | pe-summarizer for darkbadge 003862c0
+[2026-09-07 18:59:40] AGENT_DONE | pe-summarizer for darkbadge 003862c0
+[2026-09-07 18:59:40] AGENT_SPAWN | pe-synthesizer for darkbadge 003862c0
+[2026-09-07 19:04:23] AGENT_DONE | pe-synthesizer for darkbadge 003862c0
+[2026-09-07 19:04:32] PHASE | pe 10: session 10/10 shmorch 58a51e5f
+[2026-09-07 19:04:32] AGENT_SPAWN | pe-summarizer for shmorch 58a51e5f
+[2026-09-07 19:08:14] AGENT_SPAWN | pe-synthesizer for shmorch 58a51e5f
+[2026-09-07 19:12:54] AGENT_DONE | pe-synthesizer for shmorch 58a51e5f
+[2026-09-07 19:12:54] PHASE | pe 10 batch complete
