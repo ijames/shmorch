@@ -244,7 +244,7 @@ Shmorch installs a safety hook per CLI adapter:
 
 - **Claude Code** (`.claude/hooks/` at the project root, wired via `.claude/settings.json`) — a `PreToolUse` hook blocks `rm -rf`, `git push --force`, and direct pushes to `main`/`master` before they run; a `SessionStart` hook and a `Stop` hook (from `$SHMORCH_HOME/tools/stop.sh`, reminding about in-progress tracks) fire at the relevant points. `settings.json` also pre-allows common read-only commands so Claude doesn't prompt for permission on routine operations.
 - **omp** (`.omp/hooks/pre/safety.ts`) — a `tool_call` hook enforcing the same destructive-command blocklist.
-- **A git pre-commit hook** (`.githooks/pre-commit`) blocks accidental commits of code changes directly to `main`/`dev` — state-only commits are exempt.
+- **A git pre-commit hook** (`.githooks/pre-commit`) blocks every direct commit to `main`/`dev`, no exceptions — everything, including docs and session bookkeeping, goes through a branch + PR.
 - **Other CLIs** rely on their own approval mode plus the model-enforced safety rules below.
 
 Additional rules enforced by the model:

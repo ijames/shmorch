@@ -100,3 +100,8 @@ bash $SHMORCH_HOME/tools/timelog.sh "PHASE" "check-inbox: <N acted, M deferred, 
 
 If run standalone (not from `go` or `self-improve`), also append one line to
 `docs/project/session.md`: `check-inbox <date>: N acted, M deferred.`
+
+**These changes still go through a branch + PR, same as any other commit** —
+per `core/git-discipline.md`'s no-exception rule. There is no "just inbox
+housekeeping, commit direct to main" allowance; that precedent is exactly what
+caused repeated drift (see `docs/inbox/git-discipline-self-repo-direct-to-main-drift.md`).
