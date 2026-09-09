@@ -26,6 +26,7 @@ This table is generated from each track's own `status:`/`updated:` frontmatter �
 | [20260810-adaptive-reorient-interview](20260810-adaptive-reorient-interview/index.md) | Active | — |
 | [20260810-deterministic-merge-chain-tool](20260810-deterministic-merge-chain-tool/index.md) | Active | — |
 | [20260824-determinism-ladder](20260824-determinism-ladder/index.md) | Open | 2026-08-24 |
+| [20260908-historian-role](20260908-historian-role/index.md) | Investigation | 2026-09-08 |
 
 ## Closed
 

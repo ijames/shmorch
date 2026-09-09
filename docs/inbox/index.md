@@ -38,6 +38,9 @@ from `shmorch` (self) 2026-09-05 — resolved 2026-09-08: enforce, no carve-out;
 `.githooks/pre-commit` installed in this repo (was a template, never wired up),
 exemption logic removed, `core/git-discipline.md` and `workflows/check-inbox.md`
 updated to state it explicitly.
+`historian-visual-project-journey-role.md`, filed from
+`shmorch` (self) 2026-09-08 — promoted same day to
+`docs/project/tracks/20260908-historian-role/index.md` for scoping.
 `pe-track-record-out-of-order-dates.md`, filed from
 `shming.com` 2026-09-05 — `agents/roles/pe-synthesizer.md`'s `{#track-record}`
 paragraph now compares the new session's own date against the existing entry's
