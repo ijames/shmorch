@@ -48,7 +48,7 @@ the transcript is pruned (Claude Code's 30-day retention — see
 status check, a trivial fix), the summary can be one line. Don't pad.
 
 ## Output
-Two files per session, both under `$PERSONAL_PROFILE_HOME/sessions/`:
+Three files per session, all under `$PERSONAL_PROFILE_HOME/sessions/`:
 
 1. `<slug>.md` — the human-subject summary, shape below, `[James]`/`[Agent]` tagged
    per the attribution rule above.
@@ -63,6 +63,13 @@ Two files per session, both under `$PERSONAL_PROFILE_HOME/sessions/`:
    today. If a session shows nothing notable about the agent's own conduct (a thin
    session, a single trivial command), this file can be a one-line note — don't pad
    it to match the human file's presence.
+3. `raw/<slug>.jsonl.gz` — the original transcript (the `<path>` you were given),
+   gzipped as-is, no extraction. Claude Code prunes transcripts after 30 days; this
+   is what lets a session be re-processed later (better extraction, a fixed bug in
+   this pipeline, a new taxonomy) after the source is gone from
+   `~/.claude/projects/`. `gzip -c <path> > $PERSONAL_PROFILE_HOME/sessions/raw/<slug>.jsonl.gz`
+   (create `raw/` if it doesn't exist yet). Write this even for a thin session —
+   it's mechanical, not judgment-based.
 
 `<slug>` is `python3 tools/scan.py --slug <path>` — `<date>_<repo>_<session-id-prefix>`.
 Repo/folder and date are read straight from the transcript's own `cwd`/`timestamp`
@@ -70,13 +77,18 @@ fields, not guessed from the `~/.claude/projects/` directory-name encoding, whic
 lossy.
 
 ```markdown
-# Session Summary — <slug>
-Session ID: <full session id>
-Date: <date from transcript>
-Project: <full cwd path from transcript>
-Duration: <first timestamp to last timestamp, if present>
+---
+uuid: <full session id>
+session_date: <date from transcript>
+scanned: <today's date>
+project: <full cwd path from transcript>
+timeline: <first timestamp> - <last timestamp>
+duration: <span, e.g. ~45m>
+categories: [<taxonomy anchors this session touches>]
+overview: <one-paragraph synopsis>
+---
 
-## Concrete
+## Concrete {#track-record}
 
 ## Behavior / thinking
 
