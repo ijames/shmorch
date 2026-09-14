@@ -1,6 +1,8 @@
 # Candidate doctrine addition: expand / migrate / contract as a named tenet
 
-**Status:** New, filed from `darkbadge` 2026-09-07, developer-directed — not a
+**Status:** Resolved 2026-09-14 — see Resolution below.
+
+**Filed:** New, filed from `darkbadge` 2026-09-07, developer-directed — not a
 one-off track note, an explicit ask to codify this in Shmorch itself so it
 applies to every project, every large shift, not just this one.
 
@@ -87,3 +89,11 @@ just a feature's visibility.
 - Is a dedicated flag *type* worth adding to the Toggle Types table (a
   "Migration toggle" — owner: engineering, lifespan: until stage-2 verified,
   distinguishing feature from data-migration toggles at a glance)?
+
+## Resolution
+
+Applied 2026-09-14, all three open questions answered yes: a new
+"Data & Message-Shape Migrations — Expand / Migrate / Contract" section was
+added to `core/progressive_delivery.md` (cross-referenced from Toggle Types),
+a **Migration toggle** row was added to the Toggle Types table, and the Build
+Workflow Hook gained the parallel required-answer for migrations specifically.

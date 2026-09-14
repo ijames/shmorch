@@ -1,6 +1,6 @@
 ---
 loads_when: intake or design for a project with a deploy pipeline — deploy-vs-release, toggle taxonomy, flag lifecycle
-size: 104 lines
+size: 143 lines
 ---
 
 # Progressive Delivery — First-Class Dimension
@@ -31,6 +31,7 @@ Martin Fowler's taxonomy. Use the right type — each has a different owner, lif
 | **Experiment toggle** | A/B test, % rollout | Growth / PM | Short — codify after data |
 | **Ops toggle** | Kill switch, circuit breaker | Ops / SRE | Permanent — infrastructure |
 | **Permission toggle** | Per-customer / per-role | CS / Product | Long-lived |
+| **Migration toggle** | Gates a data/message-shape migration's own progress, not a feature's visibility | Engineering | Until stage 2 verified — see Expand / Migrate / Contract below |
 
 ---
 
@@ -68,6 +69,40 @@ Uncodified release toggles are technical debt. They accumulate, obscure intent, 
 
 ---
 
+## Data & Message-Shape Migrations — Expand / Migrate / Contract
+
+The sections above govern **code-path** visibility (is the feature dark or live to users).
+This one governs **data and message-shape authority** — which storage column/table, or
+which SQS/queue payload shape, is the source of truth. It needs a stronger guarantee than
+Dark Default: not just "absence means dark" at launch, but "every non-final stage must be
+safely flippable in *both* directions, with no data loss," because the old and new
+representations coexist and both must stay correct throughout the bake period. A single
+Toggle Types row doesn't capture that the flag here gates a *migration's own progress*, not
+a feature's visibility — that's the **Migration toggle** row above.
+
+Three stages, always named explicitly at spec time:
+
+1. **Expand (dark).** Build the new structure (column, table, SQS message field) fully
+   alongside the old. Nothing observable changes. If the new structure needs data the old
+   one already produces, dual-write both on every write — the new structure accumulates
+   real data while the old path stays authoritative and untouched. No flag is required at
+   this stage if dual-write is unconditional and cheap; a flag is required once any *read*
+   path could branch (stage 2).
+2. **Migrate / cutover (flagged, reversible).** Once the new structure is verified complete
+   and correct (e.g., a parity check against the old path's output), flip a flag so reads —
+   and, for message-shape changes, newly-produced messages — move onto the new structure.
+   The old structure keeps being written and kept intact throughout this stage purely as a
+   safety net. **The flag must be flippable back to stage-1 behavior at any point in this
+   stage with zero data loss**, since the old path never stopped. This is the property that
+   makes the migration itself agile rather than a single big-bang cutover.
+3. **Contract (one-way, its own release).** Only after stage 2 has baked and settled: a
+   final, explicit release removes the old structure, the dual-write, the old read path, and
+   the flag itself — this is the Codify Phase above, applied to a migration rather than a
+   feature. Not reversible, and deliberately its own release, never bundled into stage 2's
+   cutover.
+
+---
+
 ## Who Controls
 
 | Role | Toggle type they own |
@@ -101,4 +136,8 @@ For ops toggles additionally: what does "off" mean operationally? (rate limit? r
 > When designing a feature, the spec must answer "what is the toggle?" before implementation begins. Not as overhead — as the minimum viable release strategy.
 
 At implementation: the feature is always wrapped in a conditional from the first commit. Never ship a feature unwrapped and retrofit a flag later.
+
+For data/message-shape work specifically: does this introduce a second storage/message
+shape? If so, name its three stages (Expand / Migrate / Contract) and each stage's
+flip-back guarantee before implementation begins.
 
