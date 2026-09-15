@@ -33,11 +33,7 @@ project-locally in DarkBadge, not yet validated as more than a one-project patte
 2026-08-04 — Deferred 2026-09-04, candidate "Dependency Chains" section for
 `core/progressive_delivery.md`; DarkBadge's own case resolved via PostHog's native
 support, no urgent driver.
-(previously resolved: `expand-migrate-contract-reversible-data-migrations.md`, filed
-from `darkbadge` 2026-09-07 — resolved 2026-09-14: new "Data & Message-Shape
-Migrations — Expand / Migrate / Contract" section added to
-`core/progressive_delivery.md`, plus a Migration toggle row in Toggle Types and a
-parallel Build Workflow Hook checklist item; `git-discipline-self-repo-direct-to-main-drift.md`, filed
+(previously resolved: `git-discipline-self-repo-direct-to-main-drift.md`, filed
 from `shmorch` (self) 2026-09-05 — resolved 2026-09-08: enforce, no carve-out;
 `.githooks/pre-commit` installed in this repo (was a template, never wired up),
 exemption logic removed, `core/git-discipline.md` and `workflows/check-inbox.md`
