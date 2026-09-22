@@ -121,6 +121,33 @@ per-section phrase (added 2026-08-10) is a second, outside `docs/` entirely — 
 different artifact shape. When building any new index-shaped file, ask "does layer 1 or 2
 already answer the reader's likely question?" before assuming the full file needs opening.
 
+**This is recursive, not just an index-vs-leaf split.** A tree can satisfy the three layers
+at the root and still fail at every level beneath it — link lists and one-line labels all the
+way down, with every readable sentence pushed to the leaves where it arrives without context.
+Applies to any AI-managed doc tree a human reads (proposals, tracks, knowledge bases,
+profiles, indexes):
+
+- **Every node stands at its own depth.** A reader who stops at any level has read a
+  complete, useful account at that level — never just a pointer to where the real answer is.
+  Each child is itself a summary for its own children; the rule doesn't relax past the root.
+- **Lede first.** Each file or section opens with a paragraph that works alone — what this
+  is, why it matters, what the outcome is, and any key quantity. A bare link list or a label
+  is never a node's substance.
+- **Quantities roll up.** Anything summable (hours, cost, counts, risk, status) is stated at
+  every parent as the total of its children, not left to only appear once the reader reaches
+  a leaf table.
+- **Redundancy is intended.** A parent gives a sentence or two about each child; the child
+  opens with a fuller version of that same explanation before going into detail — it expands
+  the parent's line rather than restating or contradicting it.
+- **Leaves hold detail** — tables, specifics, edge cases, file names — never the only
+  explanation of what a thing is.
+
+**Depth read test.** Read the root lede, then the root plus every first-level lede, then one
+level further. Each cut should read as a coherent document by itself; if one doesn't, fix the
+tree rather than just noting the gap. Once a tree carries real quantities, a mechanical
+check that a parent's total equals the sum of its children's is worth scripting per
+`core/operations.md`'s general lint-over-prose preference — no specific tool prescribed here.
+
 ---
 
 ## Front-Matter Previews
