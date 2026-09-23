@@ -31,9 +31,6 @@ fix already applied directly in `~/.shmorch/personal-profile` (separate repo, no
 needed there: `project-aliases.yaml` + `read_meta()` alias resolution, commit
 `466ecbf`); open item is just documenting the mechanism in
 `workflows/personal-eval.md`/`agents/roles/pe-summarizer.md`.
-`infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31 —
-Deferred 2026-09-03, premise went stale (see file for re-check instructions); point 4
-(`.infigraph/` cleanup) still open, re-confirmed stale 2026-09-04.
 `version-control-default-merge-strategy.md`, filed from `darkbadge` 2026-09-03 —
 Deferred 2026-09-04, no default merge/rebase-before-merge doctrine for projects without
 their own strategy; needs a real decision, not just drafting.
@@ -45,7 +42,14 @@ project-locally in DarkBadge, not yet validated as more than a one-project patte
 2026-08-04 — Deferred 2026-09-04, candidate "Dependency Chains" section for
 `core/progressive_delivery.md`; DarkBadge's own case resolved via PostHog's native
 support, no urgent driver.
-(previously resolved: `track-info-retention-vs-graduation.md`, filed from
+(previously resolved: `node-complete-without-its-links.md`, filed from
+`shming.com` 2026-09-22 — folded into `core/documentation.md` § Progressive Disclosure as
+a sixth recursive bullet plus a link-stripped pass on the depth read test, 2026-09-23.
+`infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31 — decided
+2026-09-23: prefer static, diff-based analysis over a dynamic re-scanning tool; the
+`.infigraph/` directory should be removed (sandbox blocked the deletion this session,
+flagged for the developer to run by hand: `rm -rf .infigraph/`).
+`track-info-retention-vs-graduation.md`, filed from
 `darkbadge` 2026-09-16 — doctrine already covered tracks staying permanent; the
 real gap (plan/sprint staleness enforcement, track-destination graduation checks)
 fixed same day via the `close-tracks-on-merge.md`-adjacent `touch` upgrade.

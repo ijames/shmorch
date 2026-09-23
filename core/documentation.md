@@ -141,12 +141,23 @@ profiles, indexes):
   the parent's line rather than restating or contradicting it.
 - **Leaves hold detail** — tables, specifics, edge cases, file names — never the only
   explanation of what a thing is.
+- **A node survives its links being stripped.** Rendered as a flat page, pasted into an
+  email, printed to PDF, or handed to an agent with only that one file in context, link
+  targets disappear and the link text is all that's left. No sentence whose subject or
+  claim only resolves by following a link ("the reasoning is set out
+  [here](strategy.md)"); no promise the node itself doesn't keep ("we'll explain how the
+  work runs" means it explains it, not that a child does). A node's kind sets its shape —
+  a proposal reads as a proposal, not a summary of one pointing at the real proposal.
+  Links stay, for the reader who wants more — never for the reader who needs the point.
 
 **Depth read test.** Read the root lede, then the root plus every first-level lede, then one
 level further. Each cut should read as a coherent document by itself; if one doesn't, fix the
-tree rather than just noting the gap. Once a tree carries real quantities, a mechanical
-check that a parent's total equals the sum of its children's is worth scripting per
-`core/operations.md`'s general lint-over-prose preference — no specific tool prescribed here.
+tree rather than just noting the gap. Then read the root again with every link target
+stripped (`[text](target)` → `text`) — anything that becomes a sentence fragment, a
+dangling promise, or a table of contents is a defect in the node, not in the reader. Once a
+tree carries real quantities, a mechanical check that a parent's total equals the sum of
+its children's is worth scripting per `core/operations.md`'s general lint-over-prose
+preference — no specific tool prescribed here.
 
 ---
 
