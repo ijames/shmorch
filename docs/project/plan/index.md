@@ -1,6 +1,6 @@
 ---
 status: Active
-updated: 2026-08-14
+updated: 2026-09-15
 summary: Workflow context-budget umbrella (tracks/20260721-workflow-subagent-delegation) — Approach A (frontmatter-gated loading) shipped via PR #106; Approaches B (subagent delegation) and C (core doc JIT breakup) remain open. See Current Activities.
 ---
 
@@ -18,10 +18,11 @@ summary: Workflow context-budget umbrella (tracks/20260721-workflow-subagent-del
 
 <!-- One line per concurrently-live thing. Don't clobber one entry while updating another. -->
 
-- **Workflow context-budget umbrella** (last touched 2026-08-11) — [`tracks/20260721-workflow-subagent-delegation`](../tracks/20260721-workflow-subagent-delegation/index.md). Approach A (frontmatter-gated loading) shipped, PR #106. Approach B (subagent delegation) and Approach C (core/workflow doc JIT breakup) remain open, no work started on either yet.
+- **Workflow context-budget umbrella** (last touched 2026-08-18) — [`tracks/20260721-workflow-subagent-delegation`](../tracks/20260721-workflow-subagent-delegation/index.md). Approach A (frontmatter-gated loading) shipped, PR #106. Approach B (subagent delegation) and Approach C (core/workflow doc JIT breakup) remain open, no work started on either yet.
 - **Messaging-provider design** (last touched 2026-07-30) — [`tracks/20260721-messaging-provider`](../tracks/20260721-messaging-provider/index.md), check there for status.
-- **pe pipeline: split generalization from concrete track record** (started 2026-08-18) — [`plan/pe-pipeline-split-generalization-vs-concrete-track-record.md`](pe-pipeline-split-generalization-vs-concrete-track-record.md). In progress.
-- **Determinism ladder** (opened 2026-08-24) — [`tracks/20260824-determinism-ladder`](../tracks/20260824-determinism-ladder/index.md). Deterministic scaffolding with contained probabilistic chunks, from the AI-Native SDLC Playbook diff. Analysis only, nothing built.
+- **pe pipeline: split generalization from concrete track record** (last touched 2026-09-04) — [`plan/pe-pipeline-split-generalization-vs-concrete-track-record.md`](pe-pipeline-split-generalization-vs-concrete-track-record.md). v2 shipped PR #134 (actor attribution + MECE overflow); open follow-ups deliberately not built yet.
+- **Determinism ladder** (last touched 2026-08-29) — [`tracks/20260824-determinism-ladder`](../tracks/20260824-determinism-ladder/index.md). Deterministic scaffolding with contained probabilistic chunks, from the AI-Native SDLC Playbook diff. Analysis only, nothing built.
+- **`historian` role: visual/narrative project journey capture** (last touched 2026-09-08) — [`tracks/20260908-historian-role`](../tracks/20260908-historian-role/index.md). Investigation stage — new role/workflow for DarkBadge/Treeclusion articles, no work started.
 - Self-improve continues as its own automated process, logging under its own commits/PRs — not tracked as a line item here.
 
 ---
