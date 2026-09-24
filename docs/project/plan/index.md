@@ -22,7 +22,7 @@ summary: Workflow context-budget umbrella (tracks/20260721-workflow-subagent-del
 - **Messaging-provider design** (last touched 2026-07-30) — [`tracks/20260721-messaging-provider`](../tracks/20260721-messaging-provider/index.md), check there for status.
 - **pe pipeline: split generalization from concrete track record** (last touched 2026-09-04) — [`plan/pe-pipeline-split-generalization-vs-concrete-track-record.md`](pe-pipeline-split-generalization-vs-concrete-track-record.md). v2 shipped PR #134 (actor attribution + MECE overflow); open follow-ups deliberately not built yet.
 - **Determinism ladder** (last touched 2026-08-29) — [`tracks/20260824-determinism-ladder`](../tracks/20260824-determinism-ladder/index.md). Deterministic scaffolding with contained probabilistic chunks, from the AI-Native SDLC Playbook diff. Analysis only, nothing built.
-- **`historian` role: visual/narrative project journey capture** (last touched 2026-09-08) — [`tracks/20260908-historian-role`](../tracks/20260908-historian-role/index.md). Investigation stage — new role/workflow for DarkBadge/Treeclusion articles, no work started.
+- **`historian` role: visual/narrative project journey capture** (last touched 2026-09-23) — [`tracks/20260908-historian-role`](../tracks/20260908-historian-role/index.md). Investigation stage — new role/workflow for DarkBadge/Treeclusion articles; Scribe logged as candidate forward-capture tool (PR #150).
 - Self-improve continues as its own automated process, logging under its own commits/PRs — not tracked as a line item here.
 
 ---
