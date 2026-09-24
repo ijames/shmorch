@@ -10,6 +10,8 @@ will pick them up to evaluate and either apply, defer, or discard.
 Items here are not authoritative. They graduate into `workflows/`, `core/`, `agents/`,
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
+**Open:** `cross-repo-messaging-and-worktree-inbox-review.md`, filed from `treeclusion` 2026-09-24. Filing an item into another project's inbox is messaging, and the branch+PR rule means it needs a branch in a repo you may not own the checkout of; a throwaway worktree off the target's `main` solved it cleanly. Proposals: a `/shmorch message <project>` command that does exactly that for any repo, and a `check-inbox` that merges the open inbox branches into one scratch branch (also in a worktree) instead of triaging whatever happens to be on the current one. Overlaps `agent-window-confusion.md`'s cross-project routing option.
+
 **Open:** `engagement-docs-have-no-home.md`, filed from `JKAM/system` 2026-09-18. Bid, go/no-go, kickoff and wrap docs have no home in the taxonomy, so JKAM added `docs/project/engagement/`. To decide: whether `init` should scaffold it for client work.
 
 **Open:** `source-capture-tool.md`, filed from `JKAM/system` 2026-09-18. Claude's fetch tool and Chrome are both blocked from Reddit; DarkBadge reads it with its own HTTP client. Proposal: a stdlib `tools/capture.py` plus a `/shmorch capture` command that saves fetched pages to `sources/` with URL, date and hash, using official APIs where they exist.
