@@ -4,6 +4,27 @@ updated: 2026-08-10
 summary: Merged `orient`/`reorient` into one command (`/shmorch orient [focus|readiness]`) with production readiness now default-on and a new AI/LLM area (ML Test Score + NIST AI RMF), `docs/project/interview-log.md` for dated answers with contradiction detection, OWASP LLM Top 10 as a build-time guardrail (design.md/critic.md, not interview questions), + `tools/merge-chain.sh`. Latest branch adds a Progressive Disclosure doctrine and a deferred knowledge-graph note.
 ---
 
+check-inbox 2026-09-23 (new-only pass): 2 acted, 3 deferred. `agent-window-confusion` →
+`plan/agent-scope-check-and-window-identity.md`; `source-capture-tool` →
+`plan/source-capture-tool.md`, planned as one stdlib `fetch()` core used both as a Shmorch CLI
+command and as a module in DarkBadge's Lambda (flag: DarkBadge's `fetch_reddit` uses the
+no-auth endpoint, so adopting the tool means moving to OAuth). Deferred:
+`plan-item-graduation-undefined` (kept at its path, since touch.md links there),
+`close-tracks-on-merge` (mostly covered by #149), `engagement-docs-have-no-home` (one example
+so far).
+
+## Since last entry — merged, undocumented — 2026-09-23 (via `/shmorch resume` → touch)
+
+PRs #137–#150 merged since the 2026-09-05 entry: #138 git-discipline zero-exception
+branch-protection hook; #139/#150 historian role scoped + Scribe logged as candidate
+forward-capture tool; #140 pe-summarizer writes raw transcript alongside summaries;
+#141–#143 expand/migrate/contract filed then shipped as progressive-delivery doctrine
+(#146 adds Purge stage); #144/#145 inbox cleanup + inbox-is-triage-only learning;
+#147/#148 Progressive Disclosure recursive at every node + nodes must survive link
+stripping; #149 touch tracks sprint.md staleness, checks track graduation, pauses
+plan-pruning (pending `docs/inbox/plan-item-graduation-undefined.md`). Five inbox items
++ `docs/project/self-improve/20260921-shming.com.md` sit untracked on `main`.
+
 pe-track-record-out-of-order-dates 2026-09-05: acted on the previously-deferred inbox
 item — `agents/roles/pe-synthesizer.md`'s `{#track-record}` paragraph replaced the
 implicit "later session supersedes" phrasing (read as processing order) with an

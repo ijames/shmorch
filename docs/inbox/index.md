@@ -10,18 +10,16 @@ will pick them up to evaluate and either apply, defer, or discard.
 Items here are not authoritative. They graduate into `workflows/`, `core/`, `agents/`,
 `tools/`, or a track once reviewed and accepted, or are removed once resolved.
 
-**Open:** `engagement-docs-have-no-home.md`, filed from `JKAM/system` 2026-09-18. Bid, go/no-go, kickoff and wrap docs have no home in the taxonomy, so JKAM added `docs/project/engagement/`. To decide: whether `init` should scaffold it for client work.
-
-**Open:** `source-capture-tool.md`, filed from `JKAM/system` 2026-09-18. Claude's fetch tool and Chrome are both blocked from Reddit; DarkBadge reads it with its own HTTP client. Proposal: a stdlib `tools/capture.py` plus a `/shmorch capture` command that saves fetched pages to `sources/` with URL, date and hash, using official APIs where they exist.
-`agent-window-confusion.md`, filed from `JKAM/system` 2026-09-18. The user typed a request for one project into another project's agent window, and the agent did the work blind instead of flagging it. Options: a scope check in doctrine, a per-project window title or colour set by `init`/`go`, and cross-project inbox routing.
-`plan-item-graduation-undefined.md`, filed from `darkbadge` 2026-09-17 —
-`touch`'s plan/-pruning rule (added 2026-09-16) archived `[x]` plan items that carried the
-only surviving implementation detail; paused in `workflows/touch.md` pending a real answer
-for what a plan item graduates into, and how plan/track/feature/project relate as a whole.
-`close-tracks-on-merge.md`, filed from `darkbadge` 2026-09-16 —
-investigate mechanical enforcement (not just doctrine wording) for closing a track's
-master-table row as part of the merge that ships it; needs a decision on hook vs.
-generated-table approach.
+**Open:**
+`plan-item-graduation-undefined.md`, filed from `darkbadge` 2026-09-17 — Deferred
+2026-09-23, kept at this path because `workflows/touch.md` links here as the gate on
+plan-pruning. There is no graduation path yet for plan items, and how plan, track, feature
+and project relate is undefined.
+`close-tracks-on-merge.md`, filed from `darkbadge` 2026-09-16 — Deferred 2026-09-23. `touch`
+now reconciles `tracks/index.md` on every `resume`/`wrap` (PR #149). Revisit merge-time
+enforcement if the table drifts again anyway.
+`engagement-docs-have-no-home.md`, filed from `JKAM/system` 2026-09-18 — Deferred
+2026-09-23 until a second client project needs a `docs/project/engagement/` folder.
 `hooks-self-install-gap-and-readme-drift.md`, filed from `shmorch`
 (self) 2026-09-08 — `shmorch-ln` never self-installed `.githooks/`/`.claude/hooks/`
 (client-only via `init`); README's Safety section also overstates what
@@ -42,7 +40,11 @@ project-locally in DarkBadge, not yet validated as more than a one-project patte
 2026-08-04 — Deferred 2026-09-04, candidate "Dependency Chains" section for
 `core/progressive_delivery.md`; DarkBadge's own case resolved via PostHog's native
 support, no urgent driver.
-(previously resolved: `node-complete-without-its-links.md`, filed from
+(previously resolved: `agent-window-confusion.md`, filed from `JKAM/system`
+2026-09-18 — graduated to `docs/project/plan/agent-scope-check-and-window-identity.md`,
+2026-09-23. `source-capture-tool.md`, filed from `JKAM/system` 2026-09-18 — graduated to
+`docs/project/plan/source-capture-tool.md` (planned for use across Shmorch plus DarkBadge's
+Lambda), 2026-09-23. `node-complete-without-its-links.md`, filed from
 `shming.com` 2026-09-22 — folded into `core/documentation.md` § Progressive Disclosure as
 a sixth recursive bullet plus a link-stripped pass on the depth read test, 2026-09-23.
 `infigraph-removal-commit-pending.md`, filed from `shming.com` 2026-08-31 — decided
