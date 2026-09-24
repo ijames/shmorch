@@ -224,6 +224,13 @@ rule to `core/git-discipline.md` requiring `docs/project/session.md` be current 
 final push/merge of a branch, referenced from `tools/merge-chain.sh`'s header. `VERSION`
 bumped `1.3.0` → `1.3.1` (PATCH).
 
+**`/shmorch touch` note (2026-09-15):** this entry stopped tracking individual sessions
+after PR #103 — PRs #104 through #145 merged since without a matching session.md write-up
+(full narrative catch-up still owed; see `docs/project/session/` for anything already
+split out). `docs/project/plan/index.md` Current Activities reconciled against actual
+last-touched dates in the same pass; `historian-role` track (opened 2026-09-08, previously
+untracked here) added.
+
 
 
 ## History
