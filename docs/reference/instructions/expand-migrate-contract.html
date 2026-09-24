@@ -1,0 +1,348 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#faf9f5;color:#141413}img{max-width:100%}[hidden]:not([hidden=until-found]){display:none!important}</style></head><body>
+<title>Expand · Migrate · Contract</title>
+<style>
+
+  :root {
+    --paper: #eef2f6;
+    --surface: #ffffff;
+    --ink: #14202b;
+    --muted: #4f6b7a;
+    --line: #b9c7d2;
+    --line-soft: #d3ddE4;
+    --accent-cool: #2f6690;
+    --accent-amber: #b16b0f;
+    --accent-teal: #1c7361;
+    --accent-danger: #a13f3f;
+    --tint-cool: rgba(47,102,144,0.08);
+    --tint-amber: rgba(177,107,15,0.09);
+    --tint-teal: rgba(28,115,97,0.08);
+    --tint-danger: rgba(161,63,63,0.08);
+    color-scheme: light;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --paper: #0d1720;
+      --surface: #131f29;
+      --ink: #dfe8ef;
+      --muted: #93acbb;
+      --line: #2c4152;
+      --line-soft: #1c2c38;
+      --accent-cool: #74b6e3;
+      --accent-amber: #e6a746;
+      --accent-teal: #4fbb9c;
+      --accent-danger: #e08282;
+      --tint-cool: rgba(116,182,227,0.09);
+      --tint-amber: rgba(230,167,70,0.10);
+      --tint-teal: rgba(79,187,156,0.09);
+      --tint-danger: rgba(224,130,130,0.10);
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --paper: #0d1720;
+    --surface: #131f29;
+    --ink: #dfe8ef;
+    --muted: #93acbb;
+    --line: #2c4152;
+    --line-soft: #1c2c38;
+    --accent-cool: #74b6e3;
+    --accent-amber: #e6a746;
+    --accent-teal: #4fbb9c;
+    --accent-danger: #e08282;
+    --tint-cool: rgba(116,182,227,0.09);
+    --tint-amber: rgba(230,167,70,0.10);
+    --tint-teal: rgba(79,187,156,0.09);
+    --tint-danger: rgba(224,130,130,0.10);
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    line-height: 1.55;
+  }
+  .page {
+    max-width: 1040px;
+    margin: 0 auto;
+    padding: 56px 28px 72px;
+  }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11.5px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent-amber);
+    font-weight: 600;
+    margin: 0 0 14px;
+  }
+  h1 {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-weight: 600;
+    font-size: clamp(26px, 4vw, 38px);
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+    text-wrap: balance;
+  }
+  .dot { color: var(--muted); font-weight: 400; }
+  .sub {
+    max-width: 66ch;
+    color: var(--muted);
+    font-size: 16px;
+    margin: 0 0 6px;
+  }
+  .status {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    color: var(--muted);
+    border-left: 2px solid var(--accent-amber);
+    padding-left: 10px;
+    margin: 22px 0 40px;
+  }
+  .status b { color: var(--ink); font-weight: 600; }
+
+  figure { margin: 0 0 8px; }
+  .diagram-frame {
+    background: var(--surface);
+    border: 1px solid var(--line-soft);
+    border-radius: 10px;
+    padding: 18px 18px 8px;
+    overflow-x: auto;
+  }
+  svg.ladder { width: 100%; height: auto; min-width: 800px; display: block; }
+  figcaption {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 12px;
+    max-width: 72ch;
+  }
+
+  h2 {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 13px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--muted);
+    margin: 56px 0 18px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line-soft);
+  }
+
+  .table-wrap { overflow-x: auto; border: 1px solid var(--line-soft); border-radius: 10px; }
+  table { border-collapse: collapse; width: 100%; min-width: 920px; background: var(--surface); }
+  caption { caption-side: top; text-align: left; padding: 14px 16px 0; font-size: 13px; color: var(--muted); }
+  th, td { text-align: left; padding: 12px 16px; font-size: 13.5px; vertical-align: top; border-bottom: 1px solid var(--line-soft); }
+  thead th {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 11px;
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--muted);
+    border-bottom: 1px solid var(--line);
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  td.kind {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-weight: 600;
+    font-size: 12.5px;
+    white-space: nowrap;
+    color: var(--ink);
+  }
+  td.na { color: var(--muted); font-style: italic; }
+  th.st-expand { color: var(--accent-cool); }
+  th.st-migrate { color: var(--accent-amber); }
+  th.st-contract { color: var(--accent-teal); }
+  th.st-purge { color: var(--accent-danger); }
+
+  .note {
+    margin-top: 40px;
+    font-size: 13.5px;
+    color: var(--muted);
+    max-width: 72ch;
+  }
+  .note + .note { margin-top: 14px; }
+  .note code {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 12px;
+    background: var(--tint-cool);
+    padding: 1px 5px;
+    border-radius: 4px;
+    color: var(--ink);
+  }
+</style>
+
+<div class="page">
+  <p class="eyebrow">Companion diagram — core/progressive_delivery.md</p>
+  <h1>Expand <span class="dot">·</span> Migrate <span class="dot">·</span> Contract <span class="dot">·</span> Purge</h1>
+  <p class="sub">One reversible ladder for every kind of migration — schema, message shape, code path, or infrastructure. The stage is the same; only what moves, and what's left to physically remove, changes.</p>
+  <p class="status">Companion to <b><a href="../../../core/progressive_delivery.md">core/progressive_delivery.md</a> · checklist: <a href="expand-migrate-contract-checklist.md">expand-migrate-contract-checklist.md</a></b> § Data &amp; Message-Shape Migrations · originally filed from <b>darkbadge</b>, 2026-09-07 · self-contained, no external dependencies</p>
+
+  <figure>
+    <div class="diagram-frame">
+      <svg class="ladder" viewBox="0 0 1010 652" role="img" aria-label="A four-stage timeline — Expand, Migrate, Contract, Purge — with four parallel lanes: schema/data, message shape, code path, infrastructure. The new track starts dashed during Expand, becomes solid and authoritative at Migrate. For schema/data and infrastructure, the old track survives Contract as a dormant dashed line, then is cut with an X at Purge, gated on the data being ported to the new structure or safely archived past retention. For message shape and code path, the old track is already cut with an X at Contract, and Purge is marked not applicable. A reversible double-headed arrow spans Migrate; a one-way arrow spans Contract; a gated one-way arrow spans Purge.">
+        <defs>
+          <marker id="arrBi0" markerWidth="9" markerHeight="9" refX="1" refY="4.5" orient="auto">
+            <path d="M8,1 L1,4.5 L8,8 Z" fill="currentColor" />
+          </marker>
+          <marker id="arrBi1" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+            <path d="M1,1 L8,4.5 L1,8 Z" fill="currentColor" />
+          </marker>
+          <marker id="arrOne" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto">
+            <path d="M1,1 L8,4.5 L1,8 Z" fill="currentColor" />
+          </marker>
+        </defs>
+
+        <!-- stage background bands: Expand 90-330, Migrate 330-600, Contract 600-800, Purge 800-990 -->
+        <rect x="90"  y="88" width="240" height="432" fill="var(--tint-cool)" />
+        <rect x="330" y="88" width="270" height="432" fill="var(--tint-amber)" />
+        <rect x="600" y="88" width="200" height="432" fill="var(--tint-teal)" />
+        <rect x="800" y="88" width="190" height="432" fill="var(--tint-danger)" />
+
+        <!-- stage dividers -->
+        <line x1="330" y1="88" x2="330" y2="520" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4" />
+        <line x1="600" y1="88" x2="600" y2="520" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4" />
+        <line x1="800" y1="88" x2="800" y2="520" stroke="var(--line)" stroke-width="1" stroke-dasharray="3 4" />
+
+        <!-- stage headers -->
+        <text x="210" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="14" fill="var(--accent-cool)">1 · EXPAND</text>
+        <text x="210" y="52" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--muted)">dark — dual-write begins</text>
+
+        <text x="465" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="14" fill="var(--accent-amber)">2 · MIGRATE</text>
+        <text x="465" y="52" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--muted)">flag flips reads — reversible</text>
+
+        <text x="700" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="14" fill="var(--accent-teal)">3 · CONTRACT</text>
+        <text x="700" y="52" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--muted)">code removed — data dormant</text>
+
+        <text x="895" y="34" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-weight="600" font-size="14" fill="var(--accent-danger)">4 · PURGE</text>
+        <text x="895" y="52" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10.5" fill="var(--muted)">gated — ported, or retained</text>
+
+        <!-- lane 1: schema / data — old track survives Contract dormant, cut at Purge -->
+        <text x="8" y="128" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--ink)">Schema /</text>
+        <text x="8" y="141" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--ink)">data</text>
+        <line x1="90" y1="125" x2="600" y2="125" stroke="var(--muted)" stroke-width="3" />
+        <line x1="600" y1="125" x2="800" y2="125" stroke="var(--muted)" stroke-width="2" stroke-dasharray="2 4" />
+        <text x="96" y="118" font-size="10.5" fill="var(--muted)">legacy column → dormant</text>
+        <line x1="90" y1="155" x2="330" y2="155" stroke="var(--accent-cool)" stroke-width="3" stroke-dasharray="5 5" />
+        <line x1="330" y1="155" x2="990" y2="155" stroke="var(--accent-cool)" stroke-width="3" />
+        <text x="96" y="169" font-size="10.5" fill="var(--accent-cool)">new column (dual-write → authoritative)</text>
+        <line x1="795" y1="120" x2="805" y2="130" stroke="var(--accent-danger)" stroke-width="2" />
+        <line x1="795" y1="130" x2="805" y2="120" stroke="var(--accent-danger)" stroke-width="2" />
+
+        <!-- lane 2: message shape — old track cut at Contract, Purge n/a -->
+        <text x="8" y="228" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--ink)">Message /</text>
+        <text x="8" y="241" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--ink)">API shape</text>
+        <line x1="90" y1="225" x2="600" y2="225" stroke="var(--muted)" stroke-width="3" />
+        <text x="96" y="218" font-size="10.5" fill="var(--muted)">v1 payload</text>
+        <line x1="90" y1="255" x2="330" y2="255" stroke="var(--accent-cool)" stroke-width="3" stroke-dasharray="5 5" />
+        <line x1="330" y1="255" x2="990" y2="255" stroke="var(--accent-cool)" stroke-width="3" />
+        <text x="96" y="269" font-size="10.5" fill="var(--accent-cool)">v2 payload, both shapes accepted</text>
+        <line x1="595" y1="220" x2="605" y2="230" stroke="var(--ink)" stroke-width="2" />
+        <line x1="595" y1="230" x2="605" y2="220" stroke="var(--ink)" stroke-width="2" />
+        <text x="895" y="245" text-anchor="middle" font-size="10.5" font-style="italic" fill="var(--muted)">n/a</text>
+
+        <!-- lane 3: code path — old track cut at Contract, Purge n/a -->
+        <text x="8" y="328" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--ink)">Feature /</text>
+        <text x="8" y="341" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--ink)">code path</text>
+        <line x1="90" y1="325" x2="600" y2="325" stroke="var(--muted)" stroke-width="3" />
+        <text x="96" y="318" font-size="10.5" fill="var(--muted)">old branch (Release toggle off)</text>
+        <line x1="90" y1="355" x2="330" y2="355" stroke="var(--accent-cool)" stroke-width="3" stroke-dasharray="5 5" />
+        <line x1="330" y1="355" x2="990" y2="355" stroke="var(--accent-cool)" stroke-width="3" />
+        <text x="96" y="369" font-size="10.5" fill="var(--accent-cool)">new branch, toggle on for rollout</text>
+        <line x1="595" y1="320" x2="605" y2="330" stroke="var(--ink)" stroke-width="2" />
+        <line x1="595" y1="330" x2="605" y2="320" stroke="var(--ink)" stroke-width="2" />
+        <text x="895" y="345" text-anchor="middle" font-size="10.5" font-style="italic" fill="var(--muted)">n/a</text>
+
+        <!-- lane 4: infra / site — old track survives Contract dormant (cold), cut at Purge -->
+        <text x="8" y="428" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--ink)">Infra /</text>
+        <text x="8" y="441" font-family="IBM Plex Mono, monospace" font-size="11.5" font-weight="600" fill="var(--ink)">site upgrade</text>
+        <line x1="90" y1="425" x2="600" y2="425" stroke="var(--muted)" stroke-width="3" />
+        <line x1="600" y1="425" x2="800" y2="425" stroke="var(--muted)" stroke-width="2" stroke-dasharray="2 4" />
+        <text x="96" y="418" font-size="10.5" fill="var(--muted)">old host → cold, powered off</text>
+        <line x1="90" y1="455" x2="330" y2="455" stroke="var(--accent-cool)" stroke-width="3" stroke-dasharray="5 5" />
+        <line x1="330" y1="455" x2="990" y2="455" stroke="var(--accent-cool)" stroke-width="3" />
+        <text x="96" y="469" font-size="10.5" fill="var(--accent-cool)">new host, router shifts traffic</text>
+        <line x1="795" y1="420" x2="805" y2="430" stroke="var(--accent-danger)" stroke-width="2" />
+        <line x1="795" y1="430" x2="805" y2="420" stroke="var(--accent-danger)" stroke-width="2" />
+
+        <!-- reversibility / one-way / gated brackets -->
+        <line x1="338" y1="548" x2="592" y2="548" stroke="var(--accent-amber)" stroke-width="2"
+              marker-start="url(#arrBi0)" marker-end="url(#arrBi1)" color="var(--accent-amber)" />
+        <text x="465" y="568" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--accent-amber)">flip back at any point — zero data loss</text>
+
+        <line x1="608" y1="548" x2="792" y2="548" stroke="var(--accent-teal)" stroke-width="2"
+              marker-end="url(#arrOne)" color="var(--accent-teal)" />
+        <text x="700" y="568" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--accent-teal)">own release — code, not data</text>
+
+        <line x1="808" y1="548" x2="982" y2="548" stroke="var(--accent-danger)" stroke-width="2" stroke-dasharray="1 3"
+              marker-end="url(#arrOne)" color="var(--accent-danger)" />
+        <text x="895" y="568" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="var(--accent-danger)">ported to new column, or archived/past retention</text>
+
+        <!-- legend -->
+        <line x1="90" y1="604" x2="118" y2="604" stroke="var(--accent-cool)" stroke-width="3" />
+        <text x="124" y="608" font-size="11" fill="var(--muted)">new / becoming authoritative</text>
+        <line x1="330" y1="604" x2="358" y2="604" stroke="var(--muted)" stroke-width="3" />
+        <text x="364" y="608" font-size="11" fill="var(--muted)">old / safety net</text>
+        <line x1="520" y1="604" x2="548" y2="604" stroke="var(--muted)" stroke-width="2" stroke-dasharray="2 4" />
+        <text x="554" y="608" font-size="11" fill="var(--muted)">old / dormant, not yet dropped</text>
+        <line x1="800" y1="600" x2="810" y2="610" stroke="var(--accent-danger)" stroke-width="2" />
+        <line x1="800" y1="610" x2="810" y2="600" stroke="var(--accent-danger)" stroke-width="2" />
+        <text x="818" y="608" font-size="11" fill="var(--muted)">physically dropped</text>
+      </svg>
+    </div>
+    <figcaption>Four kinds of change riding the same ladder. Contract removes code, not data — for schema and infrastructure, the old storage stays dormant until Purge, gated on either the data being confirmed ported to the new structure, or it being archived (snapshot/backup) or past its retention window. Message shape and code path have nothing physical left to purge once Contract lands.</figcaption>
+  </figure>
+
+  <h2>What each stage means, per kind of change</h2>
+  <div class="table-wrap">
+    <table>
+      <caption>Concrete per migration kind — grounded in DarkBadge's <code>job_type_taxonomy_v2</code> and <code>activity_link_attempts</code> cases.</caption>
+      <thead>
+        <tr>
+          <th>Kind</th>
+          <th class="st-expand">Expand</th>
+          <th class="st-migrate">Migrate</th>
+          <th class="st-contract">Contract</th>
+          <th class="st-purge">Purge</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="kind">Schema / data</td>
+          <td>Add the new column or table; dual-write on every write path; old column stays authoritative.</td>
+          <td>Flip a flag so reads move to the new column; old column keeps being written as the safety net.</td>
+          <td>Remove the toggle and dual-write code — old column stops being written, but stays in place, dormant.</td>
+          <td>Once the pre-migration data has been ported to the new column, <em>or</em> it's archived/snapshotted or past its retention window — drop the old column. Its own, later release.</td>
+        </tr>
+        <tr>
+          <td class="kind">Message / API shape</td>
+          <td>Add the new SQS field or shape; producers emit old and new together.</td>
+          <td>Flag decides which shape is authoritative for new messages; consumers keep accepting both.</td>
+          <td>Remove the old shape from producers and consumers.</td>
+          <td class="na">N/A — nothing physical to retire once Contract lands.</td>
+        </tr>
+        <tr>
+          <td class="kind">Feature / code path</td>
+          <td>New path built dark behind a Release toggle; old path stays live.</td>
+          <td>Toggle enabled for rollout; both paths still deployed.</td>
+          <td>Codify Phase — delete the dark branch and the toggle. (Already documented.)</td>
+          <td class="na">N/A — Contract already removed everything.</td>
+        </tr>
+        <tr>
+          <td class="kind">Infra / site upgrade</td>
+          <td>Stand up the new service or host alongside the old; traffic still 100% old.</td>
+          <td>Router shifts traffic to the new host; old host stays warm for instant rollback.</td>
+          <td>Stop routing to the old host entirely; power it off, cold — not yet destroyed.</td>
+          <td>Once its data/config is confirmed backed up, or past retention — decommission and wipe the old host or volume.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="note">The Feature / code path row is <code>core/progressive_delivery.md</code>'s existing Toggle Types + Codify Phase doctrine — this ladder is that same shape, generalized to schema, message, and infrastructure changes, where the Migrate-stage reversibility guarantee has to be stronger: both representations must stay correct for the entire stage, not just "absent means dark."</p>
+  <p class="note">Purge is a distinct release from Contract on purpose: Contract removes code risk (dual-write, the flag, the old read path); Purge removes data risk (the last copy). Either condition alone is enough to gate it — the data is confirmed ported to the new structure, <em>or</em> the old copy is safely elsewhere (a snapshot, a backup, past its retention window) — so a slow or partial backfill doesn't have to block Purge as long as the old data is recoverable some other way, and vice versa.</p>
+</div>
+
+</body></html>

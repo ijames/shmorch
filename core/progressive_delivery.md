@@ -80,7 +80,7 @@ representations coexist and both must stay correct throughout the bake period. A
 Toggle Types row doesn't capture that the flag here gates a *migration's own progress*, not
 a feature's visibility — that's the **Migration toggle** row above.
 
-Three stages, always named explicitly at spec time:
+Three stages (four for schema/data and infra), always named explicitly at spec time:
 
 1. **Expand (dark).** Build the new structure (column, table, SQS message field) fully
    alongside the old. Nothing observable changes. If the new structure needs data the old
@@ -99,7 +99,17 @@ Three stages, always named explicitly at spec time:
    final, explicit release removes the old structure, the dual-write, the old read path, and
    the flag itself — this is the Codify Phase above, applied to a migration rather than a
    feature. Not reversible, and deliberately its own release, never bundled into stage 2's
-   cutover.
+   cutover. Contract removes *code* risk; for schema and infrastructure the old storage/host
+   stays in place, dormant.
+4. **Purge (gated, its own later release; schema/data and infra only).** Physically drop the
+   old column, table, or host. Gate: the pre-migration data is confirmed ported to the new
+   structure, *or* it's safely archived (snapshot/backup) or past its retention window —
+   either alone is enough. Purge removes *data* risk (the last copy), which is why it is
+   separate from Contract. N/A for message shape and code path — nothing physical is left
+   once Contract lands.
+
+Human-facing diagram and step-by-step checklist (not for agent loading):
+`docs/reference/instructions/expand-migrate-contract.html`, `expand-migrate-contract-checklist.md`.
 
 ---
 
