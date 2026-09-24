@@ -49,6 +49,34 @@ a profile-section fold.
   that point (text-based, no rendering needed — just reference them).
 - Writes screenshots as plain files, tagged with commit SHA + date. Does not
   write prose.
+- **Candidate tool to try: Scribe (scribehow.com), 2026-09-23.** Free tier
+  covers unlimited guides on web apps. Worth a dry run against DarkBadge or
+  Treeclusion's web UI before building `claude-in-chrome` capture from
+  scratch — but scoped narrowly, not a drop-in replacement:
+  - It's a live, human-driven click recorder (browser extension/desktop app)
+    that auto-generates an annotated screenshot-per-step guide as someone
+    walks through a flow. It has **no video capability at all** — can't
+    record, import, or review video, so it can't reconstruct behavior from
+    an existing recording, only capture a flow as it's driven live.
+  - Mobile capture exists but is **Pro/Enterprise only** (not the free
+    tier) and, for a mobile web/browser flow, is semi-manual — screenshot
+    before each tap, uploaded and click-tagged by hand, not automatic like
+    desktop. True native-app mobile capture needs the desktop app driving
+    an XCode Simulator or Android Emulator.
+  - Has a read-only MCP server (`mcp.scribe.com/mcp`, OAuth) that lets an
+    agent search/read guides already captured in a Scribe account — useful
+    for pulling a guide's content into `docs/history/`, but it can't
+    trigger a new capture; capture only happens through Scribe's own
+    extension/app with a human at the wheel.
+  - Net: a plausible fit for evidence-gathering during **forward capture**
+    of a web-UI walkthrough (arguably a better one-shot artifact than raw
+    screenshots, since it already annotates + sequences them), but it does
+    nothing for retroactive mode (no historical checkout/replay) and
+    doesn't reduce `historian-capturer` to zero build — still need to
+    decide whether the pipeline consumes a Scribe guide's exported
+    screenshots+captions as its evidence format, or keeps `claude-in-chrome`
+    as the primary mechanism and treats Scribe as a manual/optional
+    alternative for flows a human is walking through anyway.
 
 ### `historian-narrator` (judgment — the actual story)
 - Input: a closed track's `index.md` (Why / What changes / Work log), the
@@ -193,3 +221,13 @@ touches the same file and resolving it needs DSL fluency, not just diff
 literacy. Real options logged (derive-per-branch/don't hand-maintain,
 per-service model partitioning, main-only/no-branch-carry) but none chosen —
 this is the single biggest open question blocking this piece.
+
+### 2026-09-23
+Developer asked about Scribe (scribehow.com) as a possible `historian-capturer`
+tool, prompted by the `source-capture-tool.md` inbox item (unrelated — that's
+about fetching blocked web content, not UI capture). Researched and logged
+under `historian-capturer` above: free tier exists, has a read-only MCP
+server, no video capability at all (screenshot-sequence only), mobile capture
+is Pro/Enterprise-only and semi-manual. Candidate for forward-capture of a
+live web-UI walkthrough; doesn't touch retroactive mode. Not yet trialed
+against DarkBadge or Treeclusion.
